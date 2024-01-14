@@ -1,0 +1,39 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#topHeader{
+    position: relative;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0,0, .5),rgba(0,0,0,.5)),url(../assets/hero.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#topInfo{
+    color: white;
+    position: absolute;
+    top: 45% ; left: 10%;
+    /* width: 40vw;
+    height: 40vh; */
+}
+footer{
+    height: 20vh;
+    padding: 2rem 0;
+}
+footer ul{
+    padding: 0 0.5em;
+}
+footer li{
+    display: inline;
+}
+footer a{
+    text-decoration: none;
+    color: rgb(153, 143, 143);
+    margin-left: 4rem;
+}
+footer a:hover{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
