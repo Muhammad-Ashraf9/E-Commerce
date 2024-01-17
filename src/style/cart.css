@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+footer{
+    background-color: red;
+}
+/* 
+@media (max-width:770px) {
+    .price{
+        margin-top: ;
+        background-color: red;
+    }
+}  */
