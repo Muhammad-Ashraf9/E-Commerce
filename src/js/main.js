@@ -1,21 +1,49 @@
-import { setupCounter } from "./counter.js";
+import { getCoookie, isAuthenticated, signIn, signOut } from "./auth.js";
 import { state } from "./model.js";
-document.querySelector("#app").innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`;
+import renderNav from "./views/Nav.js";
+import renderFooter from "./views/footer.js";
 
-setupCounter(document.querySelector("#counter"));
+const body = document.querySelector("body");
+const signInBtn = document.querySelector(".modal-body button:nth-child(1)");
+const registerBtn = document.querySelector(".modal-body button:nth-child(2)");
+
+if (isAuthenticated()) {
+  const id = getCoookie("id");
+  const accountType = getCoookie("accountType");
+  state.currentUser = state[accountType.toLowerCase()].find(
+    (user) => user.id === +id
+  );
+}
+
+renderNav(body);
+renderFooter(body);
+signInBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const email = document.querySelector("input[type=email]").value;
+  const password = document.querySelector("input[type=password]").value;
+  const accountType = document.querySelector(
+    "input[name=accountType]:checked"
+  ).value;
+
+  try {
+    signIn(email, password, accountType);
+    if (accountType === "sellers") {
+      location.assign("../html/seller.html");
+      // history.pushState(null, "", `/seller/${state.currentUser.id}`);
+      return;
+    }
+    location.reload();
+  } catch (error) {
+    alert(error.message);
+  }
+});
+registerBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  location.assign("../html/signup.html");
+});
+body.addEventListener("click", (e) => {
+  if (e.target.textContent === "Sign out") {
+    signOut();
+    location.reload();
+  }
+});

@@ -1,4 +1,5 @@
 export const state = {
+  currentUser: null,
   customers: [
     {
       id: 1,
@@ -7,7 +8,7 @@ export const state = {
       password: "ash123",
       orders: [],
       cart: [],
-      AccountType: "customers",
+      accountType: "customers",
     },
   ],
   admins: [
@@ -18,7 +19,7 @@ export const state = {
       password: "ash123",
       orders: [],
       cart: [],
-      AccountType: "admins",
+      accountType: "admins",
     },
   ],
   sellers: [
@@ -34,7 +35,7 @@ export const state = {
           stock: 10,
         },
       ],
-      AccountType: "sellers",
+      accountType: "sellers",
     },
   ],
   orders: [
@@ -63,3 +64,7 @@ export const state = {
     },
   ],
 };
+
+export function setCurrentUser(user) {
+  state.currentUser = user;
+}
