@@ -1,7 +1,8 @@
-import { isAuthenticated } from "../auth.js";
-// import { state } from "../model.js";
-//why !state.currentUser not working
-const Nav = ` <nav class="navbar navbar-expand-lg  justify-content-between fixed-top bg-dark-subtle" data-bs-theme="dark"  >
+import { getCurrentUser } from "../model.js";
+import { renderModal } from "./SigninModal.js";
+
+export default function renderNav(element) {
+  const Nav = ` <nav class="navbar navbar-expand-lg  justify-content-between fixed-top bg-dark-subtle" data-bs-theme="dark"  >
             <a class="navbar-brand ms-3" href="#">Techno</a>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -26,7 +27,7 @@ const Nav = ` <nav class="navbar navbar-expand-lg  justify-content-between fixed
               <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row ">
                 <li class="nav-item " >
                 ${
-                  !isAuthenticated()
+                  !getCurrentUser()
                     ? `<a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn"  href="#">Sign in</a>`
                     : `<button class="nav-link" >Sign out</button>`
                 }
@@ -37,7 +38,6 @@ const Nav = ` <nav class="navbar navbar-expand-lg  justify-content-between fixed
               </ul>           
             </div>            
           </nav>`;
-
-export default function renderNav(element) {
   element.insertAdjacentHTML("afterbegin", Nav);
+  renderModal(element);
 }

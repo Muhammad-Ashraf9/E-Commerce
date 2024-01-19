@@ -17,10 +17,13 @@
   </head>
   <body>
     <main class="form-signup">
+      <div class="form-img">
+        <img src="../images/signup.svg" alt="signup" />
+      </div>
       <form class="text-center">
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="form-floating">
+        <div class="row">
           <input
             type="email"
             class="form-control"
@@ -29,17 +32,18 @@
           />
           <label for="floatingInput">Email address</label>
         </div>
-        <div class="form-floating">
+        <div class="row">
+          <label for="floatingPassword">Password</label>
           <input
             type="password"
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Password</label>
         </div>
         <div class="d-flex mt-4 justify-content-around">
-          <div class="form-group">
+          <div class="row">
+            <label for="customers">Customer</label>
             <input
               type="radio"
               name="accountType"
@@ -47,7 +51,6 @@
               id="customers"
               checked
             />
-            <label for="customers">Customer</label>
           </div>
 
           <div class="form-group">

@@ -7,8 +7,7 @@ export default class User {
     if (this.constructor === User) {
       throw new Error("User is an abstract class");
     }
-    this.#id =
-      Date.now().toString(36) + Math.random().toString(36).substring(2);
+    this.#id = Date.now();
     this.#name = name;
     this.#email = email;
     this.#password = password;
