@@ -73,29 +73,22 @@ export const state = {
 
 export function setCurrentUser(user) {
   state.currentUser = user;
-  saveStateInLocalStorage("currentUser", user);
+  saveInLocalStorage("currentUser", user);
 }
 export function getCurrentUser() {
   return state.currentUser;
 }
 export function addUser(user) {
-  state.users = [user, ...state.users];
-  saveStateInLocalStorage("users", state.users);
+  loadStateFromLocalStorage("users");//this solved the problem with sign up only once after default
+  state.users.push(user);
+  saveInLocalStorage("users", state.users);
 }
-export function saveStateInLocalStorage(key, value) {
+export function saveInLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
-  
 }
 export function loadStateFromLocalStorage() {
   for (const key in state) {
-    console.log(
-      "JSON.parse(localStorage.getItem(key)) :>> ",
-      JSON.parse(localStorage.getItem(key))
-    );
-    console.log("key :>> ", key);
-    console.log("B state[key] :>> ", state[key]);
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
-    console.log("A state[key] :>> ", state[key]);
   }
 }
 export function getUserById(id) {

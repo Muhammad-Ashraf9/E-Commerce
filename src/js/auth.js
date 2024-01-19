@@ -29,25 +29,22 @@ export function signUp(email, password) {
   }
 
   const customer = {
-    email,
-    name: "",
-    password,
-    accountType: "customer",
     id: Date.now(),
+    name: "",
+    email,
+    accountType: "customer",
+    password,
     orders: [],
     cart: [],
   };
-
   addUser(customer);
   signIn(email, password);
 }
 
 export function setAuthStateFromCookie() {
   const id = getCoookie("id");
-  console.log("id :>> ", id);
   if (!id) return;
   const user = getUserById(id);
-  console.log("user :>> ", user);
   if (!user) return;
   setCurrentUser(user);
 }

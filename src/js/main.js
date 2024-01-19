@@ -1,12 +1,13 @@
-import { setAuthStateFromCookie, signIn, signOut } from "./auth.js";
+import { setAuthStateFromCookie, signOut } from "./auth.js";
 import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
-import { loadStateFromLocalStorage } from "./model.js";
+import { getCurrentUser, loadStateFromLocalStorage, state } from "./model.js";
 
 const body = document.querySelector("body");
 
 loadStateFromLocalStorage();
 setAuthStateFromCookie();
+
 
 renderNav(body);
 renderFooter(body);

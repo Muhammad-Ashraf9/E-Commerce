@@ -20,7 +20,14 @@ form.addEventListener("submit", (e) => {
   }
   try {
     signUp(emailValue, passwordValue);
-    location.assign("main.html");
+    //first one after default gets overriden whyyyyyyyyyyyyyyyyy?????
+    //cause a problem with sign up
+    // location.assign("admin.html");
+    // setTimeout(function () {
+      //   // history.back();
+      //   location.assign("main.html");
+      // }, 2000);
+      location.assign("main.html");
   } catch (error) {
     showErrorMessage(error.message);
   }
