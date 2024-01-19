@@ -12,54 +12,36 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../style/signup.css" />
+    <link rel="stylesheet" href="../style/main.css" />
     <script type="module" src="../js/signup.js"></script>
   </head>
   <body>
-    <main class="form-signup">
-      <form class="text-center">
+    <main class="form form-signup">
+      <div class="form-img">
+        <img src="" alt="signup" />
+      </div>
+      <form class="text-center" novalidate>
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="form-floating">
+        <div class="row">
+          <label for="floatingInput">Email address</label>
           <input
             type="email"
             class="form-control"
             id="floatingInput"
             placeholder="name@example.com"
           />
-          <label for="floatingInput">Email address</label>
         </div>
-        <div class="form-floating">
+        <div class="row">
+          <label for="floatingPassword">Password</label>
           <input
             type="password"
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Password</label>
         </div>
-        <div class="d-flex mt-4 justify-content-around">
-          <div class="form-group">
-            <input
-              type="radio"
-              name="accountType"
-              value="customers"
-              id="customers"
-              checked
-            />
-            <label for="customers">Customer</label>
-          </div>
-
-          <div class="form-group">
-            <input
-              type="radio"
-              name="accountType"
-              value="sellers"
-              id="sellers"
-            />
-            <label for="sellers">Seller</label>
-          </div>
-        </div>
+        <div class="error-message">Error</div>
         <button class="btn btn-primary py-2" type="submit">Sign up</button>
       </form>
     </main>

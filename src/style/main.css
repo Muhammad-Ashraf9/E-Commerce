@@ -1,0 +1,235 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+@media screen and (max-width: 992px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media screen and (min-width: 1800px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  color: #777;
+  line-height: 1.7;
+}
+
+.button, .button:link, .button:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+  border: none;
+}
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.button:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+.button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.2);
+}
+.button::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10rem;
+  z-index: -1;
+  transition: all 0.4s;
+  background-color: #fff;
+}
+.button--white {
+  background-color: #fff;
+  color: #777;
+}
+.button--white::after {
+  background-color: #fff;
+}
+.button--green {
+  background-color: #28b485;
+  color: #fff;
+}
+.button--green::after {
+  background-color: #28b485;
+}
+.button--animated {
+  animation: moveInBottom 0.5s ease-in 0.75s;
+  animation-fill-mode: backwards;
+}
+
+.button-text:link, .button-text:visited {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #28b485;
+  border-bottom: 1px solid #28b485;
+  padding: 5px;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+}
+.button-text:link:hover, .button-text:visited:hover {
+  background-color: #28b485;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.button-text:link:active, .button-text:visited:active {
+  transform: translateY(0);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  padding: 10rem 0;
+  color: #f7f7f7;
+  background-color: #333;
+  font-size: 1.3rem;
+}
+@media screen and (max-width: 768px) {
+  .footer {
+    font-size: 1.5rem;
+  }
+}
+.footer__logo-container {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.footer__navigation {
+  padding: 3rem 0;
+  border-top: 1px solid #f7f7f7;
+  display: inline-block;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 768px) {
+  .footer__navigation {
+    width: 100%;
+    text-align: center;
+  }
+}
+.footer__list {
+  list-style: none;
+}
+.footer__item {
+  display: inline-block;
+}
+.footer__item:not(:last-child) {
+  margin-right: 3rem;
+}
+.footer__link:link, .footer__link:visited {
+  background-color: #333;
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.footer__link:link:hover, .footer__link:link:active, .footer__link:visited:hover, .footer__link:visited:active {
+  color: #55c57a;
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.footer__copyright {
+  padding: 3rem 0;
+  border-top: 1px solid #f7f7f7;
+  width: 80%;
+  float: right;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 768px) {
+  .footer__copyright {
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+footer {
+  height: 20vh;
+  padding: 2rem 0;
+}
+
+footer ul {
+  padding: 0 0.5em;
+}
+
+footer li {
+  display: inline;
+}
+
+footer a {
+  text-decoration: none;
+  color: rgb(153, 143, 143);
+  margin-left: 4rem;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.form-signup {
+  max-width: 50rem;
+  padding: 1rem;
+  margin: auto;
+  padding: 2rem;
+}
+.form .error-message {
+  color: #ff4f30;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+#topHeader {
+  position: relative;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../assets/hero.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#topInfo {
+  color: white;
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  /* width: 40vw;
+  height: 40vh; */
+}
+
+/*# sourceMappingURL=main.css.map */

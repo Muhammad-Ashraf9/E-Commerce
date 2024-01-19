@@ -1,0 +1,35 @@
+export function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires;
+}
+export function deleteCookie(cName) {
+  const sessionEnd = new Date("1999-07-22");
+  document.cookie = `${cName}=;expires:${sessionEnd}`;
+}
+
+export function getCoookie(key) {
+  const cookies = document.cookie.split(";");
+  if (!cookies.length) {
+    return;
+  }
+  for (let i = 0; i < cookies.length; i++) {
+    const [cKey, cValue] = cookies[i].split("=");
+    if (cKey.trim() === key) {
+      return cValue;
+    }
+  }
+}
+
+export function validatePassword(password) {
+  return !!password && password.length >= 6;
+}
+
+export function validateEmail(email) {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}

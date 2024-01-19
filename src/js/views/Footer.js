@@ -1,4 +1,7 @@
-const footer = `   <footer class="bg-dark ">
+
+
+export default function renderFooter(element) {
+  const footer = `   <footer class="bg-dark ">
         <div class="container">
             <div class="row">
               <div class="col-6">
@@ -20,7 +23,5 @@ const footer = `   <footer class="bg-dark ">
               </div>
             </div>
       </footer>`;
-
-export default function renderFooter(element) {
   element.insertAdjacentHTML("beforeend", footer);
 }

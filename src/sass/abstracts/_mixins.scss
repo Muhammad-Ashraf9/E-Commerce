@@ -1,0 +1,31 @@
+@mixin absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+// em  rem in media queries always => 1em = 16px and dont depend on setting font size
+//now its recommended to use px in media queries(full page zoom)
+//em calculated on intial font size of browser (16px *125% = 20px)
+@mixin respond($breakpoint) {
+  @if ($breakpoint == phone) {
+    @media screen and (max-width: 576px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == tab-port) {
+    @media screen and (max-width: 768px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == tab-land) {
+    @media screen and (max-width: 992px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == big-desktop) {
+    @media screen and (min-width: 1800px) {
+      @content;
+    }
+  }
+}

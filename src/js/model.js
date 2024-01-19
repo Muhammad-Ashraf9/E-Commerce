@@ -1,41 +1,39 @@
 export const state = {
   currentUser: null,
-  customers: [
+  users: [
     {
       id: 1,
-      name: "ash",
-      email: "ash99@gmail.com",
-      password: "ash123",
-      orders: [],
-      cart: [],
-      accountType: "customers",
-    },
-  ],
-  admins: [
-    {
-      id: 2,
-      name: "ash",
-      email: "ash99@gmail.com",
-      password: "ash123",
-      orders: [],
-      cart: [],
-      accountType: "admins",
-    },
-  ],
-  sellers: [
-    {
-      id: 3,
-      name: "ash",
-      email: "ash99@gmail.com",
+      name: "ash customer",
+      email: "ash@customer.ash",
       password: "ash123",
       orders: [1, 2],
+      cart: [1, 2],
+      accountType: "customer",
+    },
+    {
+      id: 2,
+      name: "ash admin",
+      email: "ash@admin.ash",
+      password: "ash123",
+      accountType: "admin",
+    },
+    {
+      id: 3,
+      name: "ash seller",
+      email: "ash@seller.ash",
+      password: "ash123",
+      orders: [1, 2],
+      accountType: "seller",
       products: [
         {
-          productId: 3,
+          productId: 1,
+          stock: 10,
+        },
+        {
+          productId: 2,
           stock: 10,
         },
       ],
-      accountType: "sellers",
     },
   ],
   orders: [
@@ -55,10 +53,18 @@ export const state = {
   ],
   products: [
     {
-      id: 3,
+      id: 1,
       title: "ashhh",
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
+      sellerId: 3,
+      stock: 10,
+    },
+    {
+      id: 2,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
       sellerId: 3,
       stock: 10,
     },
@@ -67,4 +73,27 @@ export const state = {
 
 export function setCurrentUser(user) {
   state.currentUser = user;
+  saveInLocalStorage("currentUser", user);
+}
+export function getCurrentUser() {
+  return state.currentUser;
+}
+export function addUser(user) {
+  loadStateFromLocalStorage("users");//this solved the problem with sign up only once after default
+  state.users.push(user);
+  saveInLocalStorage("users", state.users);
+}
+export function saveInLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+export function loadStateFromLocalStorage() {
+  for (const key in state) {
+    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
+  }
+}
+export function getUserById(id) {
+  return state.users.find((user) => user.id === +id);
+}
+export function getUserByEmail(email) {
+  return state.users.find((user) => user.email === email);
 }
