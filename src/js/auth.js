@@ -28,23 +28,26 @@ export function signUp(email, password) {
     throw new Error("Email already exist");
   }
 
-  const user = {
+  const customer = {
     email,
+    name: "",
     password,
-    accountType,
+    accountType: "customer",
     id: Date.now(),
     orders: [],
     cart: [],
   };
 
-  addUser(user);
+  addUser(customer);
   signIn(email, password);
 }
 
 export function setAuthStateFromCookie() {
   const id = getCoookie("id");
+  console.log("id :>> ", id);
   if (!id) return;
   const user = getUserById(id);
+  console.log("user :>> ", user);
   if (!user) return;
   setCurrentUser(user);
 }

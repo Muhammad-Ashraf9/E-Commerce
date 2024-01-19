@@ -1,0 +1,16 @@
+.form {
+  &-signup {
+    max-width: 50rem;
+    padding: 1rem;
+    margin: auto;
+    padding: 2rem;
+  }
+  .error-message {
+    color: $color-error;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+}

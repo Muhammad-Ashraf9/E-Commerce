@@ -1,4 +1,4 @@
-export let state = {
+export const state = {
   currentUser: null,
   users: [
     {
@@ -73,27 +73,30 @@ export let state = {
 
 export function setCurrentUser(user) {
   state.currentUser = user;
-  saveStateInLocalStorage();
+  saveStateInLocalStorage("currentUser", user);
 }
 export function getCurrentUser() {
   return state.currentUser;
 }
 export function addUser(user) {
-  state.users.push(user);
-  saveStateInLocalStorage();
+  state.users = [user, ...state.users];
+  saveStateInLocalStorage("users", state.users);
 }
-export function saveStateInLocalStorage() {
-  localStorage.setItem("state", JSON.stringify(state));
+export function saveStateInLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+  
 }
 export function loadStateFromLocalStorage() {
-  const storedState = localStorage.getItem("state");
-  if (!storedState) {
-    saveStateInLocalStorage();
-    return;
+  for (const key in state) {
+    console.log(
+      "JSON.parse(localStorage.getItem(key)) :>> ",
+      JSON.parse(localStorage.getItem(key))
+    );
+    console.log("key :>> ", key);
+    console.log("B state[key] :>> ", state[key]);
+    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
+    console.log("A state[key] :>> ", state[key]);
   }
-  //get keys - loop over keys- set value of each key (state is constant)
-  // let state for now
-  state = JSON.parse(storedState);
 }
 export function getUserById(id) {
   return state.users.find((user) => user.id === +id);

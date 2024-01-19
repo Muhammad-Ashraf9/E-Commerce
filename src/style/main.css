@@ -111,13 +111,6 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.form-signup {
-  max-width: 50rem;
-  padding: 1rem;
-  margin: auto;
-  padding: 2rem;
-}
-
 .footer {
   padding: 10rem 0;
   color: #f7f7f7;
@@ -204,6 +197,21 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: rgb(255, 255, 255);
+}
+
+.form-signup {
+  max-width: 50rem;
+  padding: 1rem;
+  margin: auto;
+  padding: 2rem;
+}
+.form .error-message {
+  color: #ff4f30;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: all 0.3s;
 }
 
 #topHeader {
