@@ -68,6 +68,22 @@ export const state = {
       sellerId: 3,
       stock: 10,
     },
+    {
+      id: 3,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      sellerId: 3,
+      stock: 10,
+    },
+    {
+      id: 4,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      sellerId: 3,
+      stock: 10,
+    },
   ],
 };
 
