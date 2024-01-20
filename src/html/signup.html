@@ -17,13 +17,13 @@
   </head>
   <body>
     <main class="form form-signup">
-      <div class="form-img">
-        <img src="" alt="signup" />
+      <div class="form__img">
+        Techno
       </div>
       <form class="text-center" novalidate>
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="row">
+        <div class="form__group">
           <label for="floatingInput">Email address</label>
           <input
             type="email"
@@ -32,7 +32,24 @@
             placeholder="name@example.com"
           />
         </div>
-        <div class="row">
+        <div class="validation-message">
+          Email must be a valid email address
+        </div>
+        <div class="form__group">
+          <label for="name">Name:</label>
+          <input
+            id="name"
+            class="form-control"
+            name="name"
+            type="text"
+            placeholder="Enter your full name"
+          />
+          <div class="validation-message">
+            name must be 4 or more characters
+          </div>
+        </div>
+
+        <div class="form__group">
           <label for="floatingPassword">Password</label>
           <input
             type="password"
@@ -40,6 +57,9 @@
             id="floatingPassword"
             placeholder="Password"
           />
+          <div class="validation-message">
+            passord must be 6 or more characters
+          </div>
         </div>
         <div class="error-message">Error</div>
         <button class="btn btn-primary py-2" type="submit">Sign up</button>
