@@ -68,9 +68,33 @@ export const state = {
       sellerId: 3,
       stock: 10,
     },
+    {
+      id: 3,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      sellerId: 3,
+      stock: 10,
+    },
+    {
+      id: 4,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      sellerId: 3,
+      stock: 10,
+    },
   ],
 };
 
+function loadStateFromLocalStorage() {
+  for (const key in state) {
+    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
+  }
+}
+function saveInLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 export function setCurrentUser(user) {
   state.currentUser = user;
   saveInLocalStorage("currentUser", user);
@@ -79,21 +103,15 @@ export function getCurrentUser() {
   return state.currentUser;
 }
 export function addUser(user) {
-  loadStateFromLocalStorage("users");//this solved the problem with sign up only once after default
   state.users.push(user);
   saveInLocalStorage("users", state.users);
 }
-export function saveInLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-export function loadStateFromLocalStorage() {
-  for (const key in state) {
-    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
-  }
-}
+
 export function getUserById(id) {
   return state.users.find((user) => user.id === +id);
 }
 export function getUserByEmail(email) {
   return state.users.find((user) => user.email === email);
 }
+//this runs once when the app starts sets the state from local storage
+loadStateFromLocalStorage();
