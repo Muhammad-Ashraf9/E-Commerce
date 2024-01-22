@@ -25,8 +25,13 @@ $color-error: #ff4f30;
 //gradients
 $linear-gradiant-primary: linear-gradient(
   to right bottom,
-  rgba($color-primary-light, 0.8),
-  rgba($color-primary-dark, 0.8)
+  rgba($color-primary-light, 0.3),
+  rgba($color-primary-dark, 0.3)
+);
+$linear-gradiant-secondary: linear-gradient(
+  to right bottom,
+  rgba($color-secondary-light, 0.1),
+  rgba($color-secondary-dark, 0.1)
 );
 //shadows
 $box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
@@ -39,3 +44,6 @@ $default-font-size: 1.6rem;
 //border-radius
 $default-border-radius: 3px;
 $btn-border-radius: 10rem;
+
+//transition
+$default-transition: all 0.3s ease-in-out;
