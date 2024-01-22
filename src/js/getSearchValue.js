@@ -1,8 +1,6 @@
 export function getSearchValue() {
     // let value = document.querySelector("searchform").value;
     // let value2 = document.querySelector("input[type='search']").value;
-    console.log("from getSearchValue.js");
-    // console.log(value2);
     if (document.querySelector("input[type='search']") !== null) {
       return document.querySelector("input[type='search']").value;
     } else {

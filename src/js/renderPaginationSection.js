@@ -1,7 +1,6 @@
 import { products } from "../js/Products.js";
 
 export function renderPaginationSection(page, pagesCount) {
-  console.log("page: " + page + " pagesCount: " + pagesCount);
   const pagSec = document.getElementById("paginationSection");
   pagSec.innerHTML = "";
   if(pagesCount == 0) return
@@ -34,7 +33,6 @@ export function renderPaginationSection(page, pagesCount) {
       (i == page - 1 && i >= 1) ||
       (i == page + 1 && i <= pagesCount)
     ) {
-      console.log("i: " + i + " page: " + page);
       const pagSecDivLi = document.createElement("li");
       pagSecDivLi.classList.add("page-item");
       if (i == page) {

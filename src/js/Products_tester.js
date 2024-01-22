@@ -6,30 +6,28 @@ import renderFooter from "../js/views/Footer.js";
 // import { categories } from "./views/renderCategoryButtons.js";
 import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
+// import { addToCart } from "./addToCart.js";
 
-
-let numberOfCardsPerPage = 8;
+var numberOfCardsPerPage = 6;
 let prodID = -1;
 
 document.addEventListener("DOMContentLoaded", function () {
   const body = document.querySelector("body");
 
-// Open the product details page
+  // Open the product details page
   body.addEventListener("click", function (e) {
     if (e.target.classList.contains("viewProductPage")) {
       var prodID = e.target.id;
       localStorage.setItem("id", prodID);
       // location.assign("../html/ProductDetails.html");
-      window.open("../html/ProductDetails.html", "_blank")
+      window.open("../html/ProductDetails.html", "_blank");
     }
   });
 
-// Filter the products by category
+  // Filter the products by category
   let CategoryButtons = document.getElementById("CategoryButtons");
   CategoryButtons.addEventListener("click", function (event) {
-    if(event.target.nodeName == "INPUT")
-      console.log(event.target.value);
-    let searchValue = getSearchValue();
+    if (event.target.nodeName == "INPUT") var searchValue = getSearchValue();
     let category = getCheckedValue();
     let products = ProductsFiltered(searchValue, category);
 
@@ -41,20 +39,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (endCard > productsCount) {
       endCard = productsCount;
     }
-    renderCards(1,4);
+    renderCards(1, 4);
   });
 
-// Onload page rendering of the cards
+  // Onload page rendering of the cards
   let page = 1; // Current page
   let productsCount = ProductsFiltered("", "").length; // Number of products
-  let numberOfCardsPerPage = 8; // Number of cards per page
+  // let numberOfCardsPerPage = 8; // Number of cards per page
   let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
   var startCard = (page - 1) * numberOfCardsPerPage + 1; // Start card
   var endCard = page * numberOfCardsPerPage;
   if (endCard > productsCount) {
     endCard = productsCount;
   }
-  console.log("startCard: " + startCard + " endCard: " + endCard);
   renderNav(body);
   renderFooter(body);
   renderCards(page, numberOfCardsPerPage);
@@ -64,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector('input[type="search"]')
     .addEventListener("input", function (event) {
       // let searchValue = event.target.value;
-      // console.log(ProductsFiltered(searchValue, ""));
       // //
       // // Define the variables for the pagination
       // let page = 1; // Current page
@@ -84,10 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // renderCards;
     });
 
-// Render after click on the pagination buttons
+  // Render after click on the pagination buttons
   const pagSec = document.getElementById("paginationSection");
   pagSec.addEventListener("click", function (event) {
-    console.log("event.target.nodeName: " + event.target.nodeName);
     if (event.target.nodeName == "A") {
       pagSec.innerHTML = "";
       if (event.target.textContent === "Previous") {
@@ -103,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
           page++;
         }
       } else {
-        console.log("event.target.textContent: " + event.target.textContent);
         page = parseInt(event.target.textContent);
       }
 
@@ -114,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
     let searchValue = document.querySelector('input[type="search"]').value;
-    console.log(ProductsFiltered(searchValue, ""));
     renderCards(page, numberOfCardsPerPage);
   });
 
@@ -126,13 +119,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const clearBtn = document.getElementById("clear-btn");
   clearBtn.addEventListener("click", clearInput);
 
-  // renderCards(startCard, endCard, searchValue);
-  // renderPaging();
+
 });
 
-  const clearBtn = document.getElementById("clear-btn");
-  clearBtn.addEventListener("click", function () {
-    const input = document.querySelector('input[type="search"]');
-    input.value = "";
-    renderCards(1, numberOfCardsPerPage);
-  });
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", function () {
+  const input = document.querySelector('input[type="search"]');
+  input.value = "";
+  renderCards(1, numberOfCardsPerPage);
+});
+
+
+

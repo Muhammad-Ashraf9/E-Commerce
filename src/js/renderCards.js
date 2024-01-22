@@ -2,8 +2,8 @@ import { ProductsFiltered } from "../js/ProductsFiltered.js";
 import { renderPaginationSection } from "../js/renderPaginationSection.js";
 import { getSearchValue } from "./getSearchValue.js";
 import { getCheckedValue } from "./getCategory.js";
-
-    // Drawing the cards
+import { addtoCart } from "./addtoCart.js";
+// Drawing the cards
 export function renderCards(page, numberOfCardsPerPage) {
   let searchValue = getSearchValue();
   let category = getCheckedValue();
@@ -16,8 +16,6 @@ export function renderCards(page, numberOfCardsPerPage) {
   if (endCard > Products.length) {
     endCard = Products.length;
   }
-  console.log(numberOfCardsPerPage);
-  console.log("startCard: " + startCard + " endCard: " + endCard);
 
   for (let i = startCard; i <= endCard; i++) {
     // Products.forEach((element) => {
@@ -35,7 +33,6 @@ export function renderCards(page, numberOfCardsPerPage) {
     imageDiv.classList.add("wsk-cp-img");
     // and alt value to the image
     // printvalues();
-    // console.log("products[i-1].name" + products[i-1].name + i);
     imageDiv.setAttribute("alt", Products[i - 1].name);
     imageDiv.setAttribute("src", Products[i - 1].imgURL);
     // append the div for the text
@@ -80,13 +77,24 @@ export function renderCards(page, numberOfCardsPerPage) {
     const addToCartDiv = document.createElement("div");
     // add class "wcf-right"
     addToCartDiv.classList.add("wcf-right");
+    // append a read only input for the quantity
+    const quantityInput = document.createElement("input");
+    // add class "quantity"
+    quantityInput.classList.add("quantity");
+    // add type "text"
+    quantityInput.setAttribute("type", "text");
+    quantityInput.setAttribute("value", "0");
+    quantityInput.setAttribute("readonly", "readonly");
+    quantityInput.setAttribute("style", "width: 30px;");
     // append the button for the add to cart
     const addToCartButton = document.createElement("button");
     // add class "buy-btn"
     addToCartButton.classList.add("buy-btn");
+    addToCartButton.onclick = addtoCart;
     // append the i for the add to cart
     const addToCartI = document.createElement("i");
     addToCartI.classList.add("fa-solid", "fa-cart-plus");
+
     // addToCartI.classList.add("fa-cart-shopping");
     // <i class="fa-light fa-cart-shopping"></i>
     // append the divs to the page
@@ -104,6 +112,7 @@ export function renderCards(page, numberOfCardsPerPage) {
     footerDiv.appendChild(priceDiv);
     priceDiv.appendChild(priceSpan);
     footerDiv.appendChild(addToCartDiv);
+    addToCartDiv.appendChild(quantityInput);
     addToCartDiv.appendChild(addToCartButton);
     addToCartButton.appendChild(addToCartI);
   }
@@ -114,6 +123,7 @@ export function renderCards(page, numberOfCardsPerPage) {
   } else {
     pagesCount = Math.ceil(Products.length / numberOfCardsPerPage);
   }
-  console.log("pageCount  = " + pagesCount);
   renderPaginationSection(page, pagesCount);
+
+
 }
