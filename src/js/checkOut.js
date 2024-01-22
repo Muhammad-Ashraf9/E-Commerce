@@ -1,3 +1,10 @@
+import { getProductById, state,getCurrentUser, getUserById } from "./model.js";
+const user = getCurrentUser();
+let ucart = user ? user.cart : state.guestCart;
+let cart = ucart.map((item) => ({
+  product: getProductById(item.id),
+  num: item.quantity,
+}));
 (() => {
   'use strict'
 
@@ -34,7 +41,7 @@
     }, false)
   })
 })()
-let cart=[
+let cartss=[
   {
       title:"watch1",
       description:"this is a great watch that has many features like like your great eyes",
@@ -98,35 +105,31 @@ window.addEventListener("load",function(){
    cards.innerHTML="";
    if(cart.length==0){
     content.innerHTML=`<h1>your cart is empty !</h1>`;
-      //  document.getElementById("content").style.visibility="hidden";
-      //  document.getElementById("numOfItems").innerText=`items(0)`
-      //  document.getElementById("SubTotal").innerText=total.toFixed(2);
-      //  document.getElementById("beforeTax").innerText=parseFloat(document.getElementById("Shipping").innerText)
    }
-   total=0;
+   let total=0;
    numOfItems=0;
    cart.forEach(item => {
        numOfItems+=item.num
-       total+=item.price*item.num;
+       total+=item.product.price*item.num;
        cards.innerHTML+=`<div id="${flag}" class="card m-auto">
        <div class="row g-0">
          <div  class="col-lg-2">
-           <img  src="${item.img}" class="img-fluid rounded" alt="${item.title}">
+           <img  src="${item.product.img}" class="img-fluid rounded" alt="${item.product.title}">
          </div>
          <div class="col-lg-10">
            
            <div class="card-body d-flex gap-3 flex-nowrap">
              <!-- Information -->
              <div class="col-sm-7 flex-grow-1">
-               <h5 class="card-title">${item.title}</h5>
-               <p class="card-text">${item.description}</p>
-               <p class="card-text"><small class="text-body-secondary">${item.shopeName}</small></p>
+               <h5 class="card-title">${item.product.title}</h5>
+               <p class="card-text">${item.product.description}</p>
+               <p class="card-text"><small class="text-body-secondary">${getUserById(item.product.id).name}</small></p>
              </div>
              <!-- End of information -->
              <!-- Controls -->
              <div class="col-4 pt-4 text-center">
              <button id="close" class="float-end btn btn-lg btn-close rounded-circle"> </button>
-             <h3 class="price mt-2 mb-3">${item.price.toFixed(2)}</h3>
+             <h3 class="price mt-2 mb-3">${item.product.price}</h3>
              <div class="btn-group numOfItems">
                <button style="background: #eec28c; color:white" class="btn">+</button>
                <span class="fs-2 mx-3">${item.num}</span>
@@ -153,7 +156,10 @@ window.addEventListener("load",function(){
    if(e.target.innerText=="+"){
       let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
       if(cart[cardID].num==cart[cardID].stock){
-        alert(`Sorry but there is no more ${cart[cardID].title} in the sellers stock`)
+        console.log(e.target)
+        e.target.setAttribute("data-bs-toggle","popover");
+        e.target.setAttribute("data-bs-title","Popover title");
+        e.target.setAttribute("data-bs-content","And here's some amazing content. It's very engaging. Right?"); 
         return;
       }
       cart[cardID].num+=+1;
@@ -176,7 +182,10 @@ window.addEventListener("load",function(){
        console.log(e)
        generateCards();      
    } 
+
+
   })
+
 
 
 
