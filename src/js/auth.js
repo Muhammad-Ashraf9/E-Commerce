@@ -23,14 +23,14 @@ export function signOut() {
   setCurrentUser(null);
 }
 
-export function signUp(email, password) {
+export function signUp(email, password, name) {
   if (getUserByEmail(email)) {
     throw new Error("Email already exist");
   }
 
   const customer = {
     id: Date.now(),
-    name: "",
+    name,
     email,
     accountType: "customer",
     password,
