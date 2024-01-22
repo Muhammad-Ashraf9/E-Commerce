@@ -32,7 +32,7 @@ export function signUp(email, password) {
     id: Date.now(),
     name: "",
     email,
-    accountType: "customer",
+    accountType: "seller",
     password,
     orders: [],
     cart: [],

@@ -6,8 +6,8 @@ export const state = {
       name: "ash customer",
       email: "ash@customer.ash",
       password: "ash123",
-      orders: [1, 2],
-      cart: [1, 2],
+      orders: [1, 2,3],
+      cart: [1, 2,3],
       accountType: "customer",
     },
     {
@@ -22,7 +22,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [1, 2],
+      orders: [1, 2,3],
       accountType: "seller",
       products: [
         {
@@ -41,7 +41,7 @@ export const state = {
       id: 1,
       items: [
         {
-          productId: 3,
+          productId: 1,
           quantity: 2,
           price: 100,
           status: "pending",
@@ -50,6 +50,32 @@ export const state = {
       status: "pending",
       date: "1999-07-22",
     },
+    {
+      id: 2,
+      items: [
+        {
+          productId: 1,
+          quantity: 2,
+          price: 100,
+          status: "pending",
+        },
+      ],
+      status: "pending",
+      date: "1999-07-22",
+    },
+    {
+      id: 3,
+      items: [
+        {
+          productId: 1,
+          quantity: 2,
+          price: 100,
+          status: "pending",
+        },
+      ],
+      status: "pending",
+      date: "1999-07-22",
+    }
   ],
   products: [
     {
@@ -58,15 +84,19 @@ export const state = {
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
       sellerId: 3,
+      category:'any',
       stock: 10,
+      image:'../../images/Meubel House_Logos-05.png'
     },
     {
       id: 2,
       title: "fghfgh",
       description: "fffff ffff",
-      price: 10,
+      price: 500,
       sellerId: 3,
+      category:'any',
       stock: 10,
+      image:'../../images/Meubel House_Logos-05.png'
     },
   ],
 };
@@ -96,4 +126,42 @@ export function getUserById(id) {
 }
 export function getUserByEmail(email) {
   return state.users.find((user) => user.email === email);
+}
+
+export function getAllOrdersByOrderIds(orderIds) {
+  // Initialize an array to store the found orders
+  const allOrders = [];
+
+  // Iterate through the order IDs
+  for (const orderId of orderIds) {
+    // Find the order in the state.orders array
+    const foundOrder = state.orders.find((order) => order.id === orderId);
+
+    // If the order is found, add it to the allOrders array
+    if (foundOrder) {
+      allOrders.push(foundOrder);
+    }
+  }
+
+  return allOrders;
+}
+
+export function getAllProductsByProductIds(productIds) {
+  // Initialize an array to store the found orders
+  const allProducts = [];
+
+  // Iterate through the order IDs
+  for (const productId of productIds) {
+    // Find the order in the state.orders array
+    console.log(productId);
+    const foundProduct = state.products.find((product) => product.id === productId.productId);
+
+    // If the order is found, add it to the allOrders array
+    if (foundProduct) {
+      console.log(foundProduct);
+      allProducts.push(foundProduct);
+    }
+  }
+
+  return allProducts;
 }
