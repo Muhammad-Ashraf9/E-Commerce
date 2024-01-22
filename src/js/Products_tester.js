@@ -6,6 +6,8 @@ import renderFooter from "../js/views/Footer.js";
 // import { categories } from "./views/renderCategoryButtons.js";
 import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
+
+
 let numberOfCardsPerPage = 8;
 let prodID = -1;
 
