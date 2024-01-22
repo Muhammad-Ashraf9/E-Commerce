@@ -1,59 +1,63 @@
-var cart=[
-    {
-        title:"watch1",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:2000.,
-        img:"../assets/test1.jpeg",
-        num:1
-        ,productID:15
-    },
-    {
-        title:"watch2",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:22.25,
-        img:"../assets/test2.jpeg"
-        ,num:1
-        ,productID:14
-    },
-    {
-        title:"watch3",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:150.50,
-        img:"../assets/test1.jpeg"
-        ,num:1
-        ,productID:13
-    },
-    {
-        title:"watch4",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:11.95,
-        img:"../assets/test2.jpeg"
-        ,num:1
-        ,productID:12
-    },
-    {
-        title:"watch5",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:75.25,
-        img:"../assets/test1.jpeg"
-        ,num:1
-        ,productID:11
-    },{
-        title:"watch6",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:200.25,
-        img:"../assets/test2.jpeg"
-        ,num:5
-        ,productID:10
-    }
-]
+import {  state} from "./model.js";
+import {  getCurrentUser} from "./model.js";
+import {  getUserById} from "./model.js";
 
+console.log('state  ',state )
+let cart=[
+  {
+      title:"watch1",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:2000.,
+      img:"../assets/test1.jpeg",
+      num:1
+      ,stock:15,
+  },
+  {
+      title:"watch2",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:22.25,
+      img:"../assets/test2.jpeg"
+      ,num:1
+      ,stock:14
+  },
+  {
+      title:"watch3",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:150.50,
+      img:"../assets/test1.jpeg"
+      ,num:1
+      ,stock:13
+  },
+  {
+      title:"watch4",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:11.95,
+      img:"../assets/test2.jpeg"
+      ,num:1
+      ,stock:12
+  },
+  {
+      title:"watch5",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:75.25,
+      img:"../assets/test1.jpeg"
+      ,num:1
+      ,stock:11
+  },{
+      title:"watch6",
+      description:"this is a great watch that has many features like like your great eyes",
+      shopeName:"Nike Store",
+      price:200.25,
+      img:"../assets/test2.jpeg"
+      ,num:5
+      ,stock:10
+  }
+]
 window.addEventListener("load",function(){
    let cards= this.document.getElementById("items");
    generateCards();
@@ -64,14 +68,13 @@ window.addEventListener("load",function(){
         cards.innerHTML=`<h1>your cart is empty !</h1>`;
         document.getElementById("CheckOut").style.visibility="hidden";
     }
-    total=0;
-
+    let total=0;
     cart.forEach(item => {
         total+=item.price*item.num;
         cards.innerHTML+=`<div id="${flag}" class="card m-auto">
         <div class="row g-0">
-          <div  class="col-md-2">
-            <img  src="${item.img}" class="img-fluid rounded" alt="...">
+          <div  class="col-lg-2">
+            <img  src="${item.img}" class="img-fluid rounded" alt="${item.title}">
           </div>
           <div class="col-md-10">
             
@@ -86,11 +89,11 @@ window.addEventListener("load",function(){
               <!-- Controls -->
               <div class="col-4 pt-4 text-center">
                 <button id="close" class="float-end btn btn-lg btn-close rounded-circle"> </button>
-                <h2 class="price mt-2 mb-3">${item.price}</h2>
+                <h3 class="price mt-2 mb-3">${item.price.toFixed(2)}</h3>
                 <div class="btn-group numOfItems">
-                  <button class="btn btn-success">+</button>
+                  <button style="background: #eec28c; color:white" class="btn">+</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button class="btn btn-danger fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -108,6 +111,10 @@ window.addEventListener("load",function(){
    cards.addEventListener("click",function(e){
     if(e.target.innerText=="+"){
        let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+       if(cart[cardID].num==cart[cardID].stock){
+        alert(`Sorry but there is no more ${cart[cardID].title} in the sellers stock`)
+        return;
+      }
        cart[cardID].num+=+1;
         generateCards();
    }
@@ -126,8 +133,7 @@ window.addEventListener("load",function(){
     function deleteCard(cardId){ 
         cart.splice(cardId,1);
         generateCards();      
-    }
-         
+    }    
     })
 })
 

@@ -7,7 +7,9 @@ export const state = {
       email: "ash@customer.ash",
       password: "ash123",
       orders: [1, 2],
-      cart: [1, 2],
+      cart: [{id :1,
+              num: 2
+            }],
       accountType: "customer",
     },
     {
