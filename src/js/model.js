@@ -1,5 +1,5 @@
 export const state = {
-  currentUser: null,
+  currentUser: "guest",
   users: [
     {
       id: 1,
@@ -8,7 +8,7 @@ export const state = {
       password: "ash123",
       orders: [1, 2],
       cart: [{id :1,
-              num: 2
+              quantity: 2
             }],
       accountType: "customer",
     },
@@ -86,6 +86,7 @@ export const state = {
       title: "ashhh",
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -94,6 +95,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -102,6 +104,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -110,6 +113,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },

@@ -2,7 +2,14 @@ import {  state} from "./model.js";
 import {  getCurrentUser} from "./model.js";
 import {  getUserById} from "./model.js";
 
-console.log('state  ',state )
+let currentUser=getCurrentUser();
+console.log("state",state);
+if(getCurrentUser==="guest"){
+
+}else{
+  let states
+
+}
 let cart=[
   {
       title:"watch1",
