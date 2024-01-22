@@ -1,602 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products Page</title>
-    <link rel="stylesheet" href="style/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style/style_products_tester.css" />
-    <script
-      src="https://kit.fontawesome.com/585a1514af.js"
-      crossorigin="anonymous">
-    </script>
-    <script type="module">
-      import {products} from "./Products.js"
-      
-      // adding divs dynamically to the page
-      document.addEventListener("DOMContentLoaded", function () {
 
-// Drawing the cards
-        function renderCards(startCard, endCard) {
-          const firstRow = document.getElementById("ProductShow");
-          firstRow.innerHTML = "";
-          for (let i = startCard; i <= endCard; i++) {
-            // if (products[i-1].name === "product1") {
-            //   console.log(products[i-1].name);
-            //   continue;
-            
-            // }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products Page</title>
+  <link rel="stylesheet" href="../style/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../style/style_products_tester.css" />
 
-            const productOuterDiv = document.createElement("div");
-            // add class "col-md-3"
-            productOuterDiv.classList.add("col-md-3");
-            // append the div for the product
-            const productDiv = document.createElement("div");
-            // add class "wsk-cp-product" to the div
-            productDiv.classList.add("wsk-cp-product");
-            // append the div for the image
-            const imageDiv = document.createElement("img");
-            // add class "img-responsive"
-            imageDiv.classList.add("wsk-cp-img");
-            // and alt value to the image
-            // printvalues();
-            // console.log("products[i-1].name" + products[i-1].name + i);
-            imageDiv.setAttribute("alt", products[i-1].name);
-            imageDiv.setAttribute("src", products[i-1].imgURL);
-            // append the div for the text
-            const textDiv = document.createElement("div");
-            // add class "wsk-cp-text"
-            textDiv.classList.add("wsk-cp-text");
-            // append the div for the category
-            const categoryDiv = document.createElement("div");
-            // add class "category"
-            categoryDiv.classList.add("category");
-            // append the span for the category
-            const categorySpan = document.createElement("span");
-            categorySpan.innerText = "Category";
-            // append the div for the product name
-            const productNameDiv = document.createElement("div");
-            // add class "title-product"
-            productNameDiv.classList.add("title-product");
-            // append the h3 for the product name
-            const productNameH3 = document.createElement("h3");
-            productNameH3.innerText = products[i-1].name + " " + i;
-            // append the div for the description
-            const descriptionDiv = document.createElement("div");
-            // add class "description-prod"
-            descriptionDiv.classList.add("description-prod");
-            // append the p for the description
-            const descriptionP = document.createElement("p");
-            descriptionP.innerText = products[i-1].description;
-            // append the div for the footer
-            const footerDiv = document.createElement("div");
-            // add class "card-footer"
-            footerDiv.classList.add("card-footer");
-            // append the div for the price
-            const priceDiv = document.createElement("div");
-            // add class "wcf-left"
-            priceDiv.classList.add("wcf-left");
-            // append the span for the price
-            const priceSpan = document.createElement("span");
-            priceSpan.innerText = products[i-1].price;
-            // append the div for the add to cart button 
-            const addToCartDiv = document.createElement("div");
-            // add class "wcf-right"
-            addToCartDiv.classList.add("wcf-right");
-            // append the button for the add to cart
-            const addToCartButton = document.createElement("button");
-            // add class "buy-btn"
-            addToCartButton.classList.add("buy-btn");
-            // append the i for the add to cart
-            const addToCartI = document.createElement("i");
-            addToCartI.classList.add("fa-solid", "fa-cart-plus");
-            // addToCartI.classList.add("fa-cart-shopping");
-            // <i class="fa-light fa-cart-shopping"></i>
-            // append the divs to the page
-            firstRow.appendChild(productOuterDiv);
-            productOuterDiv.appendChild(productDiv);
-            productDiv.appendChild(imageDiv);
-            productDiv.appendChild(textDiv);
-            textDiv.appendChild(categoryDiv);
-            categoryDiv.appendChild(categorySpan);
-            textDiv.appendChild(productNameDiv);
-            productNameDiv.appendChild(productNameH3);
-            textDiv.appendChild(descriptionDiv);
-            descriptionDiv.appendChild(descriptionP);
-            textDiv.appendChild(footerDiv);
-            footerDiv.appendChild(priceDiv);
-            priceDiv.appendChild(priceSpan);
-            footerDiv.appendChild(addToCartDiv);
-            addToCartDiv.appendChild(addToCartButton);
-            addToCartButton.appendChild(addToCartI);
-          }
-        }
+  <script src="https://kit.fontawesome.com/585a1514af.js" crossorigin="anonymous">
+  </script>
+  <script type="module" src="../js/Products_tester.js"></script>
 
-        // fetch("Products.js")
-        // .then(response => response.json())
-        // .then(products => {
-        //   const n = products.length; // Number of products
-        // })
-        // .catch(error => {
-        //   console.error("Error fetching products:", error);
-        // });
+</head>
 
-// Define the variables for the pagination
-        var page = 1; // Current page
-        var productsCount = products.length; // Number of products
-        var numberOfCardsPerPage = 5; // Number of cards per page
-        var pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
-        var startCard = 1; // Start card
-        var endCard = numberOfCardsPerPage; // End card
+<body>
+  <!-- Body STARTS -->
+  <div class="shell">
+    <div class="container">
+      <div id="topHeader" class="container-fluid  ">
 
-        function printvalues() 
-        {
-          console.log("page: " + page,
-                      "productsCount: " + productsCount,
-                      "numberOfCardsPerPage: " + numberOfCardsPerPage,
-                      "pagesCount: " + pagesCount,
-                      "startCard: " + startCard,
-                      "endCard: " + endCard
-                      );
-        }
+        <!-- Search Bar STARTS -->
+        <form action="" id="searchform">
+          <input type="search" placeholder="Search by product" required>
+          <i class="fa fa-search"></i>
+          <a href="javascript:void(0)" id="clear-btn"><i class="fa-solid fa-xmark"></i></a>
+        </form>
+        <!-- Search Bar ENDS -->
+        <!-- Navigation Bar STARTS -->
 
-
-
-        const pagSec = document.getElementById("paginationSection");
-        pagSec.addEventListener("click", function (event) {
-          console.log("listen to: " + event.target.innerHTML);
-          console.log(event.target.nodeName);
-          if(event.target.nodeName == "A")
-          {
-
-            console.log(event.target.nodeName)
-            pagSec.innerHTML = "";
-          
-            if (event.target.textContent === "Previous") {
-              if (page === 1) {
-                page = 1;
-              } else {
-                page--;
-              }
-            } else if (event.target.textContent === "Next") {
-              if (page === pagesCount) {
-                page = pagesCount;
-              } else {
-                page++;
-              }
-            } 
-            else
-            {
-              page = parseInt(event.target.textContent);
-            }
-            console.log(page);
-
-            startCard = (page - 1) * numberOfCardsPerPage + 1;
-            endCard = page * numberOfCardsPerPage;
-            if (endCard > productsCount) {
-              endCard = productsCount;
-            }
-          }
-          
-          // if (page === 1) {
-            //   startCard = 1;
-            //   endCard = numberOfCardsPerPage;
-            // } else if (productsCount - startCard < numberOfCardsPerPage) {
-              //   startCard = (page - 1) * numberOfCardsPerPage + 1;
-              //   endCard = productsCount;
-              // } else if (productsCount - startCard >= numberOfCardsPerPage) {
-                //   startCard = (page - 1) * numberOfCardsPerPage + 1;
-                //   endCard = numberOfCardsPerPage;
-                // } else {
-                  //   startCard = (page - 1) * numberOfCardsPerPage + 1;
-                  //   endCard = page * numberOfCardsPerPage;
-                  // }
-                  
-                  renderCards(startCard, endCard);
-                  renderPaginationSection();
-                });
-                
-        function renderPaginationSection() {
-          const pagSec = document.getElementById("paginationSection");
-          pagSec.innerHTML = "";
-
-          // Create the pagination buttons
-            const pagSecDiv = document.createElement("ul");
-            pagSecDiv.classList.add("pagination");
-            pagSecDiv.setAttribute("style", "justify-content: center;");
-
-          // Create the < button
-          if(page != 1)
-          {
-            const pagSecDivLiLeft = document.createElement("li");
-            pagSecDivLiLeft.classList.add("page-item");
-            // const pagSecDivLiLeftSpan = document.createElement("span");
-            // pagSecDivLiLeftSpan.classList.add("material-icons");
-            // pagSecDiv.appendChild(pagSecDivLiLeftSpan);
-            pagSecDiv.appendChild(pagSecDivLiLeft);
-            const pagSecDivLiLeftA = document.createElement("a");
-            pagSecDivLiLeftA.classList.add("page-link");
-            pagSecDivLiLeftA.setAttribute("href", "#");
-            pagSecDivLiLeftA.innerText = "Previous";
-            pagSecDivLiLeft.appendChild(pagSecDivLiLeftA);
-            pagSecDiv.appendChild(pagSecDivLiLeft);
-            pagSec.appendChild(pagSecDiv);
-          }
-
-          // Create the page buttons
-          for (let i = 1; i <= pagesCount; i++) 
-          {
-            if (i == 1 
-             || i == pagesCount 
-             || i == page 
-             || (i == page - 1 && i >= 1)
-             || (i == page + 1 && i <= pagesCount)
-             ) {
-              console.log("i: " + i + " page: " + page);
-              const pagSecDivLi = document.createElement("li");
-              pagSecDivLi.classList.add("page-item");
-              if (i == page) {
-                pagSecDivLi.classList.add("active");
-              }
-              const pagSecDivLiA = document.createElement("a");
-              pagSecDivLiA.classList.add("page-link");
-              pagSecDivLiA.setAttribute("href", "#");
-              pagSecDivLiA.innerText = i;
-              pagSecDiv.appendChild(pagSecDivLi);
-              pagSecDivLi.appendChild(pagSecDivLiA);
-            }
-
-            // when to print the ... in the pagination
-            // page = 1 [1 2 3 ... 6]
-            // page = 2 [1 2 3 4 ... 6]
-            // page = 3 [1 ... 2 3 4 ... 6]
-            // page = 4 [1 ... 3 4 5 6]
-
-            // if ((i == 3 && page > 3)
-            //  || (i == pagesCount - 3 && page < pagesCount - 3)) 
-            if (false)
-            {
-              const pagSecDivLi = document.createElement("li");
-              pagSecDivLi.classList.add("page-item");
-              const pagSecDivLiA = document.createElement("a");
-              pagSecDivLiA.classList.add("page-link");
-              pagSecDivLiA.setAttribute("href", "#");
-              pagSecDivLiA.classList.add("disabled")
-              pagSecDivLiA.innerText = "...";
-              pagSecDiv.appendChild(pagSecDivLi);
-              pagSecDivLi.appendChild(pagSecDivLiA);
-            }
-          }
-
-          // Create the > button
-          if(page != pagesCount)
-          {
-            const pagSecDivLiRight = document.createElement("li");
-            pagSecDivLiRight.classList.add("page-item");
-            // const pagSecDivLiRightSpan = document.createElement("span");
-            // pagSecDivLiRightSpan.classList.add("material-icons");
-            // pagSecDiv.appendChild(pagSecDivLiRightSpan);
-            pagSecDiv.appendChild(pagSecDivLiRight);
-            const pagSecDivLiRightA = document.createElement("a");
-            pagSecDivLiRightA.classList.add("page-link");
-            pagSecDivLiRightA.setAttribute("href", "#");
-            pagSecDivLiRightA.innerText = "Next";
-            pagSecDivLiRight.appendChild(pagSecDivLiRightA);
-            
-            pagSecDiv.appendChild(pagSecDivLiRight);
-            pagSec.appendChild(pagSecDiv);
-          }
-            
-            
-          pagSec.appendChild(pagSecDiv);
-        }
-
-        renderPaginationSection();
-        
-        // append the div for the product
-        // Call the function with the desired startCard and endCard values
-
-        const clearInput = () => {
-          const input = document.querySelector('input[type="search"]');
-          input.value = "";
-        }
-        const clearBtn = document.getElementById("clear-btn");
-        clearBtn.addEventListener("click", clearInput);
-
-        renderCards(startCard, endCard);
-        // renderPaging();
-
-
-      });
-
-      // const searchValue = document.querySelector('input[type="search"]').value;
-      
-      // const searchValue = "your search value";
-
-      // const filteredProducts = products.filter(product => {
-      //   // Modify the condition based on your filtering criteria
-      //   return product.name.toLowerCase().includes(searchValue.toLowerCase());
-      // });
-
-      // // Use the filteredProducts array as needed
-
-
-    </script>
-  </head>
-  <body>
-<!-- Body STARTS -->
-    <div class="shell">
-      <div class="container">
-                <div id="topHeader" class="container-fluid  ">
-
-<!-- Search Bar STARTS -->
-                  <form action="" id="searchform">
-                    <input type="search" placeholder="Search by product" required>
-                    <i class="fa fa-search"></i>
-                    <a href="javascript:void(0)" id="clear-btn"><i class="fa-solid fa-xmark"></i></a>
-                  </form>
-<!-- Search Bar ENDS -->
-<!-- Navigation Bar STARTS -->
-          <nav class="navbar navbar-expand-lg  justify-content-between fixed-top bg-dark-subtle" data-bs-theme="dark"  >
-            <a class="navbar-brand ms-3" href="#">Techno</a>
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
-            <div>
-              <ul class=" navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
-                <li class="nav-item mx-lg-3">
-                  <a class="nav-link " aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item mx-3">
-                  <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item mx-lg-3">
-                  <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item mx-2">
-                  <a class="nav-link" href="#">Contact us</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mx-3 ">
-              <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row ">
-                <li class="nav-item " >
-                  <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn"  href="#">Sign in</a>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link"href="#"><i class="fa-solid fa-cart-plus"></i></a>
-                </li>
-              </ul>           
-            </div>            
-          </nav> 
-<!-- Navigation Bar ENDS -->
-        </div>
-<!-- This is the sign in section -->
-        <div class="modal fade" id="signIn" aria-labelledby="signIn" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header d-flex flex-row justify-content-between">
-                <span class="modal-title fs-5 text-black " id="signIn">Sign in</span>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form >
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                  </div>
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
-                  <div class="mt-2 px-1">
-                    <input class="me-2 mt-2  " type="checkbox" name="staySigned" id="staySigned"><label  for="staySigned">Stay signed in</label>
-                    <a href="#" style="color: rgb(165, 165, 165);" class=" float-end">Forgot your password</a>
-                  </div>
-                  <div class="text-center ">
-                    <button class="mt-3  btn btn-outline-dark w-100">Sign in</button>
-                    <button class="my-2  btn btn-dark w-100">Register</button>
-                  </div>
-              </div>
-            </form>
-            </div>
+        <!-- 
+        <nav class="navbar navbar-expand-lg  justify-content-between fixed-top bg-dark-subtle" data-bs-theme="dark">
+          <a class="navbar-brand ms-3" href="#">Techno</a>
+          <div>
+            <ul class=" navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
+              <li class="nav-item mx-lg-3">
+                <a class="nav-link " aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item mx-lg-3">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="#">Contact us</a>
+              </li>
+            </ul>
           </div>
-        </div>
-<!-- sign in end -->
-<!-- Start The Products Show -->
-        <div id="ProductShow" class="row">
-          <!-- 
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img">
-                    <img src="" alt="Product" class="img-responsive" />
-                  </div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Ethnic</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn">
-                        <i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Introvert</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Beauty</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Drama</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart cvf ggf gfg g</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-               -->
-        </div>
-<!-- <div class="row">
-              <div class="col-md-6">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img">
-                    <img src="" alt="Product" class="img-responsive" />
-                  </div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Ethnic</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Introvert</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Beauty</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="wsk-cp-product">
-                  <div class="wsk-cp-img"><img src="" alt="Product" class="img-responsive" /></div>
-                  <div class="wsk-cp-text">
-                    <div class="category">
-                      <span>Drama</span>
-                    </div>
-                    <div class="title-product">
-                      <h3>My face not my heart cvf ggf gfg g</h3>
-                    </div>
-                    <div class="description-prod">
-                      <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                      <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-<!-- pagination STARTS -->
-            <div id="paginationSection" class="container container-fluid ">
-              <!-- FILEPATH: /g:/Project E-commerce/Products_tester.html -->
-<!-- 
-              <ul class="pagination" style="justify-content: center;">
-                <li class="page-item active"><a class="page-link" href="">1</a></li>
-                <li class="page-item"><a class="page-link act"    href="">2</a></li>
-                <li class="page-item"><a class="page-link"        href="">3</a></li>
-                <li class="page-item"><a class="page-link"        href="">4</a></li>
-                <li class="page-item"><a class="page-link"        href="">5</a></li>
-              </ul>
--->
-<!-- pagination STARTS -->
+          <div class="mx-3 ">
+            <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row ">
+              <li class="nav-item ">
+                <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>
+              </li>
+              <li class="nav-item px-2">
+                <a class="nav-link" href="#"><i class="fa-solid fa-cart-plus"></i></a>
+              </li>
+            </ul>
           </div>
-        </div>
+        </nav>
+ -->
+
+        <!-- Navigation Bar ENDS -->
     </div>
-<!-- Body ENDS -->
-  </body>
+      <!-- This is the sign in section -->
+<!-- 
+      <div class="modal fade" id="signIn" aria-labelledby="signIn" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header d-flex flex-row justify-content-between">
+              <span class="modal-title fs-5 text-black " id="signIn">Sign in</span>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                  <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <label for="floatingPassword">Password</label>
+                </div>
+                <div class="mt-2 px-1">
+                  <input class="me-2 mt-2  " type="checkbox" name="staySigned" id="staySigned"><label
+                    for="staySigned">Stay signed in</label>
+                  <a href="#" style="color: rgb(165, 165, 165);" class=" float-end">Forgot your password</a>
+                </div>
+                <div class="text-center ">
+                  <button class="mt-3  btn btn-outline-dark w-100">Sign in</button>
+                  <button class="my-2  btn btn-dark w-100">Register</button>
+                </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+ -->
+      <!-- sign in end -->
+<!-- Start The Category Buttons -->
+<div class="container" id="CategoryButtons">
+  <div id="CategoryButtons" class="container">
+    <ul class="row ">
+      <li class="list-group-item col">
+        <input class="form-check-input me-1" type="radio" value="" id="zeroCheckbox" name="Category" checked>
+        <label class="form-check-label" for="firstCheckbox">All</label>
+      </li>
+      <li class="list-group-item col">
+        <input class="form-check-input me-1" type="radio" value="TVs" id="firstCheckbox" name="Category">
+        <label class="form-check-label" for="firstCheckbox">TVs</label>
+      </li>
+      <li class="list-group-item col">
+        <input class="form-check-input me-1" type="radio" value="Laptops" id="secondCheckbox" name="Category">
+        <label class="form-check-label" for="secondCheckbox">Laptops</label>
+      </li>
+      <li class="list-group-item col">
+        <input class="form-check-input me-1" type="radio" value="Phone" id="thirdCheckbox" name="Category">
+        <label class="form-check-label" for="thirdCheckbox">Phone</label>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--   
+  <label for="option-1" class="option option-1">
+    <div class="dot"></div>
+    <span>ALL</span>
+  </label>
+  <label for="option-2" class="option option-2">
+    <div class="dot"></div>
+    <span>TVs</span>
+  </label>
+  <label for="option-3" class="option option-3">
+    <div class="dot"></div>
+    <span>Laptops</span>
+  </label>
+  <label for="option-4" class="option option-4">
+    <div class="dot"></div>
+    <span>Phone</span>
+  </label>
+   -->
+</div>
+
+
+<!-- End The Category Buttons -->
+<!-- Start The Products Show -->
+
+      <div class="container" id="ProductsShow">
+        <div id="ProductShow" class="row">
+        </div>
+      </div>
+
+<!-- End The Products Show -->
+<!-- pagination STARTS -->
+      <div id="paginationSection" class="container container-fluid ">
+<!-- pagination ENDS -->
+      </div>
+    </div>
+  </div>
+  <!-- Body ENDS -->
+</body>
+
 </html>
