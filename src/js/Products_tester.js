@@ -8,7 +8,7 @@ import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
 // import { addToCart } from "./addToCart.js";
 
-var numberOfCardsPerPage = 6;
+var numberOfCardsPerPage = 8;
 let prodID = -1;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (endCard > productsCount) {
     endCard = productsCount;
   }
-  renderNav(body);
-  renderFooter(body);
+  // renderNav(body);
+  // renderFooter(body);
   renderCards(page, numberOfCardsPerPage);
 
   let searchValue = document.querySelector('input[type="search"]').value;

@@ -28,8 +28,8 @@ body {
   -o-transform: translate(-50%);
   -khtml-transform: translate(-50%);
   width: 100%;
-  padding: 15px;
-  transition: all 0.2s ease-in-out;
+  padding: 5px;
+  transition: all 0.4s ease-in-out;
 }
 
 .wsk-cp-img img {
@@ -42,7 +42,7 @@ body {
   top: -2px;
   -webkit-scale: 2.1;
   padding: 0px;
-  border-radius: 10px;
+  border-radius: 15%;
 
   transition: all 0.2s ease-in-out;
 }
@@ -52,8 +52,13 @@ body {
 }
 
 .wsk-cp-text {
+  border-radius: 6px;
   padding-top: 100%;
+  background: #fdf5eb;
+  transition: all 0.2s ease-in-out;
+  
 }
+
 
 .wsk-cp-text .category {
   text-align: center;
@@ -67,6 +72,7 @@ body {
 
 .wsk-cp-text .category > * {
   position: absolute;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -80,7 +86,7 @@ body {
 .wsk-cp-text .category > span {
   padding: 12px 30px;
   border: 1px solid #313131;
-  background: #212121;
+  background: #B88E2F;
   color: #fff;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   border-radius: 27px;
@@ -128,9 +134,13 @@ body {
 }
 
 .card-footer {
-  padding: 25px 0 5px;
-  border-top: 1px solid #ddd;
+  padding: 8px 0 5px;
+  border-top: 3px solid #ddd;
 }
+.card-footer * {
+  margin: 3px;
+}
+
 
 .card-footer:after,
 .card-footer:before {
@@ -351,7 +361,7 @@ input[type="search"] {
 } 
 
 .card {
-
+  margin: 0 auto;
   background-color: #fff;
   border: none;
   border-radius: 10px;

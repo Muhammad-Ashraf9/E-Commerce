@@ -15,7 +15,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod1.png",
-    description: "description1",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -52,7 +53,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -89,7 +91,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -126,7 +129,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -163,7 +167,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -200,7 +205,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -237,7 +243,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -274,7 +281,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -311,7 +319,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -348,7 +357,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -385,7 +395,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -422,7 +433,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -459,7 +471,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -496,7 +509,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -533,7 +547,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -570,7 +585,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -607,7 +623,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,
@@ -644,7 +661,8 @@ export let products = [
     price: 80,
     priceBeforeDiscount: 100,
     imgURL: "/assets/Products/prod2.png",
-    description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+    description:
+      "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
     brand: "brand1",
     quantity: 10,
     // isAvailable: products.quantity === 0 ? true : false,

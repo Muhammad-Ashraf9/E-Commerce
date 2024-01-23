@@ -14,7 +14,42 @@ prodDescDiv.innerText = Product.description;
 let prodCategoryDiv = document.querySelector("#prodCategory h4");;
 prodCategoryDiv.innerText += " " + Product.category;
 
-renderCards(1,8);
+
+  // Render after click on the pagination buttons
+  let page = 1;
+  let numberOfCardsPerPage = 4
+  renderCards(page, numberOfCardsPerPage);
+
+  const pagSec = document.getElementById("paginationSection");
+  pagSec.addEventListener("click", function (event) {
+    console.log(event.target);
+    if (event.target.nodeName == "A") {
+      pagSec.innerHTML = "";
+      if (event.target.textContent === "Previous") {
+        if (page === 1) {
+          page = 1;
+        } else {
+          page--;
+        }
+      } else if (event.target.textContent === "Next") {
+        if (page === pagesCount) {
+          page = pagesCount;
+        } else {
+          page++;
+        }
+      } else {
+        page = parseInt(event.target.textContent);
+      }
+
+      // startCard = (page - 1) * numberOfCardsPerPage + 1;
+      // endCard = page * numberOfCardsPerPage;
+      // if (endCard > productsCount) {
+      //   endCard = productsCount;
+      // }
+    }
+    renderCards(page, numberOfCardsPerPage);
+  });
+
 
 const wishIcon = document.querySelector(".wish-icon i");
 wishIcon.addEventListener("click", function () {

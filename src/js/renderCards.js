@@ -40,12 +40,12 @@ export function renderCards(page, numberOfCardsPerPage) {
     // add class "wsk-cp-text"
     textDiv.classList.add("wsk-cp-text");
     // append the div for the category
-    const categoryDiv = document.createElement("div");
+    // const categoryDiv = document.createElement("div");
     // add class "category"
-    categoryDiv.classList.add("category");
+    // categoryDiv.classList.add("category");
     // append the span for the category
-    const categorySpan = document.createElement("span");
-    categorySpan.innerText = Products[i - 1].category;
+    // const categorySpan = document.createElement("span");
+    // categorySpan.innerText = Products[i - 1].category;
     // append the div for the product name
     const productNameDiv = document.createElement("div");
     // add class "title-product"
@@ -56,12 +56,12 @@ export function renderCards(page, numberOfCardsPerPage) {
     productNameH3.setAttribute("class", "viewProductPage");
     productNameH3.setAttribute("id", Products[i - 1].id);
     // append the div for the description
-    const descriptionDiv = document.createElement("div");
+    // const descriptionDiv = document.createElement("div");
     // add class "description-prod"
-    descriptionDiv.classList.add("description-prod");
+    // descriptionDiv.classList.add("description-prod");
     // append the p for the description
-    const descriptionP = document.createElement("p");
-    descriptionP.innerText = Products[i - 1].description;
+    // const descriptionP = document.createElement("p");
+    // descriptionP.innerText = Products[i - 1].description;
     // append the div for the footer
     const footerDiv = document.createElement("div");
     // add class "card-footer"
@@ -72,7 +72,9 @@ export function renderCards(page, numberOfCardsPerPage) {
     priceDiv.classList.add("wcf-left");
     // append the span for the price
     const priceSpan = document.createElement("span");
-    priceSpan.innerText = Products[i - 1].price;
+    var textPrice =
+      `${Products[i - 1].price} $ <del>${Products[i - 1].priceBeforeDiscount} $</del>`;
+    priceSpan.innerHTML = textPrice;
     // append the div for the add to cart button
     const addToCartDiv = document.createElement("div");
     // add class "wcf-right"
@@ -85,9 +87,13 @@ export function renderCards(page, numberOfCardsPerPage) {
     quantityInput.setAttribute("type", "text");
     quantityInput.setAttribute("value", "0");
     quantityInput.setAttribute("readonly", "readonly");
-    quantityInput.setAttribute("style", "width: 30px;");
+    var style = "width: 30px; background-color: transparent; border: none;";
+    quantityInput.setAttribute("style", style);
     // append the button for the add to cart
     const addToCartButton = document.createElement("button");
+    var style = "width: 30px; background-color: transparent; border: none;";
+    addToCartButton.setAttribute("style", style);
+
     // add class "buy-btn"
     addToCartButton.classList.add("buy-btn");
     addToCartButton.onclick = addtoCart;
@@ -102,12 +108,12 @@ export function renderCards(page, numberOfCardsPerPage) {
     productOuterDiv.appendChild(productDiv);
     productDiv.appendChild(imageDiv);
     productDiv.appendChild(textDiv);
-    textDiv.appendChild(categoryDiv);
-    categoryDiv.appendChild(categorySpan);
+    // textDiv.appendChild(categoryDiv);
+    // categoryDiv.appendChild(categorySpan);
     textDiv.appendChild(productNameDiv);
     productNameDiv.appendChild(productNameH3);
-    textDiv.appendChild(descriptionDiv);
-    descriptionDiv.appendChild(descriptionP);
+    // textDiv.appendChild(descriptionDiv);
+    // descriptionDiv.appendChild(descriptionP);
     textDiv.appendChild(footerDiv);
     footerDiv.appendChild(priceDiv);
     priceDiv.appendChild(priceSpan);
