@@ -1,6 +1,6 @@
-import { getProductById, state,getCurrentUser, getUserById } from "./model.js";
+import { getProductById, state,getCurrentUser, getUserById, getCurrentCart,changeCartItemCount,DeleteFromCart } from "./model.js";
 const user = getCurrentUser();
-let ucart = user ? user.cart : state.guestCart;
+let ucart = getCurrentCart()
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
@@ -11,6 +11,11 @@ window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
   function generateCards() {
+ cart =    getCurrentCart().map((item) => ({
+  product: getProductById(item.id),
+  num: item.quantity,
+}));
+
     let flag = 0;
     cards.innerHTML = "";
     if (cart.length == 0) {
@@ -41,7 +46,7 @@ window.addEventListener("load", function () {
               <!-- End of information -->
               <!-- Controls -->
               <div class="col-4 pt-4 text-center">
-                <button id="close" class="float-end btn btn-lg btn-close rounded-circle"> </button>
+                <button id="close" class="float-end btn btn-lg btn-close rounded-circle" data-id="${item.product.id}"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
                   <button style="background: #eec28c; color:white" class="btn">+</button>
@@ -66,11 +71,15 @@ window.addEventListener("load", function () {
         e.target.parentElement.parentElement.parentElement.parentElement
           .parentElement.parentElement.id;
       if (cart[cardID].num == cart[cardID].product.stock) {
-        alert(
-          `Sorry but there is no more ${cart[cardID].product.title} in the sellers stock`
-        );
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
         return;
       }
+      changeCartItemCount( cart[cardID].product.id, cart[cardID].num+1);
       cart[cardID].num += +1;
       generateCards();
     }
@@ -79,20 +88,28 @@ window.addEventListener("load", function () {
         e.target.parentElement.parentElement.parentElement.parentElement
           .parentElement.parentElement.id;
       if (cart[cardID].num - 1 == 0) return;
-      cart[cardID].num -= 1;
+      changeCartItemCount( cart[cardID].product.id, cart[cardID].num-1);
+      cart[cardID].num += -1;
       generateCards();
     }
-    if (e.target.id == "close") {
-      let cardID =
-        e.target.parentElement.parentElement.parentElement.parentElement
-          .parentElement.id;
-      deleteCard(cardID);
+    if (e.target.dataset.id) {
+      console.log('e.target.dataset.id', e.target.dataset.id)
+      const itemId = +e.target.dataset.id
+      // let cardID =
+      //   e.target.parentElement.parentElement.parentElement.parentElement
+      //     .parentElement.id;
+      DeleteFromCart(itemId);
+
+      generateCards();
+      console.log("4")
+
     }
 
-    function deleteCard(cardId) {
-      cart.splice(cardId, 1);
-      generateCards();
-    }
+    // function deleteCard(cardId) {
+    //   cart.splice(cardId, 1);
+    //   DeleteFromCart(cart[cardId].product.id);
+    //   generateCards();
+    // }
   });
 let CheckOut =  document.getElementById("proceed")
 CheckOut.addEventListener("click",function(e){
@@ -100,7 +117,14 @@ CheckOut.addEventListener("click",function(e){
     if(state.currentUser.accountType === 'customer')
       location.assign("../html/checkout_page.html")
   }else{
-    location.assign("../html/main.html")
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    }).then(()=>{
+      location.assign('../html/main.html')
+    })
   }
   })
 });

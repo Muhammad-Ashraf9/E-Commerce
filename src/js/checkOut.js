@@ -1,106 +1,41 @@
-import { getProductById, state,getCurrentUser, getUserById } from "./model.js";
+import { getProductById, state,getCurrentUser, getUserById,changeCartItemCount,DeleteFromCart,getCurrentCart } from "./model.js";
 const user = getCurrentUser();
 let ucart = user ? user.cart : state.guestCart;
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-(() => {
-  'use strict'
 
+//(() => {
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
+    document.getElementById("placing").addEventListener('click', event => {
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
-
       }else{
-        document.getElementById("content").innerHTML=`<h1  class="text-center">Your order has been submitted!</h1>
-        <h3  class="text-center">You can track your order in your profile page</h3>
-        <div class="text-center">
-        <div class="text-center">
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-        <i class="fa-regular fa-star fs-1 text-danger"></i>
-  </div>
-        </div>`
+          Swal.fire({
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success"
+        });
       }
       form.classList.add('was-validated')
-    }, false)
+    })
   })
-})()
-let cartss=[
-  {
-      title:"watch1",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:2000.,
-      img:"../assets/test1.jpeg",
-      num:1
-      ,stock:15,
-  },
-  {
-      title:"watch2",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:22.25,
-      img:"../assets/test2.jpeg"
-      ,num:1
-      ,stock:14
-  },
-  {
-      title:"watch3",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:150.50,
-      img:"../assets/test1.jpeg"
-      ,num:1
-      ,stock:13
-  },
-  {
-      title:"watch4",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:11.95,
-      img:"../assets/test2.jpeg"
-      ,num:1
-      ,stock:12
-  },
-  {
-      title:"watch5",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:75.25,
-      img:"../assets/test1.jpeg"
-      ,num:1
-      ,stock:11
-  },{
-      title:"watch6",
-      description:"this is a great watch that has many features like like your great eyes",
-      shopeName:"Nike Store",
-      price:200.25,
-      img:"../assets/test2.jpeg"
-      ,num:5
-      ,stock:10
-  }
-]
+//})()
+
 window.addEventListener("load",function(){
   let numOfItems=0;
-  let cards= this.document.getElementById("items");
+  let cards = this.document.getElementById("items");
   generateCards();
-  function generateCards(){
+  function generateCards() {
+ cart =    getCurrentCart().map((item) => ({
+  product: getProductById(item.id),
+  num: item.quantity,
+}));
    let flag=0;
    cards.innerHTML="";
    if(cart.length==0){
@@ -111,37 +46,41 @@ window.addEventListener("load",function(){
    cart.forEach(item => {
        numOfItems+=item.num
        total+=item.product.price*item.num;
-       cards.innerHTML+=`<div id="${flag}" class="card m-auto">
-       <div class="row g-0">
-         <div  class="col-lg-2">
-           <img  src="${item.product.img}" class="img-fluid rounded" alt="${item.product.title}">
-         </div>
-         <div class="col-lg-10">
-           
-           <div class="card-body d-flex gap-3 flex-nowrap">
-             <!-- Information -->
-             <div class="col-sm-7 flex-grow-1">
-               <h5 class="card-title">${item.product.title}</h5>
-               <p class="card-text">${item.product.description}</p>
-               <p class="card-text"><small class="text-body-secondary">${getUserById(item.product.id).name}</small></p>
-             </div>
-             <!-- End of information -->
-             <!-- Controls -->
-             <div class="col-4 pt-4 text-center">
-             <button id="close" class="float-end btn btn-lg btn-close rounded-circle"> </button>
-             <h3 class="price mt-2 mb-3">${item.product.price}</h3>
-             <div class="btn-group numOfItems">
-               <button style="background: #eec28c; color:white" class="btn">+</button>
-               <span class="fs-2 mx-3">${item.num}</span>
-               <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
-             </div>
-           </div>
-             <!-- End of controls -->
-           </div>
-           <!-- End of Control and information -->
-           </div>
-       </div>
-     </div>`
+       cards.innerHTML += `<div id="${flag}" class="card m-auto">
+        <div class="row g-0">
+          <div  class="col-lg-2">
+            <img  src="${item.product.img}" class="img-fluid rounded" alt="${
+        item.title
+      }">
+          </div>
+          <div class="col-md-10">
+            
+            <div class="card-body d-flex gap-3 flex-nowrap">
+              <!-- Information -->
+              <div class="col-sm-7 flex-grow-1">
+                <h5 class="card-title">${item.product.title}</h5>
+                <p class="card-text">${item.product.description}</p>
+                <p class="card-text"><small class="text-body-secondary">${
+                  getUserById(item.product.id).name
+                }</small></p>
+              </div>
+              <!-- End of information -->
+              <!-- Controls -->
+              <div class="col-4 pt-4 text-center">
+                <button id="close" class="float-end btn btn-lg btn-close rounded-circle" data-id="${item.product.id}"> </button>
+                <h3 class="price mt-2 mb-3">${item.product.price}</h3>
+                <div class="btn-group numOfItems">
+                  <button style="background: #eec28c; color:white" class="btn">+</button>
+                  <span class="fs-2 mx-3">${item.num}</span>
+                  <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
+                </div>
+              </div>
+              <!-- End of controls -->
+            </div>
+            <!-- End of Control and information -->
+            </div>
+        </div>
+      </div>`;
      flag++;
      
       });
@@ -154,35 +93,36 @@ window.addEventListener("load",function(){
   
   cards.addEventListener("click",function(e){
    if(e.target.innerText=="+"){
-      let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-      if(cart[cardID].num==cart[cardID].stock){
-        console.log(e.target)
-        e.target.setAttribute("data-bs-toggle","popover");
-        e.target.setAttribute("data-bs-title","Popover title");
-        e.target.setAttribute("data-bs-content","And here's some amazing content. It's very engaging. Right?"); 
-        return;
-      }
-      cart[cardID].num+=+1;
-       generateCards();
+    let cardID =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement.parentElement.id;
+    if (cart[cardID].num == cart[cardID].product.stock) {
+      alert(
+        `Sorry but there is no more ${cart[cardID].product.title} in the sellers stock`
+      );
+      return;
+    }
+    changeCartItemCount( cart[cardID].product.id, cart[cardID].num+1);
+    cart[cardID].num += +1;
+    generateCards();
   }
   if(e.target.innerText=="-"){
        let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
        if(cart[cardID].num-1==0)return
-       cart[cardID].num-=1;
+       changeCartItemCount( cart[cardID].product.id, cart[cardID].num-1);
+      cart[cardID].num += -1;
        generateCards();
    
    }
-   if(e.target.id=="close"){
-       let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-       deleteCard(cardID)
-   }
+   if (e.target.dataset.id) {
+    console.log('e.target.dataset.id', e.target.dataset.id)
+    const itemId = +e.target.dataset.id
+    DeleteFromCart(itemId);
 
-   function deleteCard(cardId){ 
-       cart.splice(cardId,1);
-       console.log(e)
-       generateCards();      
-   } 
+    generateCards();
+  }
 
+ 
 
   })
 
