@@ -74,9 +74,8 @@ window.addEventListener("load", function () {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
-          footer: '<a href="#">Why do I have this issue?</a>'
-        });
+          text: "Sorry, there is no more of this item in the seller's stock",
+          });
         return;
       }
       changeCartItemCount( cart[cardID].product.id, cart[cardID].num+1);
@@ -95,21 +94,9 @@ window.addEventListener("load", function () {
     if (e.target.dataset.id) {
       console.log('e.target.dataset.id', e.target.dataset.id)
       const itemId = +e.target.dataset.id
-      // let cardID =
-      //   e.target.parentElement.parentElement.parentElement.parentElement
-      //     .parentElement.id;
       DeleteFromCart(itemId);
-
       generateCards();
-      console.log("4")
-
     }
-
-    // function deleteCard(cardId) {
-    //   cart.splice(cardId, 1);
-    //   DeleteFromCart(cart[cardId].product.id);
-    //   generateCards();
-    // }
   });
 let CheckOut =  document.getElementById("proceed")
 CheckOut.addEventListener("click",function(e){
@@ -120,8 +107,7 @@ CheckOut.addEventListener("click",function(e){
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Something went wrong!",
-      footer: '<a href="#">Why do I have this issue?</a>'
+      text: "You need to sign in in order to make an order",
     }).then(()=>{
       location.assign('../html/main.html')
     })

@@ -5,9 +5,6 @@ let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
-//(() => {
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
   Array.from(forms).forEach(form => {
@@ -17,15 +14,14 @@ let cart = ucart.map((item) => ({
         event.stopPropagation()
       }else{
           Swal.fire({
-          title: "Good job!",
-          text: "You clicked the button!",
+          title: "Congratulations!",
+          text: "Your order has been submitted successfully",
           icon: "success"
         });
       }
       form.classList.add('was-validated')
     })
   })
-//})()
 
 window.addEventListener("load",function(){
   let numOfItems=0;
@@ -121,12 +117,5 @@ window.addEventListener("load",function(){
 
     generateCards();
   }
-
- 
-
   })
-
-
-
-
 })
