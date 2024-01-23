@@ -1,5 +1,9 @@
 export const state = {
   currentUser: null,
+  guestCart:[{id:1,quantity:2},
+    {id:2,quantity:2},
+    {id:3,quantity:2},
+  ],
   users: [
     {
       id: 1,
@@ -7,7 +11,11 @@ export const state = {
       email: "ash@customer.ash",
       password: "ash123",
       orders: [1, 2],
-      cart: [1, 2],
+      cart: [{id :1,
+              quantity: 2
+            },{id :2,
+              quantity: 2
+            }],
       accountType: "customer",
     },
     {
@@ -84,6 +92,7 @@ export const state = {
       title: "ashhh",
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -92,6 +101,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -100,6 +110,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -108,6 +119,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -117,6 +129,11 @@ export const state = {
 function loadStateFromLocalStorage() {
   for (const key in state) {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
+  }
+}
+function saveStateInLocalStorage(){
+  for (const key in state) {
+    localStorage.setItem(key,JSON.stringify(state[key]))
   }
 }
 function saveInLocalStorage(key, value) {
@@ -164,5 +181,48 @@ export function getOrdersRevenue(ordersArray) {
 export function getOrderTotal(order) {
   return order.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
+export function changeCartItemCount(id,quantity){
+  const cart = getCurrentCart()
+  const index = cart.findIndex(item => item.id === +id)
+  cart[index].quantity = quantity;
+  if(!state.currentUser)
+  {
+
+    state.guestCart = cart;
+  } 
+  else
+  {
+    state.currentUser.cart = cart;
+    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    state.users[index].cart = cart;
+  }
+
+  saveStateInLocalStorage();
+
+}
+export function DeleteFromCart(id){
+  const cart = getCurrentCart()
+  console.log('cart', cart)
+  console.log('id', id)
+  const newCart = cart.filter(item => item.id !== +id)
+  console.log('newCart', newCart)
+  if(!state.currentUser)
+  {
+
+    state.guestCart = newCart;
+  } 
+  else
+  {
+    state.currentUser.cart = newCart;
+    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    state.users[index].cart = newCart;
+  }
+  saveStateInLocalStorage();
+
+}
+export function getCurrentCart(){
+  return state.currentUser ? state.currentUser.cart : state.guestCart;
+}
+
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
