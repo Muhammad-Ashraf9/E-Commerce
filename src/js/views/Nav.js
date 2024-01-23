@@ -1,3 +1,4 @@
+import { signOut } from "../auth.js";
 import { getCurrentUser } from "../model.js";
 import { renderModal } from "./SigninModal.js";
 
@@ -39,5 +40,12 @@ export default function renderNav(element) {
             </div>            
           </nav>`;
   element.insertAdjacentHTML("afterbegin", Nav);
+  const nav = document.querySelector("nav");
+  nav.addEventListener("click", (e) => {
+    if (e.target.textContent !== "Sign out") return;
+    signOut();
+    nav.remove();
+    renderNav(element);
+  });
   renderModal(element);
 }

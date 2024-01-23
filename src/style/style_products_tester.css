@@ -347,6 +347,44 @@ input[type="search"] {
 
 
 #searchform:valid a {
-  
   display: block;
 } 
+
+.card {
+
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 190px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+/* .rating-star {
+    font-size: 10px !important;
+    color: gold;
+    
+} */
+
+.wish-icon {
+  position: absolute;
+  /* right: 10px;
+    top: 10px;
+    z-index: 99; */
+  cursor: pointer;
+  font-size: 16px;
+  color: #abb0b8;
+}
+
+.wish-icon .fa-heart {
+  color: #ff6161;
+}
+
+.star-rating li {
+  padding: 0;
+}
+
+.star-rating i {
+  font-size: 14px;
+  color: #ffc000;
+}

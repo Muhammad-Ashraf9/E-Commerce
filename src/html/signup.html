@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Commerce</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -17,13 +19,13 @@
   </head>
   <body>
     <main class="form form-signup">
-      <div class="form-img">
-        <img src="" alt="signup" />
+      <div class="form__img">
+        Techno
       </div>
       <form class="text-center" novalidate>
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="row">
+        <div class="form__group">
           <label for="floatingInput">Email address</label>
           <input
             type="email"
@@ -32,7 +34,24 @@
             placeholder="name@example.com"
           />
         </div>
-        <div class="row">
+        <div class="validation-message">
+          Email must be a valid email address
+        </div>
+        <div class="form__group">
+          <label for="name">Name:</label>
+          <input
+            id="name"
+            class="form-control"
+            name="name"
+            type="text"
+            placeholder="Enter your full name"
+          />
+          <div class="validation-message">
+            name must be 4 or more characters
+          </div>
+        </div>
+
+        <div class="form__group">
           <label for="floatingPassword">Password</label>
           <input
             type="password"
@@ -40,6 +59,9 @@
             id="floatingPassword"
             placeholder="Password"
           />
+          <div class="validation-message">
+            passord must be 6 or more characters
+          </div>
         </div>
         <div class="error-message">Error</div>
         <button class="btn btn-primary py-2" type="submit">Sign up</button>

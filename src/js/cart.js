@@ -1,96 +1,57 @@
-var cart=[
-    {
-        title:"watch1",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:2000.,
-        img:"../assets/test1.jpeg",
-        num:1
-        ,productID:15
-    },
-    {
-        title:"watch2",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:22.25,
-        img:"../assets/test2.jpeg"
-        ,num:1
-        ,productID:14
-    },
-    {
-        title:"watch3",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:150.50,
-        img:"../assets/test1.jpeg"
-        ,num:1
-        ,productID:13
-    },
-    {
-        title:"watch4",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:11.95,
-        img:"../assets/test2.jpeg"
-        ,num:1
-        ,productID:12
-    },
-    {
-        title:"watch5",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:75.25,
-        img:"../assets/test1.jpeg"
-        ,num:1
-        ,productID:11
-    },{
-        title:"watch6",
-        description:"this is a great watch that has many features like like your great eyes",
-        shopeName:"Nike Store",
-        price:200.25,
-        img:"../assets/test2.jpeg"
-        ,num:5
-        ,productID:10
-    }
-]
+import { getProductById, state,getCurrentUser, getUserById, getCurrentCart,changeCartItemCount,DeleteFromCart } from "./model.js";
+const user = getCurrentUser();
+let ucart = getCurrentCart()
+let cart = ucart.map((item) => ({
+  product: getProductById(item.id),
+  num: item.quantity,
+}));
 
-window.addEventListener("load",function(){
-   let cards= this.document.getElementById("items");
-   generateCards();
-   function generateCards(){
-    let flag=0;
-    cards.innerHTML="";
-    if(cart.length==0){
-        cards.innerHTML=`<h1>your cart is empty !</h1>`;
-        document.getElementById("CheckOut").style.visibility="hidden";
-    }
-    total=0;
 
-    cart.forEach(item => {
-        total+=item.price*item.num;
-        cards.innerHTML+=`<div id="${flag}" class="card m-auto">
+window.addEventListener("load", function () {
+  let cards = this.document.getElementById("items");
+  generateCards();
+  function generateCards() {
+ cart =    getCurrentCart().map((item) => ({
+  product: getProductById(item.id),
+  num: item.quantity,
+}));
+
+    let flag = 0;
+    cards.innerHTML = "";
+    if (cart.length == 0) {
+      cards.innerHTML = `<h1>your cart is empty !</h1>`;
+      document.getElementById("CheckOut").style.visibility = "hidden";
+    }
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.product.price * item.num;
+      cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
-          <div  class="col-md-2">
-            <img  src="${item.img}" class="img-fluid rounded" alt="...">
+          <div  class="col-lg-2">
+            <img  src="${item.product.img}" class="img-fluid rounded" alt="${
+        item.title
+      }">
           </div>
           <div class="col-md-10">
             
             <div class="card-body d-flex gap-3 flex-nowrap">
               <!-- Information -->
               <div class="col-sm-7 flex-grow-1">
-                <h5 class="card-title">${item.title}</h5>
-                <p class="card-text">${item.description}</p>
-                <p class="card-text"><small class="text-body-secondary">${item.shopeName}</small></p>
+                <h5 class="card-title">${item.product.title}</h5>
+                <p class="card-text">${item.product.description}</p>
+                <p class="card-text"><small class="text-body-secondary">${
+                  getUserById(item.product.id).name
+                }</small></p>
               </div>
               <!-- End of information -->
               <!-- Controls -->
               <div class="col-4 pt-4 text-center">
-                <button id="close" class="float-end btn btn-lg btn-close rounded-circle"> </button>
-                <h2 class="price mt-2 mb-3">${item.price}</h2>
+                <button id="close" class="float-end btn btn-lg btn-close rounded-circle" data-id="${item.product.id}"> </button>
+                <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button class="btn btn-success">+</button>
+                  <button style="background: #eec28c; color:white" class="btn">+</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button class="btn btn-danger fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -98,36 +59,72 @@ window.addEventListener("load",function(){
             <!-- End of Control and information -->
             </div>
         </div>
-      </div>`
+      </div>`;
       flag++;
-      
-       });
-       document.getElementById("SubTotal").innerText=total.toFixed(2);
-   }
-   
-   cards.addEventListener("click",function(e){
-    if(e.target.innerText=="+"){
-       let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-       cart[cardID].num+=+1;
-        generateCards();
-   }
-   if(e.target.innerText=="-"){
-        let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-        if(cart[cardID].num-1==0)return
-        cart[cardID].num-=1;
-        generateCards();
-    
+    });
+    document.getElementById("SubTotal").innerText = total
+  }
+
+  cards.addEventListener("click", function (e) {
+    if (e.target.innerText == "+") {
+      let cardID =
+        e.target.parentElement.parentElement.parentElement.parentElement
+          .parentElement.parentElement.id;
+      if (cart[cardID].num == cart[cardID].product.stock) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+        return;
+      }
+      changeCartItemCount( cart[cardID].product.id, cart[cardID].num+1);
+      cart[cardID].num += +1;
+      generateCards();
     }
-    if(e.target.id=="close"){
-        let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-        deleteCard(cardID)
+    if (e.target.innerText == "-") {
+      let cardID =
+        e.target.parentElement.parentElement.parentElement.parentElement
+          .parentElement.parentElement.id;
+      if (cart[cardID].num - 1 == 0) return;
+      changeCartItemCount( cart[cardID].product.id, cart[cardID].num-1);
+      cart[cardID].num += -1;
+      generateCards();
+    }
+    if (e.target.dataset.id) {
+      console.log('e.target.dataset.id', e.target.dataset.id)
+      const itemId = +e.target.dataset.id
+      // let cardID =
+      //   e.target.parentElement.parentElement.parentElement.parentElement
+      //     .parentElement.id;
+      DeleteFromCart(itemId);
+
+      generateCards();
+      console.log("4")
+
     }
 
-    function deleteCard(cardId){ 
-        cart.splice(cardId,1);
-        generateCards();      
-    }
-         
+    // function deleteCard(cardId) {
+    //   cart.splice(cardId, 1);
+    //   DeleteFromCart(cart[cardId].product.id);
+    //   generateCards();
+    // }
+  });
+let CheckOut =  document.getElementById("proceed")
+CheckOut.addEventListener("click",function(e){
+  if (state.currentUser) {
+    if(state.currentUser.accountType === 'customer')
+      location.assign("../html/checkout_page.html")
+  }else{
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    }).then(()=>{
+      location.assign('../html/main.html')
     })
-})
-
+  }
+  })
+});

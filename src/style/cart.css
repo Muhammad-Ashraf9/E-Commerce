@@ -6,15 +6,11 @@
 footer{
     background-color: red;
 }
-img:hover{
-    transform: scale(1.08);
-    /* transform: rotate(360deg); */
-    transition: all 2s;
+#hero{
+height: 40vh;
+background-image: url(../assets/header.png);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
 }
-/* 
-@media (max-width:770px) {
-    .price{
-        margin-top: ;
-        background-color: red;
-    }
-}  */
+

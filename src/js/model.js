@@ -1,13 +1,22 @@
 export const state = {
   currentUser: null,
+  guestCart:[{id:1,quantity:2},
+    {id:2,quantity:2},
+    {id:3,quantity:2},
+  ],
   users: [
     {
       id: 1,
       name: "ash customer",
       email: "ash@customer.ash",
       password: "ash123",
-      orders: [1, 2,3],
-      cart: [1, 2,3],
+
+      orders: [1, 2],
+      cart: [{id :1,
+              quantity: 2
+            },{id :2,
+              quantity: 2
+            }],
       accountType: "customer",
     },
     {
@@ -46,7 +55,14 @@ export const state = {
           price: 100,
           status: "pending",
         },
+        {
+          productId: 2,
+          quantity: 6,
+          price: 10,
+          status: "pending",
+        },
       ],
+      customerId: 1,
       status: "pending",
       date: "1999-07-22",
     },
@@ -54,6 +70,7 @@ export const state = {
       id: 2,
       items: [
         {
+
           productId: 1,
           quantity: 2,
           price: 100,
@@ -70,12 +87,24 @@ export const state = {
           productId: 1,
           quantity: 2,
           price: 100,
+
+          productId: 2,
+          quantity: 5,
+          price: 5,
+          status: "pending",
+        },
+        {
+          productId: 4,
+          quantity: 10,
+          price: 20,
           status: "pending",
         },
       ],
       status: "pending",
+
+      customerId: 1,
       date: "1999-07-22",
-    }
+    },
   ],
   products: [
     {
@@ -83,6 +112,7 @@ export const state = {
       title: "ashhh",
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       category:'any',
       stock: 10,
@@ -92,7 +122,27 @@ export const state = {
       id: 2,
       title: "fghfgh",
       description: "fffff ffff",
-      price: 500,
+
+      price: 10,
+      img:"../assets/test1.jpeg",
+      sellerId: 3,
+      stock: 10,
+    },
+    {
+      id: 3,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      img:"../assets/test1.jpeg",
+      sellerId: 3,
+      stock: 10,
+    },
+    {
+      id: 4,
+      title: "fghfgh",
+      description: "fffff ffff",
+      price: 10,
+      img:"../assets/test1.jpeg",
       sellerId: 3,
       category:'any',
       stock: 10,
@@ -101,6 +151,19 @@ export const state = {
   ],
 };
 
+function loadStateFromLocalStorage() {
+  for (const key in state) {
+    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
+  }
+}
+function saveStateInLocalStorage(){
+  for (const key in state) {
+    localStorage.setItem(key,JSON.stringify(state[key]))
+  }
+}
+function saveInLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 export function setCurrentUser(user) {
   state.currentUser = user;
   saveInLocalStorage("currentUser", user);
@@ -109,24 +172,17 @@ export function getCurrentUser() {
   return state.currentUser;
 }
 export function addUser(user) {
-  loadStateFromLocalStorage("users");//this solved the problem with sign up only once after default
   state.users.push(user);
   saveInLocalStorage("users", state.users);
 }
-export function saveInLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-export function loadStateFromLocalStorage() {
-  for (const key in state) {
-    state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
-  }
-}
+
 export function getUserById(id) {
   return state.users.find((user) => user.id === +id);
 }
 export function getUserByEmail(email) {
   return state.users.find((user) => user.email === email);
 }
+
 
 export function getAllOrdersByOrderIds(orderIds) {
   // Initialize an array to store the found orders
@@ -165,3 +221,73 @@ export function getAllProductsByProductIds(productIds) {
 
   return allProducts;
 }
+
+export function getCustomers() {
+  return state.users.filter((u) => u.accountType === "customer");
+}
+export function getSellers() {
+  return state.users.filter((u) => u.accountType === "seller");
+}
+export function getLastAddedProducts(number = 0) {
+  return state.products.slice(-number);
+}
+export function getTotalOrdersRevenue() {
+  return getOrdersRevenue(state.orders);
+}
+export function getOrderById(id) {
+  return state.orders.find((order) => order.id === +id);
+}
+export function getProductById(id) {
+  return state.products.find((product) => product.id === +id);
+}
+export function getOrdersRevenue(ordersArray) {
+  return ordersArray.reduce((acc, order) => acc + getOrderTotal(order), 0);
+}
+export function getOrderTotal(order) {
+  return order.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+}
+export function changeCartItemCount(id,quantity){
+  const cart = getCurrentCart()
+  const index = cart.findIndex(item => item.id === +id)
+  cart[index].quantity = quantity;
+  if(!state.currentUser)
+  {
+
+    state.guestCart = cart;
+  } 
+  else
+  {
+    state.currentUser.cart = cart;
+    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    state.users[index].cart = cart;
+  }
+
+  saveStateInLocalStorage();
+
+}
+export function DeleteFromCart(id){
+  const cart = getCurrentCart()
+  console.log('cart', cart)
+  console.log('id', id)
+  const newCart = cart.filter(item => item.id !== +id)
+  console.log('newCart', newCart)
+  if(!state.currentUser)
+  {
+
+    state.guestCart = newCart;
+  } 
+  else
+  {
+    state.currentUser.cart = newCart;
+    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    state.users[index].cart = newCart;
+  }
+  saveStateInLocalStorage();
+
+}
+export function getCurrentCart(){
+  return state.currentUser ? state.currentUser.cart : state.guestCart;
+}
+
+//this runs once when the app starts sets the state from local storage
+loadStateFromLocalStorage();
