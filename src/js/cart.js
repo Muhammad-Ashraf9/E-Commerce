@@ -62,8 +62,8 @@ window.addEventListener("load", function () {
                 <h5 class="card-title">${item.product.title}</h5>
                 <p class="card-text">${item.product.description}</p>
                 <p class="card-text"><small class="text-body-secondary">${
-                  getUserById(item.product.id).name
-                }</small></p>
+                  getUserById(item.product.sellerId).name
+                } only ${item.product.stock} left in the stock</small></p>
               </div>
               <!-- End of information -->
               <!-- Controls -->
