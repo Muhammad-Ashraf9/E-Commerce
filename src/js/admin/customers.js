@@ -1,3 +1,11 @@
+import {
+  deleteProductById,
+  getByPageNumber,
+  getUserById,
+  state,
+} from "../model.js";
+import { generateTabel, getModalHTML } from "./dashboard.js";
+import { getPaginationHTML, handlePagination } from "./pagination.js";
 export function generateCustomersTabelHead() {
   return `<td>id</td>
   <td>name</td>
@@ -28,4 +36,33 @@ export function generateCustomersTabelBody(arrayOfCustomers) {
       </tr>`
     )
     .join("");
+}
+
+export function renderCustomersPage(
+  container,
+  array,
+  pageNumber,
+  itemsPerPage
+) {
+  container.innerHTML = "";
+  container.insertAdjacentHTML(
+    "beforeend",
+    generateTabel(
+      generateCustomersTabelHead(),
+      generateCustomersTabelBody(
+        getByPageNumber(array, pageNumber, itemsPerPage)
+      )
+    )
+  );
+  container.insertAdjacentHTML(
+    "beforeend",
+    getPaginationHTML(array, pageNumber, itemsPerPage)
+  );
+  handlePagination(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderCustomersPage
+  );
 }

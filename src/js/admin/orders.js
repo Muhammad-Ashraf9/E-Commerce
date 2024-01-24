@@ -1,0 +1,62 @@
+import {
+  getByPageNumber,
+  getOrderTotal,
+  getProductById,
+  getUserById,
+  state,
+} from "../model.js";
+import { generateTabel } from "./dashboard.js";
+import { getPaginationHTML, handlePagination } from "./pagination.js";
+export function generateOrdersTableHeader() {
+  return `
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Customer Name</th>
+
+      <th scope="col">Total</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+`;
+}
+export function generateOrdersTableBody(arrayOfOrders) {
+  return arrayOfOrders
+    .map(
+      (order) =>
+        `
+      <tbody>
+      <tr>
+      <td>${order.id}</td>
+      <td>${getUserById(order.customerId).name}</td>
+   
+    
+      <td>${getOrderTotal(order)}</td>
+      <td>${new Date(order.id).toISOString().split("T")[0]}</td>
+    </tr> 
+    </tbody>
+    `
+    )
+    .join("");
+}
+export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
+  container.innerHTML = "";
+  container.insertAdjacentHTML(
+    "beforeend",
+    generateTabel(
+      generateOrdersTableHeader(),
+      generateOrdersTableBody(getByPageNumber(array, pageNumber, itemsPerPage))
+    )
+  );
+  container.insertAdjacentHTML(
+    "beforeend",
+    getPaginationHTML(array, pageNumber, itemsPerPage)
+  );
+  handlePagination(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderOrdersPage
+  );
+}
