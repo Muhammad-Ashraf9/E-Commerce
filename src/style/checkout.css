@@ -1,18 +1,28 @@
 *{
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
+#placeOrder{
+    position: sticky;
+    top: 4rem;
+}
 #hero{
-    height: 30vh;
+    height: 40vh;
     background-image: url(../assets/header.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    }
+#header{
+    text-align: center;
+    /* background-color: pink; */
+    font-size: 2.5rem;
+    background-color:  rgb(250, 177, 250);
+    /* margin-bottom: 0; */
+}
+.bgPaige{
+    background-color: #F9F1E7;
 }
 
 /* 

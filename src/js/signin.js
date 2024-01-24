@@ -1,6 +1,8 @@
 import { signIn } from "./auth.js";
 import { getCurrentUser } from "./model.js";
+import renderNav from "./views/Nav.js";
 
+const body = document.querySelector("body");
 export default function handleSignIn(form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
