@@ -1,7 +1,7 @@
 import { setAuthStateFromCookie, signOut } from "./auth.js";
 import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
-import { state } from "./model.js";
+// import { state } from "./model.js";
 
 const body = document.querySelector("body");
 
