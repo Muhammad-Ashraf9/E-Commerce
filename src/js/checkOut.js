@@ -35,7 +35,17 @@ window.addEventListener("load",function(){
    let flag=0;
    cards.innerHTML="";
    if(cart.length==0){
-    content.innerHTML=`<h1>your cart is empty !</h1>`;
+    content.innerHTML=`
+    <div class="row p-3" style="background: #F9F1E7;">
+      <div class="col-lg-6">
+        <span style="background: #F9F1E7;" class="fs-1">your cart is empty !</span>  
+      </div>      
+      <div class="pt-3 col-lg-6">
+        <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
+        <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="main.html">Go to Products page</a></button>
+      </div>
+    </ >
+    `;
    }
    let total=0;
    numOfItems=0;
