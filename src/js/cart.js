@@ -1,4 +1,4 @@
-var cart=[
+export var cart=[
     {
         title:"watch1",
         description:"this is a great watch that has many features like like your great eyes",

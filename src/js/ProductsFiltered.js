@@ -1,7 +1,8 @@
-import { products } from "../js/Products.js";
+// import { products } from "../js/Products.js";
+import { state } from "./model.js"
 export let ProductsFiltered = (searchValue, category) => {
-  return products.filter((product) => {
-    const isMatchingSearchValue = product.name
+  return state.products.filter((product) => {
+    const isMatchingSearchValue = product.title
       .toLowerCase()
       .includes(searchValue.toLowerCase());
     if (!category) return isMatchingSearchValue;

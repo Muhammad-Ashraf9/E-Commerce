@@ -1,12 +1,13 @@
-import { products } from "../js/Products.js";
+// import { products } from "../js/Products.js";
+import { state } from "./model.js";
 import { renderCards } from "../js/renderCards.js";
 var prodID = localStorage.getItem("id");
-let Product = products[prodID];
+let Product = state.products[prodID];
 let prodImgDiv = document.getElementById("prodImg");
-prodImgDiv.src = Product.imgURL;
-// productDiv.alt = Product.name;
+prodImgDiv.src = Product.imgURL0;
+// productDiv.alt = Product.title;
 let prodNameDiv = document.getElementById("prodName");
-prodNameDiv.innerText = Product.name;
+prodNameDiv.innerText = Product.title;
 let prodPriceDiv = document.getElementById("prodPrice");
 prodPriceDiv.innerText += " "+Product.price+" $";
 let prodDescDiv = document.getElementById("prodDesc");

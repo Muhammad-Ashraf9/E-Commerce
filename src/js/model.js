@@ -54,10 +54,39 @@ export const state = {
   products: [
     {
       id: 1,
-      title: "ashhh",
-      description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
-      imgURL0: "../assets/Products/prod11.png",
+      title: "LINANÄS",
+      description: "Sofa",
+      imgURL0: "../assets/Products/prod5.png",
       imgURL1: "../assets/Products/prod12.png",
+      price: 339,
+      prevPrice: 339,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "LAGKAPTEN / ALEX",
+      description: "Desk, 55 1/8x23 5/8",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1158868_pe888215_s5.jpg?f=xxs",
       imgURL2: "../assets/Products/prod13.png",
       imgURL3: "../assets/Products/prod14.png",
       price: 100,
@@ -66,8 +95,256 @@ export const state = {
       sellerId: 3,
       stock: 10,
       rating: 4,
-      numberofsales:0,
-      countSold:0,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "LAGKAPTEN",
+      description: "Tabletop, 55 1/8x23 5/8 ",
+      imgURL0:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__0977800_pe813782_s5.jpg?f=xxs",
+      imgURL1:
+        "https://www.ikea.com/us/en/images/products/lagkapten-tabletop-white__1166683_ph182444_s5.jpg?f=xxs",
+      imgURL2: "../assets/Products/prod13.png",
+      imgURL3: "../assets/Products/prod14.png",
+      price: 100,
+      prevPrice: 200,
+      category: "Sofas",
+      sellerId: 3,
+      stock: 10,
+      rating: 4,
+      numberofsales: 0,
+      countSold: 0,
       reviews: [
         {
           userId: 1,

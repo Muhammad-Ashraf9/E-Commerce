@@ -33,8 +33,8 @@ export function renderCards(page, numberOfCardsPerPage) {
     imageDiv.classList.add("wsk-cp-img");
     // and alt value to the image
     // printvalues();
-    imageDiv.setAttribute("alt", Products[i - 1].name);
-    imageDiv.setAttribute("src", Products[i - 1].imgURL);
+    imageDiv.setAttribute("alt", Products[i - 1].title);
+    imageDiv.setAttribute("src", Products[i - 1].imgURL0);
     // append the div for the text
     const textDiv = document.createElement("div");
     // add class "wsk-cp-text"
@@ -52,7 +52,7 @@ export function renderCards(page, numberOfCardsPerPage) {
     productNameDiv.classList.add("title-product");
     // append the h3 for the product name
     const productNameH3 = document.createElement("h3");
-    productNameH3.innerText = Products[i - 1].name + i;
+    productNameH3.innerText = Products[i - 1].title + i;
     productNameH3.setAttribute("class", "viewProductPage");
     productNameH3.setAttribute("id", Products[i - 1].id);
     // append the div for the description
