@@ -1,8 +1,14 @@
-import { deleteProductById, getByPageNumber, getUserById, state } from "../model.js";
+import {
+  deleteProductById,
+  getByPageNumber,
+  getUserById,
+  state,
+} from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
 import { getPaginationHTML, handlePagination } from "./pagination.js";
 
-export function renderProductsPage(container, array, pageNumber, itemsPerPage,modal) {
+export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
+  const modal = document.querySelector("#modal");
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",

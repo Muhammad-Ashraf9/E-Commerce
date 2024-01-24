@@ -57,6 +57,8 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
-    renderOrdersPage
+    renderOrdersPage,
+
+
   );
 }
