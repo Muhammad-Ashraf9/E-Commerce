@@ -150,7 +150,6 @@ export const state = {
     },
   ],
 };
-
 function loadStateFromLocalStorage() {
   for (const key in state) {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
@@ -246,6 +245,22 @@ export function getOrdersRevenue(ordersArray) {
 export function getOrderTotal(order) {
   return order.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
+
+export function getByPageNumber(array, pageNumber, itemsPerPage) {
+  //sorting first or sorting after slicing?
+  const start = (pageNumber - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return array.slice(start, end);
+}
+export function deleteProductById(id) {
+  state.products = state.products.filter((product) => product.id !== +id);
+  saveInLocalStorage("products", state.products);
+}
+export function deleteUserById(id) {
+  state.users = state.users.filter((user) => user.id !== +id);
+  saveInLocalStorage("users", state.users);
+}
+
 export function changeCartItemCount(id,quantity){
   const cart = getCurrentCart()
   const index = cart.findIndex(item => item.id === +id)
