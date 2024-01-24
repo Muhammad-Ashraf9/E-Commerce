@@ -11,6 +11,7 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../style/checkout.css">
+  <link rel="stylesheet" href="../sass/main.css">
   <script type="module" src="../js/main.js"></script>
 
 </head>
@@ -29,223 +30,183 @@
       </nav>
     </div>
 </div>
-  <div id="content" class="container ">
-
-    <div class="row ">
-      <div class="col-lg-8 col-md-10">
-        <form class="row g-3 needs-validation" novalidate>
-          <!-- Personal info  -->
-          <div class="rounded-4 p-4 row g-3 bgPaige">
-            <span class="fs-4">Personal information:</span>
-            <div class="col-md-6 ">
-              <label for="validationCustom01" class="form-label">First name</label>
-              <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="validationCustom01" required>
-              <div class="valid-feedback">
-                Cool name!
+  <div id="all">
+    <div id="content" class="container ">
+    
+      <div class="row ">
+        <div class="col-lg-8 col-md-10">
+          <form class="row g-3 needs-validation" novalidate>
+            <!-- Personal info  -->
+            <div class="rounded-4 p-4 row g-3 bgPaige">
+              <span class="fs-4">Personal information:</span>
+              <div class="col-md-6 ">
+                <label for="validationCustom01" class="form-label">First name</label>
+                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="validationCustom01" required>
+                <div class="valid-feedback">
+                  Cool name!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your name.
+                </div>
               </div>
-              <div class="invalid-feedback">
-                Please enter your name.
+              <div class="col-md-6">
+                <label for="lastname" class="form-label">Last name</label>
+                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="lastname" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your last name.
+                </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <label for="lastname" class="form-label">Last name</label>
-              <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="lastname" required>
-              <div class="valid-feedback">
-                Looks good!
+              <div class="col-md-12">
+                <label for="validationCustom03" class="form-label">Residence Address</label>
+                <input type="text" class="form-control" id="validationCustom03" required>
+                <div class="invalid-feedback">
+                  Please provide a valid Address.
+                </div>
               </div>
-              <div class="invalid-feedback">
-                Please enter your last name.
+              <div class="col-md-6 ">
+                <label for="Email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="Email" required>
+                <div class="valid-feedback">
+                  nice email!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your email.
+                </div>
               </div>
-            </div>
-            <div class="col-md-12">
-              <label for="validationCustom03" class="form-label">Residence Address</label>
-              <input type="text" class="form-control" id="validationCustom03" required>
-              <div class="invalid-feedback">
-                Please provide a valid Address.
-              </div>
-            </div>
-            <div class="col-md-6 ">
-              <label for="Email" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="Email" required>
-              <div class="valid-feedback">
-                nice email!
-              </div>
-              <div class="invalid-feedback">
-                Please enter your email.
-              </div>
-            </div>
-            <div class="col-md-6 ">
-              <label for="Phone" class="form-label">Phone Number</label>
-              <input pattern="^01(0|1|2|5)[0-9]{8}$" type="tel" class="form-control" id="Phone" required>
-              <div class="valid-feedback">
-                Looks good.
-              </div>
-              <div class="invalid-feedback">
-                Please enter your number which consists of 11 numbers.
-              </div>
-            </div>
-          </div>
-          
-          <!-- Shipping Details  -->
-          <div class="rounded-4 p-4 row g-3 bgPaige">
-            <span class="fs-4">Shipping Details:</span>
-            <div class="col-md-12 ">
-              <label for="StreetAdd" class="form-label">Street Address</label>
-              <input type="text" class="form-control" id="StreetAdd" required>
-              <div class="valid-feedback">
-                Now I know where you live.
-              </div>
-              <div class="invalid-feedback">
-                Please enter your street address.
+              <div class="col-md-6 ">
+                <label for="Phone" class="form-label">Phone Number</label>
+                <input pattern="^01(0|1|2|5)[0-9]{8}$" type="tel" class="form-control" id="Phone" required>
+                <div class="valid-feedback">
+                  Looks good.
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your number which consists of 11 numbers.
+                </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <label for="Governerate" class="form-label">Governerate</label>
-              <select class="form-select" id="Governerate" required>
-                <option selected disabled value="">Choose your state</option>
-                <option value="Alexandria">Alexandria</option>
-                <option value="Aswan">Aswan</option>
-                <option value="Asyut">Asyut</option>
-                <option value="Beheira">Beheira</option>
-                <option value="Beni Suef">Beni Suef</option>
-                <option value="Cairo">Cairo</option>
-                <option value="Dakahlia">Dakahlia</option>
-                <option value="Damietta">Damietta</option>
-                <option value="Faiyum">Faiyum</option>
-                <option value="Gharbia">Gharbia</option>
-                <option value="Giza">Giza</option>
-                <option value="Ismailia">Ismailia</option>
-                <option value="Kafr El Sheikh">Kafr El Sheikh</option>
-                <option value="Luxor">Luxor</option>
-                <option value="Matruh">Matruh</option>
-                <option value="Minya">Minya</option>
-                <option value="Monufia">Monufia</option>
-                <option value="New Valley">New Valley</option>
-                <option value="North Sinai">North Sinai</option>
-                <option value="Port Said">Port Said</option>
-                <option value="Qalyubia">Qalyubia</option>
-                <option value="Qena">Qena</option>
-                <option value="Red Sea">Red Sea</option>
-                <option value="Sharqia">Sharqia</option>
-                <option value="Sohag">Sohag</option>
-                <option value="South Sinai">South Sinai</option>
-                <option value="Suez">Suez</option>
-            </select>
-              <div class="valid-feedback">
-                The best people.
+            
+            <!-- Shipping Details  -->
+            <div class="rounded-4 p-4 row g-3 bgPaige">
+              <span class="fs-4">Shipping Details:</span>
+              <div class="col-md-12 ">
+                <label for="StreetAdd" class="form-label">Street Address</label>
+                <input type="text" class="form-control" id="StreetAdd" required>
+                <div class="valid-feedback">
+                  Now I know where you live.
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your street address.
+                </div>
               </div>
-              <div class="invalid-feedback">
-                Please enter your Governerate.
+              <div class="col-md-4">
+                <label for="Governerate" class="form-label">Governerate</label>
+                <select class="form-select" id="Governerate" required>
+                  <option selected disabled value="">Choose your state</option>
+                  <option value="Alexandria">Alexandria</option>
+                  <option value="Aswan">Aswan</option>
+                  <option value="Asyut">Asyut</option>
+                  <option value="Beheira">Beheira</option>
+                  <option value="Beni Suef">Beni Suef</option>
+                  <option value="Cairo">Cairo</option>
+                  <option value="Dakahlia">Dakahlia</option>
+                  <option value="Damietta">Damietta</option>
+                  <option value="Faiyum">Faiyum</option>
+                  <option value="Gharbia">Gharbia</option>
+                  <option value="Giza">Giza</option>
+                  <option value="Ismailia">Ismailia</option>
+                  <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+                  <option value="Luxor">Luxor</option>
+                  <option value="Matruh">Matruh</option>
+                  <option value="Minya">Minya</option>
+                  <option value="Monufia">Monufia</option>
+                  <option value="New Valley">New Valley</option>
+                  <option value="North Sinai">North Sinai</option>
+                  <option value="Port Said">Port Said</option>
+                  <option value="Qalyubia">Qalyubia</option>
+                  <option value="Qena">Qena</option>
+                  <option value="Red Sea">Red Sea</option>
+                  <option value="Sharqia">Sharqia</option>
+                  <option value="Sohag">Sohag</option>
+                  <option value="South Sinai">South Sinai</option>
+                  <option value="Suez">Suez</option>
+              </select>
+                <div class="valid-feedback">
+                  The best people.
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your Governerate.
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="City" class="form-label">City</label>
+                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="City" required>
+                <div class="valid-feedback">
+                  Sounds good.
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your city name.
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="Zip" class="form-label">Zip</label>
+                <input pattern="[0-9]{5}" type="text" class="form-control" id="Zip" required>
+                <div class="invalid-feedback">
+                  Please enter a calid code.
+                </div>
+                <div class="valid-feedback">
+                  Looks good.
+                </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <label for="City" class="form-label">City</label>
-              <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="City" required>
-              <div class="valid-feedback">
-                Sounds good.
-              </div>
-              <div class="invalid-feedback">
-                Please enter your city name.
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for="Zip" class="form-label">Zip</label>
-              <input pattern="[0-9]{5}" type="text" class="form-control" id="Zip" required>
-              <div class="invalid-feedback">
-                Please enter a calid code.
-              </div>
-              <div class="valid-feedback">
-                Looks good.
+    
+            <!-- Items -->
+    
+            <div style="background: #F9F1E7;" class="rounded-4 p-4 row g-3 mb-3">
+              <span class="fs-4">Shipping Details</span>
+              <div id="items" class=" p-3 d-flex flex-column gap-3">
+    
+    
               </div>
             </div>
-          </div>
-
-          <!-- Items -->
-
-          <div style="background: #F9F1E7;" class="rounded-4 p-4 row g-3 mb-3">
-            <span class="fs-4">Shipping Details</span>
-            <div id="items" class=" p-3 d-flex flex-column gap-3">
-
-
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div id="placeOrder" class="rounded-4 pt-5 p-4 mb-3 bgPaige">
+            <button id="placing" style="background-color: #B88E2F; color: white;" class="btn w-100" >Place Order</button>
+            <p class="pt-3">By placing your order, you agree to our company's <strong>Privacy Policy</strong> and <strong>Conditions of use.</strong></p>
+            <hr> 
+            <p class="fs-3">Order Summary</p> 
+            <div class="d-flex justify-content-between ">
+              <span id="numOfItems"></span>
+              <span id="SubTotal"></span>
             </div>
-          </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div id="placeOrder" class="rounded-4 pt-5 p-4 mb-3 bgPaige">
-          <button id="placing" style="background-color: #B88E2F; color: white;" class="btn w-100" >Place Order</button>
-          <p class="pt-3">By placing your order, you agree to our company's <strong>Privacy Policy</strong> and <strong>Conditions of use.</strong></p>
-          <hr> 
-          <p class="fs-3">Order Summary</p> 
-          <div class="d-flex justify-content-between ">
-            <span id="numOfItems"></span>
-            <span id="SubTotal"></span>
-          </div>
-          <div class="d-flex justify-content-between ">
-            <span>Shipping and handling</span>
-            <span id="Shipping">25</span>
-          </div>
-          <div class="d-flex justify-content-between ">
-            <span>Before Tax</span>
-            <span id="beforeTax">56</span>
-          </div>
-          <div class="d-flex justify-content-between ">
-            <span>Tax Collected</span>
-            <span id="Tax">56</span>
-          </div>
-          <hr>
-          <div class="d-flex justify-content-between ">
-            <h5 style="color: #B88E2F;">Total</h5>
-            <h5 style="color: #B88E2F;" id="AfterTax"></h5>
+            <div class="d-flex justify-content-between ">
+              <span>Shipping and handling</span>
+              <span id="Shipping">25</span>
+            </div>
+            <div class="d-flex justify-content-between ">
+              <span>Before Tax</span>
+              <span id="beforeTax">56</span>
+            </div>
+            <div class="d-flex justify-content-between ">
+              <span>Tax Collected</span>
+              <span id="Tax">56</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between ">
+              <h5 style="color: #B88E2F;">Total</h5>
+              <h5 style="color: #B88E2F;" id="AfterTax"></h5>
+            </div>
           </div>
         </div>
+      </form>
+    
       </div>
-    </form>
-
     </div>
   </div>
   <div style="flex: 1;"></div>
-
-  <div style="background: #ecd7bd; " class="ps-5 mt-2">
-    <div class="container-fluid">
-      <div class="row text-center p-3">
-        <div class="col-lg-3 col-md-6">
-          <div class="d-flex flex-nowrap">
-            <img width="40 px" src="../assets/trophy 1.svg" alt="">
-            <div class="text-start mx-3">
-              <span class="fw-bold fs-6">High Quality</span><br> 
-              <span class="fw-light text-secondary">crafted from top materials</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 ">
-          <div class="d-flex flex-nowrap">
-            <img width="40 px" src="../assets/guarantee.svg" alt="">
-            <div class="text-start mx-3">
-              <span class="fw-bold fs-6">Warranty Protection</span><br> 
-              <span class="fw-light text-secondary">Over 2 years</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 ">
-          <div class="d-flex flex-nowrap">
-            <img width="40 px" src="../assets/shipping.svg" alt="">
-            <div class="text-start mx-3">
-              <span class="fw-bold fs-6">Free Shipping</span><br> 
-              <span class="fw-light text-secondary">Order over 150 $</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="d-flex flex-nowrap">
-            <img width="40 px" src="../assets/customer-support.svg" alt="">
-            <div class="text-start mx-3">
-              <span class="fw-bold fs-6">24 / 7 Support</span><br> 
-              <span class="fw-light text-secondary">Dedicated support</span>
-            </div>
-          </div>
-        </div>
-       
-       
       </div>
     </div>
   </div>

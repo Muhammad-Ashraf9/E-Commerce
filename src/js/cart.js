@@ -19,8 +19,30 @@ window.addEventListener("load", function () {
     let flag = 0;
     cards.innerHTML = "";
     if (cart.length == 0) {
-      cards.innerHTML = `<h1>your cart is empty !</h1>`;
-      document.getElementById("CheckOut").style.visibility = "hidden";
+      cards.innerHTML = `
+      <div class="row">
+        <div class="col-lg-6">
+          <span class="fs-1 fw-bold">your cart is empty !</span>
+  
+        </div>       
+        <div class="pt-3 col-lg-6">
+         <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
+         <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="main.html">Go to Products page</a></button>
+        </div>
+      </div>
+      `;
+      document.getElementById("CheckOut").style.display = "none";
+      
+      // setTimeout(() => {
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "Oops...",
+      //     text: "You need to sign in in order to make an order",
+      //   }).then(()=>{
+      //     location.assign('../html/main.html')
+      //   })
+      // }, 3000);
+      
     }
     let total = 0;
     cart.forEach((item) => {
