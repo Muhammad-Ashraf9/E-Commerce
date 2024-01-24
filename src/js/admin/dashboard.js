@@ -34,7 +34,6 @@ const main = document.querySelector("main");
 const signoutBtn = document.querySelector(".signout");
 const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
-console.log("modal :>> ", modal);
 
 let pageNumber = 1;
 let itemsPerPage = 1;
@@ -135,8 +134,6 @@ function getTotalCardHTML(number, title) {
 function renderDashboard(container, modal) {
   container.innerHTML = "";
   container.insertAdjacentHTML("afterbegin", `<canvas id="myChart"></canvas>`);
-
-  console.log("dashboard");
   container.insertAdjacentHTML(
     "afterbegin",
     `<div class="row">${getTotalCardHTML(
@@ -239,7 +236,7 @@ sidebar.addEventListener("click", (e) => {
         break;
       case "sellers":
         pageNumber = 1;
-        renderSellersPage(main, getSellers(), pageNumber, itemsPerPage);
+        renderSellersPage(main, getSellers(), pageNumber, itemsPerPage, modal);
         break;
       default:
         break;

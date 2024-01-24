@@ -22,8 +22,8 @@ export function getCoookie(key) {
   }
 }
 
-export function validatePassword(password) {
-  return !!password && password.length >= 6;
+export function isValidPassword(password) {
+  return /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
 }
 
 export function isValidName(string) {

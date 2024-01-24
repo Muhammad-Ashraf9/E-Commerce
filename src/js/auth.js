@@ -23,7 +23,7 @@ export function signOut() {
   setCurrentUser(null);
 }
 
-export function signUp(email, password, name) {
+export function signUp(email, password, name, accountType) {
   if (getUserByEmail(email)) {
     throw new Error("Email already exist");
   }
@@ -32,13 +32,13 @@ export function signUp(email, password, name) {
     id: Date.now(),
     name,
     email,
-    accountType: "seller",
+    accountType: (accountType || "customer").toLowerCase(),
     password,
     orders: [],
     cart: [],
   };
   addUser(customer);
-  signIn(email, password);
+  // signIn(email, password);
 }
 
 export function setAuthStateFromCookie() {

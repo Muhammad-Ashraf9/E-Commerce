@@ -42,7 +42,8 @@ export function renderCustomersPage(
   container,
   array,
   pageNumber,
-  itemsPerPage
+  itemsPerPage,
+  modal
 ) {
   container.innerHTML = "";
   container.insertAdjacentHTML(
@@ -63,6 +64,7 @@ export function renderCustomersPage(
     array,
     pageNumber,
     itemsPerPage,
-    renderCustomersPage
+    renderCustomersPage,
+
   );
 }
