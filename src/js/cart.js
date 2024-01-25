@@ -5,8 +5,6 @@ let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
-
 window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
@@ -15,7 +13,6 @@ window.addEventListener("load", function () {
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
     let flag = 0;
     cards.innerHTML = "";
     if (cart.length == 0) {
@@ -23,7 +20,6 @@ window.addEventListener("load", function () {
       <div class="row">
         <div class="col-lg-6">
           <span class="fs-1 fw-bold">your cart is empty !</span>
-  
         </div>       
         <div class="pt-3 col-lg-6">
          <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
@@ -43,8 +39,7 @@ window.addEventListener("load", function () {
         item.title
       }">
           </div>
-          <div class="col-md-10">
-            
+          <div class="col-md-10">  
             <div class="card-body d-flex gap-3 flex-nowrap">
               <!-- Information -->
               <div class="col-sm-7 flex-grow-1">
@@ -75,7 +70,6 @@ window.addEventListener("load", function () {
     });
     document.getElementById("SubTotal").innerText = total
   }
-
   cards.addEventListener("click", function (e) {
     if (e.target.innerText == "+") {
       let cardID =+e.target.id;

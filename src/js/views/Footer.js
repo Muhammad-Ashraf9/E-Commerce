@@ -42,8 +42,6 @@ export default function renderFooter(element) {
       </div>
     </div>
   </div>
-
-
   <footer>
   <div class="footer-top">
     <div class="container">
@@ -94,7 +92,6 @@ export default function renderFooter(element) {
     </div>
   </div>
   </div>
-  
 </footer>`;
   element.insertAdjacentHTML("beforeend", footer);
 }
