@@ -14,15 +14,19 @@
 .footer-contact a { 
   border-bottom: 1px dashed #ccc; 
   text-decoration: none;
-  color: #B88E2F; }
+  color: #B88E2F; 
+  margin-left: 0;
+
+}
 .footer-contact p a:hover, .footer-contact p a:focus { 
   border-bottom: 1px dashed #B88E2F; 
 }
 .footer-links a { 
   color: #888; 
   text-decoration: none;
+  margin-left: 0;
 }
-.footer-links a:hover, .footer-links a:focus { 
+.footer-links a:hover{ 
   color: #555; 
   margin-left: 3px; 
 }
@@ -31,7 +35,7 @@
   color: #bbb; 
   margin:  20px; 
 }
-.footer-social a:hover, .footer-social a:focus { 
+.footer-social a:hover{ 
   color: #B88E2F;
 }
 .footer-social i { 
