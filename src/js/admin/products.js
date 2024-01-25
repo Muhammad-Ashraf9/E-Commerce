@@ -30,16 +30,19 @@ export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
     itemsPerPage,
     renderProductsPage
   );
-  container.addEventListener("click", (e) => {
+  document.querySelector("table").addEventListener("click", (e) => {
+    console.log("Proucts table event");
+
     const id = e.target.dataset?.id;
     if (!id) return;
     modal.innerHTML = getModalHTML(id);
-  });
-  modal.addEventListener("click", (e) => {
-    if (!e.target.dataset.id) return;
-    const id = +e.target.dataset.id;
-    deleteProductById(id);
-    renderProductsPage(container, state.products, pageNumber, itemsPerPage);
+    document.querySelector(".modal-footer").addEventListener("click", (e) => {
+      console.log("modal-footer Proucts footer");
+      if (!e.target.dataset.id) return;
+      const id = +e.target.dataset.id;
+      deleteProductById(id);
+      renderProductsPage(container, state.products, pageNumber, itemsPerPage);
+    });
   });
 }
 export function generateProductsTableHeader() {

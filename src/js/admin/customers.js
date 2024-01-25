@@ -1,6 +1,9 @@
 import {
+  deleteCustomerById,
   deleteProductById,
+
   getByPageNumber,
+  getCustomers,
   getUserById,
   state,
 } from "../model.js";
@@ -26,12 +29,10 @@ export function generateCustomersTabelBody(arrayOfCustomers) {
         <td>${customer.orders.length}</td>
         <td>${new Date(customer.id).toISOString().split("T")[0]}</td>
         <td>
-      <button class="btn btn-sm btn-danger" data-id="${
-        customer.id
-      }">Delete</button>
-        <button class="btn btn-sm btn-primary" data-id="${
-          customer.id
-        }">Edit</button>
+      <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
+       data-bs-target="#modal" data-id="${customer.id}">Delete</button>
+        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" 
+       data-bs-target="#modal" data-id="${customer.id}">Edit</button>
         </td>
       </tr>`
     )
@@ -42,8 +43,7 @@ export function renderCustomersPage(
   container,
   array,
   pageNumber,
-  itemsPerPage,
-  modal
+  itemsPerPage
 ) {
   container.innerHTML = "";
   container.insertAdjacentHTML(
@@ -64,7 +64,21 @@ export function renderCustomersPage(
     array,
     pageNumber,
     itemsPerPage,
-    renderCustomersPage,
-
+    renderCustomersPage
   );
+  document.querySelector("table").addEventListener("click", (e) => {
+    console.log("Customers table event");
+    //every time i navigate to customers it adds this event same with proucts (can delete prouct and customer )
+    // sol: remove event listener before adding it again or ad event listener to the table that got rendered
+    const id = e.target.dataset?.id;
+    if (!id) return;
+    modal.innerHTML = getModalHTML(id);
+    document.querySelector(".modal-footer").addEventListener("click", (e) => {
+      console.log("modal-footer from customers");
+      if (!e.target.dataset.id) return;
+      const id = +e.target.dataset.id;
+      deleteCustomerById(id);
+      renderCustomersPage(container, getCustomers(), pageNumber, itemsPerPage);
+    });
+  });
 }
