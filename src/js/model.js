@@ -67,63 +67,78 @@ export const state = {
   ],
   orders: [
     {
-      id: 1,
-      items: [
+      "id": 189770,
+      "items": [
         {
-          productId: 1,
-          quantity: 2,
-          price: 100,
-          status: "pending",
+          "id": 1,
+          "title": "ashhh",
+          "description": "dsfsdfsd sdfsd fsd f",
+          "price": 100,
+          "img": "../assets/test1.jpeg",
+          "sellerId": 3,
+          "category": "any",
+          "stock": 6
         },
         {
-          productId: 2,
-          quantity: 6,
-          price: 10,
-          status: "pending",
-        },
+          "id": 2,
+          "title": "fghfgh",
+          "description": "fffff ffff",
+          "price": 10,
+          "img": "../assets/test2.jpeg",
+          "sellerId": 3,
+          "stock": 8
+        }
       ],
-      customerId: 1,
-      status: "pending",
-      date: "1999-07-22",
-    },
-    {
-      id: 2,
-      items: [
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+        "FirstName": "abdelhameed",
+        "lastname": "abdelhameed",
+        "userAddress": "78 madrab st,ezbet elshal,qism tani",
+        "Email": "abdelhameedosamaiti@gmail.com",
+        "Phone": "01094335757",
+        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+        "City": "mansoura",
+        "Zip": "35511"
+      }
+    },{
+      "id": 354028,
+      "items": [
         {
-          productId: 1,
-          quantity: 2,
-          price: 100,
-          status: "pending",
+          "id": 1,
+          "title": "ashhh",
+          "description": "dsfsdfsd sdfsd fsd f",
+          "price": 100,
+          "img": "../assets/test1.jpeg",
+          "sellerId": 3,
+          "category": "any",
+          "stock": 7
         },
+        {
+          "id": 2,
+          "title": "fghfgh",
+          "description": "fffff ffff",
+          "price": 10,
+          "img": "../assets/test2.jpeg",
+          "sellerId": 3,
+          "stock": 8
+        }
       ],
-      status: "pending",
-      date: "1999-07-22",
-    },
-    {
-      id: 3,
-      items: [
-        {
-          productId: 1,
-          quantity: 2,
-          price: 100,
-
-          productId: 2,
-          quantity: 5,
-          price: 5,
-          status: "pending",
-        },
-        {
-          productId: 4,
-          quantity: 10,
-          price: 20,
-          status: "pending",
-        },
-      ],
-      status: "pending",
-
-      customerId: 1,
-      date: "1999-07-22",
-    },
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+        "FirstName": "abdelhameed",
+        "lastname": "abdelhameed",
+        "userAddress": "78 madrab st,ezbet elshal,qism tani",
+        "Email": "abdelhameedosamaiti@gmail.com",
+        "Phone": "01094335757",
+        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+        "City": "mansoura",
+        "Zip": "35511"
+      }
+    }
   ],
   products: [
     {
