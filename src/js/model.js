@@ -77,7 +77,8 @@ export const state = {
           "img": "../assets/test1.jpeg",
           "sellerId": 3,
           "category": "any",
-          "stock": 6
+          "stock": 6,
+          "quantity": 2
         },
         {
           "id": 2,
@@ -86,7 +87,8 @@ export const state = {
           "price": 10,
           "img": "../assets/test2.jpeg",
           "sellerId": 3,
-          "stock": 8
+          "stock": 8,
+          "quantity": 2
         }
       ],
       "customerId": 1,
@@ -113,7 +115,8 @@ export const state = {
           "img": "../assets/test1.jpeg",
           "sellerId": 3,
           "category": "any",
-          "stock": 7
+          "stock": 7,
+          "quantity": 2
         },
         {
           "id": 2,
@@ -122,7 +125,8 @@ export const state = {
           "price": 10,
           "img": "../assets/test2.jpeg",
           "sellerId": 3,
-          "stock": 8
+          "stock": 8,
+          "quantity": 2
         }
       ],
       "customerId": 1,
@@ -138,7 +142,34 @@ export const state = {
         "City": "mansoura",
         "Zip": "35511"
       }
-    }
+    },{
+      "id": 305375,
+      "items": [
+          {
+              "id": 2,
+              "title": "fghfgh",
+              "description": "fffff ffff",
+              "price": 10,
+              "img": "../assets/test1.jpeg",
+              "sellerId": 3,
+              "stock": 8,
+              "quantity": 2
+          }
+      ],
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+          "FirstName": "abdelhameed",
+          "lastname": "abdelhameed",
+          "userAddress": "78 madrab st,ezbet elshal,qism tani",
+          "Email": "abdelhameedosamaiti@gmail.com",
+          "Phone": "01094335757",
+          "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+          "City": "mansoura",
+          "Zip": "35511"
+      }
+  }
   ],
   products: [
     {
