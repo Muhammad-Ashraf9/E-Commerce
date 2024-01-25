@@ -1,13 +1,10 @@
-// import {products} from "../js/Products.js";
 import { ProductsFiltered } from "../js/ProductsFiltered.js";
 import { renderCards } from "../js/renderCards.js";
 import renderNav from "../js/views/Nav.js";
 import renderFooter from "../js/views/Footer.js";
-// import { categories } from "./views/renderCategoryButtons.js";
 import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
-// import { addToCart } from "./addToCart.js";
-
+import { addtoCart } from "./addtoCart.js";
 var numberOfCardsPerPage = 8;
 let prodID = -1;
 
@@ -45,39 +42,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // Onload page rendering of the cards
   let page = 1; // Current page
   let productsCount = ProductsFiltered("", "").length; // Number of products
-  // let numberOfCardsPerPage = 8; // Number of cards per page
   let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
   var startCard = (page - 1) * numberOfCardsPerPage + 1; // Start card
   var endCard = page * numberOfCardsPerPage;
   if (endCard > productsCount) {
     endCard = productsCount;
   }
-  // renderNav(body);
-  // renderFooter(body);
   renderCards(page, numberOfCardsPerPage);
 
   let searchValue = document.querySelector('input[type="search"]').value;
   document
     .querySelector('input[type="search"]')
     .addEventListener("input", function (event) {
-      // let searchValue = event.target.value;
-      // //
-      // // Define the variables for the pagination
-      // let page = 1; // Current page
-      // var productsCount = ProductsFiltered(searchValue, "").length; // Number of products
-      // var numberOfCardsPerPage = 5; // Number of cards per page
-      // var pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
-      // // var startCard = 1; // Start card
-      // var startCard = (page - 1) * numberOfCardsPerPage + 1; // Start card
-      // //  endCard = numberOfCardsPerPage; // End card
-      // var endCard = page * numberOfCardsPerPage;
-      // if (endCard > productsCount) {
-      //   endCard = productsCount;
-      // }
-      // //
-
       renderCards(1, numberOfCardsPerPage);
-      // renderCards;
     });
 
   // Render after click on the pagination buttons
@@ -122,12 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// addEventListener to the search bar
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", function () {
   const input = document.querySelector('input[type="search"]');
   input.value = "";
   renderCards(1, numberOfCardsPerPage);
 });
-
-
 
