@@ -51,7 +51,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [ 3],
+      orders: [3],
       accountType: "seller",
       products: [
         {
@@ -67,78 +67,80 @@ export const state = {
   ],
   orders: [
     {
-      "id": 189770,
-      "items": [
+      id: 189770,
+      items: [
         {
-          "id": 1,
-          "title": "ashhh",
-          "description": "dsfsdfsd sdfsd fsd f",
-          "price": 100,
-          "img": "../assets/test1.jpeg",
-          "sellerId": 3,
-          "category": "any",
-          "stock": 6
+          id: 1,
+          title: "ashhh",
+          description: "dsfsdfsd sdfsd fsd f",
+          price: 100,
+          img: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 6,
         },
         {
-          "id": 2,
-          "title": "fghfgh",
-          "description": "fffff ffff",
-          "price": 10,
-          "img": "../assets/test2.jpeg",
-          "sellerId": 3,
-          "stock": 8
-        }
+          id: 2,
+          title: "fghfgh",
+          description: "fffff ffff",
+          price: 10,
+          img: "../assets/test2.jpeg",
+          sellerId: 3,
+          stock: 8,
+        },
       ],
-      "customerId": 1,
-      "status": "pending",
-      "date": "2024-01-25",
-      "customerDetails": {
-        "FirstName": "abdelhameed",
-        "lastname": "abdelhameed",
-        "userAddress": "78 madrab st,ezbet elshal,qism tani",
-        "Email": "abdelhameedosamaiti@gmail.com",
-        "Phone": "01094335757",
-        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
-        "City": "mansoura",
-        "Zip": "35511"
-      }
-    },{
-      "id": 354028,
-      "items": [
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
+    {
+      id: 354028,
+      items: [
+        //
         {
-          "id": 1,
-          "title": "ashhh",
-          "description": "dsfsdfsd sdfsd fsd f",
-          "price": 100,
-          "img": "../assets/test1.jpeg",
-          "sellerId": 3,
-          "category": "any",
-          "stock": 7
+          id: 1,
+          title: "ashhh",
+          description: "dsfsdfsd sdfsd fsd f",
+          price: 100,
+          img: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 7,
         },
         {
-          "id": 2,
-          "title": "fghfgh",
-          "description": "fffff ffff",
-          "price": 10,
-          "img": "../assets/test2.jpeg",
-          "sellerId": 3,
-          "stock": 8
-        }
+          id: 2,
+          title: "fghfgh",
+          description: "fffff ffff",
+          price: 10,
+          img: "../assets/test2.jpeg",
+          sellerId: 3,
+          stock: 8,
+        },
       ],
-      "customerId": 1,
-      "status": "pending",
-      "date": "2024-01-25",
-      "customerDetails": {
-        "FirstName": "abdelhameed",
-        "lastname": "abdelhameed",
-        "userAddress": "78 madrab st,ezbet elshal,qism tani",
-        "Email": "abdelhameedosamaiti@gmail.com",
-        "Phone": "01094335757",
-        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
-        "City": "mansoura",
-        "Zip": "35511"
-      }
-    }
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
   ],
   products: [
     {
@@ -152,7 +154,6 @@ export const state = {
       stock: 10,
 
       image: "../../images/Meubel House_Logos-05.png",
-
     },
     {
       id: 2,
@@ -186,7 +187,6 @@ export const state = {
       category: "any",
       stock: 10,
       image: "../../images/Meubel House_Logos-05.png",
-
     },
   ],
 };
@@ -196,7 +196,7 @@ function loadStateFromLocalStorage() {
   }
 }
 
-export function saveStateInLocalStorage(){
+export function saveStateInLocalStorage() {
   for (const key in state) {
     localStorage.setItem(key, JSON.stringify(state[key]));
   }
@@ -338,11 +338,10 @@ export function changeCartItemCount(id, quantity) {
   saveStateInLocalStorage();
 }
 
-export function DeleteFromCart(id){
-  const cart = getCurrentCart()
-  const newCart = cart.filter(item => item.id !== +id)
-  if(!state.currentUser)
-  {
+export function DeleteFromCart(id) {
+  const cart = getCurrentCart();
+  const newCart = cart.filter((item) => item.id !== +id);
+  if (!state.currentUser) {
     state.guestCart = newCart;
   } else {
     state.currentUser.cart = newCart;

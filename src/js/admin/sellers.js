@@ -110,6 +110,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
       } catch (error) {
         email.classList.add("is-invalid");
         emailInvalidFeedback.textContent = error.message;
+        emailInvalidFeedback.style.display = "block";
       }
     });
   });
