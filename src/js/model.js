@@ -155,7 +155,7 @@ function loadStateFromLocalStorage() {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
   }
 }
-function saveStateInLocalStorage(){
+export function saveStateInLocalStorage(){
   for (const key in state) {
     localStorage.setItem(key,JSON.stringify(state[key]))
   }
@@ -282,10 +282,7 @@ export function changeCartItemCount(id,quantity){
 }
 export function DeleteFromCart(id){
   const cart = getCurrentCart()
-  console.log('cart', cart)
-  console.log('id', id)
   const newCart = cart.filter(item => item.id !== +id)
-  console.log('newCart', newCart)
   if(!state.currentUser)
   {
 
