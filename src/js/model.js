@@ -366,5 +366,12 @@ export function deleteSellerById(id) {
   deleteCustomerById(id);
   saveStateInLocalStorage();
 }
+export function editUserById(id, email, password, name) {
+  const index = state.users.findIndex((user) => user.id === +id);
+  state.users[index].email = email;
+  state.users[index].password = password;
+  state.users[index].name = name;
+  saveStateInLocalStorage();
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
