@@ -13,10 +13,12 @@ export const state = {
       password: "ash123",
 
       orders: [1, 2],
+
       cart: [
         { id: 1, quantity: 2 },
         { id: 2, quantity: 2 },
       ],
+
       accountType: "customer",
     },
     {
@@ -133,15 +135,18 @@ export const state = {
       sellerId: 3,
       category: "any",
       stock: 10,
+
       image: "../../images/Meubel House_Logos-05.png",
+
     },
     {
       id: 2,
       title: "fghfgh",
       description: "fffff ffff",
-
       price: 10,
+
       img: "../assets/test1.jpeg",
+
       sellerId: 3,
       stock: 10,
     },
@@ -150,8 +155,10 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
+
       img: "../assets/test1.jpeg",
       sellerId: 5,
+
       stock: 10,
     },
     {
@@ -164,6 +171,7 @@ export const state = {
       category: "any",
       stock: 10,
       image: "../../images/Meubel House_Logos-05.png",
+
     },
   ],
 };
@@ -172,7 +180,8 @@ function loadStateFromLocalStorage() {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
   }
 }
-function saveStateInLocalStorage() {
+
+export function saveStateInLocalStorage(){
   for (const key in state) {
     localStorage.setItem(key, JSON.stringify(state[key]));
   }
@@ -313,13 +322,12 @@ export function changeCartItemCount(id, quantity) {
 
   saveStateInLocalStorage();
 }
-export function DeleteFromCart(id) {
-  const cart = getCurrentCart();
-  console.log("cart", cart);
-  console.log("id", id);
-  const newCart = cart.filter((item) => item.id !== +id);
-  console.log("newCart", newCart);
-  if (!state.currentUser) {
+
+export function DeleteFromCart(id){
+  const cart = getCurrentCart()
+  const newCart = cart.filter(item => item.id !== +id)
+  if(!state.currentUser)
+  {
     state.guestCart = newCart;
   } else {
     state.currentUser.cart = newCart;

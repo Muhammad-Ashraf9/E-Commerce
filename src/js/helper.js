@@ -34,3 +34,6 @@ export function isValidEmail(emailString) {
     emailString.toLowerCase()
   );
 }
+export function generateRandomId() {
+  return Math.floor(Math.random() * 1000000) + 1;
+}
