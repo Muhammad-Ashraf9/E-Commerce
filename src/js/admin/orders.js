@@ -6,7 +6,7 @@ import {
   state,
 } from "../model.js";
 import { generateTabel } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import { getPaginationHTML, handleChangingItemsPerPage, handlePagination } from "./pagination.js";
 export function generateOrdersTableHeader() {
   return `
   <thead>
@@ -63,4 +63,11 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     itemsPerPage,
     renderOrdersPage
   );
+    handleChangingItemsPerPage(
+      container,
+      array,
+      pageNumber,
+      itemsPerPage,
+      renderOrdersPage
+    );
 }

@@ -1,14 +1,13 @@
 import {
   deleteCustomerById,
   deleteProductById,
-
   getByPageNumber,
   getCustomers,
   getUserById,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import { getPaginationHTML, handleChangingItemsPerPage, handlePagination } from "./pagination.js";
 export function generateCustomersTabelHead() {
   return `<td>id</td>
   <td>name</td>
@@ -60,6 +59,13 @@ export function renderCustomersPage(
     getPaginationHTML(array, pageNumber, itemsPerPage)
   );
   handlePagination(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderCustomersPage
+  );
+  handleChangingItemsPerPage(
     container,
     array,
     pageNumber,
