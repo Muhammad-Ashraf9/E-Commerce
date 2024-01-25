@@ -85,11 +85,10 @@ export default function renderFooter(element) {
     <div class="container">
       <div class="row">
            <div class="col footer-social">
-                <a href="https://www.facebook.com/search/top?q=muhammad%20ashraf"><i class="fab fa-facebook-f"></i></a> 
-                <a href="https://twitter.com/AbdoUsama18"><i class="fab fa-twitter"></i></a> 
-                <a href=""><i class="fab fa-google-plus-g"></i></a> 
-                <a href="https://www.instagram.com/abd_usama/?igshid=ZDdkNTZiNTM%3D"><i class="fab fa-instagram"></i></a> 
-                <a href="#"><i class="fab fa-github"></i></a>
+                <a target=blank href="https://www.facebook.com/search/top?q=muhammad%20ashraf"><i class="fab fa-facebook-f"></i></a> 
+                <a target=blank href="https://twitter.com/AbdoUsama18"><i class="fab fa-twitter"></i></a> 
+                <a target=blank href="https://www.instagram.com/abd_usama/?igshid=ZDdkNTZiNTM%3D"><i class="fab fa-instagram"></i></a> 
+                <a target=blank href="https://github.com/Muhammad-Ashraf9/E-Commerce"><i class="fab fa-github"></i></a>
               </div>
          </div>
     </div>
