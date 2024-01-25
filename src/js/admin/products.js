@@ -5,11 +5,17 @@ import {
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import {
+  getPaginationHTML,
+  getSelectItemsPerPageHTML,
+  handleChangingItemsPerPage,
+  handlePagination,
+} from "./pagination.js";
 
 export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
   const modal = document.querySelector("#modal");
   container.innerHTML = "";
+
   container.insertAdjacentHTML(
     "beforeend",
     generateTabel(
@@ -44,6 +50,13 @@ export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
       renderProductsPage(container, state.products, pageNumber, itemsPerPage);
     });
   });
+  handleChangingItemsPerPage(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderProductsPage
+  );
 }
 export function generateProductsTableHeader() {
   return `
