@@ -34,7 +34,7 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
         }).then(()=>{
           location.assign('../html/main.html')
         })
-        }{
+        }else{
           Swal.fire({
               title: "Sorry!",
               text: `Your order can't be submitted because their is no more of ${x.product.title}\n in the sellers stock`,
@@ -85,7 +85,7 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
       }
       
       state.users[sellerIndex].products[productIndex].stock-=cart[flagx].num //updating the stock in the sellers list of products
-
+      user.cart=[];
 
       flagx++;
     });
@@ -137,7 +137,7 @@ window.addEventListener("load",function(){
                 <p class="card-text">${item.product.description}</p>
                 <p class="card-text"><small class="text-body-secondary">${
                   getUserById(item.product.sellerId).name
-                } only ${item.product.stock} left in the stock</small></p>
+                } only ${item.product.stock - item.num} left in the stock</small></p>
               </div>
               <!-- End of information -->
               <!-- Controls -->
@@ -145,9 +145,9 @@ window.addEventListener("load",function(){
                 <button id="close" class="float-end btn btn-lg btn-close rounded-circle" data-id="${item.product.id}"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #eec28c; color:white" class="btn">+</button>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -169,9 +169,7 @@ window.addEventListener("load",function(){
   
   cards.addEventListener("click",function(e){
    if(e.target.innerText=="+"){
-    let cardID =
-      e.target.parentElement.parentElement.parentElement.parentElement
-        .parentElement.parentElement.id;
+    let cardID =+e.target.id;
     if (cart[cardID].num >= cart[cardID].product.stock) {
       Swal.fire({
         title: "Sorry!",
@@ -186,7 +184,7 @@ window.addEventListener("load",function(){
     generateCards();
   }
   if(e.target.innerText=="-"){
-       let cardID=e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+       let cardID=+e.target.id;
        if(cart[cardID].num-1==0)return
        changeCartItemCount( cart[cardID].product.id, cart[cardID].num-1);
       cart[cardID].num += -1;

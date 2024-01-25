@@ -13,7 +13,7 @@ export const state = {
 
       orders: [1, 2],
       cart: [{id :1,
-              quantity: 2
+              quantity: 3
             },{id :2,
               quantity: 2
             }],
@@ -116,15 +116,13 @@ export const state = {
       sellerId: 3,
       category:'any',
       stock: 10,
-      image:'../../images/Meubel House_Logos-05.png'
     },
     {
       id: 2,
       title: "fghfgh",
       description: "fffff ffff",
-
       price: 10,
-      img:"../assets/test1.jpeg",
+      img:"../assets/test2.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -133,7 +131,7 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
-      img:"../assets/test1.jpeg",
+      img:"../assets/test2.jpeg",
       sellerId: 3,
       stock: 10,
     },
@@ -142,11 +140,10 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
-      img:"../assets/test1.jpeg",
+      img:"../assets/test2.jpeg",
       sellerId: 3,
       category:'any',
       stock: 10,
-      image:'../../images/Meubel House_Logos-05.png'
     },
   ],
 };
