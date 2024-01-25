@@ -11,7 +11,6 @@ import {
   getOrderTotal,
   getByPageNumber,
   deleteProductById,
-
 } from "../model.js";
 import {
   generateCustomersTabelBody,
@@ -36,7 +35,7 @@ const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
-let itemsPerPage = 1;
+let itemsPerPage = 3;
 
 export function generateTabel(header, body) {
   return `    <div class="table-responsive small">

@@ -1,13 +1,12 @@
 import { signUp } from "../auth.js";
 import { isValidEmail, isValidName, isValidPassword } from "../helper.js";
-import {
-  deleteSellerById,
-  getByPageNumber,
-  getSellers,
-
-} from "../model.js";
+import { deleteSellerById, getByPageNumber, getSellers } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import {
+  getPaginationHTML,
+  handleChangingItemsPerPage,
+  handlePagination,
+} from "./pagination.js";
 export function generateSellersTabelHead() {
   return `
   <thead>
@@ -111,6 +110,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
       } catch (error) {
         email.classList.add("is-invalid");
         emailInvalidFeedback.textContent = error.message;
+        emailInvalidFeedback.style.display = "block";
       }
     });
   });
@@ -131,6 +131,13 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
       console.log("id :>> ", id);
     }
   });
+  handleChangingItemsPerPage(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderSellersPage
+  );
 }
 
 function getAddSellerModalFormHTML() {
