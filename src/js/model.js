@@ -70,24 +70,28 @@ export const state = {
       id: 189770,
       items: [
         {
-          id: 1,
-          title: "ashhh",
-          description: "dsfsdfsd sdfsd fsd f",
-          price: 100,
-          img: "../assets/test1.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 6,
+
+          "id": 1,
+          "title": "ashhh",
+          "description": "dsfsdfsd sdfsd fsd f",
+          "price": 100,
+          "img": "../assets/test1.jpeg",
+          "sellerId": 3,
+          "category": "any",
+          "stock": 6,
+          "quantity": 2
         },
         {
-          id: 2,
-          title: "fghfgh",
-          description: "fffff ffff",
-          price: 10,
-          img: "../assets/test2.jpeg",
-          sellerId: 3,
-          stock: 8,
-        },
+          "id": 2,
+          "title": "fghfgh",
+          "description": "fffff ffff",
+          "price": 10,
+          "img": "../assets/test2.jpeg",
+          "sellerId": 3,
+          "stock": 8,
+          "quantity": 2
+        }
+
       ],
       customerId: 1,
       status: "pending",
@@ -108,39 +112,69 @@ export const state = {
       items: [
         //
         {
-          id: 1,
-          title: "ashhh",
-          description: "dsfsdfsd sdfsd fsd f",
-          price: 100,
-          img: "../assets/test1.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 7,
+          "id": 1,
+          "title": "ashhh",
+          "description": "dsfsdfsd sdfsd fsd f",
+          "price": 100,
+          "img": "../assets/test1.jpeg",
+          "sellerId": 3,
+          "category": "any",
+          "stock": 7,
+          "quantity": 2
         },
         {
-          id: 2,
-          title: "fghfgh",
-          description: "fffff ffff",
-          price: 10,
-          img: "../assets/test2.jpeg",
-          sellerId: 3,
-          stock: 8,
-        },
+          "id": 2,
+          "title": "fghfgh",
+          "description": "fffff ffff",
+          "price": 10,
+          "img": "../assets/test2.jpeg",
+          "sellerId": 3,
+          "stock": 8,
+          "quantity": 2
+        }
       ],
-      customerId: 1,
-      status: "pending",
-      date: "2024-01-25",
-      customerDetails: {
-        FirstName: "abdelhameed",
-        lastname: "abdelhameed",
-        userAddress: "78 madrab st,ezbet elshal,qism tani",
-        Email: "abdelhameedosamaiti@gmail.com",
-        Phone: "01094335757",
-        streetAddress: "78 madrab st,ezbet elshal,qism tani",
-        City: "mansoura",
-        Zip: "35511",
-      },
-    },
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+        "FirstName": "abdelhameed",
+        "lastname": "abdelhameed",
+        "userAddress": "78 madrab st,ezbet elshal,qism tani",
+        "Email": "abdelhameedosamaiti@gmail.com",
+        "Phone": "01094335757",
+        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+        "City": "mansoura",
+        "Zip": "35511"
+      }
+    },{
+      "id": 305375,
+      "items": [
+          {
+              "id": 2,
+              "title": "fghfgh",
+              "description": "fffff ffff",
+              "price": 10,
+              "img": "../assets/test1.jpeg",
+              "sellerId": 3,
+              "stock": 8,
+              "quantity": 2
+          }
+      ],
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+          "FirstName": "abdelhameed",
+          "lastname": "abdelhameed",
+          "userAddress": "78 madrab st,ezbet elshal,qism tani",
+          "Email": "abdelhameedosamaiti@gmail.com",
+          "Phone": "01094335757",
+          "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+          "City": "mansoura",
+          "Zip": "35511"
+      }
+  }
+
   ],
   products: [
     {

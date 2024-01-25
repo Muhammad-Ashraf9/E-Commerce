@@ -67,7 +67,9 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
     let customerID=getCurrentUser().id;
     let Items=[]; // making an array of products to be put in the order details
     cart.forEach(item => {
+      item.product["quantity"]= item.num
       Items.push(item.product)
+
     });
     var formData = new FormData(document.getElementById('form'));
       // Create an object to store form data
@@ -79,7 +81,7 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
       });
       console.log(formData.entries());
     let newOrder = {   //creating a new order object
-      id: orderID, 
+      id: orderID,  
       items: Items,
       customerId: customerID,
       status: "pending",
