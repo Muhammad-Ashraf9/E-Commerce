@@ -35,8 +35,12 @@ export function signUp(email, password, name, accountType) {
     accountType: (accountType || "customer").toLowerCase(),
     password,
     orders: [],
-    cart: [],
   };
+  if (customer.accountType === "seller") {
+    customer.products = [];
+  } else if (customer.accountType === "customer") {
+    customer.cart = [];
+  }
   addUser(customer);
   // signIn(email, password);
 }

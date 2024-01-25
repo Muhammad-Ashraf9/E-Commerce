@@ -1,7 +1,12 @@
 import { signUp } from "../auth.js";
 import { isValidEmail, isValidName, isValidPassword } from "../helper.js";
-import { getByPageNumber, getSellers, state } from "../model.js";
-import { generateTabel } from "./dashboard.js";
+import {
+  deleteSellerById,
+  getByPageNumber,
+  getSellers,
+
+} from "../model.js";
+import { generateTabel, getModalHTML } from "./dashboard.js";
 import { getPaginationHTML, handlePagination } from "./pagination.js";
 export function generateSellersTabelHead() {
   return `
@@ -10,8 +15,8 @@ export function generateSellersTabelHead() {
       <th scope="col">ID</th>
       <th scope="col">Seller Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Products Number</th>
-      <th scope="col">Orders Number</th>
+      <th scope="col">No. Products</th>
+      <th scope="col">No. Orders</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -28,11 +33,13 @@ export function generateSellersTabelBody(arrayOfSellers) {
         <td>${seller.id}</td>
         <td>${seller.name}</td>
         <td>${seller.email}</td>
-        <td>${seller}</td>
-        <td>${seller}</td>
+        <td>${seller.products.length}</td>
+        <td>${seller.orders.length}</td>
         <td>
-        <button class="btn btn-sm btn-danger"  data-id="${seller.id}">Delete</button>
-        <button class="btn btn-sm btn-primary"  data-id="${seller.id}">Edit</button>
+        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
+       data-bs-target="#modal"   data-del-id="${seller.id}">Delete</button>
+        <button class="btn btn-sm btn-primary"        data-bs-toggle="modal" 
+       data-bs-target="#modal"  data-edit-id="${seller.id}">Edit</button>
         </td>
       </tr>
       </tbody>
@@ -47,7 +54,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "afterbegin",
-    `<button class="btn btn-bg btn-success m-4" data-bs-toggle="modal" data-bs-target="#modal" >Add Seller</button>`
+    `<button id="add-seller" class="btn btn-bg btn-success m-4" data-bs-toggle="modal" data-bs-target="#modal" >Add Seller</button>`
   );
   container.insertAdjacentHTML(
     "beforeend",
@@ -67,44 +74,61 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     itemsPerPage,
     renderSellersPage
   );
-  container.addEventListener("click", (e) => {
-    if (e.target.dataset?.bsTarget === "#modal") {
-      modal.innerHTML = getAddSellerModalFormHTML();
-    }
-  });
-  modal.addEventListener("click", (e) => {
-    if (!e.target.classList?.contains("btn-success")) return;
-    const email = document.querySelector("input[type=email]");
-    const emailInvalidFeedback = document.querySelector(
-      ".invalid-feedback.email"
-    );
-    const password = document.querySelector("input[type=password]");
-    const passwordInvalidFeedback = document.querySelector(
-      ".invalid-feedback.password"
-    );
-    const name = document.querySelector("input[type=text]");
-    const nameInvalidFeedback = document.querySelector(
-      ".invalid-feedback.name"
-    );
+  document.querySelector("#add-seller").addEventListener("click", (e) => {
+    console.log("add seller");
+    modal.innerHTML = getAddSellerModalFormHTML();
+    document.querySelector(".modal-footer").addEventListener("click", (e) => {
+      console.log("modal footer sellers");
+      if (!e.target.classList?.contains("btn-success")) return;
+      const email = document.querySelector("input[type=email]");
+      const emailInvalidFeedback = document.querySelector(
+        ".invalid-feedback.email"
+      );
+      const password = document.querySelector("input[type=password]");
+      const passwordInvalidFeedback = document.querySelector(
+        ".invalid-feedback.password"
+      );
+      const name = document.querySelector("input[type=text]");
+      const nameInvalidFeedback = document.querySelector(
+        ".invalid-feedback.name"
+      );
 
-    emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
-    validateEmail(email, emailInvalidFeedback);
-    validatePassword(password, passwordInvalidFeedback);
-    validateName(name, nameInvalidFeedback);
-    if (
-      !isValidEmail(email.value) ||
-      !isValidName(name.value) ||
-      !isValidPassword(password.value)
-    ) {
-      return;
-    }
-    try {
-      signUp(email.value, password.value, name.value, "seller");
-      document.querySelector("[data-bs-dismiss='modal']").click();
-      renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
-    } catch (error) {
-      email.classList.add("is-invalid");
-      emailInvalidFeedback.textContent = error.message;
+      emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+      validateEmail(email, emailInvalidFeedback);
+      validatePassword(password, passwordInvalidFeedback);
+      validateName(name, nameInvalidFeedback);
+      if (
+        !isValidEmail(email.value) ||
+        !isValidName(name.value) ||
+        !isValidPassword(password.value)
+      ) {
+        return;
+      }
+      try {
+        signUp(email.value, password.value, name.value, "seller");
+        document.querySelector("[data-bs-dismiss='modal']").click();
+        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+      } catch (error) {
+        email.classList.add("is-invalid");
+        emailInvalidFeedback.textContent = error.message;
+      }
+    });
+  });
+  document.querySelector("table").addEventListener("click", (e) => {
+    console.log("table sellers");
+    console.log("e.target.dataset :>> ", e.target.dataset);
+    if (e.target.dataset?.delId) {
+      modal.innerHTML = getModalHTML(e.target.dataset.delId);
+      document.querySelector(".modal-footer").addEventListener("click", (e) => {
+        console.log("modal-footer sellers");
+        const id = +e.target.dataset?.id;
+        if (!id) return;
+        deleteSellerById(id);
+        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+      });
+    } else if (e.target.dataset?.editId) {
+      const id = +e.target.dataset.editId;
+      console.log("id :>> ", id);
     }
   });
 }

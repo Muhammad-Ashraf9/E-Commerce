@@ -28,7 +28,11 @@ export function generateOrdersTableBody(arrayOfOrders) {
       <tbody>
       <tr>
       <td>${order.id}</td>
-      <td>${getUserById(order.customerId).name}</td>
+      <td>${
+        getUserById(order.customerId)//better to put all orders data in order object instead of only the id
+          ? getUserById(order.customerId).name
+          : "Deleted user"
+      }</td>
    
     
       <td>${getOrderTotal(order)}</td>
@@ -57,8 +61,6 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
-    renderOrdersPage,
-
-
+    renderOrdersPage
   );
 }

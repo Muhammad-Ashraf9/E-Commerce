@@ -1,8 +1,9 @@
 export const state = {
   currentUser: null,
-  guestCart:[{id:1,quantity:2},
-    {id:2,quantity:2},
-    {id:3,quantity:2},
+  guestCart: [
+    { id: 1, quantity: 2 },
+    { id: 2, quantity: 2 },
+    { id: 3, quantity: 2 },
   ],
   users: [
     {
@@ -12,11 +13,12 @@ export const state = {
       password: "ash123",
 
       orders: [1, 2],
-      cart: [{id :1,
-              quantity: 3
-            },{id :2,
-              quantity: 2
-            }],
+
+      cart: [
+        { id: 1, quantity: 2 },
+        { id: 2, quantity: 2 },
+      ],
+
       accountType: "customer",
     },
     {
@@ -31,7 +33,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [1, 2,3],
+      orders: [1, 2],
       accountType: "seller",
       products: [
         {
@@ -40,6 +42,24 @@ export const state = {
         },
         {
           productId: 2,
+          stock: 10,
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: "ash seller",
+      email: "ash@seller.ash",
+      password: "ash123",
+      orders: [ 3],
+      accountType: "seller",
+      products: [
+        {
+          productId: 3,
+          stock: 10,
+        },
+        {
+          productId: 4,
           stock: 10,
         },
       ],
@@ -126,17 +146,22 @@ export const state = {
       title: "ashhh",
       description: "dsfsdfsd sdfsd fsd f",
       price: 100,
-      img:"../assets/test1.jpeg",
+      img: "../assets/test1.jpeg",
       sellerId: 3,
-      category:'any',
+      category: "any",
       stock: 10,
+
+      image: "../../images/Meubel House_Logos-05.png",
+
     },
     {
       id: 2,
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
-      img:"../assets/test2.jpeg",
+
+      img: "../assets/test1.jpeg",
+
       sellerId: 3,
       stock: 10,
     },
@@ -145,8 +170,10 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
-      img:"../assets/test2.jpeg",
-      sellerId: 3,
+
+      img: "../assets/test1.jpeg",
+      sellerId: 5,
+
       stock: 10,
     },
     {
@@ -154,10 +181,12 @@ export const state = {
       title: "fghfgh",
       description: "fffff ffff",
       price: 10,
-      img:"../assets/test2.jpeg",
-      sellerId: 3,
-      category:'any',
+      img: "../assets/test1.jpeg",
+      sellerId: 5,
+      category: "any",
       stock: 10,
+      image: "../../images/Meubel House_Logos-05.png",
+
     },
   ],
 };
@@ -166,9 +195,10 @@ function loadStateFromLocalStorage() {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
   }
 }
+
 export function saveStateInLocalStorage(){
   for (const key in state) {
-    localStorage.setItem(key,JSON.stringify(state[key]))
+    localStorage.setItem(key, JSON.stringify(state[key]));
   }
 }
 function saveInLocalStorage(key, value) {
@@ -192,7 +222,6 @@ export function getUserById(id) {
 export function getUserByEmail(email) {
   return state.users.find((user) => user.email === email);
 }
-
 
 export function getAllOrdersByOrderIds(orderIds) {
   // Initialize an array to store the found orders
@@ -220,7 +249,9 @@ export function getAllProductsByProductIds(productIds) {
   for (const productId of productIds) {
     // Find the order in the state.orders array
     console.log(productId);
-    const foundProduct = state.products.find((product) => product.id === productId.productId);
+    const foundProduct = state.products.find(
+      (product) => product.id === productId.productId
+    );
 
     // If the order is found, add it to the allOrders array
     if (foundProduct) {
@@ -264,53 +295,77 @@ export function getByPageNumber(array, pageNumber, itemsPerPage) {
   return array.slice(start, end);
 }
 export function deleteProductById(id) {
+  //get product to get seller id
+  const product = getProductById(id);
+
+  //loop over users
+  state.users.forEach((user) => {
+    if (user.id === product.sellerId) {
+      //delete product from seller products
+      user.products = user.products.filter(
+        (product) => product.productId !== +id
+      );
+    } else if (user.accountType === "customer") {
+      //delete product from all carts
+      user.cart = user.cart.filter((item) => item.id !== +id);
+    }
+  });
+
+  //delete product from guest cart
+  state.guestCart = state.guestCart.filter((item) => item.id !== +id);
+
+  //delete product from products
   state.products = state.products.filter((product) => product.id !== +id);
-  saveInLocalStorage("products", state.products);
-}
-export function deleteUserById(id) {
-  state.users = state.users.filter((user) => user.id !== +id);
-  saveInLocalStorage("users", state.users);
+
+  //save state in local storage
+  saveStateInLocalStorage();
 }
 
-export function changeCartItemCount(id,quantity){
-  const cart = getCurrentCart()
-  const index = cart.findIndex(item => item.id === +id)
+export function changeCartItemCount(id, quantity) {
+  const cart = getCurrentCart();
+  const index = cart.findIndex((item) => item.id === +id);
   cart[index].quantity = quantity;
-  if(!state.currentUser)
-  {
-
+  if (!state.currentUser) {
     state.guestCart = cart;
-  } 
-  else
-  {
+  } else {
     state.currentUser.cart = cart;
-    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    const index = state.users.findIndex(
+      (user) => user.id === state.currentUser.id
+    );
     state.users[index].cart = cart;
   }
 
   saveStateInLocalStorage();
-
 }
+
 export function DeleteFromCart(id){
   const cart = getCurrentCart()
   const newCart = cart.filter(item => item.id !== +id)
   if(!state.currentUser)
   {
-
     state.guestCart = newCart;
-  } 
-  else
-  {
+  } else {
     state.currentUser.cart = newCart;
-    const index = state.users.findIndex(user=>user.id === state.currentUser.id)
+    const index = state.users.findIndex(
+      (user) => user.id === state.currentUser.id
+    );
     state.users[index].cart = newCart;
   }
   saveStateInLocalStorage();
-
 }
-export function getCurrentCart(){
+export function getCurrentCart() {
   return state.currentUser ? state.currentUser.cart : state.guestCart;
 }
-
+export function deleteCustomerById(id) {
+  state.users = state.users.filter((user) => user.id !== +id);
+  saveInLocalStorage("users", state.users);
+}
+export function deleteSellerById(id) {
+  const seller = getUserById(id);
+  console.log("seller :>> ", seller);
+  seller.products.forEach((product) => deleteProductById(product.productId));
+  deleteCustomerById(id);
+  saveStateInLocalStorage();
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
