@@ -44,7 +44,7 @@ export function handlePagination(
 
 export function getSelectItemsPerPageHTML() {
   return `
-  <select name="itemsPerPage"  aria-label="items per page">
+  <select name="itemsPerPage" class="dashborad-select" aria-label="items per page">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
