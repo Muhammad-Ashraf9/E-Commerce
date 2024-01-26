@@ -64,7 +64,8 @@ export function renderCustomersPage(
       container,
       searchCustomerByName(e.target.value),
       pageNumber,
-      itemsPerPage
+      itemsPerPage,
+      sortBy     
     );
   };
   container.innerHTML = "";
@@ -86,6 +87,7 @@ export function renderCustomersPage(
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderCustomersPage
   );
   handleChangingItemsPerPage(
@@ -93,6 +95,7 @@ export function renderCustomersPage(
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderCustomersPage
   );
   document.querySelector("table").addEventListener("click", (e) => {

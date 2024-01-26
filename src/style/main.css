@@ -92,12 +92,19 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-select {
+.dashborad-select {
   width: 4rem;
   height: 2rem;
   text-align: center;
   border-radius: 5px;
   margin: 2rem 0;
+}
+
+.table-img--sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .footer-top {
