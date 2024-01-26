@@ -48,10 +48,15 @@ export function generateOrdersTableBody(arrayOfOrders) {
     )
     .join("");
 }
-export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
+export function renderOrdersPage(
+  container,
+  array,
+  pageNumber,
+  itemsPerPage,
+  sortBy
+) {
   //set on change event to search input to sellers
   const search = document.querySelector("#navbarSearch input");
-
 
   //set on change event to search input to sellers
   search.onchange = (e) => {
@@ -59,7 +64,8 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
       container,
       searchOrdersByCustomerName(e.target.value),
       pageNumber,
-      itemsPerPage
+      itemsPerPage,
+      sortBy
     );
   };
   container.innerHTML = "";
@@ -79,6 +85,7 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderOrdersPage
   );
   handleChangingItemsPerPage(
@@ -86,6 +93,7 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderOrdersPage
   );
 }

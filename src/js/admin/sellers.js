@@ -54,7 +54,13 @@ export function generateSellersTabelBody(arrayOfSellers) {
     .join("");
 }
 
-export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
+export function renderSellersPage(
+  container,
+  array,
+  pageNumber,
+  itemsPerPage,
+  sortBy
+) {
   const modal = document.querySelector("#modal");
   const search = document.querySelector("#navbarSearch input");
 
@@ -88,6 +94,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderSellersPage
   );
   document.querySelector("#add-seller").addEventListener("click", (e) => {
@@ -186,6 +193,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
     renderSellersPage
   );
 }

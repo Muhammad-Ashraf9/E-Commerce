@@ -100,6 +100,13 @@ body {
   margin: 2rem 0;
 }
 
+.table-img--sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .footer-top {
   padding-top: 30px;
   text-align: left;

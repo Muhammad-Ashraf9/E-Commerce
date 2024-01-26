@@ -70,28 +70,26 @@ export const state = {
       id: 189770,
       items: [
         {
-
-          "id": 1,
-          "title": "ashhh",
-          "description": "dsfsdfsd sdfsd fsd f",
-          "price": 100,
-          "img": "../assets/test1.jpeg",
-          "sellerId": 3,
-          "category": "any",
-          "stock": 6,
-          "quantity": 2
+          id: 1,
+          title: "ashhh",
+          description: "dsfsdfsd sdfsd fsd f",
+          price: 100,
+          img: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 6,
+          quantity: 2,
         },
         {
-          "id": 2,
-          "title": "fghfgh",
-          "description": "fffff ffff",
-          "price": 10,
-          "img": "../assets/test2.jpeg",
-          "sellerId": 3,
-          "stock": 8,
-          "quantity": 2
-        }
-
+          id: 2,
+          title: "fghfgh",
+          description: "fffff ffff",
+          price: 10,
+          img: "../assets/test2.jpeg",
+          sellerId: 3,
+          stock: 8,
+          quantity: 2,
+        },
       ],
       customerId: 1,
       status: "pending",
@@ -112,115 +110,110 @@ export const state = {
       items: [
         //
         {
-          "id": 1,
-          "title": "ashhh",
-          "description": "dsfsdfsd sdfsd fsd f",
-          "price": 100,
-          "img": "../assets/test1.jpeg",
-          "sellerId": 3,
-          "category": "any",
-          "stock": 7,
-          "quantity": 2
+          id: 1,
+          title: "ashhh",
+          description: "dsfsdfsd sdfsd fsd f",
+          price: 100,
+          img: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 7,
+          quantity: 2,
         },
         {
-          "id": 2,
-          "title": "fghfgh",
-          "description": "fffff ffff",
-          "price": 10,
-          "img": "../assets/test2.jpeg",
-          "sellerId": 3,
-          "stock": 8,
-          "quantity": 2
-        }
+          id: 2,
+          title: "fghfgh",
+          description: "fffff ffff",
+          price: 10,
+          img: "../assets/test2.jpeg",
+          sellerId: 3,
+          stock: 8,
+          quantity: 2,
+        },
       ],
-      "customerId": 1,
-      "status": "pending",
-      "date": "2024-01-25",
-      "customerDetails": {
-        "FirstName": "abdelhameed",
-        "lastname": "abdelhameed",
-        "userAddress": "78 madrab st,ezbet elshal,qism tani",
-        "Email": "abdelhameedosamaiti@gmail.com",
-        "Phone": "01094335757",
-        "streetAddress": "78 madrab st,ezbet elshal,qism tani",
-        "City": "mansoura",
-        "Zip": "35511"
-      }
-    },{
-      "id": 305375,
-      "items": [
-          {
-              "id": 2,
-              "title": "fghfgh",
-              "description": "fffff ffff",
-              "price": 10,
-              "img": "../assets/test1.jpeg",
-              "sellerId": 3,
-              "stock": 8,
-              "quantity": 2
-          }
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
+    {
+      id: 305375,
+      items: [
+        {
+          id: 2,
+          title: "fghfgh",
+          description: "fffff ffff",
+          price: 10,
+          img: "../assets/test1.jpeg",
+          sellerId: 3,
+          stock: 8,
+          quantity: 2,
+        },
       ],
-      "customerId": 1,
-      "status": "pending",
-      "date": "2024-01-25",
-      "customerDetails": {
-          "FirstName": "abdelhameed",
-          "lastname": "abdelhameed",
-          "userAddress": "78 madrab st,ezbet elshal,qism tani",
-          "Email": "abdelhameedosamaiti@gmail.com",
-          "Phone": "01094335757",
-          "streetAddress": "78 madrab st,ezbet elshal,qism tani",
-          "City": "mansoura",
-          "Zip": "35511"
-      }
-  }
-
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
   ],
   products: [
     {
       id: 1,
-      title: "ashhh",
-      description: "dsfsdfsd sdfsd fsd f",
+      title: "abc",
+      description: "bcd",
       price: 100,
       img: "../assets/test1.jpeg",
       sellerId: 3,
       category: "any",
       stock: 10,
-
-      image: "../../images/Meubel House_Logos-05.png",
     },
     {
       id: 2,
-      title: "fghfgh",
-      description: "fffff ffff",
+      title: "def",
+      description: "def",
       price: 10,
-
       img: "../assets/test1.jpeg",
-
       sellerId: 3,
-      stock: 10,
-    },
-    {
-      id: 3,
-      title: "fghfgh",
-      description: "fffff ffff",
-      price: 10,
-
-      img: "../assets/test1.jpeg",
-      sellerId: 5,
-
+      category: "chairs",
       stock: 10,
     },
     {
       id: 4,
-      title: "fghfgh",
-      description: "fffff ffff",
+      title: "ghk",
+      description: "hkl",
+      price: 10,
+      category: "tables",
+      img: "../assets/test1.jpeg",
+      sellerId: 5,
+      stock: 10,
+    },
+    {
+      id: 3,
+      title: "mno",
+      description: "nop",
       price: 10,
       img: "../assets/test1.jpeg",
       sellerId: 5,
-      category: "any",
+      category: "tables",
       stock: 10,
-      image: "../../images/Meubel House_Logos-05.png",
     },
   ],
 };
@@ -430,8 +423,18 @@ export function searchCustomerByName(name) {
 }
 export function searchOrdersByCustomerName(name) {
   return state.orders.filter((order) =>
-    getUserById(order.customerId).name.toLowerCase().includes(name.toLowerCase())
+    getUserById(order.customerId)
+      .name.toLowerCase()
+      .includes(name.toLowerCase())
   );
+}
+
+export function sortByField(array, field, order = "asc") {
+  return [...array].sort((a, b) => {
+    let res = a[field] > b[field] ? 1 : -1;
+    if (order === "desc") res *= -1;
+    return res;
+  });
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

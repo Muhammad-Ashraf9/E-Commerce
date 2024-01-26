@@ -36,6 +36,7 @@ const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
 let itemsPerPage = 3;
+const sortBy = { field: "id", order: "desc" };
 
 export function generateTabel(header, body) {
   return `    <div class="table-responsive small">
@@ -188,7 +189,7 @@ sidebar.addEventListener("click", (e) => {
     switch (e.target.dataset.link) {
       case "dashboard":
         pageNumber = 1;
-        renderDashboard(main, modal);
+        renderDashboard(main, modal, pageNumber, itemsPerPage, sortBy);
         break;
       case "products":
         pageNumber = 1;
@@ -202,15 +203,33 @@ sidebar.addEventListener("click", (e) => {
         break;
       case "orders":
         pageNumber = 1;
-        renderOrdersPage(main, state.orders, pageNumber, itemsPerPage);
+        renderOrdersPage(
+          main,
+          state.orders,
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       case "customers":
         pageNumber = 1;
-        renderCustomersPage(main, getCustomers(), pageNumber, itemsPerPage);
+        renderCustomersPage(
+          main,
+          getCustomers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       case "sellers":
         pageNumber = 1;
-        renderSellersPage(main, getSellers(), pageNumber, itemsPerPage, modal);
+        renderSellersPage(
+          main,
+          getSellers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       default:
         break;

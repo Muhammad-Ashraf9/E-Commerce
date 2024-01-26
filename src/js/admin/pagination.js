@@ -32,13 +32,14 @@ export function handlePagination(
   array,
   pageNumber,
   itemsPerPage,
+  sortBy,
   renderFunction
 ) {
   const pagination = document.querySelector(".pagination");
   pagination.addEventListener("click", (e) => {
     if (!e.target.dataset?.goto) return;
     pageNumber = +e.target.dataset.goto;
-    renderFunction(container, array, pageNumber, itemsPerPage);
+    renderFunction(container, array, pageNumber, itemsPerPage, sortBy);
   });
 }
 
@@ -57,6 +58,7 @@ export function handleChangingItemsPerPage(
   array,
   pageNumber,
   itemsPerPage,
+  sortBy,
   renderFunction
 ) {
   container.insertAdjacentHTML(
@@ -66,6 +68,6 @@ export function handleChangingItemsPerPage(
   const selectElement = document.querySelector("select");
   selectElement.value = itemsPerPage;
   selectElement.addEventListener("change", (e) => {
-    renderFunction(container, array, pageNumber, +e.target.value);
+    renderFunction(container, array, pageNumber, +e.target.value, sortBy);
   });
 }
