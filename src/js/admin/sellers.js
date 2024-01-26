@@ -1,6 +1,13 @@
 import { signUp } from "../auth.js";
 import { isValidEmail, isValidName, isValidPassword } from "../helper.js";
-import { deleteSellerById, getByPageNumber, getSellers } from "../model.js";
+import {
+  deleteSellerById,
+  editUserById,
+  getByPageNumber,
+  getSellers,
+  getUserById,
+  searchSellerByName,
+} from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
 import {
   getPaginationHTML,
@@ -48,8 +55,18 @@ export function generateSellersTabelBody(arrayOfSellers) {
 }
 
 export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
-  console.log("array :>> ", array);
   const modal = document.querySelector("#modal");
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to search input to sellers
+  search.onchange = (e) => {
+    renderSellersPage(
+      container,
+      searchSellerByName(e.target.value),
+      pageNumber,
+      itemsPerPage
+    );
+  };
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "afterbegin",
@@ -74,20 +91,18 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     renderSellersPage
   );
   document.querySelector("#add-seller").addEventListener("click", (e) => {
-    console.log("add seller");
     modal.innerHTML = getAddSellerModalFormHTML();
     document.querySelector(".modal-footer").addEventListener("click", (e) => {
-      console.log("modal footer sellers");
       if (!e.target.classList?.contains("btn-success")) return;
-      const email = document.querySelector("input[type=email]");
+      const email = document.querySelector("#email");
       const emailInvalidFeedback = document.querySelector(
         ".invalid-feedback.email"
       );
-      const password = document.querySelector("input[type=password]");
+      const password = document.querySelector("#password");
       const passwordInvalidFeedback = document.querySelector(
         ".invalid-feedback.password"
       );
-      const name = document.querySelector("input[type=text]");
+      const name = document.querySelector("#userName");
       const nameInvalidFeedback = document.querySelector(
         ".invalid-feedback.name"
       );
@@ -115,12 +130,9 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     });
   });
   document.querySelector("table").addEventListener("click", (e) => {
-    console.log("table sellers");
-    console.log("e.target.dataset :>> ", e.target.dataset);
     if (e.target.dataset?.delId) {
       modal.innerHTML = getModalHTML(e.target.dataset.delId);
       document.querySelector(".modal-footer").addEventListener("click", (e) => {
-        console.log("modal-footer sellers");
         const id = +e.target.dataset?.id;
         if (!id) return;
         deleteSellerById(id);
@@ -128,7 +140,45 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
       });
     } else if (e.target.dataset?.editId) {
       const id = +e.target.dataset.editId;
-      console.log("id :>> ", id);
+      modal.innerHTML = getAddSellerModalFormHTML(getUserById(id));
+      document.querySelector(".modal-footer").addEventListener("click", (e) => {
+        if (!e.target.classList?.contains("btn-success")) return;
+        const id = +e.target.dataset?.id;
+        const email = document.querySelector("#email");
+        const emailInvalidFeedback = document.querySelector(
+          ".invalid-feedback.email"
+        );
+        const password = document.querySelector("#password");
+        const passwordInvalidFeedback = document.querySelector(
+          ".invalid-feedback.password"
+        );
+        const name = document.querySelector("#userName");
+        const nameInvalidFeedback = document.querySelector(
+          ".invalid-feedback.name"
+        );
+
+        emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+        validateEmail(email, emailInvalidFeedback);
+        validatePassword(password, passwordInvalidFeedback);
+        validateName(name, nameInvalidFeedback);
+        if (
+          !isValidEmail(email.value) ||
+          !isValidName(name.value) ||
+          !isValidPassword(password.value)
+        ) {
+          return;
+        }
+        try {
+          editUserById(id, email.value, password.value, name.value);
+          document.querySelector("[data-bs-dismiss='modal']").click();
+          renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+        } catch (error) {
+          email.classList.add("is-invalid");
+          emailInvalidFeedback.textContent = error.message;
+          emailInvalidFeedback.style.display = "block";
+        }
+        console.log("sellers");
+      });
     }
   });
   handleChangingItemsPerPage(
@@ -140,14 +190,19 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
   );
 }
 
-function getAddSellerModalFormHTML() {
+export function getAddSellerModalFormHTML(seller) {
   return `
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="addSellerModalLabel">
         <p class="lead text-success">
-          Add Seller to the store 🤑
+        ${
+          seller
+            ? `Update ${seller?.name}'s Info`
+            : "Add new seller to the store 🤑"
+        }
+          
          </p>
       
          </h1>
@@ -157,7 +212,9 @@ function getAddSellerModalFormHTML() {
  
         <div class="input-group ">
           <div class="form-floating">
-            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" value="${
+              seller?.email ? seller.email : ""
+            }">
             <label for="email">Email address</label>
           </div>
           <div class="invalid-feedback email">
@@ -166,16 +223,24 @@ function getAddSellerModalFormHTML() {
         </div>
         <div class="input-group has-validation">
           <div class="form-floating mt-3 ">
-            <input type="text" class="form-control mt-3" id="userName" placeholder="Seller Name">
+            <input type="text" class="form-control mt-3" id="userName" placeholder="Seller Name" value="${
+              seller?.name ? seller.name : ""
+            }">
             <label for="userName">Seller name</label>
           </div>
           <div class="invalid-feedback name">
-              Please choose a name.
+              Please choose a username.
            </div>
         </div>
       <div class="input-group has-validation">
         <div class="form-floating mt-3">
-          <input type="password" class="form-control mt-3" id="password" placeholder="Password" aria-describedby="invalidCheckPasswordFeedback">
+        
+          <input type="${
+            seller?.password ? "text" : "password"
+          }" class="form-control mt-3" id="password" placeholder="Password" aria-describedby="invalidCheckPasswordFeedback" value="${
+    seller?.password ? seller.password : ""
+  }">
+       
           <label for="password">Password</label>
         </div>
             <div class="invalid-feedback password" id="invalidCheckPasswordFeedback">
@@ -186,7 +251,9 @@ function getAddSellerModalFormHTML() {
       </div>
       <div class="modal-footer d-flex justify-content-around">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success " >Confirm</button>
+        <button type="button" class="btn btn-success" data-id="${
+          seller?.id
+        }" >Confirm</button>
       </div>
     </div>
   </div>
@@ -194,7 +261,6 @@ function getAddSellerModalFormHTML() {
 }
 
 function validateEmail(email, emailInvalidFeedback) {
-  console.log("email :>> ", email);
   if (!isValidEmail(email.value)) {
     email.classList.add("is-invalid");
     emailInvalidFeedback.style.display = "block";
@@ -220,4 +286,45 @@ function validatePassword(password, passwordInvalidFeedback) {
     password.classList.remove("is-invalid");
     passwordInvalidFeedback.style.display = "none";
   }
+}
+
+export function handleEditUser(id) {
+  modal.innerHTML = getAddSellerModalFormHTML(getUserById(id));
+  document.querySelector(".modal-footer").addEventListener("click", (e) => {
+    const id = +e.target.dataset?.id;
+    console.log("id  seller modal:>> ", id);
+    if (!id) return;
+    const email = document.querySelector("#email");
+    const emailInvalidFeedback = document.querySelector(
+      ".invalid-feedback.email"
+    );
+    const password = document.querySelector("#password");
+    const passwordInvalidFeedback = document.querySelector(
+      ".invalid-feedback.password"
+    );
+    const name = document.querySelector("#userName");
+    const nameInvalidFeedback = document.querySelector(
+      ".invalid-feedback.name"
+    );
+
+    emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+    validateEmail(email, emailInvalidFeedback);
+    validatePassword(password, passwordInvalidFeedback);
+    validateName(name, nameInvalidFeedback);
+    if (
+      !isValidEmail(email.value) ||
+      !isValidName(name.value) ||
+      !isValidPassword(password.value)
+    ) {
+      return;
+    }
+    try {
+      editUserById(id, email.value, password.value, name.value);
+      document.querySelector("[data-bs-dismiss='modal']").click();
+    } catch (error) {
+      email.classList.add("is-invalid");
+      emailInvalidFeedback.textContent = error.message;
+      emailInvalidFeedback.style.display = "block";
+    }
+  });
 }
