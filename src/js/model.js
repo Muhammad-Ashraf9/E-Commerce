@@ -44,10 +44,28 @@ export const state = {
         },
       ],
     },
+    {
+      id: 5,
+      name: "ash seller",
+      email: "ash@seller.ash",
+      password: "ash123",
+      orders: [3],
+      accountType: "seller",
+      products: [
+        {
+          productId: 3,
+          stock: 10,
+        },
+        {
+          productId: 4,
+          stock: 10,
+        },
+      ],
+    },
   ],
   orders: [
     {
-      id: 354028,
+      id: 189770,
       items: [
         {
           id: 1,
@@ -102,7 +120,9 @@ export const state = {
     },
     {
       id: 354028,
+      id: 354028,
       items: [
+        //
         {
           id: 2,
           title: "id2item1",
@@ -248,6 +268,17 @@ export const state = {
         City: "mansoura",
         Zip: "35511",
       },
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
     },
   ],
   products: [
@@ -292,6 +323,7 @@ export const state = {
       prevPrice: 200,
       category: "Sofas",
       sellerId: 3,
+      category: "chairs",
       stock: 10,
       rating: 4,
       numberofsales: 0,
@@ -2246,7 +2278,8 @@ function loadStateFromLocalStorage() {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
   }
 }
-function saveStateInLocalStorage() {
+
+export function saveStateInLocalStorage() {
   for (const key in state) {
     localStorage.setItem(key, JSON.stringify(state[key]));
   }
@@ -2345,12 +2378,30 @@ export function getByPageNumber(array, pageNumber, itemsPerPage) {
   return array.slice(start, end);
 }
 export function deleteProductById(id) {
+  //get product to get seller id
+  const product = getProductById(id);
+
+  //loop over users
+  state.users.forEach((user) => {
+    if (user.id === product.sellerId) {
+      //delete product from seller products
+      user.products = user.products.filter(
+        (product) => product.productId !== +id
+      );
+    } else if (user.accountType === "customer") {
+      //delete product from all carts
+      user.cart = user.cart.filter((item) => item.id !== +id);
+    }
+  });
+
+  //delete product from guest cart
+  state.guestCart = state.guestCart.filter((item) => item.id !== +id);
+
+  //delete product from products
   state.products = state.products.filter((product) => product.id !== +id);
-  saveInLocalStorage("products", state.products);
-}
-export function deleteUserById(id) {
-  state.users = state.users.filter((user) => user.id !== +id);
-  saveInLocalStorage("users", state.users);
+
+  //save state in local storage
+  saveStateInLocalStorage();
 }
 
 export function changeCartItemCount(id, quantity) {
@@ -2369,12 +2420,10 @@ export function changeCartItemCount(id, quantity) {
 
   saveStateInLocalStorage();
 }
+
 export function DeleteFromCart(id) {
   const cart = getCurrentCart();
-  console.log("cart", cart);
-  console.log("id", id);
   const newCart = cart.filter((item) => item.id !== +id);
-  console.log("newCart", newCart);
   if (!state.currentUser) {
     state.guestCart = newCart;
   } else {
@@ -2389,6 +2438,59 @@ export function DeleteFromCart(id) {
 export function getCurrentCart() {
   return state.currentUser ? state.currentUser.cart : state.guestCart;
 }
+export function deleteCustomerById(id) {
+  state.users = state.users.filter((user) => user.id !== +id);
+  saveInLocalStorage("users", state.users);
+}
+export function deleteSellerById(id) {
+  const seller = getUserById(id);
+  seller.products.forEach((product) => deleteProductById(product.productId));
+  deleteCustomerById(id);
+  saveStateInLocalStorage();
+}
+export function editUserById(id, email, password, name) {
+  const foundUser = getUserByEmail(email);
+  if (foundUser && foundUser.id !== +id)
+    throw new Error("Email already in use.");
+  const index = state.users.findIndex((user) => user.id === +id);
+  state.users[index].email = email;
+  state.users[index].password = password;
+  state.users[index].name = name;
+  saveStateInLocalStorage();
+}
+export function searchProductsByTitle(title) {
+  return state.products.filter((product) =>
+    product.title.toLowerCase().includes(title.toLowerCase())
+  );
+}
+export function searchSellerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "seller"
+  );
+}
+export function searchCustomerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "customer"
+  );
+}
+export function searchOrdersByCustomerName(name) {
+  return state.orders.filter((order) =>
+    getUserById(order.customerId)
+      .name.toLowerCase()
+      .includes(name.toLowerCase())
+  );
+}
 
+export function sortByField(array, field, order = "asc") {
+  return [...array].sort((a, b) => {
+    let res = a[field] > b[field] ? 1 : -1;
+    if (order === "desc") res *= -1;
+    return res;
+  });
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

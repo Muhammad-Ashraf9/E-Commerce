@@ -5,8 +5,6 @@ let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
-
 window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
@@ -15,7 +13,6 @@ window.addEventListener("load", function () {
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
     let flag = 0;
     cards.innerHTML = "";
     if (cart.length == 0) {
@@ -23,7 +20,6 @@ window.addEventListener("load", function () {
       <div class="row">
         <div class="col-lg-6">
           <span class="fs-1 fw-bold">your cart is empty !</span>
-  
         </div>       
         <div class="pt-3 col-lg-6">
          <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
@@ -32,17 +28,6 @@ window.addEventListener("load", function () {
       </div>
       `;
       document.getElementById("CheckOut").style.display = "none";
-      
-      // setTimeout(() => {
-      //   Swal.fire({
-      //     icon: "error",
-      //     title: "Oops...",
-      //     text: "You need to sign in in order to make an order",
-      //   }).then(()=>{
-      //     location.assign('../html/main.html')
-      //   })
-      // }, 3000);
-      
     }
     let total = 0;
     cart.forEach((item) => {
@@ -54,16 +39,15 @@ window.addEventListener("load", function () {
         item.title
       }">
           </div>
-          <div class="col-md-10">
-            
+          <div class="col-md-10">  
             <div class="card-body d-flex gap-3 flex-nowrap">
               <!-- Information -->
               <div class="col-sm-7 flex-grow-1">
                 <h5 class="card-title">${item.product.title}</h5>
                 <p class="card-text">${item.product.description}</p>
                 <p class="card-text"><small class="text-body-secondary">${
-                  getUserById(item.product.id).name
-                }</small></p>
+                  getUserById(item.product.sellerId).name
+                } only ${item.product.stock - item.num} left in the stock</small></p>
               </div>
               <!-- End of information -->
               <!-- Controls -->
@@ -71,9 +55,9 @@ window.addEventListener("load", function () {
                 <button id="close" class="float-end btn btn-lg btn-close rounded-circle" data-id="${item.product.id}"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #eec28c; color:white" class="btn">+</button>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button style="background: #B88E2F; color:white" class="btn fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -86,12 +70,11 @@ window.addEventListener("load", function () {
     });
     document.getElementById("SubTotal").innerText = total
   }
-
   cards.addEventListener("click", function (e) {
     if (e.target.innerText == "+") {
-      let cardID =
-        e.target.parentElement.parentElement.parentElement.parentElement
-          .parentElement.parentElement.id;
+      let cardID =+e.target.id;
+      console.log(cardID);
+
       if (cart[cardID].num == cart[cardID].product.stock) {
         Swal.fire({
           icon: "error",
@@ -105,9 +88,8 @@ window.addEventListener("load", function () {
       generateCards();
     }
     if (e.target.innerText == "-") {
-      let cardID =
-        e.target.parentElement.parentElement.parentElement.parentElement
-          .parentElement.parentElement.id;
+      let cardID =e.target.id;
+      console.log(cardID);
       if (cart[cardID].num - 1 == 0) return;
       changeCartItemCount( cart[cardID].product.id, cart[cardID].num-1);
       cart[cardID].num += -1;

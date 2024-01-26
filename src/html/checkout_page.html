@@ -11,7 +11,7 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../style/checkout.css">
-  <link rel="stylesheet" href="../sass/main.css">
+  <link rel="stylesheet" href="../style/main.css">
   <script type="module" src="../js/main.js"></script>
 
 </head>
@@ -35,13 +35,13 @@
     
       <div class="row ">
         <div class="col-lg-8 col-md-10">
-          <form class="row g-3 needs-validation" novalidate>
+          <form id="form" class="row g-3 needs-validation"  novalidate>
             <!-- Personal info  -->
             <div class="rounded-4 p-4 row g-3 bgPaige">
               <span class="fs-4">Personal information:</span>
               <div class="col-md-6 ">
-                <label for="validationCustom01" class="form-label">First name</label>
-                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="validationCustom01" required>
+                <label for="FirstName" class="form-label">First name</label>
+                <input pattern="[A-Za-z]{3,}" name="FirstName" type="text" class="form-control" id="FirstName" required>
                 <div class="valid-feedback">
                   Cool name!
                 </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="col-md-6">
                 <label for="lastname" class="form-label">Last name</label>
-                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="lastname" required>
+                <input pattern="[A-Za-z]{3,}" name="lastname" type="text" class="form-control" id="lastname" required>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -60,15 +60,15 @@
                 </div>
               </div>
               <div class="col-md-12">
-                <label for="validationCustom03" class="form-label">Residence Address</label>
-                <input type="text" class="form-control" id="validationCustom03" required>
+                <label for="userAddress" class="form-label">Residence Address</label>
+                <input type="text" name="userAddress" class="form-control"  id="userAddress" required>
                 <div class="invalid-feedback">
                   Please provide a valid Address.
                 </div>
               </div>
               <div class="col-md-6 ">
                 <label for="Email" class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="Email" required>
+                <input type="email" name="Email" class="form-control" id="Email" required>
                 <div class="valid-feedback">
                   nice email!
                 </div>
@@ -78,7 +78,7 @@
               </div>
               <div class="col-md-6 ">
                 <label for="Phone" class="form-label">Phone Number</label>
-                <input pattern="^01(0|1|2|5)[0-9]{8}$" type="tel" class="form-control" id="Phone" required>
+                <input name="Phone" pattern="^01(0|1|2|5)[0-9]{8}$" type="tel" class="form-control" id="Phone" required>
                 <div class="valid-feedback">
                   Looks good.
                 </div>
@@ -92,8 +92,8 @@
             <div class="rounded-4 p-4 row g-3 bgPaige">
               <span class="fs-4">Shipping Details:</span>
               <div class="col-md-12 ">
-                <label for="StreetAdd" class="form-label">Street Address</label>
-                <input type="text" class="form-control" id="StreetAdd" required>
+                <label for="streetAddress" class="form-label">Street Address</label>
+                <input type="text" name="streetAddress" class="form-control" id="streetAddress" required>
                 <div class="valid-feedback">
                   Now I know where you live.
                 </div>
@@ -102,7 +102,7 @@
                 </div>
               </div>
               <div class="col-md-4">
-                <label for="Governerate" class="form-label">Governerate</label>
+                <label for="Governerate" name="Governerate" class="form-label">Governerate</label>
                 <select class="form-select" id="Governerate" required>
                   <option selected disabled value="">Choose your state</option>
                   <option value="Alexandria">Alexandria</option>
@@ -142,7 +142,7 @@
               </div>
               <div class="col-md-4">
                 <label for="City" class="form-label">City</label>
-                <input pattern="[A-Za-z]{3,}" type="text" class="form-control" id="City" required>
+                <input name="City" pattern="[A-Za-z]{3,}" type="text" class="form-control" id="City" required>
                 <div class="valid-feedback">
                   Sounds good.
                 </div>
@@ -152,7 +152,7 @@
               </div>
               <div class="col-md-4">
                 <label for="Zip" class="form-label">Zip</label>
-                <input pattern="[0-9]{5}" type="text" class="form-control" id="Zip" required>
+                <input name="Zip" pattern="[0-9]{5}" type="text" class="form-control" id="Zip" required>
                 <div class="invalid-feedback">
                   Please enter a calid code.
                 </div>

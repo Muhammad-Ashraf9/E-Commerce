@@ -11,7 +11,6 @@ import {
   getOrderTotal,
   getByPageNumber,
   deleteProductById,
-  deleteUserById,
 } from "../model.js";
 import {
   generateCustomersTabelBody,
@@ -36,43 +35,9 @@ const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
-let itemsPerPage = 1;
-// Graphs
-// eslint-disable-next-line no-unused-vars
-// const myChart = new Chart(chart, {
-//   type: "line",
-//   data: {
-//     labels: [
-//       "Sunday",
-//       "Monday",
-//       "Tuesday",
-//       "Wednesday",
-//       "Thursday",
-//       "Friday",
-//       "Saturday",
-//     ],
-//     datasets: [
-//       {
-//         data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-//         lineTension: 0,
-//         backgroundColor: "transparent",
-//         borderColor: "#007bff",
-//         borderWidth: 4,
-//         pointBackgroundColor: "#007bff",
-//       },
-//     ],
-//   },
-//   options: {
-//     plugins: {
-//       legend: {
-//         display: false,
-//       },
-//       tooltip: {
-//         boxPadding: 3,
-//       },
-//     },
-//   },
-// });
+let itemsPerPage = 3;
+const sortBy = { field: "id", order: "desc" };
+
 export function generateTabel(header, body) {
   return `    <div class="table-responsive small">
             <table class="table table-striped table-sm">
@@ -97,7 +62,7 @@ export function getModalHTML(id) {
       </div>
       <div class="modal-footer d-flex justify-content-around">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger btn-delete"    data-bs-dismiss="modal" data-id="${id}">Delete</button>
+        <button type="button" class="btn btn-danger btn-delete" data-bs-dismiss="modal" data-id="${id}">Delete</button>
       </div>
     </div>
   </div>
@@ -131,7 +96,13 @@ function getTotalCardHTML(number, title) {
               </div>
             </div>`;
 }
-function renderDashboard(container, modal) {
+function renderDashboard(container) {
+  const modal = document.querySelector("#modal");
+
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to not use the last onchange event(and render the last page)
+  search.onchange = "";
   container.innerHTML = "";
   container.insertAdjacentHTML("afterbegin", `<canvas id="myChart"></canvas>`);
   container.insertAdjacentHTML(
@@ -153,6 +124,7 @@ function renderDashboard(container, modal) {
       "customers"
     )}${getSummaryCardHTML(getSellers(), "sellers")}</div>`
   );
+
   const createdChart = new Chart(document.querySelector("#myChart"), {
     type: "bar",
     data: {
@@ -187,16 +159,18 @@ function renderDashboard(container, modal) {
       generateProductsTableBody(getLastAddedProducts(3))
     )
   );
-  container.addEventListener("click", (e) => {
+  document.querySelector("table").addEventListener("click", (e) => {
+    console.log("Proucts table dashboard event");
     const id = e.target.dataset?.id;
     if (!id) return;
     modal.innerHTML = getModalHTML(id);
-  });
-  modal.addEventListener("click", (e) => {
-    if (!e.target.dataset.id) return;
-    const id = +e.target.dataset.id;
-    deleteProductById(id);
-    renderDashboard(container, modal);
+    document.querySelector(".modal-footer").addEventListener("click", (e) => {
+      console.log("modal-footer Proucts dashboard event");
+      if (!e.target.dataset.id) return;
+      const id = +e.target.dataset.id;
+      deleteProductById(id);
+      renderDashboard(container, modal);
+    });
   });
 }
 
@@ -204,6 +178,7 @@ function renderDashboard(container, modal) {
 if (!getCurrentUser() || getCurrentUser().accountType !== "admin") {
   location.assign("../html/main.html");
 }
+//hide dashboard with spinner
 
 sidebar.addEventListener("click", (e) => {
   if (e.target.classList.contains("nav-link")) {
@@ -214,7 +189,7 @@ sidebar.addEventListener("click", (e) => {
     switch (e.target.dataset.link) {
       case "dashboard":
         pageNumber = 1;
-        renderDashboard(main, modal);
+        renderDashboard(main, modal, pageNumber, itemsPerPage, sortBy);
         break;
       case "products":
         pageNumber = 1;
@@ -228,15 +203,33 @@ sidebar.addEventListener("click", (e) => {
         break;
       case "orders":
         pageNumber = 1;
-        renderOrdersPage(main, state.orders, pageNumber, itemsPerPage);
+        renderOrdersPage(
+          main,
+          state.orders,
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       case "customers":
         pageNumber = 1;
-        renderCustomersPage(main, getCustomers(), pageNumber, itemsPerPage);
+        renderCustomersPage(
+          main,
+          getCustomers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       case "sellers":
         pageNumber = 1;
-        renderSellersPage(main, getSellers(), pageNumber, itemsPerPage, modal);
+        renderSellersPage(
+          main,
+          getSellers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy
+        );
         break;
       default:
         break;
