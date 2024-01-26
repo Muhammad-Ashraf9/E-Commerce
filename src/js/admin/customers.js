@@ -1,21 +1,32 @@
 import {
   deleteCustomerById,
   deleteProductById,
-
+  editUserById,
   getByPageNumber,
   getCustomers,
   getUserById,
+  searchCustomerByName,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import {
+  getPaginationHTML,
+  handleChangingItemsPerPage,
+  handlePagination,
+} from "./pagination.js";
+import { getAddSellerModalFormHTML, handleEditUser } from "./sellers.js";
 export function generateCustomersTabelHead() {
-  return `<td>id</td>
-  <td>name</td>
-  <td>Email</td>
-  <td>number of orders</td>
-  <td>Date</td>
-    <td>Actions</td>
+  return `  
+  <thead>
+    <tr>
+      <th scope="col">ID
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">No. orders</th>
+           <th scope="col">Date</th>
+          <th scope="col">Actions</th>
+            </tr>
+       </thead>
   `;
 }
 export function generateCustomersTabelBody(arrayOfCustomers) {
@@ -30,9 +41,9 @@ export function generateCustomersTabelBody(arrayOfCustomers) {
         <td>${new Date(customer.id).toISOString().split("T")[0]}</td>
         <td>
       <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-id="${customer.id}">Delete</button>
+       data-bs-target="#modal" data-del-id="${customer.id}">Delete</button>
         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-id="${customer.id}">Edit</button>
+       data-bs-target="#modal" data-edit-id="${customer.id}">Edit</button>
         </td>
       </tr>`
     )
@@ -45,6 +56,18 @@ export function renderCustomersPage(
   pageNumber,
   itemsPerPage
 ) {
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to search input to sellers
+  search.onchange = (e) => {
+    renderCustomersPage(
+      container,
+      searchCustomerByName(e.target.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy     
+    );
+  };
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",
@@ -64,21 +87,36 @@ export function renderCustomersPage(
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
+    renderCustomersPage
+  );
+  handleChangingItemsPerPage(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    sortBy,
     renderCustomersPage
   );
   document.querySelector("table").addEventListener("click", (e) => {
-    console.log("Customers table event");
-    //every time i navigate to customers it adds this event same with proucts (can delete prouct and customer )
-    // sol: remove event listener before adding it again or ad event listener to the table that got rendered
-    const id = e.target.dataset?.id;
-    if (!id) return;
-    modal.innerHTML = getModalHTML(id);
-    document.querySelector(".modal-footer").addEventListener("click", (e) => {
-      console.log("modal-footer from customers");
-      if (!e.target.dataset.id) return;
-      const id = +e.target.dataset.id;
-      deleteCustomerById(id);
+    if (e.target.dataset?.delId) {
+      modal.innerHTML = getModalHTML(+e.target.dataset?.delId);
+      document.querySelector(".modal-footer").addEventListener("click", (e) => {
+        if (!e.target.dataset.id) return;
+        const id = +e.target.dataset.id;
+        deleteCustomerById(id);
+        renderCustomersPage(
+          container,
+          getCustomers(),
+          pageNumber,
+          itemsPerPage
+        );
+      });
+    } else if (e.target.dataset?.editId) {
+      const id = +e.target.dataset.editId;
+      console.log("id :>> ", id);
+      handleEditUser(id);
       renderCustomersPage(container, getCustomers(), pageNumber, itemsPerPage);
-    });
+    }
   });
 }

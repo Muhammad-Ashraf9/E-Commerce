@@ -52,7 +52,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [3],
+      orders: [ 3],
       accountType: "seller",
       products: [
         {
@@ -109,6 +109,7 @@ export const state = {
     {
       id: 354028,
       items: [
+        //
         {
           id: 1,
           title: "ashhh",
@@ -177,48 +178,43 @@ export const state = {
   products: [
     {
       id: 1,
-      title: "ashhh",
-      description: "dsfsdfsd sdfsd fsd f",
+      title: "abc",
+      description: "bcd",
       price: 100,
       img: "../assets/test1.jpeg",
       sellerId: 3,
       category: "any",
       stock: 10,
-
-      image: "../../images/Meubel House_Logos-05.png",
     },
     {
       id: 2,
-      title: "fghfgh",
-      description: "fffff ffff",
+      title: "def",
+      description: "def",
       price: 10,
-
       img: "../assets/test1.jpeg",
-
       sellerId: 3,
-      stock: 10,
-    },
-    {
-      id: 3,
-      title: "fghfgh",
-      description: "fffff ffff",
-      price: 10,
-
-      img: "../assets/test1.jpeg",
-      sellerId: 5,
-
+      category: "chairs",
       stock: 10,
     },
     {
       id: 4,
-      title: "fghfgh",
-      description: "fffff ffff",
+      title: "ghk",
+      description: "hkl",
+      price: 10,
+      category: "tables",
+      img: "../assets/test1.jpeg",
+      sellerId: 5,
+      stock: 10,
+    },
+    {
+      id: 3,
+      title: "mno",
+      description: "nop",
       price: 10,
       img: "../assets/test1.jpeg",
       sellerId: 5,
-      category: "any",
+      category: "tables",
       stock: 10,
-      image: "../../images/Meubel House_Logos-05.png",
     },
   ],
 };
@@ -393,10 +389,53 @@ export function deleteCustomerById(id) {
 }
 export function deleteSellerById(id) {
   const seller = getUserById(id);
-  console.log("seller :>> ", seller);
   seller.products.forEach((product) => deleteProductById(product.productId));
   deleteCustomerById(id);
   saveStateInLocalStorage();
+}
+export function editUserById(id, email, password, name) {
+  const foundUser = getUserByEmail(email);
+  if (foundUser && foundUser.id !== +id)
+    throw new Error("Email already in use.");
+  const index = state.users.findIndex((user) => user.id === +id);
+  state.users[index].email = email;
+  state.users[index].password = password;
+  state.users[index].name = name;
+  saveStateInLocalStorage();
+}
+export function searchProductsByTitle(title) {
+  return state.products.filter((product) =>
+    product.title.toLowerCase().includes(title.toLowerCase())
+  );
+}
+export function searchSellerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "seller"
+  );
+}
+export function searchCustomerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "customer"
+  );
+}
+export function searchOrdersByCustomerName(name) {
+  return state.orders.filter((order) =>
+    getUserById(order.customerId)
+      .name.toLowerCase()
+      .includes(name.toLowerCase())
+  );
+}
+
+export function sortByField(array, field, order = "asc") {
+  return [...array].sort((a, b) => {
+    let res = a[field] > b[field] ? 1 : -1;
+    if (order === "desc") res *= -1;
+    return res;
+  });
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
