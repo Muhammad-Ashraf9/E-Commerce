@@ -12,30 +12,39 @@
     <link rel="stylesheet" href="" />
     <!-- Page Interanl Stylesheet -->
     <style>
-th,td {
-width:0.1%;
-white-space: nowrap;
-}
-td.clip {
-  white-space: nowrap; 
-  width: 50px; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  border: 1px solid #000000;
-}
+        th,
+        td {
+            width: 0.1%;
+            white-space: nowrap;
+        }
+
+        .imageResize {
+            top: -50px;
+            left: -35px;
+            z-index: 999;
+            cursor: pointer;
+            -webkit-transition-property: all;
+            -webkit-transition-duration: 0.3s;
+            -webkit-transition-timing-function: ease;
+        }
+
+        .imageResize:hover {
+            transform: scale(3);
+        }
     </style>
 
     <!-- JQuery Script -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <!-- FontAwesome Script -->
     <script src="https://kit.fontawesome.com/585a1514af.js" crossorigin="anonymous"></script>
+    <!-- SweetAlert Script -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Page External Script  -->
     <script type="module" src="../js/ordersInTable.js"></script>
     <!-- Page Internal Script -->
     </script>
 
     </script>
-
 </head>
 
 <body>
@@ -44,5 +53,4 @@ td.clip {
             <div id="table" class="">
             </div>
         </div>
-    </div>
 </body>
