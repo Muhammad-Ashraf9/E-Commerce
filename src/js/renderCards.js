@@ -4,12 +4,17 @@ import { getSearchValue } from "./getSearchValue.js";
 import { getCheckedValue } from "./getCategory.js";
 import { addtoCart } from "./addtoCart.js";
 // Drawing the cards
-export function renderCards(page, numberOfCardsPerPage) {
-  let searchValue = getSearchValue();
-  let category = getCheckedValue();
+export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchValue(), category = getCheckedValue()) {
+  // let searchValue = ;
+  // let category = ;
   let Products = ProductsFiltered(searchValue, category);
+  // for (const iterator of Products) {
+  //   console.log(iterator);
+  // }
 
-  const firstRow = document.getElementById("ProductShow");
+  const body = document.querySelector("body");
+
+  const firstRow = document.getElementById("ProductsShow");
   firstRow.innerHTML = "";
   var startCard = (page - 1) * numberOfCardsPerPage + 1;
   var endCard = page * numberOfCardsPerPage;
@@ -20,26 +25,26 @@ export function renderCards(page, numberOfCardsPerPage) {
     const productOuterDiv = `
       <div class="col-md-3">
         <div class="wsk-cp-product">
-          <img class="wsk-cp-img" alt="${Products[i - 1].title}" src="${
-      Products[i - 1].imgURL0
-    }">
+          <img id="two" class="wsk-cp-img" alt="${
+            Products[i - 1].title
+          }" src="${Products[i - 1].imgURL0}">
+          <img id="one" class="wsk-cp-img" alt="${
+            Products[i - 1].title
+          }" src="${Products[i - 1].imgURL1}">
           <div class="wsk-cp-text">
             <div class="title-product">
-              <h3 class=" viewProductPage" id="${
-                Products[i - 1].id
-              }">
-                <a href="">${Products[i - 1].title}${i}</a>
-                
+              <h3 class="viewProductPage" id="${Products[i - 1].id}">
+                ${Products[i - 1].title}${i}
               </h3>
             </div>
             <div class="card-footer">
               <div class="wcf-left">
-                <span>${Products[i - 1].price} $ <del>${
-      Products[i - 1].priceBeforeDiscount
+                <span>${Products[i - 1].price} $ <del style="color: red">${
+      Products[i - 1].prevPrice
     } $</del></span>
               </div>
               <div class="wcf-right">
-                <input class="quantity" type="text" value="0" readonly style="width: 30px; background-color: transparent; border: none;">
+                <input type="text" class="quantity" value="0" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
                 <button style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
                   <i class="fa-solid fa-cart-plus"></i>
                 </button>
@@ -52,12 +57,21 @@ export function renderCards(page, numberOfCardsPerPage) {
 
     firstRow.innerHTML += productOuterDiv;
   }
-  // add an event listener to all the created buttons 
+  // add an event listener to all the created buttons
   let addbuttons = document.getElementsByClassName("buy-btn");
-  for (let i = 0; i< addbuttons.length; i++)
-  {
-    addbuttons[i].addEventListener("click", addtoCart)
+  for (let i = 0; i < addbuttons.length; i++) {
+    addbuttons[i].addEventListener("click", addtoCart);
   }
+
+  // Open the product details page
+  body.addEventListener("click", function (e) {
+    if (e.target.classList.contains("viewProductPage")) {
+      var prodID = e.target.id;
+      localStorage.setItem("id", prodID);
+      // location.assign("../html/ProductDetails.html");
+      window.open("../html/ProductDetails.html", "_blank");
+    }
+  });
 
   let pagesCount = 0;
   if (Products.length == 0) {

@@ -5,21 +5,20 @@ import renderFooter from "../js/views/Footer.js";
 import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
 import { addtoCart } from "./addtoCart.js";
-var numberOfCardsPerPage = 8;
 let prodID = -1;
+
+// Onload page rendering of the cards
+var numberOfCardsPerPage = 8;
+ let page = 1; // Current page
+ let productsCount = ProductsFiltered(getSearchValue(), getCheckedValue()).length; // Number of products
+ let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
+ renderCards(page, numberOfCardsPerPage, "", "");
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const body = document.querySelector("body");
 
-  // Open the product details page
-  body.addEventListener("click", function (e) {
-    if (e.target.classList.contains("viewProductPage")) {
-      var prodID = e.target.id;
-      localStorage.setItem("id", prodID);
-      // location.assign("../html/ProductDetails.html");
-      window.open("../html/ProductDetails.html", "_blank");
-    }
-  });
 
   // Filter the products by category
   let CategoryButtons = document.getElementById("CategoryButtons");
@@ -36,25 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (endCard > productsCount) {
       endCard = productsCount;
     }
-    renderCards(1, 4);
+    renderCards(page, numberOfCardsPerPage, searchValue, category);
   });
 
-  // Onload page rendering of the cards
-  let page = 1; // Current page
-  let productsCount = ProductsFiltered("", "").length; // Number of products
-  let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
-  var startCard = (page - 1) * numberOfCardsPerPage + 1; // Start card
-  var endCard = page * numberOfCardsPerPage;
-  if (endCard > productsCount) {
-    endCard = productsCount;
-  }
-  renderCards(page, numberOfCardsPerPage);
+  // var startCard = (page - 1) * numberOfCardsPerPage + 1; // Start card
+  // var endCard = page * numberOfCardsPerPage;
+  // if (endCard > productsCount) {
+  //   endCard = productsCount;
+  // }
 
-  let searchValue = document.querySelector('input[type="search"]').value;
+  // let searchValue = document.querySelector('input[type="search"]').value;
+  // Render the cards after input in the search bar
   document
     .querySelector('input[type="search"]')
     .addEventListener("input", function (event) {
-      renderCards(1, numberOfCardsPerPage);
+      renderCards(1, numberOfCardsPerPage, event.target.value);
     });
 
   // Render after click on the pagination buttons
@@ -78,14 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
         page = parseInt(event.target.textContent);
       }
 
-      startCard = (page - 1) * numberOfCardsPerPage + 1;
-      endCard = page * numberOfCardsPerPage;
-      if (endCard > productsCount) {
-        endCard = productsCount;
-      }
     }
     let searchValue = document.querySelector('input[type="search"]').value;
-    renderCards(page, numberOfCardsPerPage);
+    renderCards(page, numberOfCardsPerPage, searchValue);
   });
 
   // Clear the search bar

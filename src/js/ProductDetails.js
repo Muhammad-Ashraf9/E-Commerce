@@ -1,29 +1,36 @@
 // import { products } from "../js/Products.js";
 import { state } from "./model.js";
 import { renderCards } from "../js/renderCards.js";
-var prodID = localStorage.getItem("id");
-let Product = state.products[prodID];
-let prodImgDiv = document.getElementById("prodImg");
-prodImgDiv.src = Product.imgURL0;
-// productDiv.alt = Product.title;
-let prodNameDiv = document.getElementById("prodName");
+import { ProductsFiltered } from "./ProductsFiltered.js";
+let prodID = localStorage.getItem("id");
+const Product = state.products[prodID];
+const prodImgtwo = document.getElementById("two");
+const prodImgone = document.getElementById("one");
+prodImgtwo.src = Product.imgURL0;
+prodImgone.src = Product.imgURL1;
+const prodNameDiv = document.getElementById("prodName");
 prodNameDiv.innerText = Product.title;
-let prodPriceDiv = document.getElementById("prodPrice");
-prodPriceDiv.innerText += " "+Product.price+" $";
-let prodDescDiv = document.getElementById("prodDesc");
+const prodPriceh3 = document.getElementById("prodPrice");
+prodPriceh3.innerText += ` ${Product.price} $`;
+const prodPriceh4 = document.getElementById("prodPriceBD");
+if (Product.prevPrice !== Product.price) {
+  prodPriceh4.innerText += ` ${Product.prevPrice} $`;
+}
+const prodDescDiv = document.getElementById("prodDesc");
 prodDescDiv.innerText = Product.description;
-let prodCategoryDiv = document.querySelector("#prodCategory h4");;
-prodCategoryDiv.innerText += " " + Product.category;
-
-
+const prodCategoryDiv = document.querySelector("#prodCategory h4");
+prodCategoryDiv.innerText += ` ${Product.category}`;
+let category = `${Product.category}`;
   // Render after click on the pagination buttons
-  let page = 1;
   let numberOfCardsPerPage = 4
-  renderCards(page, numberOfCardsPerPage);
+  let page = 1; // Current page
+  let productsCount = ProductsFiltered("", category).length; // Number of products
+  let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
+
+  renderCards(page, numberOfCardsPerPage, "", category);
 
   const pagSec = document.getElementById("paginationSection");
   pagSec.addEventListener("click", function (event) {
-    console.log(event.target);
     if (event.target.nodeName == "A") {
       pagSec.innerHTML = "";
       if (event.target.textContent === "Previous") {
@@ -41,14 +48,8 @@ prodCategoryDiv.innerText += " " + Product.category;
       } else {
         page = parseInt(event.target.textContent);
       }
-
-      // startCard = (page - 1) * numberOfCardsPerPage + 1;
-      // endCard = page * numberOfCardsPerPage;
-      // if (endCard > productsCount) {
-      //   endCard = productsCount;
-      // }
     }
-    renderCards(page, numberOfCardsPerPage);
+    renderCards(page, numberOfCardsPerPage, "", category);
   });
 
 
