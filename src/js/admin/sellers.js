@@ -6,6 +6,7 @@ import {
   getByPageNumber,
   getSellers,
   getUserById,
+  searchSellerByName,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
 import {
@@ -55,6 +56,17 @@ export function generateSellersTabelBody(arrayOfSellers) {
 
 export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
   const modal = document.querySelector("#modal");
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to search input to sellers
+  search.onchange = (e) => {
+    renderSellersPage(
+      container,
+      searchSellerByName(e.target.value),
+      pageNumber,
+      itemsPerPage
+    );
+  };
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "afterbegin",
@@ -280,7 +292,7 @@ export function handleEditUser(id) {
   modal.innerHTML = getAddSellerModalFormHTML(getUserById(id));
   document.querySelector(".modal-footer").addEventListener("click", (e) => {
     const id = +e.target.dataset?.id;
-    console.log('id  seller modal:>> ', id);
+    console.log("id  seller modal:>> ", id);
     if (!id) return;
     const email = document.querySelector("#email");
     const emailInvalidFeedback = document.querySelector(

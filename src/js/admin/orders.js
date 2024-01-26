@@ -3,10 +3,15 @@ import {
   getOrderTotal,
   getProductById,
   getUserById,
+  searchOrdersByCustomerName,
   state,
 } from "../model.js";
 import { generateTabel } from "./dashboard.js";
-import { getPaginationHTML, handleChangingItemsPerPage, handlePagination } from "./pagination.js";
+import {
+  getPaginationHTML,
+  handleChangingItemsPerPage,
+  handlePagination,
+} from "./pagination.js";
 export function generateOrdersTableHeader() {
   return `
   <thead>
@@ -29,7 +34,7 @@ export function generateOrdersTableBody(arrayOfOrders) {
       <tr>
       <td>${order.id}</td>
       <td>${
-        getUserById(order.customerId)//better to put all orders data in order object instead of only the id
+        getUserById(order.customerId) //better to put all orders data in order object instead of only the id
           ? getUserById(order.customerId).name
           : "Deleted user"
       }</td>
@@ -44,6 +49,19 @@ export function generateOrdersTableBody(arrayOfOrders) {
     .join("");
 }
 export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
+  //set on change event to search input to sellers
+  const search = document.querySelector("#navbarSearch input");
+
+
+  //set on change event to search input to sellers
+  search.onchange = (e) => {
+    renderOrdersPage(
+      container,
+      searchOrdersByCustomerName(e.target.value),
+      pageNumber,
+      itemsPerPage
+    );
+  };
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",
@@ -63,11 +81,11 @@ export function renderOrdersPage(container, array, pageNumber, itemsPerPage) {
     itemsPerPage,
     renderOrdersPage
   );
-    handleChangingItemsPerPage(
-      container,
-      array,
-      pageNumber,
-      itemsPerPage,
-      renderOrdersPage
-    );
+  handleChangingItemsPerPage(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    renderOrdersPage
+  );
 }

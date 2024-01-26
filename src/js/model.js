@@ -375,8 +375,29 @@ export function editUserById(id, email, password, name) {
   state.users[index].name = name;
   saveStateInLocalStorage();
 }
-export function searchProductsByTitle(title){
-return   state.products.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()));
+export function searchProductsByTitle(title) {
+  return state.products.filter((product) =>
+    product.title.toLowerCase().includes(title.toLowerCase())
+  );
+}
+export function searchSellerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "seller"
+  );
+}
+export function searchCustomerByName(name) {
+  return state.users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(name.toLowerCase()) &&
+      user.accountType === "customer"
+  );
+}
+export function searchOrdersByCustomerName(name) {
+  return state.orders.filter((order) =>
+    getUserById(order.customerId).name.toLowerCase().includes(name.toLowerCase())
+  );
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

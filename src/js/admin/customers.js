@@ -5,6 +5,7 @@ import {
   getByPageNumber,
   getCustomers,
   getUserById,
+  searchCustomerByName,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
@@ -55,8 +56,17 @@ export function renderCustomersPage(
   pageNumber,
   itemsPerPage
 ) {
-  console.log("cus render");
-  console.log("array :>> ", array);
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to search input to sellers
+  search.onchange = (e) => {
+    renderCustomersPage(
+      container,
+      searchCustomerByName(e.target.value),
+      pageNumber,
+      itemsPerPage
+    );
+  };
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",
@@ -103,9 +113,7 @@ export function renderCustomersPage(
       const id = +e.target.dataset.editId;
       console.log("id :>> ", id);
       handleEditUser(id);
-      console.log("getCustomers() :>> ", getCustomers());
       renderCustomersPage(container, getCustomers(), pageNumber, itemsPerPage);
-      console.log("customers");
     }
   });
 }

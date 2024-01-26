@@ -95,7 +95,13 @@ function getTotalCardHTML(number, title) {
               </div>
             </div>`;
 }
-function renderDashboard(container, modal) {
+function renderDashboard(container) {
+  const modal = document.querySelector("#modal");
+
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to not use the last onchange event(and render the last page)
+  search.onchange = "";
   container.innerHTML = "";
   container.insertAdjacentHTML("afterbegin", `<canvas id="myChart"></canvas>`);
   container.insertAdjacentHTML(
