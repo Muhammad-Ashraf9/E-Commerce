@@ -2,6 +2,7 @@ import {
   deleteProductById,
   getByPageNumber,
   getUserById,
+  searchProductsByTitle,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
@@ -14,8 +15,27 @@ import {
 
 export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
   const modal = document.querySelector("#modal");
-  container.innerHTML = "";
+  const search = document.querySelector("#navbarSearch input");
+  // console.log("search.cloneNode(true) :>> ", search.cloneNode(true));
+  console.log("search.onchange :>> ", search.onchange);
+  // search.replaceWith(search.cloneNode(true)); //to remove event listener
+  search.onchange = (e) => {
+    console.log("e.target.value :>> ", e.target.value);
+    console.log("array :>> ", array);
+    console.log(
+      "searchProductsByTitle(e.target.value) :>> ",
+      searchProductsByTitle(e.target.value)
+    );
+    renderProductsPage(
+      container,
+      searchProductsByTitle(e.target.value),
+      pageNumber,
+      itemsPerPage
+    );
+  };
+  console.log("search.onchange :>> ", search.onchange);
 
+  container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",
     generateTabel(

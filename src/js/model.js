@@ -361,17 +361,22 @@ export function deleteCustomerById(id) {
 }
 export function deleteSellerById(id) {
   const seller = getUserById(id);
-  console.log("seller :>> ", seller);
   seller.products.forEach((product) => deleteProductById(product.productId));
   deleteCustomerById(id);
   saveStateInLocalStorage();
 }
 export function editUserById(id, email, password, name) {
+  const foundUser = getUserByEmail(email);
+  if (foundUser && foundUser.id !== +id)
+    throw new Error("Email already in use.");
   const index = state.users.findIndex((user) => user.id === +id);
   state.users[index].email = email;
   state.users[index].password = password;
   state.users[index].name = name;
   saveStateInLocalStorage();
+}
+export function searchProductsByTitle(title){
+return   state.products.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()));
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

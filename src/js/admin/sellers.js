@@ -54,7 +54,6 @@ export function generateSellersTabelBody(arrayOfSellers) {
 }
 
 export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
-  console.log("array :>> ", array);
   const modal = document.querySelector("#modal");
   container.innerHTML = "";
   container.insertAdjacentHTML(
@@ -80,7 +79,6 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     renderSellersPage
   );
   document.querySelector("#add-seller").addEventListener("click", (e) => {
-    console.log("add seller");
     modal.innerHTML = getAddSellerModalFormHTML();
     document.querySelector(".modal-footer").addEventListener("click", (e) => {
       if (!e.target.classList?.contains("btn-success")) return;
@@ -120,11 +118,9 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
     });
   });
   document.querySelector("table").addEventListener("click", (e) => {
-    console.log("table sellers");
     if (e.target.dataset?.delId) {
       modal.innerHTML = getModalHTML(e.target.dataset.delId);
       document.querySelector(".modal-footer").addEventListener("click", (e) => {
-        console.log("modal-footer sellers");
         const id = +e.target.dataset?.id;
         if (!id) return;
         deleteSellerById(id);
@@ -132,7 +128,6 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
       });
     } else if (e.target.dataset?.editId) {
       const id = +e.target.dataset.editId;
-      console.log("id  edit:>> ", id);
       modal.innerHTML = getAddSellerModalFormHTML(getUserById(id));
       document.querySelector(".modal-footer").addEventListener("click", (e) => {
         if (!e.target.classList?.contains("btn-success")) return;
@@ -170,6 +165,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
           emailInvalidFeedback.textContent = error.message;
           emailInvalidFeedback.style.display = "block";
         }
+        console.log("sellers");
       });
     }
   });
@@ -182,7 +178,7 @@ export function renderSellersPage(container, array, pageNumber, itemsPerPage) {
   );
 }
 
-function getAddSellerModalFormHTML(seller) {
+export function getAddSellerModalFormHTML(seller) {
   return `
   <div class="modal-dialog">
     <div class="modal-content">
@@ -253,7 +249,6 @@ function getAddSellerModalFormHTML(seller) {
 }
 
 function validateEmail(email, emailInvalidFeedback) {
-  console.log("email :>> ", email);
   if (!isValidEmail(email.value)) {
     email.classList.add("is-invalid");
     emailInvalidFeedback.style.display = "block";
@@ -279,4 +274,45 @@ function validatePassword(password, passwordInvalidFeedback) {
     password.classList.remove("is-invalid");
     passwordInvalidFeedback.style.display = "none";
   }
+}
+
+export function handleEditUser(id) {
+  modal.innerHTML = getAddSellerModalFormHTML(getUserById(id));
+  document.querySelector(".modal-footer").addEventListener("click", (e) => {
+    const id = +e.target.dataset?.id;
+    console.log('id  seller modal:>> ', id);
+    if (!id) return;
+    const email = document.querySelector("#email");
+    const emailInvalidFeedback = document.querySelector(
+      ".invalid-feedback.email"
+    );
+    const password = document.querySelector("#password");
+    const passwordInvalidFeedback = document.querySelector(
+      ".invalid-feedback.password"
+    );
+    const name = document.querySelector("#userName");
+    const nameInvalidFeedback = document.querySelector(
+      ".invalid-feedback.name"
+    );
+
+    emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+    validateEmail(email, emailInvalidFeedback);
+    validatePassword(password, passwordInvalidFeedback);
+    validateName(name, nameInvalidFeedback);
+    if (
+      !isValidEmail(email.value) ||
+      !isValidName(name.value) ||
+      !isValidPassword(password.value)
+    ) {
+      return;
+    }
+    try {
+      editUserById(id, email.value, password.value, name.value);
+      document.querySelector("[data-bs-dismiss='modal']").click();
+    } catch (error) {
+      email.classList.add("is-invalid");
+      emailInvalidFeedback.textContent = error.message;
+      emailInvalidFeedback.style.display = "block";
+    }
+  });
 }
