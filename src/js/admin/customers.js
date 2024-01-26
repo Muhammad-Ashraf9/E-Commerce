@@ -54,7 +54,9 @@ export function renderCustomersPage(
   container,
   array,
   pageNumber,
-  itemsPerPage
+  itemsPerPage,
+  sortBy,
+  searchBy
 ) {
   const search = document.querySelector("#navbarSearch input");
 
@@ -65,7 +67,8 @@ export function renderCustomersPage(
       searchCustomerByName(e.target.value),
       pageNumber,
       itemsPerPage,
-      sortBy     
+      sortBy,
+      searchBy
     );
   };
   container.innerHTML = "";
@@ -88,6 +91,7 @@ export function renderCustomersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderCustomersPage
   );
   handleChangingItemsPerPage(
@@ -96,6 +100,7 @@ export function renderCustomersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderCustomersPage
   );
   document.querySelector("table").addEventListener("click", (e) => {

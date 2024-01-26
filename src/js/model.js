@@ -436,5 +436,10 @@ export function sortByField(array, field, order = "asc") {
     return res;
   });
 }
+export function searchByField(array, field, value) {
+  return array.filter((item) =>
+    `${item[field]}`.toLowerCase().includes(value.toLowerCase())
+  );
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

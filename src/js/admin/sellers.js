@@ -59,7 +59,8 @@ export function renderSellersPage(
   array,
   pageNumber,
   itemsPerPage,
-  sortBy
+  sortBy,
+  searchBy
 ) {
   const modal = document.querySelector("#modal");
   const search = document.querySelector("#navbarSearch input");
@@ -70,7 +71,9 @@ export function renderSellersPage(
       container,
       searchSellerByName(e.target.value),
       pageNumber,
-      itemsPerPage
+      itemsPerPage,
+      sortBy,
+      searchBy
     );
   };
   container.innerHTML = "";
@@ -95,7 +98,8 @@ export function renderSellersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
-    renderSellersPage
+     searchBy,
+     renderSellersPage
   );
   document.querySelector("#add-seller").addEventListener("click", (e) => {
     modal.innerHTML = getAddSellerModalFormHTML();
@@ -128,7 +132,7 @@ export function renderSellersPage(
       try {
         signUp(email.value, password.value, name.value, "seller");
         document.querySelector("[data-bs-dismiss='modal']").click();
-        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage, sortBy, searchBy);
       } catch (error) {
         email.classList.add("is-invalid");
         emailInvalidFeedback.textContent = error.message;
@@ -143,7 +147,7 @@ export function renderSellersPage(
         const id = +e.target.dataset?.id;
         if (!id) return;
         deleteSellerById(id);
-        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+        renderSellersPage(container, getSellers(), pageNumber, itemsPerPage, sortBy, searchBy);
       });
     } else if (e.target.dataset?.editId) {
       const id = +e.target.dataset.editId;
@@ -178,7 +182,7 @@ export function renderSellersPage(
         try {
           editUserById(id, email.value, password.value, name.value);
           document.querySelector("[data-bs-dismiss='modal']").click();
-          renderSellersPage(container, getSellers(), pageNumber, itemsPerPage);
+          renderSellersPage(container, getSellers(), pageNumber, itemsPerPage, sortBy, searchBy);
         } catch (error) {
           email.classList.add("is-invalid");
           emailInvalidFeedback.textContent = error.message;
@@ -194,6 +198,7 @@ export function renderSellersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderSellersPage
   );
 }
