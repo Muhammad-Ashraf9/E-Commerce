@@ -4,21 +4,18 @@ export const state = {
     { id: 1, quantity: 2 },
     { id: 2, quantity: 2 },
     { id: 3, quantity: 2 },
-  ],
+  ], 
   users: [
     {
       id: 1,
       name: "ash customer",
       email: "ash@customer.ash",
       password: "ash123",
-
       orders: [1, 2],
-
       cart: [
         { id: 1, quantity: 2 },
         { id: 2, quantity: 2 },
       ],
-
       accountType: "customer",
     },
     {
@@ -33,16 +30,11 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [1, 2],
+      orders: [354028, 3528],
       accountType: "seller",
       products: [
         {
           productId: 1,
-          stock: 10,
-        },
-        {
-          productId: 2,
-          stock: 10,
         },
       ],
     },
@@ -50,128 +42,133 @@ export const state = {
       id: 5,
       name: "ash seller",
       email: "ash@seller.ash",
-      password: "ash123",
+      password: "ash12345",
       orders: [ 3],
       accountType: "seller",
       products: [
         {
           productId: 3,
-          stock: 10,
         },
         {
           productId: 4,
-          stock: 10,
         },
       ],
     },
   ],
   orders: [
     {
-      id: 1,
-      items: [
+      "id": 354028,
+      "items": [
         {
-          productId: 1,
-          quantity: 2,
-          price: 100,
-          status: "pending",
+          "id": 1,
+          "title": "order1",
+          "description": "dsfsdfsd sdfsd fsd f",
+          'quantity':5,
+          "price": 100,
+          "img": "../assets/test1.jpeg",
+          "sellerId": 3,
+          'status':'pending',
+          "category": "any",
+          "stock": 7
         },
         {
-          productId: 2,
-          quantity: 6,
-          price: 10,
-          status: "pending",
-        },
+          "id": 2,
+          "title": "order2",
+          "description": "fffff ffff",
+          'quantity':10,
+          "category": "any",
+          "price": 10,
+          "img": "../assets/test2.jpeg",
+          'status':'pending',
+          "sellerId": 10,
+          "stock": 8
+        }
       ],
-      customerId: 1,
-      status: "pending",
-      date: "1999-07-22",
-    },
-    {
-      id: 2,
-      items: [
-        {
-          productId: 1,
-          quantity: 2,
-          price: 100,
-          status: "pending",
-        },
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+        "FirstName": "abdelhameed",
+      "lastname": "abdelhameed",
+      "userAddress": "78 madrab st,ezbet elshal,qism tani",
+      "Email": "abdelhameedosamaiti@gmail.com",
+      "Phone": "01094335757",
+      "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+      "City": "mansoura",
+      "Zip": "35511"
+    }
+  },
+  {
+    "id": 3528,
+    "items": [
+      {
+        "id": 3,
+        "title": "order3",
+        "description": "dsfsdfsd sdfsd fsd f",
+        'quantity':25,
+        "price": 500,
+        "img": "../assets/test1.jpeg",
+        "sellerId": 3,
+        'status':'pending',
+        "category": "any",
+        "stock": 17
+      },
+      {
+        "id": 1,
+        "title": "order4",
+        "description": "fffff ffff",
+        'quantity':10,
+        "price": 10,
+        'status':'pending',
+        "category": "any",
+        "img": "../assets/test2.jpeg",
+        "sellerId": 70,
+        "stock": 8
+        }
       ],
-      status: "pending",
-      date: "1999-07-22",
+      "customerId": 1,
+      "status": "pending",
+      "date": "2024-01-25",
+      "customerDetails": {
+      "FirstName": "abdelhameed",
+      "lastname": "abdelhameed",
+      "userAddress": "78 madrab st,ezbet elshal,qism tani",
+      "Email": "abdelhameedosamaiti@gmail.com",
+      "Phone": "01094335757",
+      "streetAddress": "78 madrab st,ezbet elshal,qism tani",
+      "City": "mansoura",
+      "Zip": "35511"
+      }
     },
-    {
-      id: 3,
-      items: [
-        {
-          productId: 1,
-          quantity: 2,
-          price: 100,
 
-          productId: 2,
-          quantity: 5,
-          price: 5,
-          status: "pending",
-        },
-        {
-          productId: 4,
-          quantity: 10,
-          price: 20,
-          status: "pending",
-        },
-      ],
-      status: "pending",
-
-      customerId: 1,
-      date: "1999-07-22",
-    },
   ],
   products: [
     {
       id: 1,
       title: "ashhh",
-      description: "dsfsdfsd sdfsd fsd f",
+      description: "Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.",
+      imgURL0: "../../assets/Products/prod1.png",
+      imgURL1: "../../assets/Products/prod2.png",
+      category: "Sofas",
+      stock: 10,
       price: 100,
-      img: "../assets/test1.jpeg",
+      prevPrice: 200,
       sellerId: 3,
-      category: "any",
-      stock: 10,
-
-      image: "../../images/Meubel House_Logos-05.png",
-
-    },
-    {
-      id: 2,
-      title: "fghfgh",
-      description: "fffff ffff",
-      price: 10,
-
-      img: "../assets/test1.jpeg",
-
-      sellerId: 3,
-      stock: 10,
-    },
-    {
-      id: 3,
-      title: "fghfgh",
-      description: "fffff ffff",
-      price: 10,
-
-      img: "../assets/test1.jpeg",
-      sellerId: 5,
-
-      stock: 10,
-    },
-    {
-      id: 4,
-      title: "fghfgh",
-      description: "fffff ffff",
-      price: 10,
-      img: "../assets/test1.jpeg",
-      sellerId: 5,
-      category: "any",
-      stock: 10,
-      image: "../../images/Meubel House_Logos-05.png",
-
+      rating: 4,
+      numberofsales:0,
+      countSold:0,
+      reviews: [
+        {
+          userId: 1,
+          comment: "good",
+          rating: 4,
+        },
+        {
+          userId: 2,
+          comment: "bad",
+          rating: 2,
+        },
+      ],
     },
   ],
 };
@@ -209,45 +206,69 @@ export function getUserByEmail(email) {
 }
 
 export function getAllOrdersByOrderIds(orderIds) {
-  // Initialize an array to store the found orders
   const allOrders = [];
-
+  let ordersFromLocalStorage = localStorage.getItem('orders')
+  let orders = JSON.parse(ordersFromLocalStorage)
   // Iterate through the order IDs
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
-    const foundOrder = state.orders.find((order) => order.id === orderId);
-
+    const foundOrder = orders.find((order) => order.id === orderId);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
       allOrders.push(foundOrder);
     }
   }
+  const result = [];
 
-  return allOrders;
+  for (let i = 0; i < allOrders.length; i++) {
+    // Create a new array for each iteration of the outer loop
+    const matchedItems = [];
+    for (let j = 0; j < allOrders[i].items.length; j++) {
+      if (allOrders[i].items[j].sellerId === state.currentUser.id) {
+        matchedItems.push(allOrders[i].items[j]);
+        matchedItems.push(allOrders[i].date);
+        matchedItems.push(allOrders[i].id);
+      }
+    }
+    result.push(matchedItems);
+  }
+  console.log(result);
+  return result;
 }
 
+function getAllProductsBySellerId(allProducts){
+  if(state.currentUser.accountType === 'seller'){
+    if(allProducts){
+      let id = state.currentUser.id;
+      const result = allProducts.filter(obj => obj.sellerId === id);
+      return result
+    }
+    //
+  }else
+    return
+}
 export function getAllProductsByProductIds(productIds) {
+  // // console.log(productIds);
   // Initialize an array to store the found orders
   const allProducts = [];
 
   // Iterate through the order IDs
   for (const productId of productIds) {
     // Find the order in the state.orders array
-    console.log(productId);
-    const foundProduct = state.products.find(
-      (product) => product.id === productId.productId
-    );
+    // console.log(productId);
 
+    //const foundProduct = state.products.find((product) => product.id === productId.productId);
+    const foundProduct = localStorage.getItem('products')
+    
     // If the order is found, add it to the allOrders array
     if (foundProduct) {
-      console.log(foundProduct);
-      allProducts.push(foundProduct);
+      // console.log(foundProduct);
+      allProducts.push(JSON.parse(foundProduct));
     }
-  }
-
-  return allProducts;
+    }
+  const arrProducts = getAllProductsBySellerId(allProducts[0])
+  return arrProducts;
 }
-
 export function getCustomers() {
   return state.users.filter((u) => u.accountType === "customer");
 }
