@@ -15,9 +15,9 @@
 
 .wish-icon {
     position: absolute;
-    /* right: 10px;
+    right: 10px;
     top: 10px;
-    z-index: 99; */
+    z-index: 99;
     cursor: pointer;
     font-size: 16px;
     color: #abb0b8;
@@ -35,3 +35,4 @@
     font-size: 14px;
     color: #ffc000;
 }
+

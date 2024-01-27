@@ -1,28 +1,14 @@
-import { products } from "../js/Products.js";
-
 export function renderPaginationSection(page, pagesCount) {
-  console.log("page: " + page + " pagesCount: " + pagesCount);
   const pagSec = document.getElementById("paginationSection");
   pagSec.innerHTML = "";
-  if(pagesCount == 0) return
+  if (pagesCount == 0) return;
 
   // Create the pagination buttons
-  const pagSecDiv = document.createElement("ul");
-  pagSecDiv.classList.add("pagination");
-  pagSecDiv.setAttribute("style", "justify-content: center;");
+  let pagSecDiv = `<ul class="pagination" style="justify-content: center;">`;
 
   // Create the < button
   if (page != 1) {
-    const pagSecDivLiLeft = document.createElement("li");
-    pagSecDivLiLeft.classList.add("page-item");
-    pagSecDiv.appendChild(pagSecDivLiLeft);
-    const pagSecDivLiLeftA = document.createElement("a");
-    pagSecDivLiLeftA.classList.add("page-link");
-    pagSecDivLiLeftA.setAttribute("href", "#");
-    pagSecDivLiLeftA.innerText = "Previous";
-    pagSecDivLiLeft.appendChild(pagSecDivLiLeftA);
-    pagSecDiv.appendChild(pagSecDivLiLeft);
-    pagSec.appendChild(pagSecDiv);
+    pagSecDiv += `<li class="page-item"><a class="page-link" href="#">Previous</a></li>`;
   }
 
   // Create the page buttons
@@ -34,47 +20,23 @@ export function renderPaginationSection(page, pagesCount) {
       (i == page - 1 && i >= 1) ||
       (i == page + 1 && i <= pagesCount)
     ) {
-      console.log("i: " + i + " page: " + page);
-      const pagSecDivLi = document.createElement("li");
-      pagSecDivLi.classList.add("page-item");
-      if (i == page) {
-        pagSecDivLi.classList.add("active");
-      }
-      const pagSecDivLiA = document.createElement("a");
-      pagSecDivLiA.classList.add("page-link");
-      pagSecDivLiA.setAttribute("href", "#");
-      pagSecDivLiA.innerText = i;
-      pagSecDiv.appendChild(pagSecDivLi);
-      pagSecDivLi.appendChild(pagSecDivLiA);
+      if(i == page)
+        pagSecDiv += `<li class="page-item active"  style="background-color: red;"><a class="page-link" href="#">${i}</a></li>`;
+      else
+        pagSecDiv += `<li class="page-item"><a class="page-link" href="#">${i}</a></li>`;
+
     }
 
+    // Create the ... button
     if ((i == page - 2 && i >= 1) || (i == page + 2 && i <= pagesCount)) {
-      const pagSecDivLi = document.createElement("li");
-      pagSecDivLi.classList.add("page-item");
-      const pagSecDivLiA = document.createElement("a");
-      pagSecDivLiA.classList.add("page-link");
-      pagSecDivLiA.setAttribute("href", "#");
-      pagSecDivLiA.classList.add("disabled");
-      pagSecDivLiA.innerText = "...";
-      pagSecDiv.appendChild(pagSecDivLi);
-      pagSecDivLi.appendChild(pagSecDivLiA);
+      pagSecDiv += `<li class="page-item"><a class="page-link" style="pointer-events: none;" href="#">...</a></li>`;
     }
   }
 
   // Create the > button
   if (page != pagesCount) {
-    const pagSecDivLiRight = document.createElement("li");
-    pagSecDivLiRight.classList.add("page-item");
-    pagSecDiv.appendChild(pagSecDivLiRight);
-    const pagSecDivLiRightA = document.createElement("a");
-    pagSecDivLiRightA.classList.add("page-link");
-    pagSecDivLiRightA.setAttribute("href", "#");
-    pagSecDivLiRightA.innerText = "Next";
-    pagSecDivLiRight.appendChild(pagSecDivLiRightA);
-
-    pagSecDiv.appendChild(pagSecDivLiRight);
-    pagSec.appendChild(pagSecDiv);
+    pagSecDiv += `<li class="page-item"><a class="page-link" href="#">Next</a></li>`;
   }
 
-  pagSec.appendChild(pagSecDiv);
+  pagSec.innerHTML = pagSecDiv;
 }
