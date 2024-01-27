@@ -15,7 +15,8 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
 
   const body = document.querySelector("body");
 
-  const firstRow = document.getElementById("ProductsShow");
+  let firstRow = document.getElementById("ProductsShow");
+  console.log(firstRow);
   firstRow.innerHTML = "";
   var startCard = (page - 1) * numberOfCardsPerPage + 1;
   var endCard = page * numberOfCardsPerPage;
