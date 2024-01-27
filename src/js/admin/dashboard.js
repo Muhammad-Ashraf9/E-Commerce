@@ -12,6 +12,7 @@ import {
   getByPageNumber,
   deleteProductById,
 } from "../model.js";
+import { renderCustomerServicePage } from "./customer-service.js";
 import {
   generateCustomersTabelBody,
   generateCustomersTabelHead,
@@ -199,7 +200,7 @@ sidebar.addEventListener("click", (e) => {
           state.products,
           pageNumber,
           itemsPerPage,
-          sortBy, 
+          sortBy,
           searchBy
         );
         break;
@@ -230,6 +231,17 @@ sidebar.addEventListener("click", (e) => {
         renderSellersPage(
           main,
           getSellers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy,
+          searchBy
+        );
+        break;
+      case "customer-services":
+        pageNumber = 1;
+        renderCustomerServicePage(
+          main,
+          state.messages,
           pageNumber,
           itemsPerPage,
           sortBy,
