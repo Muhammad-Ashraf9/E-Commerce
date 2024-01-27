@@ -1,10 +1,14 @@
 import { getProductById, state,getCurrentUser, getUserById, getCurrentCart,changeCartItemCount,DeleteFromCart } from "./model.js";
 const user = getCurrentUser();
+if (!getCurrentUser() || getCurrentUser().accountType == "admin") {
+  location.assign("../html/main.html");
+}
 let ucart = getCurrentCart()
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
+
 window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
