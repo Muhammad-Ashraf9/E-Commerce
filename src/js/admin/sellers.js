@@ -117,10 +117,7 @@ export function renderSellersPage(
   document.querySelector(
     `[data-field="${sortBy.field}"]`
   ).className = `${sortBy.order}`;
-  console.log(
-    'document.querySelector(`[data-field="${sortBy.field}"]`) :>> ',
-    document.querySelector(`[data-field="${sortBy.field}"]`)
-  );
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
@@ -130,8 +127,6 @@ export function renderSellersPage(
         sortBy.field = field;
         sortBy.order = "asc";
       }
-      e.target.class = sortBy.order;
-
       renderSellersPage(
         container,
         sortByField(getSellers(), sortBy.field, sortBy.order),

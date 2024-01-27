@@ -18,7 +18,7 @@ export function renderCustomerServicePage(
   array,
   pageNumber,
   itemsPerPage,
-  sortBy,
+  sortBy = { field: "mId", order: "asc" },
   searchBy = { field: "mId", value: "" }
 ) {
   const modal = document.querySelector("#modal");
@@ -61,6 +61,11 @@ export function renderCustomerServicePage(
     searchBy,
     renderCustomerServicePage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {

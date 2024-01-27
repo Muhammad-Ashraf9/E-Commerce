@@ -64,9 +64,13 @@
 
 [data-field] {
   cursor: pointer;
+  &:hover {
+    color: $color-tertiary-dark;
+  }
 }
 
 .asc {
+  color: $color-primary-dark !important; //
   &::after {
     content: "";
     display: inline-block;
@@ -77,10 +81,10 @@
     border-bottom: 0.3em solid;
     border-right: 0.3em solid transparent;
     border-left: 0.3em solid transparent;
-    
   }
 }
 .desc {
+  color: $color-secondary-dark !important; //important to override specifity of bootstrap table
   &::after {
     content: "";
     display: inline-block;

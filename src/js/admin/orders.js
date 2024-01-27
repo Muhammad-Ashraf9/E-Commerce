@@ -105,6 +105,12 @@ export function renderOrdersPage(
     searchBy,
     renderOrdersPage
   );
+
+
+   document.querySelector(
+     `[data-field="${sortBy.field}"]`
+   ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {

@@ -323,7 +323,13 @@ input:invalid {
 [data-field] {
   cursor: pointer;
 }
+[data-field]:hover {
+  color: #5643fa;
+}
 
+.asc {
+  color: #28b485 !important;
+}
 .asc::after {
   content: "";
   display: inline-block;
@@ -336,6 +342,9 @@ input:invalid {
   border-left: 0.3em solid transparent;
 }
 
+.desc {
+  color: #ff7730 !important;
+}
 .desc::after {
   content: "";
   display: inline-block;

@@ -243,8 +243,8 @@ sidebar.addEventListener("click", (e) => {
           main,
           state.messages,
           pageNumber,
-          itemsPerPage,
-          sortBy,
+          itemsPerPage
+          // sortBy,
           // searchBy
         );
         break;
