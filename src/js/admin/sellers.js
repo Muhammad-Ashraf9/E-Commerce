@@ -24,8 +24,8 @@ export function generateSellersTabelHead() {
       <th scope="col" data-field="id" >Id</th>
       <th scope="col" data-field="name" >Name</th>
       <th scope="col" data-field="email">Email</th>
-      <th scope="col">No. Products</th>
-      <th scope="col">No. Orders</th>
+      <th scope="col" data-field="numberOfProducts">No. Products</th>
+      <th scope="col" data-field="numberOfOrders">No. Orders</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -129,7 +129,15 @@ export function renderSellersPage(
       }
       renderSellersPage(
         container,
-        sortByField(getSellers(), sortBy.field, sortBy.order),
+        sortByField(
+          getSellers().map((s) => ({
+            ...s,
+            numberOfProducts: s.products.length,
+            numberOfOrders: s.orders.length,
+          })),
+          sortBy.field,
+          sortBy.order
+        ),
         pageNumber,
         itemsPerPage,
         sortBy,
