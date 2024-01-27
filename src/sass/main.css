@@ -92,6 +92,22 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
+.dashborad-select {
+  width: 4rem;
+  height: 2rem;
+  text-align: center;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+
+.table-img--sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .footer-top {
   padding-top: 30px;
   text-align: left;
@@ -152,15 +168,15 @@ body {
 }
 
 #customerSupport {
-  width: 2.7rem;
-  height: 2.7rem;
+  width: 3.2rem;
+  height: 3.2rem;
   color: white;
   background-color: #B88E2F;
   border: none;
   border-radius: 100%;
   position: fixed;
-  right: 10%;
-  top: 92%;
+  right: 7%;
+  top: 90%;
   z-index: 1022;
 }
 
