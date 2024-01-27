@@ -165,6 +165,19 @@ body {
   height: 10px;
 }
 
+#customerSupport {
+  width: 2.7rem;
+  height: 2.7rem;
+  color: white;
+  background-color: #B88E2F;
+  border: none;
+  border-radius: 100%;
+  position: fixed;
+  right: 10%;
+  top: 92%;
+  z-index: 1022;
+}
+
 input:invalid {
   border: 1px solid #ff4f30;
 }

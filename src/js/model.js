@@ -442,5 +442,9 @@ export function searchByField(array, field, value) {
     `${item[field]}`.toLowerCase().includes(value.toLowerCase())
   );
 }
+export function deleteMessageById(id) {
+  state.messages = state.messages.filter((message) => message.id !== +id);
+  saveStateInLocalStorage();
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
