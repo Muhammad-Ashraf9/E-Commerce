@@ -1,3 +1,7 @@
+:root{
+ --prime: #B88E2F
+
+}
 .body{
     margin: 0;
     padding: 0;
@@ -16,23 +20,52 @@
 img{
     border-radius: 10px;
 }
+
 #newcollection{
+    color:  var(--prime)
+    /* 
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 3vw;
     width: 559px;
     height: 100px;
-    /* flex-shrink: 0; */
-    color:  #B88E2F;
-    font-family: Poppins;
-    font-size: 45px;
-    font-style: normal;
-    font-weight: 700;
+    flex-shrink: 0;
+    font-weight: 700; 
+    */
 }
-.box{
-    border-radius: 10px;
-    background: #FFF3E3;
-    padding: 20px;
-    top: 230px;
-    left: 700px;
+
+@media (min-width: 600px) {
+    div#box{
+        /* border-radius: 10px; */
+        background: #FFF3E3;
+        /* padding: 20px; */
+        top: 45vh;
+        left: 50vw;
+        
+    }
 }
+@media (min-width: 400px) {
+    div#box{
+        /* border-radius: 10px; */
+        background: #FFF3E3;
+        /* padding: 20px; */
+        top: 45vh;
+        left: 5vw;
+        
+    }
+}
+ @media (min-width: 900px) {
+    div#box{
+         /* border-radius: 10px; */
+        background: #FFF3E3;
+        /* padding: 20px;  */
+        top: 45vh;
+        left: 50vw;
+       
+        
+    }
+}
+
 #title{
     margin-top: 50px;
     color: var(--Font-Color, #333);
@@ -68,4 +101,32 @@ img{
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+div img{
+    object-fit: cover;
+}
+#testimonials{
+    background-image: linear-gradient(rgba(0, 0,0, .7),rgba(0,0,0,.7)),url(../html/Cloud\ sofa\ three\ seater\ +\ ottoman_2\ 1.png);
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
+#testimonials i{
+  font-size:  40px;
+  margin-left: -10px;
+  margin-bottom: 20px;
+ transition: 1s;
+}
+#testimonials i:hover{
+ transform: rotate(360deg);
+}
+#testimonials p{
+    margin-bottom: 20px;
+    font-style: italic;
+}
+#testimonials img{
+    height: 50px;
+    border-radius: 50%;
+    margin-right:  20px;
+    vertical-align: middle;
 }

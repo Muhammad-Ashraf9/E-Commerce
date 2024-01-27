@@ -5,6 +5,7 @@ import { getCheckedValue } from "./getCategory.js";
 
     // Drawing the cards
 export function renderCards(page, numberOfCardsPerPage) {
+  console.log("hi");
   let searchValue = getSearchValue();
   let category = getCheckedValue();
   let Products = ProductsFiltered(searchValue, category);
