@@ -1,9 +1,12 @@
 import { signOut } from "../auth.js";
 import { getCurrentUser } from "../model.js";
 import { renderModal } from "./SigninModal.js";
+import { renderCustomerModal } from "./customerSupportModal.js";
 
 export default function renderNav(element) {
-  const Nav = `<nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
+  
+  const Nav = `  
+  <nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
     <div class="col-2">
       <a class="navbar-brand ms-3" href="main.html">
@@ -39,7 +42,7 @@ export default function renderNav(element) {
           ${
             !getCurrentUser()
               ? `<a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>`
-              : `<button class="nav-link">Sign out</button>`
+              : `<button class="nav-link">Sign out</button> <button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
           }
         </li>
         <li class="nav-item px-2">
@@ -48,7 +51,8 @@ export default function renderNav(element) {
       </ul>
     </div>
   </div>
-</nav>`;
+</nav>
+`;
   element.insertAdjacentHTML("afterbegin", Nav);
   const nav = document.querySelector("nav");
   nav.addEventListener("click", (e) => {
@@ -58,4 +62,5 @@ export default function renderNav(element) {
     renderNav(element);
   });
   renderModal(element);
+  renderCustomerModal(element)
 }

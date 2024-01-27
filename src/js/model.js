@@ -1,5 +1,6 @@
 export const state = {
   currentUser: null,
+  messages: [],
   guestCart: [
     { id: 1, quantity: 2 },
     { id: 2, quantity: 2 },
@@ -51,7 +52,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [3],
+      orders: [ 3],
       accountType: "seller",
       products: [
         {
