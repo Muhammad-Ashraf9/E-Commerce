@@ -14,7 +14,10 @@ import {
   handleChangingItemsPerPage,
   handlePagination,
 } from "./pagination.js";
-import { getAddSellerModalFormHTML, handleEditUser } from "./sellers.js";
+import {
+  handleAddUser,
+  handleEditUser,
+} from "./sellers.js";
 export function generateCustomersTabelHead() {
   return `  
   <thead>
@@ -72,6 +75,16 @@ export function renderCustomersPage(
     );
   };
   container.innerHTML = "";
+  handleAddUser(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    sortBy,
+    searchBy,
+    renderCustomersPage,
+    "customer"
+  );
   container.insertAdjacentHTML(
     "beforeend",
     generateTabel(
@@ -119,9 +132,17 @@ export function renderCustomersPage(
       });
     } else if (e.target.dataset?.editId) {
       const id = +e.target.dataset.editId;
-      console.log("id :>> ", id);
-      handleEditUser(id);
-      renderCustomersPage(container, getCustomers(), pageNumber, itemsPerPage);
+      handleEditUser(
+        id,
+        container,
+        array,
+        pageNumber,
+        itemsPerPage,
+        sortBy,
+        searchBy,
+        renderCustomersPage,
+        "customer"
+      );
     }
   });
 }
