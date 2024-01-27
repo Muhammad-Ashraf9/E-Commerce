@@ -20,9 +20,9 @@ export function generateOrdersTableHeader() {
     <tr>
       <th scope="col" data-field="id">Order Id</th>
       <th scope="col" data-field="customerId">Customer Id</th>
-      <th scope="col">Customer Name</th>
+      <th scope="col" data-field="customerName">Customer Name</th>
       <th scope="col" data-field="date">Date</th>
-      <th scope="col">Total</th>
+      <th scope="col" data-field="orderTotal">Order Total</th>
     </tr>
   </thead>
 `;
@@ -43,7 +43,7 @@ export function generateOrdersTableBody(arrayOfOrders) {
       }</td>
    
     
-      <td>${new Date(order.id).toISOString().split("T")[0]}</td>
+      <td>${new Date(order.date).toISOString().split("T")[0]}</td>
       <td>${getOrderTotal(order)}</td>
     </tr> 
     </tbody>
@@ -106,10 +106,9 @@ export function renderOrdersPage(
     renderOrdersPage
   );
 
-
-   document.querySelector(
-     `[data-field="${sortBy.field}"]`
-   ).className = `${sortBy.order}`;
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
 
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
@@ -123,15 +122,23 @@ export function renderOrdersPage(
 
       renderOrdersPage(
         container,
-        sortByField(state.orders, sortBy.field, sortBy.order),
+        sortByField(
+          state.orders.map((o) => ({
+            ...o,
+            orderTotal: getOrderTotal(o),
+            customerName: getUserById(o.customerId)
+              ? getUserById(o.customerId).name
+              : "Deleted Customer",
+          })),
+          sortBy.field,
+          sortBy.order
+        ),
         pageNumber,
         itemsPerPage,
         sortBy,
         searchBy
       );
     }
-
-
   });
   container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   const searchBySelectElement = document.querySelector("select[name=searchBy]");
