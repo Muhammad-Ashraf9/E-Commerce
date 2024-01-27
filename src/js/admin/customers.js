@@ -21,11 +21,11 @@ export function generateCustomersTabelHead() {
   return `  
   <thead>
     <tr>
-      <th scope="col" data-field="id">Id</th>
+          <th scope="col" data-field="id">Id</th>
           <th scope="col" data-field="name">Name</th>
           <th scope="col" data-field="email">Email</th>
+          <th scope="col" data-field="numberOfOrders">Number Of Orders</th>
           <th scope="col" data-field="date">Date</th>
-          <th scope="col">No. orders</th>
           <th scope="col">Actions</th>
             </tr>
        </thead>
@@ -42,10 +42,10 @@ export function generateCustomersTabelBody(arrayOfCustomers) {
         <td>${customer.orders.length}</td>
         <td>${new Date(customer.id).toISOString().split("T")[0]}</td>
         <td>
-      <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-del-id="${customer.id}">Delete</button>
+        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
+        data-bs-target="#modal" data-del-id="${customer.id}">Delete</button>
         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-edit-id="${customer.id}">Edit</button>
+          data-bs-target="#modal" data-edit-id="${customer.id}">Edit</button>
         </td>
       </tr>`
     )
@@ -119,9 +119,9 @@ export function renderCustomersPage(
   );
 
   //
-   document.querySelector(
-     `[data-field="${sortBy.field}"]`
-   ).className = `${sortBy.order}`;
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
 
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
@@ -135,7 +135,15 @@ export function renderCustomersPage(
 
       renderCustomersPage(
         container,
-        sortByField(getCustomers(), sortBy.field, sortBy.order),
+        sortByField(
+          getCustomers().map((c) => ({
+            ...c,
+            numberOfOrders: c.orders.length,
+            date: c.id,
+          })),
+          sortBy.field,
+          sortBy.order
+        ),
         pageNumber,
         itemsPerPage,
         sortBy,
