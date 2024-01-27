@@ -1,5 +1,6 @@
 export const state = {
   currentUser: null,
+  messages: [],
   guestCart: [
     { id: 1, quantity: 5 },
     { id: 2, quantity: 2 },
@@ -2490,6 +2491,16 @@ export function sortByField(array, field, order = "asc") {
     if (order === "desc") res *= -1;
     return res;
   });
+}
+export function searchByField(array, field, value) {
+  return array.filter((item) =>
+    `${item[field]}`.toLowerCase().includes(value.toLowerCase())
+  );
+}
+export function deleteMessageById(id) {
+  console.log("id :>> ", id);
+  state.messages = state.messages.filter((message) => message.mId !== +id);
+  saveStateInLocalStorage();
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

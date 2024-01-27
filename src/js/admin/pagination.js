@@ -33,24 +33,36 @@ export function handlePagination(
   pageNumber,
   itemsPerPage,
   sortBy,
+  searchBy,
   renderFunction
 ) {
   const pagination = document.querySelector(".pagination");
   pagination.addEventListener("click", (e) => {
     if (!e.target.dataset?.goto) return;
     pageNumber = +e.target.dataset.goto;
-    renderFunction(container, array, pageNumber, itemsPerPage, sortBy);
+    renderFunction(
+      container,
+      array,
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      searchBy
+    );
   });
 }
 
 export function getSelectItemsPerPageHTML() {
   return `
+  <div> Show
   <select name="itemsPerPage" class="dashborad-select" aria-label="items per page">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
   <option value="4">4</option>
-</select>`;
+  </select>
+  Entries
+  </div>
+  `;
 }
 
 export function handleChangingItemsPerPage(
@@ -59,6 +71,7 @@ export function handleChangingItemsPerPage(
   pageNumber,
   itemsPerPage,
   sortBy,
+  searchBy,
   renderFunction
 ) {
   container.insertAdjacentHTML(
@@ -68,6 +81,13 @@ export function handleChangingItemsPerPage(
   const selectElement = document.querySelector("select");
   selectElement.value = itemsPerPage;
   selectElement.addEventListener("change", (e) => {
-    renderFunction(container, array, pageNumber, +e.target.value, sortBy);
+    renderFunction(
+      container,
+      array,
+      pageNumber,
+      +e.target.value,
+      sortBy,
+      searchBy
+    );
   });
 }

@@ -1,5 +1,8 @@
+import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
+  console.log(getCurrentUser());
   const footer = `
+</li>
   <div class="p-2 ps-5 mt-2">
     <div class="container-fluid">
       <div class="row text-center p-3">

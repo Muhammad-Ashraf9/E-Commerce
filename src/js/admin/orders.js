@@ -53,7 +53,8 @@ export function renderOrdersPage(
   array,
   pageNumber,
   itemsPerPage,
-  sortBy
+  sortBy,
+  searchBy
 ) {
   //set on change event to search input to sellers
   const search = document.querySelector("#navbarSearch input");
@@ -65,7 +66,8 @@ export function renderOrdersPage(
       searchOrdersByCustomerName(e.target.value),
       pageNumber,
       itemsPerPage,
-      sortBy
+      sortBy,
+      searchBy
     );
   };
   container.innerHTML = "";
@@ -86,6 +88,7 @@ export function renderOrdersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderOrdersPage
   );
   handleChangingItemsPerPage(
@@ -94,6 +97,7 @@ export function renderOrdersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderOrdersPage
   );
 }
