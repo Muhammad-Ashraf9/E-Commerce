@@ -2274,6 +2274,7 @@ export const state = {
   ],
 };
 function loadStateFromLocalStorage() {
+  console.log("state LOADED:>> ");
   for (const key in state) {
     state[key] = JSON.parse(localStorage.getItem(key)) || state[key];
   }
@@ -2501,6 +2502,9 @@ export function deleteMessageById(id) {
   console.log("id :>> ", id);
   state.messages = state.messages.filter((message) => message.mId !== +id);
   saveStateInLocalStorage();
+}
+export function testLog() {
+  console.log("test");
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();
