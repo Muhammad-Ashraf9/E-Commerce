@@ -37,8 +37,8 @@ function display(){
         section.appendChild(alert)
         return
     }
-    let skip = ['countSold',  'numberofsales',  'rating', 'prevPrice', 'sellerId', 'reviews','imgURL1']
-    let customHeaders = ['Product ID', 'Title', 'Description', 'Image','Category', 'Stock','Price'];  
+    let skip = ['countSold',  'numberofsales',  'rating', 'prevPrice', 'sellerId', 'reviews','imgURL0','imgURL1']
+    let customHeaders = ['Product ID', 'Title', 'Description','Category', 'Stock','Price'];
     // Create a table element
     let table = document.createElement('table');
     //table.innerHTML = '';
@@ -60,42 +60,49 @@ function display(){
             }else if(key === 'id'){
                 let cell = row.insertCell();
                 cell.setAttribute('scope',"row")
-                cell.textContent = allProducts[i][key];            
+                cell.textContent = allProducts[i][key];
                 cell.setAttribute('id',allProducts[i][key])
             }else if (key === 'imgURL0') {
-                console.log(allProducts[i][key]);
-                let img = document.createElement('img');
-                img.src = allProducts[i][key];  // Set the source directly to imgURL0
-                img.alt = 'Image Not Found!';
-                
-                let cell = row.insertCell();
-                cell.setAttribute('scope', 'row');
-                cell.setAttribute('id', 'productImg');
-                cell.appendChild(img);  // Append the img element, not imageDataURL
+                // console.log(allProducts[i][key]);
+                // let img = document.createElement('img');
+                // img.src = allProducts[i][key];  // Set the source directly to imgURL0
+                // img.alt = 'Image Not Found!';
+
+                // let cell = row.insertCell();
+                // cell.setAttribute('scope', 'row');
+                // cell.setAttribute('id', 'productImg');
+                // cell.appendChild(img);  // Append the img element, not imageDataURL
             }
             else if(key === 'description'){
                 let cell = row.insertCell();
                 cell.setAttribute('scope',"row")
-                cell.textContent = (allProducts[i][key]).slice(0,20);            
+                cell.textContent = (allProducts[i][key]).slice(0,20);
             }else{
                 let cell = row.insertCell();
                 cell.setAttribute('scope',"row")
-                cell.textContent = allProducts[i][key];            
+                cell.textContent = allProducts[i][key];
             }
         }
         let cell1 = row.insertCell()
         cell1.setAttribute('scope',"row")
         let cell2= row.insertCell()
         cell2.setAttribute('scope',"row")
+        let cell3= row.insertCell()
+        cell3.setAttribute('scope',"row")
         cell1.innerHTML = `<i class=" fa-regular fa-pen-to-square"></i>`;
-    cell2.innerHTML = '<i class=" fa-solid fa-trash"></i>';
+        cell2.innerHTML = '<i class=" fa-solid fa-trash"></i>';
+        cell3.innerHTML = '<i class="fa-solid fa-eye"></i>';
     }
 
 // Append the table to the body
 section.appendChild(table)
 
 }
-
+document.querySelector('.fa-eye').addEventListener('click',(e)=>{   
+    let productId = e.target.parentNode.parentNode.firstChild.id
+    localStorage.setItem("id",productId);
+    location.assign('./ProductDetails.html')
+})
 
 let body = document.querySelector('body');
 let modal = document.getElementById('myModal');
@@ -157,7 +164,7 @@ function AddNewProduct(e){
     try {
         inputValidation(obj)
         let createdProduct ={
-            'id' : Date.now(),                                                                      
+            'id' : Date.now(),
             'title' : obj.NewProductName,
             'description' : obj.NewProductDescription,
             'imgURL0': imageDataURL,
@@ -185,7 +192,7 @@ function AddNewProduct(e){
     } catch (error) {
         console.log(error);
         errorMessage.innerText = error.message;
-        errorMessage.style.opacity = 1;  
+        errorMessage.style.opacity = 1;
     }
 }
 
@@ -239,19 +246,19 @@ body.addEventListener('click', function (e) {
 
 function deleteProduct(e){
     if (sellerId.accountType === 'seller') {
-        // Delete Product From Products Array 
+        // Delete Product From Products Array
         let productId = e.target.parentNode.parentNode.firstChild.id
         // console.log(productId);
         let product = getProductById(productId)
-        let indexOfProduct = state.products.indexOf(product) 
-        state.products.splice(indexOfProduct,1)            
-        // Delete Product From Products Array in User Array 
+        let indexOfProduct = state.products.indexOf(product)
+        state.products.splice(indexOfProduct,1)
+        // Delete Product From Products Array in User Array
         let user = getUserById(sellerId.id)
         let targetProdact = user.products.findIndex((item) => item.productId == +productId);
         user.products.splice(targetProdact,1)
-        // Delete Product From Products Array in Current User Array 
+        // Delete Product From Products Array in Current User Array
         user.products = user.products
-        
+
         setCurrentUser(user)
         // console.log(currentUser);
         saveStateInLocalStorage()
@@ -283,7 +290,7 @@ function editProduct(e){
             try {
                     inputValidation(obj)
                     let updatedProduct ={
-                        'id' : product.id, 
+                        'id' : product.id,
                         'title' : obj.NewProductName,
                         'description' : obj.NewProductDescription,
                         'imgURL0': imageDataURL,
@@ -317,11 +324,11 @@ function editProduct(e){
                     } catch (error) {
                     console.log(error);
                     errorMessage.innerText = error.message;
-                    errorMessage.style.opacity = 1;  
+                    errorMessage.style.opacity = 1;
                 }
             display()
         })
-    }   
+    }
 }
 
     // Get the form fields
@@ -365,14 +372,14 @@ function inputValidation(obj){
         console.log(NewProductprice);
         throw new Error("Invalid Product Price. Please enter a valid number.");
     }
-    
+
     // Validate category (letters and spaces only)
     if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductcatagory)) {
         // Check if NewProductcatagory contains invalid characters
         throw new Error("Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters.");
     }
-    
-    
+
+
     // Validate quantity (numbers only)
     if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
         // Check if NewProductQuantity is not a positive integer
@@ -382,6 +389,6 @@ function inputValidation(obj){
     // Validate description (letters and spaces only)
     if (!/^[A-Za-z\s]{10,}$/.test(obj.NewProductDescription)) {
         throw new Error("Invalid Description.");
-        
+
     }
-} 
+}

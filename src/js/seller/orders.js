@@ -12,7 +12,7 @@ function display(){
   // Parse the JSON string to get the JavaScript object
   const currentUserData = JSON.parse(userDataFromLocalStorage);
     // Example usage:
-    const orders = getAllOrdersByOrderIds(currentUserData.orders);
+  const orders = getAllOrdersByOrderIds(currentUserData.orders);
     console.log(orders);
     let customHeaders = ['Order ID','Order Date' ,'Product ID','Title','Quantity', 'Price', 'Order Status','Category' ,'Stock'];
     let skip = ['img','sellerId','description',]
