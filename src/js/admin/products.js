@@ -30,7 +30,6 @@ export function renderProductsPage(
   //onchange instead of addEventListener to remove previous event listeners
   search.onchange = (e) => {
     const newSearchBy = { ...searchBy, value: e.target.value.trim() };
-    console.log("newSearchBy search  valuue:>> ", newSearchBy);
 
     renderProductsPage(
       container,
@@ -77,7 +76,7 @@ export function renderProductsPage(
 
       renderProductsPage(
         container,
-        sortByField(array, sortBy.field, sortBy.order),
+        sortByField(state.products, sortBy.field, sortBy.order),
         pageNumber,
         itemsPerPage,
         sortBy,
@@ -117,7 +116,6 @@ export function renderProductsPage(
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {
     const newSearchBy = { ...searchBy, field: e.target.value };
-    console.log("newSearchBy fierld :>> ", newSearchBy);
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),

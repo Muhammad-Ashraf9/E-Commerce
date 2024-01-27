@@ -245,7 +245,7 @@ sidebar.addEventListener("click", (e) => {
           pageNumber,
           itemsPerPage,
           sortBy,
-          searchBy
+          // searchBy
         );
         break;
       default:
