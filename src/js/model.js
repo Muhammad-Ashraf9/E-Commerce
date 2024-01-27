@@ -109,7 +109,6 @@ export const state = {
     {
       id: 354028,
       items: [
-        //
         {
           id: 1,
           title: "ashhh",
