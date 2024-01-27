@@ -172,7 +172,7 @@ export function generateProductsTableBody(arrayOfProducts) {
     .join("");
 }
 
-function getSelectSearchByHTML() {
+export function getSelectSearchByHTML() {
   return `
   <div> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
@@ -181,7 +181,6 @@ function getSelectSearchByHTML() {
   <option value="description">description</option>
   <option value="category">category</option>
   <option value="price">price</option>
-  <option value="sellerId">seller id</option>
   </select>
   </div>
   `;

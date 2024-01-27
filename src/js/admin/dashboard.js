@@ -12,6 +12,7 @@ import {
   getByPageNumber,
   deleteProductById,
 } from "../model.js";
+import { renderCustomerServicePage } from "./customer-service.js";
 import {
   generateCustomersTabelBody,
   generateCustomersTabelHead,
@@ -53,12 +54,12 @@ export function getModalHTML(id) {
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="deleteModalLabel">
-        <div class="alert alert-danger" role="alert">Delete</div></h1>
+        <div class="fs-4 fw-bold">Delete</div></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <div class="alert alert-danger" role="alert">
-      THIS WILL BE DELETED FOR EVER!!💀
+      <div class="alert text-bg-danger" role="alert">
+      Are you sure you want to delete this row?     
       </div>
       </div>
       <div class="modal-footer d-flex justify-content-around">
@@ -199,7 +200,7 @@ sidebar.addEventListener("click", (e) => {
           state.products,
           pageNumber,
           itemsPerPage,
-          sortBy, 
+          sortBy,
           searchBy
         );
         break;
@@ -230,6 +231,17 @@ sidebar.addEventListener("click", (e) => {
         renderSellersPage(
           main,
           getSellers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy,
+          searchBy
+        );
+        break;
+      case "customer-services":
+        pageNumber = 1;
+        renderCustomerServicePage(
+          main,
+          state.messages,
           pageNumber,
           itemsPerPage,
           sortBy,
