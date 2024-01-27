@@ -69,19 +69,20 @@ export function renderCustomerServicePage(
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
-      if (sortBy.field === field) {
-        sortBy.order = sortBy.order === "asc" ? "desc" : "asc";
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
       } else {
-        sortBy.field = field;
-        sortBy.order = "asc";
+        newSortBy.field = field;
+        newSortBy.order = "asc";
       }
 
       renderCustomerServicePage(
         container,
-        sortByField(state.messages, sortBy.field, sortBy.order),
+        sortByField(state.messages, newSortBy.field, newSortBy.order),
         pageNumber,
         itemsPerPage,
-        sortBy,
+        newSortBy,
         searchBy
       );
     }
