@@ -1,25 +1,59 @@
-import { products } from "../js/Products.js";
+// import { products } from "../js/Products.js";
+import { state } from "./model.js";
 import { renderCards } from "../js/renderCards.js";
-var prodID = localStorage.getItem("id");
-console.log(prodID);
-let Product = products[prodID];
-console.log(Product);
-let prodImgDiv = document.getElementById("prodImg");
-prodImgDiv.src = Product.imgURL;
-// productDiv.alt = Product.name;
-let prodNameDiv = document.getElementById("prodName");
-prodNameDiv.innerText = Product.name;
-let prodPriceDiv = document.getElementById("prodPrice");
-prodPriceDiv.innerText += " "+Product.price+" $";
-let prodDescDiv = document.getElementById("prodDesc");
+import { ProductsFiltered } from "./ProductsFiltered.js";
+let prodID = localStorage.getItem("id");
+const Product = state.products[prodID];
+const prodImgtwo = document.getElementById("two");
+const prodImgone = document.getElementById("one");
+prodImgtwo.src = Product.imgURL0;
+prodImgone.src = Product.imgURL1;
+const prodNameDiv = document.getElementById("prodName");
+prodNameDiv.innerText = Product.title;
+const prodPriceh3 = document.getElementById("prodPrice");
+prodPriceh3.innerText += ` ${Product.price} $`;
+const prodPriceh4 = document.getElementById("prodPriceBD");
+if (Product.prevPrice !== Product.price) {
+  prodPriceh4.innerText += ` ${Product.prevPrice} $`;
+}
+const prodDescDiv = document.getElementById("prodDesc");
 prodDescDiv.innerText = Product.description;
-let prodCategoryDiv = document.querySelector("#prodCategory h4");;
-prodCategoryDiv.innerText += " " + Product.category;
+const prodCategoryDiv = document.querySelector("#prodCategory h4");
+prodCategoryDiv.innerText += ` ${Product.category}`;
+let category = `${Product.category}`;
+  // Render after click on the pagination buttons
+  let numberOfCardsPerPage = 4
+  let page = 1; // Current page
+  let productsCount = ProductsFiltered("", category).length; // Number of products
+  let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
 
-renderCards(1,8);
+  renderCards(page, numberOfCardsPerPage, "", category);
+
+  const pagSec = document.getElementById("paginationSection");
+  pagSec.addEventListener("click", function (event) {
+    if (event.target.nodeName == "A") {
+      pagSec.innerHTML = "";
+      if (event.target.textContent === "Previous") {
+        if (page === 1) {
+          page = 1;
+        } else {
+          page--;
+        }
+      } else if (event.target.textContent === "Next") {
+        if (page === pagesCount) {
+          page = pagesCount;
+        } else {
+          page++;
+        }
+      } else {
+        page = parseInt(event.target.textContent);
+      }
+    }
+    renderCards(page, numberOfCardsPerPage, "", category);
+  });
+
 
 const wishIcon = document.querySelector(".wish-icon i");
-console.log(wishIcon);
 wishIcon.addEventListener("click", function () {
   if (wishIcon.classList.contains("fa-heart-o")) {
       wishIcon.classList.remove("fa-heart-o");
@@ -29,38 +63,3 @@ wishIcon.addEventListener("click", function () {
       wishIcon.classList.add("fa-heart-o");
   }
 });
-// <div class="container " >
-//     <div class="row">
-//         <div class="col-12 col-md-8">
-//             <img src="" alt="" id="prodImg" class="img-fluid ">
-//         </div>
-//         <div class="col-12 col-md-4">
-//             <h2 id="prodName" class="display-3" ></h2>
-//             <h3 id="prodPrice" style="display: inline;"></h3>
-//             <p id="prodDesc" class="lead" style="display: inline;"></p>
-//             <div class="text-white text-center p-3 mb-3" id="prodCategory" style="background-color:#B88E2F;"></div>
-//             <button class="btn btn-primary" id="addToCart">Add to Cart</button>
-//         </div>
-//     </div>
-// </div>
-// <div class="container mt-5">
-//     <h3>Product Reviews</h3>
-//     <div class="card">
-//         <div class="card-body">
-//             <h5 class="card-title">John Doe</h5>
-//             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod
-//                 mauris eu
-//                 ligula
-//                 ultrices, id lacinia nunc tincidunt.</p>
-//         </div>
-//     </div>
-//     <div class="card mt-3">
-//         <div class="card-body">
-//             <h5 class="card-title">Jane Smith</h5>
-//             <p class="card-text">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-//                 curae; Sed
-//                 euismod
-//                 mauris eu ligula ultrices, id lacinia nunc tincidunt.</p>
-//         </div>
-//     </div>
-// </div>
