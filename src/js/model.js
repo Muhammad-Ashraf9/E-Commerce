@@ -1,9 +1,9 @@
 export const state = {
   currentUser: null,
   guestCart: [
-    { id: 1, quantity: 2 },
+    { id: 1, quantity: 5 },
     { id: 2, quantity: 2 },
-    { id: 3, quantity: 2 },
+    { id: 3, quantity: 1 },
   ],
   users: [
     {
@@ -11,7 +11,6 @@ export const state = {
       name: "ash customer",
       email: "ash@customer.ash",
       password: "ash123",
-
       orders: [1, 2],
       cart: [
         { id: 1, quantity: 2 },
@@ -283,7 +282,7 @@ export const state = {
   ],
   products: [
     {
-      id: 2,
+      id: 1,
       title: "Coush",
       description: "Desk, 89 1/50 8/8",
       imgURL0:

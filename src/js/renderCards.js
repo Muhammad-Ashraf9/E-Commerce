@@ -2,7 +2,8 @@ import { ProductsFiltered } from "../js/ProductsFiltered.js";
 import { renderPaginationSection } from "../js/renderPaginationSection.js";
 import { getSearchValue } from "./getSearchValue.js";
 import { getCheckedValue } from "./getCategory.js";
-import { addtoCart } from "./addtoCart.js";
+import { addtoCart } from "./addToCart.js";
+import { getQuantityFromguestCart } from "./getQuantityFromguestCart.js";
 // Drawing the cards
 export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchValue(), category = getCheckedValue()) {
   // let searchValue = ;
@@ -22,6 +23,8 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
     endCard = Products.length;
   }
   for (let i = startCard; i <= endCard; i++) {
+    const iID = Products[i - 1].id;
+    const prodQ = getQuantityFromguestCart(iID);
     const productOuterDiv = `
       <div class="col-md-3">
         <div class="wsk-cp-product">
@@ -44,9 +47,9 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
     } $</del></span>
               </div>
               <div class="wcf-right">
-                <input type="text" class="quantity" value="0" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
-                <button style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
-                  <i class="fa-solid fa-cart-plus"></i>
+                <input type="text" class="quantity" value="${prodQ}" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
+                <button id="${iID}" style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
+                  <i id="${iID}" class="fa-solid fa-cart-plus"></i>
                 </button>
               </div>
             </div>
@@ -81,3 +84,4 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   }
   renderPaginationSection(page, pagesCount);
 }
+
