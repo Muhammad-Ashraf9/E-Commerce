@@ -128,10 +128,11 @@ function generateCustomerServiceTableHeader() {
   return `
     <thead>
     <tr>
-        <th scope="col" data-field="id">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Message</th>
+        <th scope="col" data-field="mId">Message ID</th>
+        <th scope="col" data-field="uId">User ID</th>
+        <th scope="col" data-field="name">Name</th>
+        <th scope="col" data-field="email">Email</th>
+        <th scope="col" data-field="message">Message</th>
         <th scope="col" data-field="date">Date</th>
         <th scope="col">Actions</th>
     </tr>`;
@@ -144,13 +145,14 @@ function generateCustomerServiceTableBody(array) {
           .map((item) => {
             return `
             <tr>
-                <td>${item.user.id}</td>
-                <td>${item.user.name}</td>
-                <td>${item.user.email}</td>
+                <td>${item.mId}</td>
+                <td>${item.uId}</td>
+                <td>${item.name}</td>
+                <td>${item.email}</td>
                 <td>${item.message}</td>
                 <td>${item.date}</td>
                 <td>
-                    <button class="btn btn-danger" data-id="${item.id}" data-bs-toggle="modal" data-bs-target="#modal">Delete</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal" data-id="${item.mId}">Delete</button>
                 </td>
             </tr>
             `;
