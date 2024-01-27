@@ -4,7 +4,7 @@ localStorage.setItem("state", JSON.stringify(stateinmycomputer));
 let state = JSON.parse(localStorage.getItem("state"));
 
 let orders = state.orders;
-let myID = 1; // get it from the function
+let myID = 2; // get it from the function
 function renderOrders(tableDiv, myID) {
   // render table to print all the orders in a table
   let tableinnerHTML = "";
