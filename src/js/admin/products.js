@@ -2,6 +2,7 @@ import {
   deleteProductById,
   getByPageNumber,
   getUserById,
+  searchByField,
   searchProductsByTitle,
   sortByField,
   state,
@@ -19,19 +20,25 @@ export function renderProductsPage(
   array,
   pageNumber,
   itemsPerPage,
-  sortBy
+  sortBy,
+  searchBy
 ) {
   const modal = document.querySelector("#modal");
   const search = document.querySelector("#navbarSearch input");
   // search.replaceWith(search.cloneNode(true)); //to remove event listener
 
+  //onchange instead of addEventListener to remove previous event listeners
   search.onchange = (e) => {
+    const newSearchBy = { ...searchBy, value: e.target.value.trim() };
+    console.log("newSearchBy search  valuue:>> ", newSearchBy);
+
     renderProductsPage(
       container,
-      searchProductsByTitle(e.target.value),
+      searchByField(state.products, newSearchBy.field, newSearchBy.value),
       pageNumber,
       itemsPerPage,
-      sortBy
+      sortBy,
+      newSearchBy
     );
   };
 
@@ -55,6 +62,7 @@ export function renderProductsPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderProductsPage
   );
   document.querySelector("table").addEventListener("click", (e) => {
@@ -72,7 +80,8 @@ export function renderProductsPage(
         sortByField(array, sortBy.field, sortBy.order),
         pageNumber,
         itemsPerPage,
-        sortBy
+        sortBy,
+        searchBy
       );
     }
 
@@ -89,7 +98,8 @@ export function renderProductsPage(
         state.products,
         pageNumber,
         itemsPerPage,
-        sortBy
+        sortBy,
+        searchBy
       );
     });
   });
@@ -99,8 +109,24 @@ export function renderProductsPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderProductsPage
   );
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
+  const searchBySelectElement = document.querySelector("select[name=searchBy]");
+  searchBySelectElement.value = searchBy.field;
+  searchBySelectElement.addEventListener("change", (e) => {
+    const newSearchBy = { ...searchBy, field: e.target.value };
+    console.log("newSearchBy fierld :>> ", newSearchBy);
+    renderProductsPage(
+      container,
+      searchByField(state.products, newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
+  });
 }
 export function generateProductsTableHeader() {
   return `
@@ -144,4 +170,19 @@ export function generateProductsTableBody(arrayOfProducts) {
     </tbody> `
     )
     .join("");
+}
+
+function getSelectSearchByHTML() {
+  return `
+  <div> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="id">id</option>
+  <option value="title">title</option>
+  <option value="description">description</option>
+  <option value="category">category</option>
+  <option value="price">price</option>
+  <option value="sellerId">seller id</option>
+  </select>
+  </div>
+  `;
 }

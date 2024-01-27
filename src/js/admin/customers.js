@@ -14,7 +14,10 @@ import {
   handleChangingItemsPerPage,
   handlePagination,
 } from "./pagination.js";
-import { getAddSellerModalFormHTML, handleEditUser } from "./sellers.js";
+import {
+  handleAddUser,
+  handleEditUser,
+} from "./sellers.js";
 export function generateCustomersTabelHead() {
   return `  
   <thead>
@@ -54,7 +57,9 @@ export function renderCustomersPage(
   container,
   array,
   pageNumber,
-  itemsPerPage
+  itemsPerPage,
+  sortBy,
+  searchBy
 ) {
   const search = document.querySelector("#navbarSearch input");
 
@@ -65,10 +70,21 @@ export function renderCustomersPage(
       searchCustomerByName(e.target.value),
       pageNumber,
       itemsPerPage,
-      sortBy     
+      sortBy,
+      searchBy
     );
   };
   container.innerHTML = "";
+  handleAddUser(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    sortBy,
+    searchBy,
+    renderCustomersPage,
+    "customer"
+  );
   container.insertAdjacentHTML(
     "beforeend",
     generateTabel(
@@ -88,6 +104,7 @@ export function renderCustomersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderCustomersPage
   );
   handleChangingItemsPerPage(
@@ -96,6 +113,7 @@ export function renderCustomersPage(
     pageNumber,
     itemsPerPage,
     sortBy,
+    searchBy,
     renderCustomersPage
   );
   document.querySelector("table").addEventListener("click", (e) => {
@@ -114,9 +132,17 @@ export function renderCustomersPage(
       });
     } else if (e.target.dataset?.editId) {
       const id = +e.target.dataset.editId;
-      console.log("id :>> ", id);
-      handleEditUser(id);
-      renderCustomersPage(container, getCustomers(), pageNumber, itemsPerPage);
+      handleEditUser(
+        id,
+        container,
+        array,
+        pageNumber,
+        itemsPerPage,
+        sortBy,
+        searchBy,
+        renderCustomersPage,
+        "customer"
+      );
     }
   });
 }

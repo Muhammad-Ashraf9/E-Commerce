@@ -93,11 +93,10 @@ body {
 }
 
 .dashborad-select {
-  width: 4rem;
   height: 2rem;
   text-align: center;
   border-radius: 5px;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .table-img--sm {
