@@ -1,3 +1,6 @@
+input:invalid {
+  border: 1px solid $color-error;
+}
 .form {
   &-signup {
     max-width: 50rem;
@@ -15,10 +18,12 @@
   }
   &__img {
     border-radius: 50%;
-    width: 10rem;
-    height: 10rem;
+    width: 5rem;
+    height: 5rem;
     background-color: $color-primary;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &__group {
     display: flex;
@@ -46,7 +51,7 @@
     text-transform: capitalize;
     opacity: 0;
     transform: scale(0.1);
-    &__visible {
+    &--visible {
       opacity: 1;
       transform: scale(1);
     }

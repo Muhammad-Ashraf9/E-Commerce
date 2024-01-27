@@ -23,22 +23,26 @@ export function signOut() {
   setCurrentUser(null);
 }
 
-export function signUp(email, password) {
+export function signUp(email, password, name, accountType) {
   if (getUserByEmail(email)) {
     throw new Error("Email already exist");
   }
 
   const customer = {
     id: Date.now(),
-    name: "",
+    name,
     email,
-    accountType: "customer",
+    accountType: (accountType || "customer").toLowerCase(),
     password,
     orders: [],
-    cart: [],
   };
+  if (customer.accountType === "seller") {
+    customer.products = [];
+  } else if (customer.accountType === "customer") {
+    customer.cart = [];
+  }
   addUser(customer);
-  signIn(email, password);
+  // signIn(email, password);
 }
 
 export function setAuthStateFromCookie() {

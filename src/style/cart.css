@@ -3,18 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
-footer{
-    background-color: red;
+#hero{
+    height: 30vh;
+    background-image: url(../assets/header.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-img:hover{
-    transform: scale(1.08);
-    /* transform: rotate(360deg); */
-    transition: all 2s;
+#CheckOut{
+    z-index: 1000;
 }
-/* 
-@media (max-width:770px) {
-    .price{
-        margin-top: ;
-        background-color: red;
-    }
-}  */
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css" />
+    <script type="module" src="../js/ProductDetails.js"></script>
+    <script src="https://kit.fontawesome.com/585a1514af.js" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="../style/style_products_tester.css" />
+    </script>
+</head>
+<body >
+    <h1 class="display-3 text-white " style="background-color: #B88E2F;">Product Details</h1>
+    
+<!--     
+    <div class="container" id="BreadCrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Library</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+        </nav>
+    </div>
+ -->
+    <div class="container " >
+        <div class="row border-top border-bottom my-3">
+            <div class="col-12 col-md-8">
+                <img src="" alt="" id="prodImg" class="img-fluid ">
+                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+            </div>
+            <div class="col-12 col-md-4">
+                <h2 id="prodName" class="display-3 " ></h2>
+                <h3 id="prodPrice" style="display: inline;">Price: </h3>
+                <h4 id="prodPriceBD" class="text-bg-warning text-decoration-line-through" style="display: inline;">50</h4>
+                <p id="prodDesc" class="lead "></p>
+                <div class="star-rating">
+                    
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                    </ul>
+                </div>
+                <div class=" rounded-4 text-center p-2 mb-3" id="prodCategory" style="background-color:#B88E2F;">
+                    <a href="#" class="text-decoration-none ">
+                        <h4 class="text-white">Category: </h4>
+                    </a>
+                </div>
+                <button id="addToCart" class="rounded-4 text-center p-2 mb-3" 
+                class="btn btn-lg bg-white data-toggle=tooltip" data-placement="bottom" title="Add to Cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Reviews STARTS -->
+    <div class="container mt-5">
+        <h3>Product Reviews</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">John Doe</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod
+                    mauris eu
+                    ligula
+                    ultrices, id lacinia nunc tincidunt.</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Jane Smith</h5>
+                <p class="card-text">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                    curae; Sed
+                    euismod
+                    mauris eu ligula ultrices, id lacinia nunc tincidunt.</p>
+            </div>
+        </div>
+    </div>
+<!-- Reviews ENDS -->
+
+<!-- Start The Products Show -->
+    
+    <div class="container" id="ProductsShow">
+        <div id="ProductShow" class="row">
+        </div>
+    </div>
+    
+    <!-- End The Products Show -->
+<!-- pagination STARTS -->
+<div id="paginationSection" class="container container-fluid ">
+<!-- pagination ENDS -->
+
+</body>
+</html>
