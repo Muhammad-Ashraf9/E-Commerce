@@ -181,7 +181,6 @@ export function getSelectSearchByHTML() {
   <option value="description">description</option>
   <option value="category">category</option>
   <option value="price">price</option>
-  <option value="sellerId">seller id</option>
   </select>
   </div>
   `;
