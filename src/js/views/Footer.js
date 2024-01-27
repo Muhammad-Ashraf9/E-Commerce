@@ -1,5 +1,8 @@
+import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
+  console.log(getCurrentUser());
   const footer = `
+</li>
   <div class="p-2 ps-5 mt-2">
     <div class="container-fluid">
       <div class="row text-center p-3">
@@ -42,8 +45,6 @@ export default function renderFooter(element) {
       </div>
     </div>
   </div>
-
-
   <footer>
   <div class="footer-top">
     <div class="container">
@@ -94,7 +95,6 @@ export default function renderFooter(element) {
     </div>
   </div>
   </div>
-  
 </footer>`;
   element.insertAdjacentHTML("beforeend", footer);
 }

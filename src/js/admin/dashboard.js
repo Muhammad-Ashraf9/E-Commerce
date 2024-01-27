@@ -11,8 +11,8 @@ import {
   getOrderTotal,
   getByPageNumber,
   deleteProductById,
-
 } from "../model.js";
+import { renderCustomerServicePage } from "./customer-service.js";
 import {
   generateCustomersTabelBody,
   generateCustomersTabelHead,
@@ -36,7 +36,9 @@ const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
-let itemsPerPage = 1;
+let itemsPerPage = 3;
+const sortBy = { field: "id", order: "desc" };
+const searchBy = { field: "id", value: "" };
 
 export function generateTabel(header, body) {
   return `    <div class="table-responsive small">
@@ -52,12 +54,12 @@ export function getModalHTML(id) {
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="deleteModalLabel">
-        <div class="alert alert-danger" role="alert">Delete</div></h1>
+        <div class="fs-4 fw-bold">Delete</div></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <div class="alert alert-danger" role="alert">
-      THIS WILL BE DELETED FOR EVER!!💀
+      <div class="alert text-bg-danger" role="alert">
+      Are you sure you want to delete this row?     
       </div>
       </div>
       <div class="modal-footer d-flex justify-content-around">
@@ -96,7 +98,13 @@ function getTotalCardHTML(number, title) {
               </div>
             </div>`;
 }
-function renderDashboard(container, modal) {
+function renderDashboard(container) {
+  const modal = document.querySelector("#modal");
+
+  const search = document.querySelector("#navbarSearch input");
+
+  //set on change event to not use the last onchange event(and render the last page)
+  search.onchange = "";
   container.innerHTML = "";
   container.insertAdjacentHTML("afterbegin", `<canvas id="myChart"></canvas>`);
   container.insertAdjacentHTML(
@@ -183,7 +191,7 @@ sidebar.addEventListener("click", (e) => {
     switch (e.target.dataset.link) {
       case "dashboard":
         pageNumber = 1;
-        renderDashboard(main, modal);
+        renderDashboard(main);
         break;
       case "products":
         pageNumber = 1;
@@ -192,20 +200,53 @@ sidebar.addEventListener("click", (e) => {
           state.products,
           pageNumber,
           itemsPerPage,
-          modal
+          sortBy,
+          searchBy
         );
         break;
       case "orders":
         pageNumber = 1;
-        renderOrdersPage(main, state.orders, pageNumber, itemsPerPage);
+        renderOrdersPage(
+          main,
+          state.orders,
+          pageNumber,
+          itemsPerPage,
+          sortBy,
+          searchBy
+        );
         break;
       case "customers":
         pageNumber = 1;
-        renderCustomersPage(main, getCustomers(), pageNumber, itemsPerPage);
+        renderCustomersPage(
+          main,
+          getCustomers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy,
+          searchBy
+        );
         break;
       case "sellers":
         pageNumber = 1;
-        renderSellersPage(main, getSellers(), pageNumber, itemsPerPage, modal);
+        renderSellersPage(
+          main,
+          getSellers(),
+          pageNumber,
+          itemsPerPage,
+          sortBy,
+          searchBy
+        );
+        break;
+      case "customer-services":
+        pageNumber = 1;
+        renderCustomerServicePage(
+          main,
+          state.messages,
+          pageNumber,
+          itemsPerPage
+          // sortBy,
+          // searchBy
+        );
         break;
       default:
         break;

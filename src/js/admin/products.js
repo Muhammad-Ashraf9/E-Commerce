@@ -2,13 +2,45 @@ import {
   deleteProductById,
   getByPageNumber,
   getUserById,
+  searchByField,
+  searchProductsByTitle,
+  sortByField,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
-import { getPaginationHTML, handlePagination } from "./pagination.js";
+import {
+  getPaginationHTML,
+  getSelectItemsPerPageHTML,
+  handleChangingItemsPerPage,
+  handlePagination,
+} from "./pagination.js";
 
-export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
+export function renderProductsPage(
+  container,
+  array,
+  pageNumber,
+  itemsPerPage,
+  sortBy,
+  searchBy
+) {
   const modal = document.querySelector("#modal");
+  const search = document.querySelector("#navbarSearch input");
+  // search.replaceWith(search.cloneNode(true)); //to remove event listener
+
+  //onchange instead of addEventListener to remove previous event listeners
+  search.onchange = (e) => {
+    const newSearchBy = { ...searchBy, value: e.target.value.trim() };
+
+    renderProductsPage(
+      container,
+      searchByField(state.products, newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
+  };
+
   container.innerHTML = "";
   container.insertAdjacentHTML(
     "beforeend",
@@ -28,10 +60,35 @@ export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
     array,
     pageNumber,
     itemsPerPage,
+    sortBy,
+    searchBy,
     renderProductsPage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
-    console.log("Proucts table event");
+    const field = e.target.dataset?.field;
+    if (field) {
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
+      } else {
+        newSortBy.field = field;
+        newSortBy.order = "asc";
+      }
+
+      renderProductsPage(
+        container,
+        sortByField(state.products, newSortBy.field, newSortBy.order),
+        pageNumber,
+        itemsPerPage,
+        newSortBy,
+        searchBy
+      );
+    }
 
     const id = e.target.dataset?.id;
     if (!id) return;
@@ -41,20 +98,52 @@ export function renderProductsPage(container, array, pageNumber, itemsPerPage) {
       if (!e.target.dataset.id) return;
       const id = +e.target.dataset.id;
       deleteProductById(id);
-      renderProductsPage(container, state.products, pageNumber, itemsPerPage);
+      renderProductsPage(
+        container,
+        state.products,
+        pageNumber,
+        itemsPerPage,
+        sortBy,
+        searchBy
+      );
     });
+  });
+  handleChangingItemsPerPage(
+    container,
+    array,
+    pageNumber,
+    itemsPerPage,
+    sortBy,
+    searchBy,
+    renderProductsPage
+  );
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
+  const searchBySelectElement = document.querySelector("select[name=searchBy]");
+  searchBySelectElement.value = searchBy.field;
+  searchBySelectElement.addEventListener("change", (e) => {
+    const newSearchBy = { ...searchBy, field: e.target.value };
+    renderProductsPage(
+      container,
+      searchByField(state.products, newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
   });
 }
 export function generateProductsTableHeader() {
   return `
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Seller Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">Actions</th>
+      <th scope="col" data-field="id">ID</th>
+      <th scope="col" data-field="title">Product title</th>
+      <th scope="col" data-field="description" >Description</th>
+      <th scope="col" >Seller Name</th>
+      <th scope="col" data-field="price">Price</th>
+      <th scope="col" data-field="category">Category</th>
+      <th scope="col" >Image</th>
+      <th scope="col" >Actions</th>
     </tr>
   </thead>
 `;
@@ -67,9 +156,15 @@ export function generateProductsTableBody(arrayOfProducts) {
       <tr>
       <td>${product.id}</td>
       <td>${product.title}</td>
-      <td>${getUserById(product.sellerId).name}</td>
-      <td>${product.price}</td>
       <td>${product.description}</td>
+      <td>${
+        getUserById(product.sellerId)
+          ? getUserById(product.sellerId).name
+          : "Deleted Seller🥲"
+      }</td>
+      <td>${product.price}</td>
+      <td>${product.category}</td>
+      <td><img class="table-img--sm"src="${product.img}"/></td>
       <td>
       <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" 
        data-bs-target="#modal"            
@@ -79,4 +174,18 @@ export function generateProductsTableBody(arrayOfProducts) {
     </tbody> `
     )
     .join("");
+}
+
+export function getSelectSearchByHTML() {
+  return `
+  <div> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="id">id</option>
+  <option value="title">title</option>
+  <option value="description">description</option>
+  <option value="category">category</option>
+  <option value="price">price</option>
+  </select>
+  </div>
+  `;
 }

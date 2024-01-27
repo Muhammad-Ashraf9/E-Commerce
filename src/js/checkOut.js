@@ -8,6 +8,10 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
   num: item.quantity,
 }));
 // validating the form and handling the checkout btn
+
+// for (const [key, value] of formData) {
+//   userData.push() `${key}: ${value}\n`;
+// }
   const forms = document.querySelectorAll('.needs-validation')
   Array.from(forms).forEach(form => {
    (function(){ document.getElementById("placing").addEventListener('click', event => {
@@ -26,6 +30,13 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
           }
         });
         if(enough){
+
+
+          // Get form data using FormData
+      
+
+      // Log the form data object to the console (you can replace this with your own logic)
+
           newOrder();   //function to create all the new order tasks
           Swal.fire({
           title: "Congratulations!",
@@ -40,9 +51,7 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
               text: `Your order can't be submitted because their is no more of ${x.product.title}\n in the sellers stock`,
               icon: "error"
             });
-        }
-        
-        
+        }  
       }
       form.classList.add('was-validated')
     })})()
@@ -58,16 +67,28 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
     let customerID=getCurrentUser().id;
     let Items=[]; // making an array of products to be put in the order details
     cart.forEach(item => {
+      item.product["quantity"]= item.num
       Items.push(item.product)
-    });
 
+    });
+    var formData = new FormData(document.getElementById('form'));
+      // Create an object to store form data
+      var formDataObject = {};
+
+      // Populate the object with form data
+      formData.forEach(function(value, key){
+        formDataObject[key] = value;
+      });
+      console.log(formData.entries());
     let newOrder = {   //creating a new order object
-      id: orderID, 
+      id: orderID,  
       items: Items,
       customerId: customerID,
       status: "pending",
       date: new Date().toISOString().slice(0, 10),
+      customerDetails:formDataObject,
     };
+    console.log(newOrder);
     state.orders.push(newOrder)     //pushing the order in the list of orders
     user.orders.push(orderID)       //pushing the order id in the current user's orders' list
     const uindex = state.users.findIndex(user=>user.id === state.currentUser.id)      //getting the customers index in the list of users
@@ -124,9 +145,7 @@ window.addEventListener("load",function(){
        cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
           <div  class="col-lg-2">
-            <img  src="${item.product.img}" class="img-fluid rounded" alt="${
-        item.title
-      }">
+            <img  src="${item.product.img}" class="img-fluid rounded" alt="${item.product.title}">
           </div>
           <div class="col-md-10">
             
