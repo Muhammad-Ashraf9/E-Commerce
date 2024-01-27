@@ -21,8 +21,8 @@ export function generateSellersTabelHead() {
   return `
   <thead>
     <tr>
-      <th scope="col" data-field="id">Id</th>
-      <th scope="col" data-field="name">Name</th>
+      <th scope="col" data-field="id" >Id</th>
+      <th scope="col" data-field="name" >Name</th>
       <th scope="col" data-field="email">Email</th>
       <th scope="col">No. Products</th>
       <th scope="col">No. Orders</th>
@@ -113,6 +113,14 @@ export function renderSellersPage(
     renderSellersPage
   );
 
+  //to change the arrow direction of the sorted field after rendering the table
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+  console.log(
+    'document.querySelector(`[data-field="${sortBy.field}"]`) :>> ',
+    document.querySelector(`[data-field="${sortBy.field}"]`)
+  );
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
@@ -122,6 +130,7 @@ export function renderSellersPage(
         sortBy.field = field;
         sortBy.order = "asc";
       }
+      e.target.class = sortBy.order;
 
       renderSellersPage(
         container,

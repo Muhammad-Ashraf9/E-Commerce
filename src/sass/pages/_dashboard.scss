@@ -63,5 +63,33 @@
 }
 
 [data-field] {
-  background-color: #a35c5c;
+  cursor: pointer;
+}
+
+.asc {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5em;
+    vertical-align: middle;
+    border-bottom: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+    
+  }
+}
+.desc {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5em;
+    vertical-align: middle;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+  }
 }
