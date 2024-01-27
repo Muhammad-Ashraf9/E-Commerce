@@ -1,21 +1,20 @@
 import {
+  deleteMessageById,
   deleteProductById,
   getByPageNumber,
-  getUserById,
   searchByField,
-  searchProductsByTitle,
   sortByField,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
 import {
   getPaginationHTML,
-  getSelectItemsPerPageHTML,
   handleChangingItemsPerPage,
   handlePagination,
 } from "./pagination.js";
+import { getSelectSearchByHTML } from "./products.js";
 
-export function renderProductsPage(
+export function renderCustomerServicePage(
   container,
   array,
   pageNumber,
@@ -25,16 +24,14 @@ export function renderProductsPage(
 ) {
   const modal = document.querySelector("#modal");
   const search = document.querySelector("#navbarSearch input");
-  // search.replaceWith(search.cloneNode(true)); //to remove event listener
 
   //onchange instead of addEventListener to remove previous event listeners
   search.onchange = (e) => {
     const newSearchBy = { ...searchBy, value: e.target.value.trim() };
-    console.log("newSearchBy search  valuue:>> ", newSearchBy);
 
-    renderProductsPage(
+    renderCustomerServicePage(
       container,
-      searchByField(state.products, newSearchBy.field, newSearchBy.value),
+      searchByField(state.messages, newSearchBy.field, newSearchBy.value),
       pageNumber,
       itemsPerPage,
       sortBy,
@@ -46,8 +43,8 @@ export function renderProductsPage(
   container.insertAdjacentHTML(
     "beforeend",
     generateTabel(
-      generateProductsTableHeader(),
-      generateProductsTableBody(
+      generateCustomerServiceTableHeader(),
+      generateCustomerServiceTableBody(
         getByPageNumber(array, pageNumber, itemsPerPage)
       )
     )
@@ -63,7 +60,7 @@ export function renderProductsPage(
     itemsPerPage,
     sortBy,
     searchBy,
-    renderProductsPage
+    renderCustomerServicePage
   );
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
@@ -75,7 +72,7 @@ export function renderProductsPage(
         sortBy.order = "asc";
       }
 
-      renderProductsPage(
+      renderCustomerServicePage(
         container,
         sortByField(array, sortBy.field, sortBy.order),
         pageNumber,
@@ -92,10 +89,10 @@ export function renderProductsPage(
       console.log("modal-footer Proucts footer");
       if (!e.target.dataset.id) return;
       const id = +e.target.dataset.id;
-      deleteProductById(id);
-      renderProductsPage(
+      deleteMessageById(id);
+      renderCustomerServicePage(
         container,
-        state.products,
+        state.messages,
         pageNumber,
         itemsPerPage,
         sortBy,
@@ -110,14 +107,13 @@ export function renderProductsPage(
     itemsPerPage,
     sortBy,
     searchBy,
-    renderProductsPage
+    renderCustomerServicePage
   );
   container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   const searchBySelectElement = document.querySelector("select[name=searchBy]");
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {
     const newSearchBy = { ...searchBy, field: e.target.value };
-    console.log("newSearchBy fierld :>> ", newSearchBy);
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),
@@ -128,61 +124,39 @@ export function renderProductsPage(
     );
   });
 }
-export function generateProductsTableHeader() {
+function generateCustomerServiceTableHeader() {
   return `
-  <thead>
+    <thead>
     <tr>
-      <th scope="col" data-field="id">ID</th>
-      <th scope="col" data-field="title">Product title</th>
-      <th scope="col" data-field="description" >Description</th>
-      <th scope="col" >Seller Name</th>
-      <th scope="col" data-field="price">Price</th>
-      <th scope="col" data-field="category">Category</th>
-      <th scope="col" >Image</th>
-      <th scope="col" >Actions</th>
-    </tr>
-  </thead>
-`;
-}
-export function generateProductsTableBody(arrayOfProducts) {
-  return arrayOfProducts
-    .map(
-      (product) =>
-        `<tbody>
-      <tr>
-      <td>${product.id}</td>
-      <td>${product.title}</td>
-      <td>${product.description}</td>
-      <td>${
-        getUserById(product.sellerId)
-          ? getUserById(product.sellerId).name
-          : "Deleted Seller🥲"
-      }</td>
-      <td>${product.price}</td>
-      <td>${product.category}</td>
-      <td><img class="table-img--sm"src="${product.img}"/></td>
-      <td>
-      <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" 
-       data-bs-target="#modal"            
-          data-id="${product.id}">Delete</button>      
-      </td>
-    </tr>
-    </tbody> `
-    )
-    .join("");
+        <th scope="col" data-field="mId">Message ID</th>
+        <th scope="col" data-field="uId">User ID</th>
+        <th scope="col" data-field="name">Name</th>
+        <th scope="col" data-field="email">Email</th>
+        <th scope="col" data-field="message">Message</th>
+        <th scope="col" data-field="date">Date</th>
+        <th scope="col">Actions</th>
+    </tr>`;
 }
 
-export function getSelectSearchByHTML() {
+function generateCustomerServiceTableBody(array) {
   return `
-  <div> Search By
-  <select name="searchBy" class="dashborad-select" aria-label="search by">
-  <option value="id">id</option>
-  <option value="title">title</option>
-  <option value="description">description</option>
-  <option value="category">category</option>
-  <option value="price">price</option>
-  <option value="sellerId">seller id</option>
-  </select>
-  </div>
-  `;
+        <tbody>
+        ${array
+          .map((item) => {
+            return `
+            <tr>
+                <td>${item.mId}</td>
+                <td>${item.uId}</td>
+                <td>${item.name}</td>
+                <td>${item.email}</td>
+                <td>${item.message}</td>
+                <td>${item.date}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal" data-id="${item.mId}">Delete</button>
+                </td>
+            </tr>
+            `;
+          })
+          .join("")}
+        </tbody>`;
 }
