@@ -31,16 +31,14 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [1, 2, 3],
+      orders: [354028, 3528],
       accountType: "seller",
       products: [
         {
           productId: 1,
-          stock: 10,
-        },
-        {
           productId: 2,
-          stock: 10,
+          productId: 3,
+          productId: 5,
         },
       ],
     },
@@ -48,17 +46,15 @@ export const state = {
       id: 5,
       name: "ash seller",
       email: "ash@seller.ash",
-      password: "ash123",
-      orders: [3],
+      password: "ash12345",
+      orders: [ 3],
       accountType: "seller",
       products: [
         {
           productId: 3,
-          stock: 10,
         },
         {
           productId: 4,
-          stock: 10,
         },
       ],
     },
@@ -2308,45 +2304,69 @@ export function getUserByEmail(email) {
 }
 
 export function getAllOrdersByOrderIds(orderIds) {
-  // Initialize an array to store the found orders
   const allOrders = [];
-
+  let ordersFromLocalStorage = localStorage.getItem('orders')
+  let orders = JSON.parse(ordersFromLocalStorage)
   // Iterate through the order IDs
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
-    const foundOrder = state.orders.find((order) => order.id === orderId);
-
+    const foundOrder = orders.find((order) => order.id === orderId);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
       allOrders.push(foundOrder);
     }
   }
+  const result = [];
 
-  return allOrders;
+  for (let i = 0; i < allOrders.length; i++) {
+    // Create a new array for each iteration of the outer loop
+    const matchedItems = [];
+    for (let j = 0; j < allOrders[i].items.length; j++) {
+      if (allOrders[i].items[j].sellerId === state.currentUser.id) {
+        matchedItems.push(allOrders[i].items[j]);
+        matchedItems.push(allOrders[i].date);
+        matchedItems.push(allOrders[i].id);
+      }
+    }
+    result.push(matchedItems);
+  }
+  console.log(result);
+  return result;
 }
 
+function getAllProductsBySellerId(allProducts){
+  if(state.currentUser.accountType === 'seller'){
+    if(allProducts){
+      let id = state.currentUser.id;
+      const result = allProducts.filter(obj => obj.sellerId === id);
+      return result
+    }
+    //
+  }else
+    return
+}
 export function getAllProductsByProductIds(productIds) {
+  // // console.log(productIds);
   // Initialize an array to store the found orders
   const allProducts = [];
 
   // Iterate through the order IDs
   for (const productId of productIds) {
     // Find the order in the state.orders array
-    console.log(productId);
-    const foundProduct = state.products.find(
-      (product) => product.id === productId.productId
-    );
+    // console.log(productId);
 
+    //const foundProduct = state.products.find((product) => product.id === productId.productId);
+    const foundProduct = localStorage.getItem('products')
+    
     // If the order is found, add it to the allOrders array
     if (foundProduct) {
-      console.log(foundProduct);
-      allProducts.push(foundProduct);
+      // console.log(foundProduct);
+      allProducts.push(JSON.parse(foundProduct));
     }
-  }
-
-  return allProducts;
+    }
+  const arrProducts = getAllProductsBySellerId(allProducts[0])
+  return arrProducts;
 }
-
 export function getCustomers() {
   return state.users.filter((u) => u.accountType === "customer");
 }
