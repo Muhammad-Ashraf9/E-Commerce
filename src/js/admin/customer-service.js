@@ -150,9 +150,10 @@ function generateCustomerServiceTableBody(array) {
                 <td>${item.name}</td>
                 <td>${item.email}</td>
                 <td>${item.message}</td>
-                <td>${item.date}</td>
+                <td>${new Date(item.date).toISOString().split("T")[0]}</td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal" data-id="${item.mId}">Delete</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" 
+       data-bs-target="#modal" data-id="${item.mId}">Delete</button>
                 </td>
             </tr>
             `;

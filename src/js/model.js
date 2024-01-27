@@ -52,7 +52,7 @@ export const state = {
       name: "ash seller",
       email: "ash@seller.ash",
       password: "ash123",
-      orders: [ 3],
+      orders: [3],
       accountType: "seller",
       products: [
         {
@@ -442,7 +442,8 @@ export function searchByField(array, field, value) {
   );
 }
 export function deleteMessageById(id) {
-  state.messages = state.messages.filter((message) => message.id !== +id);
+  console.log("id :>> ", id);
+  state.messages = state.messages.filter((message) => message.mId !== +id);
   saveStateInLocalStorage();
 }
 //this runs once when the app starts sets the state from local storage
