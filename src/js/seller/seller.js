@@ -21,23 +21,22 @@ uploadImg.addEventListener('change', (e) =>{
 saveStateInLocalStorage()
 let currentUser = localStorage.getItem('currentUser')
 const currentUserData = JSON.parse(currentUser);
+console.log(currentUserData);
 
 
-window.onload = display()
-
+display()
 
 function display(){
     section.innerHTML = ''
     let allProducts = getAllProductsByProductIds(currentUserData.products);
-    // console.log(allProducts);
-    if (allProducts==0) {
+     //console.log(allProducts);
+    if (!allProducts) {
         let alert = document.createElement('h1');
         alert.setAttribute('class','alert alert-danger')
         alert.innerText = 'There is no Product to display.'
         section.appendChild(alert)
         return
     }
-    let skip = ['countSold',  'numberofsales',  'rating', 'prevPrice', 'sellerId', 'reviews','imgURL0','imgURL1']
     let customHeaders = ['Product ID', 'Title', 'Description','Category', 'Stock','Price'];
     // Create a table element
     let table = document.createElement('table');
@@ -46,7 +45,6 @@ function display(){
     table.setAttribute('class','table')
   // Create header row with custom header names
   let headerRow = table.insertRow();
-
   for (let customHeader of customHeaders) {
       let th = document.createElement('th');
       th.setAttribute('scope',"col")
@@ -56,22 +54,11 @@ function display(){
     for (let i = 0; i < allProducts.length; i++) {
         let row = table.insertRow();
         for (let key in allProducts[i]){
-            if(skip.includes(key)){
-            }else if(key === 'id'){
+            if(key === 'id'){
                 let cell = row.insertCell();
                 cell.setAttribute('scope',"row")
                 cell.textContent = allProducts[i][key];
                 cell.setAttribute('id',allProducts[i][key])
-            }else if (key === 'imgURL0') {
-                // console.log(allProducts[i][key]);
-                // let img = document.createElement('img');
-                // img.src = allProducts[i][key];  // Set the source directly to imgURL0
-                // img.alt = 'Image Not Found!';
-
-                // let cell = row.insertCell();
-                // cell.setAttribute('scope', 'row');
-                // cell.setAttribute('id', 'productImg');
-                // cell.appendChild(img);  // Append the img element, not imageDataURL
             }
             else if(key === 'description'){
                 let cell = row.insertCell();
@@ -96,13 +83,8 @@ function display(){
 
 // Append the table to the body
 section.appendChild(table)
-
 }
-document.querySelector('.fa-eye').addEventListener('click',(e)=>{   
-    let productId = e.target.parentNode.parentNode.firstChild.id
-    localStorage.setItem("id",productId);
-    location.assign('./ProductDetails.html')
-})
+
 
 let body = document.querySelector('body');
 let modal = document.getElementById('myModal');
@@ -112,12 +94,15 @@ body.addEventListener('click', function(e) {
         currentMode = "Add";
         errorMessage.innerText = ''
         modal.style.display = 'block';
-        console.log(currentMode);
     }else if(e.target.classList.contains('fa-regular')){
         currentMode = "Edit";
         errorMessage.innerText = ''
         editProduct(e)
         console.log(currentMode);
+    }else if(e.target.classList.contains('fa-eye')){
+        let productId = e.target.parentNode.parentNode.firstChild.id
+        localStorage.setItem("id",productId);
+        location.assign('./ProductDetails.html')
     }
 });
 
@@ -199,8 +184,9 @@ function AddNewProduct(e){
 //######################################################################################################
 //########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
 //######################################################################################################
-
-body.addEventListener('click', function (e) {
+let removeItem = document.querySelectorAll('.fa-trash')
+console.log(removeItem);
+removeItem.forEach(addEventListener('click', function (e) {
     if (e.target.classList.contains('fa-trash')) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -226,11 +212,10 @@ body.addEventListener('click', function (e) {
                 }).then(() => {
                     // Remove the product's row from the table
                     e.target.parentNode.parentNode.remove();
-
                     // Delete the product
                     deleteProduct(e);
-
                     // Update the table
+                    display();
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
@@ -242,25 +227,26 @@ body.addEventListener('click', function (e) {
         });
         display();
     }
-});
-
+})
+)
 function deleteProduct(e){
     if (sellerId.accountType === 'seller') {
         // Delete Product From Products Array
         let productId = e.target.parentNode.parentNode.firstChild.id
+        deleteProductById(productId)
         // console.log(productId);
-        let product = getProductById(productId)
-        let indexOfProduct = state.products.indexOf(product)
-        state.products.splice(indexOfProduct,1)
-        // Delete Product From Products Array in User Array
-        let user = getUserById(sellerId.id)
-        let targetProdact = user.products.findIndex((item) => item.productId == +productId);
-        user.products.splice(targetProdact,1)
-        // Delete Product From Products Array in Current User Array
-        user.products = user.products
+        // let product = getProductById(productId)
+        // let indexOfProduct = state.products.indexOf(product)
+        // state.products.splice(indexOfProduct,1)
+        // // Delete Product From Products Array in User Array
+        // let user = getUserById(sellerId.id)
+        // let targetProdact = user.products.findIndex((item) => item.productId == +productId);
+        // user.products.splice(targetProdact,1)
+        // // Delete Product From Products Array in Current User Array
+        // user.products = user.products
 
-        setCurrentUser(user)
-        // console.log(currentUser);
+        // setCurrentUser(user)
+        // // console.log(currentUser);
         saveStateInLocalStorage()
     }
     //######################################################################################################
@@ -364,31 +350,31 @@ function fillFormFields(data) {
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
 function inputValidation(obj){
-    if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductName)) {
-        throw new Error("Invalid Product Name.");
-    }
-        // Validate price (numbers only)
-        if (!/^\d+$/.test((obj.NewProductprice)) || obj.NewProductprice <= 0 ) {
-        console.log(NewProductprice);
-        throw new Error("Invalid Product Price. Please enter a valid number.");
-    }
+    // if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductName)) {
+    //     throw new Error("Invalid Product Name.");
+    // }
+    //     // Validate price (numbers only)
+    //     if (!/^\d+$/.test((obj.NewProductprice)) || obj.NewProductprice <= 0 ) {
+    //     console.log(NewProductprice);
+    //     throw new Error("Invalid Product Price. Please enter a valid number.");
+    // }
 
-    // Validate category (letters and spaces only)
-    if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductcatagory)) {
-        // Check if NewProductcatagory contains invalid characters
-        throw new Error("Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters.");
-    }
+    // // Validate category (letters and spaces only)
+    // if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductcatagory)) {
+    //     // Check if NewProductcatagory contains invalid characters
+    //     throw new Error("Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters.");
+    // }
 
 
-    // Validate quantity (numbers only)
-    if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
-        // Check if NewProductQuantity is not a positive integer
-        throw new Error("Invalid Product Quantity. Please enter a valid positive number.");
-    }
+    // // Validate quantity (numbers only)
+    // if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
+    //     // Check if NewProductQuantity is not a positive integer
+    //     throw new Error("Invalid Product Quantity. Please enter a valid positive number.");
+    // }
 
-    // Validate description (letters and spaces only)
-    if (!/^[A-Za-z\s]{10,}$/.test(obj.NewProductDescription)) {
-        throw new Error("Invalid Description.");
+    // // Validate description (letters and spaces only)
+    // if (!/^[A-Za-z\s]{10,}$/.test(obj.NewProductDescription)) {
+    //     throw new Error("Invalid Description.");
 
-    }
+    // }
 }

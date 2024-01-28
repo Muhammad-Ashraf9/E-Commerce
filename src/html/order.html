@@ -33,7 +33,7 @@
 
 
   <style>
-    .table {
+    table {
         width: 100%;
         max-width: 100%;
         overflow-x: auto;
@@ -77,9 +77,6 @@
     table td:last-child{
         border-right: none;
     }
-    #productsTable{
-        margin: 20px auto;
-    }
   </style>
 
 </head>
@@ -88,6 +85,20 @@
     <section id="menu" >
     </section>            
     <section id="interface" >
+        <table></table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
     </section>
     <script type="module" src="../js/seller/orders.js"></script>
   </div>

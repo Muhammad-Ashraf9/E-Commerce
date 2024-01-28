@@ -3,12 +3,12 @@ let totalOrders = document.querySelector('#totalOrders h3')
 let pendingOrders = document.querySelector('#pendingOrders h3')
 let deliveredOrders = document.querySelector('#deliveredOrders h3')
 let totaProfit = document.querySelector('#totaProfit h3')
-document.addEventListener("DOMContentLoaded", function() {
 const userDataFromLocalStorage = localStorage.getItem('currentUser');
   // Parse the JSON string to get the JavaScript object
   const currentUserData = JSON.parse(userDataFromLocalStorage);
     // Example usage:
   const orders = getAllOrdersByOrderIds(currentUserData.orders);
+  console.log(orders);
   let tot = orders.length;
   if(orders)
         totalOrders.innerText = tot
@@ -24,7 +24,6 @@ function countPendingItems(orders, sellerId) {
             pendingCount += 1;
         }
     });
-    
     if(pendingCount)
         pendingOrders.innerText = pendingCount
     else
@@ -66,7 +65,7 @@ function profitPerMonth(orders, sellerId) {
         totaProfit.innerText = 'There is no oreders delivered yet'
 }
 profitPerMonth(orders, state.currentUser.id);
-});
+
 
 let model = document.getElementById('myModal')
 let btn = document.querySelector('input[type="button"]')
