@@ -291,21 +291,7 @@ export const state = {
       category: "Sofas",
       sellerId: 5,
       stock: 10,
-      rating: 4,
       numberofsales: 0,
-      countSold: 0,
-      reviews: [
-        {
-          userId: 1,
-          comment: "good",
-          rating: 4,
-        },
-        {
-          userId: 2,
-          comment: "bad",
-          rating: 2,
-        },
-      ],
     },
     {
       id: 2,
