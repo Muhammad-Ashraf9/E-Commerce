@@ -1,10 +1,9 @@
-import { signOut } from "../auth.js";
+import { signOut } from "../auth/auth.js";
 import { getCurrentUser } from "../model.js";
 import { renderModal } from "./SigninModal.js";
 import { renderCustomerModal } from "./customerSupportModal.js";
 
 export default function renderNav(element) {
-  
   const Nav = `  
   <nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
@@ -62,5 +61,5 @@ export default function renderNav(element) {
     renderNav(element);
   });
   renderModal(element);
-  renderCustomerModal(element)
+  renderCustomerModal(element);
 }

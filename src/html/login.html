@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../style/main.css" />
+    <script type="module" src="../js/auth/login.js"></script>
+  </head>
+  <body>
+    <main class="form form--login">
+      <form novalidate>
+        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+        <div class="input-group">
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="name@example.com"
+            />
+            <label for="email">Email address</label>
+          </div>
+          <div class="invalid-feedback email">Please choose a valid Email.</div>
+        </div>
+        <div class="input-group has-validation">
+          <div class="form-floating mt-3">
+            <input
+              type="password"
+              class="form-control mt-3"
+              id="password"
+              placeholder="Password"
+              aria-describedby="invalidCheckPasswordFeedback"
+            />
+
+            <label for="password">Password</label>
+          </div>
+          <div
+            class="invalid-feedback password"
+            id="invalidCheckPasswordFeedback"
+          >
+            Password must be at least 8 characters, at least a symbol, upper and
+            lower case letters and a number.
+          </div>
+        </div>
+        <div class="form-check mt-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="showPassword"
+            id="showPasswordCheckBox"
+          />
+          <label class="form-check-label" for="showPasswordCheckBox">
+            show password
+          </label>
+        </div>
+
+        <button class="btn btn-primary py-2" type="submit">Login</button>
+      </form>
+    </main>
+  </body>
+</html>
