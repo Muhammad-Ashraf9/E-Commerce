@@ -36,7 +36,7 @@ const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
-let itemsPerPage = 3;
+let itemsPerPage = 5;
 const sortBy = { field: "id", order: "desc" };
 const searchBy = { field: "id", value: "" };
 
@@ -265,4 +265,4 @@ signoutBtn.addEventListener("click", () => {
 });
 
 /// render Dashboard by default
-renderDashboard(main, modal);
+renderDashboard(main);

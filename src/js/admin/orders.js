@@ -83,6 +83,7 @@ export function renderOrdersPage(
       generateOrdersTableBody(getByPageNumber(array, pageNumber, itemsPerPage))
     )
   );
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   container.insertAdjacentHTML(
     "beforeend",
     getPaginationHTML(array, pageNumber, itemsPerPage)
@@ -141,7 +142,6 @@ export function renderOrdersPage(
       );
     }
   });
-  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   const searchBySelectElement = document.querySelector("select[name=searchBy]");
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {

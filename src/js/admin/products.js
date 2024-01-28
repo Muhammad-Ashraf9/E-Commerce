@@ -167,7 +167,7 @@ export function generateProductsTableBody(arrayOfProducts) {
       <td>${getUserById(product.sellerId)?.name || "Deleted Seller🥲"}</td>
       <td>${product.price}</td>
       <td>${product.category}</td>
-      <td><img class="table-img--sm"src="${product.img}"/></td>
+      <td><img class="table-img--sm"src="${product.imgURL0}"/></td>
       <td>
       <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" 
        data-bs-target="#modal"            
