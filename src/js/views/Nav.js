@@ -57,6 +57,7 @@ export default function renderNav(element) {
   nav.addEventListener("click", (e) => {
     if (e.target.textContent !== "Sign out") return;
     signOut();
+    location.assign("/src/html/newMain.html");
     nav.remove();
     renderNav(element);
   });
