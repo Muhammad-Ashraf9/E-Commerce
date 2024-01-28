@@ -1,10 +1,5 @@
 import handleSignIn from "../auth/signin.js";
-import {
-  isValidEmail,
-  isValidPassword,
-  validateEmail,
-  validatePassword,
-} from "../helper.js";
+
 
 export function renderModal(element) {
   const modal = ` <div class="modal fade" id="signIn" aria-labelledby="signIn" aria-hidden="true">
