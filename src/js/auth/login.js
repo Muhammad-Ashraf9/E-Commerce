@@ -1,4 +1,4 @@
-import { signIn, signUp } from "./auth/auth.js";
+import { signIn, signin } from "./auth.js";
 import {
   isValidEmail,
   isValidName,
@@ -36,8 +36,8 @@ showPasswordCheckBox.addEventListener("change", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
-  passwordInvalidFeedback.textContent = `Password must be at least 8 characters, at least a symbol, upper and lower case letters and a number..`; //to reset the error message after being changed by signUp function
+  emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signin function
+  passwordInvalidFeedback.textContent = `Password must be at least 8 characters, at least a symbol, upper and lower case letters and a number..`; //to reset the error message after being changed by signin function
 
   //   can be done with one function make validate function return true or false
   validateEmail(email, emailInvalidFeedback);
