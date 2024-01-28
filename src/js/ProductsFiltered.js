@@ -1,7 +1,8 @@
 // import { products } from "../js/Products.js";
-import { state as stateinmycomputer } from "./model.js";
-localStorage.setItem("state", JSON.stringify(stateinmycomputer));
-let state = JSON.parse(localStorage.getItem("state"));
+// import { state as stateinmycomputer } from "./model.js";
+// localStorage.setItem("state", JSON.stringify(stateinmycomputer));
+import { state } from "./model.js";
+// let state = JSON.parse(localStorage.getItem("state"));
 
 export let ProductsFiltered = (searchValue, category) => {
   return state.products.filter((product) => {

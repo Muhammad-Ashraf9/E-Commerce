@@ -1,6 +1,7 @@
 import { getQuantityFromguestCart } from "./getQuantityFromguestCart.js";
-let state = JSON.parse(localStorage.getItem("state"));
-
+// let state = JSON.parse(localStorage.getItem("state"));
+import { saveStateInLocalStorage, state } from "./model.js";
+console.log(state);
 // let myID = 2; // get it from the function
 // let currentUser = state.currentUser;
 // // if(currentUser){ orders of current user }
@@ -48,7 +49,8 @@ export function addtoCart(e) {
           user.cart = cart;
         }
       });
-      localStorage.setItem("state", JSON.stringify(state));
+      //localStorage.setItem("state", JSON.stringify(state));
+      saveStateInLocalStorage();
     } else {
       let cartGuest = state.guestCart;
       console.log(cartGuest);
@@ -76,7 +78,8 @@ export function addtoCart(e) {
       }
       element.value++;
       state.guestCart = cartGuest;
-      localStorage.setItem("state", JSON.stringify(state));
+      //localStorage.setItem("state", JSON.stringify(state));
+      saveStateInLocalStorage();
     }
   }
 }
