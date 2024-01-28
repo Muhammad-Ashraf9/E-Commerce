@@ -3,7 +3,7 @@ import { renderPaginationSection } from "../js/renderPaginationSection.js";
 import { getSearchValue } from "./getSearchValue.js";
 import { getCheckedValue } from "./getCategory.js";
 import { addtoCart } from "./addToCart.js";
-import { getQuantityFromguestCart } from "./getQuantityFromguestCart.js";
+import { getQuantityFromCart } from "./getQuantityFromCart.js";
 // Drawing the cards
 export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchValue(), category = getCheckedValue()) {
   // let searchValue = ;
@@ -25,7 +25,7 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   }
   for (let i = startCard; i <= endCard; i++) {
     const iID = Products[i - 1].id;
-    const prodQ = getQuantityFromguestCart(iID);
+    const prodQ = getQuantityFromCart(iID);
     const productOuterDiv = `
       <div class="col-md-3">
         <div class="wsk-cp-product">
