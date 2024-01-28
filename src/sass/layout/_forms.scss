@@ -1,59 +1,8 @@
-input:invalid {
-  border: 1px solid $color-error;
-}
 .form {
   &-signup {
     max-width: 50rem;
     padding: 1rem;
     margin: auto;
     padding: 2rem;
-  }
-  .error-message {
-    color: $color-error;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 0.5rem;
-    opacity: 0;
-    transition: all 0.3s;
-  }
-  &__img {
-    border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    background-color: $color-primary;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-
-    @include respond(tab-port) {
-      flex-direction: column;
-    }
-  }
-  label {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-transform: capitalize;
-  }
-  .validation-message {
-    color: $color-error;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 0.5rem;
-    transition: all 0.3s;
-    text-transform: capitalize;
-    opacity: 0;
-    transform: scale(0.1);
-    &--visible {
-      opacity: 1;
-      transform: scale(1);
-    }
   }
 }

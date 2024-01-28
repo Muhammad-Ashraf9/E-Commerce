@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Commerce</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -14,56 +18,84 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../sass/main.css" />
+    <link rel="stylesheet" href="../style/main.css" />
     <script type="module" src="../js/signup.js"></script>
   </head>
   <body>
     <main class="form form-signup">
-      <div class="form__img">
-        Techno
-      </div>
-      <form class="text-center" novalidate>
+      <div class="form__img">Techno</div>
+      <form novalidate>
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
-        <div class="form__group">
-          <label for="floatingInput">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
+        <div class="input-group">
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="name@example.com"
+            />
+            <label for="email">Email address</label>
+          </div>
+          <div class="invalid-feedback email">Please choose a valid Email.</div>
         </div>
-        <div class="validation-message">
-          Email must be a valid email address
-        </div>
-        <div class="form__group">
-          <label for="name">Name:</label>
-          <input
-            id="name"
-            class="form-control"
-            name="name"
-            type="text"
-            placeholder="Enter your full name"
-          />
-          <div class="validation-message">
-            name must be 4 or more characters
+        <div class="input-group has-validation">
+          <div class="form-floating mt-3">
+            <input
+              type="text"
+              class="form-control mt-3"
+              id="userName"
+              placeholder="username"
+            />
+            <label for="userName">Full Name</label>
+          </div>
+          <div class="invalid-feedback name">
+            Please choose a valid Full name must contain a at least first and
+            last name (3-16 letters).
           </div>
         </div>
+        <div class="input-group has-validation">
+          <div class="form-floating mt-3">
+            <input
+              type="password"
+              class="form-control mt-3"
+              id="password"
+              placeholder="Password"
+              aria-describedby="invalidCheckPasswordFeedback"
+            />
 
-        <div class="form__group">
-          <label for="floatingPassword">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <div class="validation-message">
-            passord must be 6 or more characters
+            <label for="password">Password</label>
+          </div>
+          <div
+            class="invalid-feedback password"
+            id="invalidCheckPasswordFeedback"
+          >
+            Password must be at least 8 characters, at least a symbol, upper and
+            lower case letters and a number.
           </div>
         </div>
-        <div class="error-message">Error</div>
+        <div class="form-check mt-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="showPassword"
+            id="showPasswordCheckBox"
+          />
+          <label class="form-check-label" for="showPasswordCheckBox">
+            show password
+          </label>
+        </div>
+        <div class="form-check mt-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="seller"
+            id="sellerCheckBox"
+          />
+          <label class="form-check-label" for="sellerCheckBox">
+            Join us as a seller💸
+          </label>
+        </div>
         <button class="btn btn-primary py-2" type="submit">Sign up</button>
       </form>
     </main>
