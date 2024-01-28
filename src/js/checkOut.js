@@ -145,7 +145,7 @@ window.addEventListener("load",function(){
        cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
           <div  class="col-lg-2">
-            <img  src="${item.product.img}" class="img-fluid rounded" alt="${item.product.title}">
+            <img  src="${item.product.imgURL0}" class="img-fluid rounded" alt="${item.product.title}">
           </div>
           <div class="col-md-10">
             

@@ -49,7 +49,7 @@ export default function renderFooter(element) {
   <div class="footer-top">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 footer-about ">
+        <div id="about" class="col-md-3 footer-about ">
         
           <h3> <img width="60vw" src="../assets/logo.png" alt="logo">  Furniro</h3>
           <p>
@@ -57,7 +57,7 @@ export default function renderFooter(element) {
           </p>
           <p class="fs-3 fw-bold ">&copy; Furniro Inc.</p>
               </div>
-        <div class="col-md-4 offset-md-1 footer-contact ">
+        <div id="contact" class="col-md-4 offset-md-1 footer-contact ">
           <h3 class="pb-3">Contact</h3>
               <p><i class="fas fa-map-marker-alt"></i> 78 madrb st, Mansoura Egypt</p>
               <p><i class="fas fa-phone"></i> Phone: 01094335757</p>
