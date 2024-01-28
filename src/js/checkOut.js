@@ -1,5 +1,12 @@
 import { getProductById, state,getCurrentUser, getUserById,changeCartItemCount,DeleteFromCart,getCurrentCart,saveStateInLocalStorage} from "./model.js";
-import {generateRandomId}from "./helper.js"
+import {generateRandomId}from "./helper.js";
+import renderNav from "./views/Nav.js";
+import renderFooter from "./views/Footer.js";
+
+const body = document.querySelector("body");
+
+renderFooter(body);
+renderNav(body);
 const user = getCurrentUser(); //getting the user
 let ucart =  user.cart ; //checking if state
 let flag=false; // intializing a flag to know when to create a knew order
@@ -43,7 +50,7 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
           text: "Your order has been submitted successfully",
           icon: "success"
         }).then(()=>{
-          location.assign('../html/main.html')
+          location.assign('../html/newMain.html')
         })
         }else{
           Swal.fire({
@@ -88,30 +95,35 @@ let cart = ucart.map((item) => ({    //fetchin user cart's data
       date: new Date().toISOString().slice(0, 10),
       customerDetails:formDataObject,
     };
-    console.log(newOrder);
     state.orders.push(newOrder)     //pushing the order in the list of orders
-    user.orders.push(orderID)       //pushing the order id in the current user's orders' list
     const uindex = state.users.findIndex(user=>user.id === state.currentUser.id)      //getting the customers index in the list of users
-    state.users[uindex].orders.push[orderID]//pushing the order id in the customer's orders' list
+
+    state.users[uindex].orders.push(orderID)//pushing the order id in the customer's orders' list
+
+    state.users[uindex].cart=[];
     let flagx=0;      //a flag to use for later
     let sellers =[];     //array to contain the ids of the sellers in this order
     Items.forEach(item => {        //a loop to update the stock of each product  
       let index=state.products.findIndex(product=>product.id===item.id)   // getting the index of the product in product list
+      console.log(item);
       let sellerIndex=state.users.findIndex(seller=>seller.id===item.sellerId)   // getting the index of the seller in users list
-      let productIndex=state.users[sellerIndex].products.findIndex(product=>product.productId===item.id) //gettig the product index in the seller's product list
+
+      console.log(sellerIndex);
+      //let productIndex=state.users[sellerIndex].products.findIndex(product=>product.productId===item.id) //gettig the product index in the seller's product list
+      
       state.products[index].stock-=cart[flagx].num ///updating the stock in product list
+      
       if(!sellers.includes(item.sellerId)){  //checking if the seller is already notified with the order id
+        console.log(state.users[sellerIndex]);
         sellers.push(item.sellerId)
         state.users[sellerIndex].orders.push(orderID) //notifing the seller with the order id
       }
       
-      state.users[sellerIndex].products[productIndex].stock-=cart[flagx].num //updating the stock in the sellers list of products
-      user.cart=[];
+      //state.users[sellerIndex].products[productIndex].stock-=cart[flagx].num //updating the stock in the sellers list of products
 
       flagx++;
     });
     saveStateInLocalStorage();
-
   };
 
 window.addEventListener("load",function(){
@@ -131,8 +143,8 @@ window.addEventListener("load",function(){
         <span style="background: #F9F1E7;" class="fs-1">your cart is empty !</span>  
       </div>      
       <div class="pt-3 col-lg-6">
-        <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
-        <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="main.html">Go to Products page</a></button>
+        <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="newMain.html">Go to home page</a></button>
+        <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="Products_tester.html">Go to Products page</a></button>
       </div>
     </ >
     `;
