@@ -72,10 +72,10 @@ export default function renderFooter(element) {
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <p><a class="scroll-link" href="main.html">Home</a></p>
-                    <p><a href="Products_tester">Products</a></p>
-                    <p><a href="#">How it works</a></p>
-                    <p><a href="#">Our clients</a></p>
+                    <p><a class="scroll-link" href="newMain.html">Home</a></p>
+                    <p><a href="Products_tester.html">Products</a></p>
+                    <p><a href="cart_page.html">Your Cart</a></p>
+                    <p><a href="newMain.html">Our clients</a></p>
                   </div>
                 </div>
               </div>
