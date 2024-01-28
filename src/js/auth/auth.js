@@ -25,6 +25,7 @@ export function signIn(email, password) {
 export function signOut() {
   deleteCookie("id");
   setCurrentUser(null);
+  location.assign('../html/main.html')
 }
 
 export function signUp(email, password, name, accountType) {
