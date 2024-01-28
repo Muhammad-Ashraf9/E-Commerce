@@ -28,7 +28,7 @@ export const state = {
     },
     {
       id: 3,
-      name: "ash seller",
+      name: "ash sellerB",
       email: "ash@seller.ash",
       password: "ash123",
       orders: [354028, 3528],
@@ -44,7 +44,7 @@ export const state = {
     },
     {
       id: 5,
-      name: "ash seller",
+      name: "ash sellerA",
       email: "ash@seller.ash",
       password: "ash12345",
       orders: [ 3],
@@ -289,7 +289,7 @@ export const state = {
       price: 100,
       prevPrice: 200,
       category: "Sofas",
-      sellerId: 3,
+      sellerId: 5,
       stock: 10,
       rating: 4,
       numberofsales: 0,
@@ -2293,7 +2293,7 @@ export function getCurrentUser() {
 }
 export function addUser(user) {
   state.users.push(user);
-  saveInLocalStorage("users", state.users);
+  saveStateInLocalStorage();
 }
 
 export function getUserById(id) {
@@ -2525,6 +2525,13 @@ export function deleteMessageById(id) {
 }
 export function testLog() {
   console.log("test");
+}
+
+export function moveGuestCartToUserCart(id) {
+  const index = state.users.findIndex((user) => user.id === +id);
+  state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
+  state.guestCart = [];
+  saveStateInLocalStorage();
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

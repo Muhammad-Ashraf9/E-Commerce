@@ -1,4 +1,4 @@
-import handleSignIn from "../signin.js";
+import handleSignIn from "../auth/signin.js";
 
 export function renderModal(element) {
   const modal = ` <div class="modal fade" id="signIn" aria-labelledby="signIn" aria-hidden="true">
