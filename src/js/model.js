@@ -47,7 +47,7 @@ export const state = {
       name: "ash sellerA",
       email: "ash@seller.ash",
       password: "ash12345",
-      orders: [ 3],
+      orders: [3],
       accountType: "seller",
       products: [
         {
@@ -2305,8 +2305,8 @@ export function getUserByEmail(email) {
 
 export function getAllOrdersByOrderIds(orderIds) {
   const allOrders = [];
-  let ordersFromLocalStorage = localStorage.getItem('orders')
-  let orders = JSON.parse(ordersFromLocalStorage)
+  let ordersFromLocalStorage = localStorage.getItem("orders");
+  let orders = JSON.parse(ordersFromLocalStorage);
   // Iterate through the order IDs
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
@@ -2334,16 +2334,15 @@ export function getAllOrdersByOrderIds(orderIds) {
   return result;
 }
 
-function getAllProductsBySellerId(allProducts){
-  if(state.currentUser.accountType === 'seller'){
-    if(allProducts){
+function getAllProductsBySellerId(allProducts) {
+  if (state.currentUser.accountType === "seller") {
+    if (allProducts) {
       let id = state.currentUser.id;
-      const result = allProducts.filter(obj => obj.sellerId === id);
-      return result
+      const result = allProducts.filter((obj) => obj.sellerId === id);
+      return result;
     }
     //
-  }else
-    return
+  } else return;
 }
 export function getAllProductsByProductIds(productIds) {
   // // console.log(productIds);
@@ -2356,15 +2355,15 @@ export function getAllProductsByProductIds(productIds) {
     // console.log(productId);
 
     //const foundProduct = state.products.find((product) => product.id === productId.productId);
-    const foundProduct = localStorage.getItem('products')
-    
+    const foundProduct = localStorage.getItem("products");
+
     // If the order is found, add it to the allOrders array
     if (foundProduct) {
       // console.log(foundProduct);
       allProducts.push(JSON.parse(foundProduct));
     }
-    }
-  const arrProducts = getAllProductsBySellerId(allProducts[0])
+  }
+  const arrProducts = getAllProductsBySellerId(allProducts[0]);
   return arrProducts;
 }
 export function getCustomers() {
@@ -2529,6 +2528,8 @@ export function testLog() {
 
 export function moveGuestCartToUserCart(id) {
   const index = state.users.findIndex((user) => user.id === +id);
+  console.log("index :>> ", index);
+  console.log("state.users[index] :>> ", state.users[index]);
   state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
   state.guestCart = [];
   saveStateInLocalStorage();
