@@ -30,7 +30,6 @@ export function renderProductsPage(
   //onchange instead of addEventListener to remove previous event listeners
   search.onchange = (e) => {
     const newSearchBy = { ...searchBy, value: e.target.value.trim() };
-    console.log("newSearchBy search  valuue:>> ", newSearchBy);
 
     renderProductsPage(
       container,
@@ -65,22 +64,28 @@ export function renderProductsPage(
     searchBy,
     renderProductsPage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
-      if (sortBy.field === field) {
-        sortBy.order = sortBy.order === "asc" ? "desc" : "asc";
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
       } else {
-        sortBy.field = field;
-        sortBy.order = "asc";
+        newSortBy.field = field;
+        newSortBy.order = "asc";
       }
 
       renderProductsPage(
         container,
-        sortByField(array, sortBy.field, sortBy.order),
+        sortByField(state.products, newSortBy.field, newSortBy.order),
         pageNumber,
         itemsPerPage,
-        sortBy,
+        newSortBy,
         searchBy
       );
     }
@@ -117,7 +122,6 @@ export function renderProductsPage(
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {
     const newSearchBy = { ...searchBy, field: e.target.value };
-    console.log("newSearchBy fierld :>> ", newSearchBy);
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),
