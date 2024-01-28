@@ -1,8 +1,8 @@
 import { getProductById, state,getCurrentUser, getUserById, getCurrentCart,changeCartItemCount,DeleteFromCart } from "./model.js";
 const user = getCurrentUser();
-if (!getCurrentUser() || getCurrentUser().accountType == "admin") {
-  location.assign("../html/main.html");
-}
+// if (!getCurrentUser() || getCurrentUser().accountType == "admin") {
+//   location.assign("../html/main.html");
+// }
 let ucart = getCurrentCart()
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
@@ -26,8 +26,8 @@ window.addEventListener("load", function () {
           <span class="fs-1 fw-bold">your cart is empty !</span>
         </div>       
         <div class="pt-3 col-lg-6">
-         <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="main.html">Go to home page</a></button>
-         <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="main.html">Go to Products page</a></button>
+         <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="newMain.html">Go to home page</a></button>
+         <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="Products_tester.html">Go to Products page</a></button>
         </div>
       </div>
       `;
