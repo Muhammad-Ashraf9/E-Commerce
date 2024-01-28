@@ -28,7 +28,7 @@ export const state = {
     },
     {
       id: 3,
-      name: "ash seller",
+      name: "ash sellerB",
       email: "ash@seller.ash",
       password: "ash123",
       orders: [1, 2, 3],
@@ -46,7 +46,7 @@ export const state = {
     },
     {
       id: 5,
-      name: "ash seller",
+      name: "ash sellerA",
       email: "ash@seller.ash",
       password: "ash123",
       orders: [3],
@@ -293,7 +293,7 @@ export const state = {
       price: 100,
       prevPrice: 200,
       category: "Sofas",
-      sellerId: 3,
+      sellerId: 5,
       stock: 10,
       rating: 4,
       numberofsales: 0,
