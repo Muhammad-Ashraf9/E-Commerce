@@ -2,7 +2,7 @@ import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
   const footer = `
 </li>
-  <div class="p-2 ps-5 mt-2">
+  <div class="p-2 ps-5 mt-2 bg-light">
     <div class="container-fluid">
       <div class="row text-center p-3">
         <div class="col-lg-3 col-md-6 p-2">
