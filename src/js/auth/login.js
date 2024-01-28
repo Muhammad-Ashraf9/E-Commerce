@@ -1,4 +1,4 @@
-import { signIn, signUp } from "./auth.js";
+import { signIn, signUp } from "./auth/auth.js";
 import {
   isValidEmail,
   isValidName,

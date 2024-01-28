@@ -1,4 +1,4 @@
-import { signUp } from "../auth.js";
+import { signUp } from "../auth/auth.js";
 import { isValidEmail, isValidName, isValidPassword, validateEmail, validateName, validatePassword } from "../helper.js";
 import {
   deleteSellerById,
