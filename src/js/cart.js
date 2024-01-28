@@ -8,7 +8,7 @@ let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-
+console.log(cart);
 window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
@@ -39,11 +39,9 @@ window.addEventListener("load", function () {
       cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
           <div  class="col-lg-2">
-            <img  src="${item.product.img}" class="img-fluid rounded" alt="${
-        item.title
-      }">
+            <img  src="${item.product.imgURL0}" class="img-fluid rounded" alt="${ item.title}">
           </div>
-          <div class="col-md-10">  
+          <div class="col-md-10 ">  
             <div class="card-body d-flex gap-3 flex-nowrap">
               <!-- Information -->
               <div class="col-sm-7 flex-grow-1">

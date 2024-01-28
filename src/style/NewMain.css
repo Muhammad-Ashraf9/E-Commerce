@@ -80,33 +80,22 @@ img {
   font-weight: 400;
   line-height: normal;
 }
-.imagess {
-  margin-top: 50px;
-  /* margin-right: 10px; */
-  /* padding-right: 20px;
-    border-radius: 30px; */
-  width: 700px;
-  height: 521px;
-  flex-shrink: 0;
+.imgtitle{
+    color:#333;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
-.imgtitle {
-  color: #333;
-  text-align: center;
-  font-family: Poppins;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-div img {
-  object-fit: cover;
-}
-#testimonials {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(../assets/testmonilas.jpg);
-  background-position: center;
-  background-size: cover;
-  color: white;
+
+#testimonials{
+    margin-top: 10px;
+    background-image: linear-gradient(rgba(0, 0,0, .7),rgba(0,0,0,.7)),url(../assets/testemonils.jpg);
+    background-position: center;
+    background-size: cover;
+    color: white;
 }
 #testimonials i {
   font-size: 40px;
