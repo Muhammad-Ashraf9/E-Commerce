@@ -4,7 +4,7 @@ import renderNav from "../js/views/Nav.js";
 import renderFooter from "../js/views/Footer.js";
 import { getCheckedValue } from "../js/getCategory.js";
 import { getSearchValue } from "../js/getSearchValue.js";
-import { addtoCart } from "./addtoCart.js";
+import { addtoCart } from ".//addToCart.js";
 let prodID = -1;
 
 // Onload page rendering of the cards

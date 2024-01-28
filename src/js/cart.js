@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
   function generateCards() {
- cart =    getCurrentCart().map((item) => ({
+  cart =    getCurrentCart().map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));

@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Products Page</title>
-<!-- Main Stylesheet -->
-<link rel="stylesheet" href="../style/main.css" />
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="../style/main.css" />
 
   <!-- Bootstrap stylesheet -->
   <link rel="stylesheet" href="../style/bootstrap.min.css" />
@@ -21,6 +21,9 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <!-- FontAwesome Script -->
   <script src="https://kit.fontawesome.com/585a1514af.js" crossorigin="anonymous"></script>
+  <!-- SweetAlert Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- Page External Script  -->
   <script type="module" src="../js/Products_tester.js"></script>
   <!-- Page Internal Script -->
@@ -32,42 +35,42 @@
 
 <body>
   <div class="container">
-    <div  class="row">
+    <div class="row">
       <div class="p-1 mx-4 my-2 rounded-3" style="background-color: #FAF3EA;">
-          <div id="CategoryButtons" class="text-center ">
-            <ul class="row">
-              <li class="list-group-item bg-transparent border-0 border-0 col">
-                <input class="form-check-input me-1" type="radio" value="" id="zeroCheckbox" name="Category" checked>
-                <label class="form-check-label" for="zeroCheckbox">All</label>
-              </li>
-              <li class="list-group-item bg-transparent border-0 col">
-                <input class="form-check-input me-1" type="radio" value="Sofas" id="firstCheckbox" name="Category">
-                <label class="form-check-label" for="firstCheckbox">Sofas</label>
-              </li>
-              <li class="list-group-item bg-transparent border-0 col">
-                <input class="form-check-input me-1" type="radio" value="TV & media furniture" id="secondCheckbox"
-                  name="Category">
-                <label class="form-check-label" for="secondCheckbox">TV & media furniture</label>
-              </li>
-              <li class="list-group-item bg-transparent border-0 col  ">
-                <input class="form-check-input me-1" type="radio" value="Phone" id="thirdCheckbox" name="Category">
-                <label class="form-check-label" for="thirdCheckbox">Phone</label>
-              </li>
-              <li class="list-group-item bg-transparent border-0 col-5 col-sm-12  ">
-                <form class="text-center" action="" id="searchform">
-                  <input type="search" placeholder="Search by product" required>
-                  <i class="fa fa-search"></i>
-                  <a href="" id="clear-btn" aria-label="clear" target="_blank" rel="noopener">
-                    <i class="fa-solid fa-xmark">
-                    </i>
-                  </a>
-                </form>
-              </li>
-            </ul>
-          </div>
-          <!-- End The Category Buttons -->
-          <div>
-          </div>
+        <div id="CategoryButtons" class="text-center ">
+          <ul class="row">
+            <li class="list-group-item bg-transparent border-0 border-0 col">
+              <input class="form-check-input me-1" type="radio" value="" id="zeroCheckbox" name="Category" checked>
+              <label class="form-check-label" for="zeroCheckbox">All</label>
+            </li>
+            <li class="list-group-item bg-transparent border-0 col">
+              <input class="form-check-input me-1" type="radio" value="Sofas" id="firstCheckbox" name="Category">
+              <label class="form-check-label" for="firstCheckbox">Sofas</label>
+            </li>
+            <li class="list-group-item bg-transparent border-0 col">
+              <input class="form-check-input me-1" type="radio" value="TV & media furniture" id="secondCheckbox"
+                name="Category">
+              <label class="form-check-label" for="secondCheckbox">TV & media furniture</label>
+            </li>
+            <li class="list-group-item bg-transparent border-0 col  ">
+              <input class="form-check-input me-1" type="radio" value="Phone" id="thirdCheckbox" name="Category">
+              <label class="form-check-label" for="thirdCheckbox">Phone</label>
+            </li>
+            <li class="list-group-item bg-transparent border-0 col-5 col-sm-12  ">
+              <form class="text-center" action="" id="searchform">
+                <input type="search" placeholder="Search by product" required>
+                <i class="fa fa-search"></i>
+                <a href="" id="clear-btn" aria-label="clear" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-xmark">
+                  </i>
+                </a>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <!-- End The Category Buttons -->
+        <div>
+        </div>
       </div>
     </div>
 
@@ -78,7 +81,7 @@
     <div id="paginationSection" class="row"></div>
     <!-- Pagination ENDS -->
   </div>
-<script type="module" src="../js/main.js"></script>
+  <script type="module" src="../js/main.js"></script>
 
 </body>
 
