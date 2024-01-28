@@ -23,22 +23,3 @@ export function getCheckedValue() {
   
   return checkedValue;
 }
-
-//<div class="container" id="CategoryButtons">
-//  <div id="CategoryButtons" class="container">
-//    <ul class="row ">
-//      <li class="list-group-item col">
-//        <input class="form-check-input me-1" type="radio" value="TVs" id="firstCheckbox">
-//        <label class="form-check-label" for="firstCheckbox">TVs</label>
-//      </li>
-//      <li class="list-group-item col">
-//        <input class="form-check-input me-1" type="radio" value="Laptops" id="secondCheckbox">
-//        <label class="form-check-label" for="secondCheckbox">Laptops</label>
-//      </li>
-//      <li class="list-group-item col">
-//        <input class="form-check-input me-1" type="radio" value="Phone" id="thirdCheckbox">
-//        <label class="form-check-label" for="thirdCheckbox">Phone</label>
-//      </li>
-//    </ul>
-//  </div>
-//</div>

@@ -3,15 +3,18 @@
 import { renderCards } from "../js/renderCards.js";
 import { ProductsFiltered } from "./ProductsFiltered.js";
 import {
+  state,
   changeCartItemCount,
   getCurrentCart,
   getCurrentUser,
   getProductById,
+  saveStateInLocalStorage,
 } from "./model.js";
+
 
 let prodID = localStorage.getItem("id");
 // get data from local storage
-let state = JSON.parse(localStorage.getItem("state"));
+// let state = JSON.parse(localStorage.getItem("state"));
 const Product = state.products[prodID];
 const prodImgtwo = document.getElementById("two");
 const prodImgone = document.getElementById("one");
@@ -164,7 +167,7 @@ cards.addEventListener("click", function (e) {
         break;
       }
     }
-    if (/*flag == true &&*/ cart[targetI].quantity == 0) {
+    if (/*flag == true &&*/ cart[targetI]  && cart[targetI].quantity == 0) {
       cart.splice(targetI, 1);
       flag = false;
     }
@@ -182,7 +185,8 @@ cards.addEventListener("click", function (e) {
         user.cart = cart;
       }
     });
-    localStorage.setItem("state", JSON.stringify(state));
+    // localStorage.setItem("state", JSON.stringify(state));
+    saveStateInLocalStorage();
   } else {
     console.log("not + or -");
   }
@@ -197,7 +201,8 @@ cards.addEventListener("click", function (e) {
   } else {
     state.guestCart = cart;
   }
-  localStorage.setItem("state", JSON.stringify(state));
+  // localStorage.setItem("state", JSON.stringify(state));
+  saveStateInLocalStorage();  
 });
 
 //     if (e.target.innerText == "+") {

@@ -1,6 +1,8 @@
+import { state } from "./model.js";
+
 export function getQuantityFromguestCart(prodID) {
   console.log("this id: " + prodID);
-  let state = JSON.parse(localStorage.getItem("state"));
+  // let state = JSON.parse(localStorage.getItem("state"));
   let guestCart = state.guestCart;
   // for loop in array of objects
   for (let item of guestCart) {
