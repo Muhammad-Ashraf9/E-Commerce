@@ -42,7 +42,7 @@ export function renderCustomerModal(element) {
       text: "Your message has been submitted successfully",
       icon: "success",
     }).then(() => {
-      location.assign("../html/main.html");
+      location.assign("../html/newMain.html");
     });
 
     console.log(state);
