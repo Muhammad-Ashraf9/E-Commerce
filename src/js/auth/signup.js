@@ -6,7 +6,7 @@ import {
   validateEmail,
   validateName,
   validatePassword,
-} from "./helper.js";
+} from "../helper.js";
 
 const form = document.querySelector("form");
 const email = document.querySelector("#email");

@@ -2297,7 +2297,7 @@ export function getCurrentUser() {
 }
 export function addUser(user) {
   state.users.push(user);
-  saveInLocalStorage("users", state.users);
+  saveStateInLocalStorage();
 }
 
 export function getUserById(id) {

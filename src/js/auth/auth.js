@@ -1,4 +1,4 @@
-import { deleteCookie, getCoookie, setCookie } from "./helper.js";
+import { deleteCookie, getCoookie, setCookie } from "../helper.js";
 import {
   addUser,
   getCurrentUser,
@@ -6,7 +6,7 @@ import {
   getUserById,
   setCurrentUser,
   state,
-} from "./model.js";
+} from "../model.js";
 
 export function signIn(email, password) {
   const user = getUserByEmail(email);
@@ -16,6 +16,7 @@ export function signIn(email, password) {
   if (password !== user.password) {
     throw new Error("Wrong password");
   }
+
   setCookie("id", user.id, 7);
   setCurrentUser(user);
 }
@@ -41,7 +42,7 @@ export function signUp(email, password, name, accountType) {
   if (customer.accountType === "seller") {
     customer.products = [];
   } else if (customer.accountType === "customer") {
-    if (!getCurrentUser()) {
+    if (!getCurrentUser() || getCurrentUser().accountType !== "admin") {
       //i use signup to add customers so i need to add guestCart only when no user is logged in
       customer.cart = [...state.guestCart];
       state.guestCart = [];
