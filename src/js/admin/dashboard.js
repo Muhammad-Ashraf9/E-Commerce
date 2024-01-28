@@ -1,4 +1,4 @@
-import { signOut } from "../auth.js";
+import { signOut } from "../auth/auth.js";
 import {
   getCurrentUser,
   getCustomers,

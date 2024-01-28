@@ -28,7 +28,7 @@ export const state = {
     },
     {
       id: 3,
-      name: "ash seller",
+      name: "ash sellerB",
       email: "ash@seller.ash",
       password: "ash123",
       orders: [354028, 3528],
@@ -44,10 +44,10 @@ export const state = {
     },
     {
       id: 5,
-      name: "ash seller",
+      name: "ash sellerA",
       email: "ash@seller.ash",
       password: "ash12345",
-      orders: [ 3],
+      orders: [3],
       accountType: "seller",
       products: [
         {
@@ -289,7 +289,7 @@ export const state = {
       price: 100,
       prevPrice: 200,
       category: "Sofas",
-      sellerId: 3,
+      sellerId: 5,
       stock: 10,
       numberofsales: 0,
     },
@@ -2279,7 +2279,7 @@ export function getCurrentUser() {
 }
 export function addUser(user) {
   state.users.push(user);
-  saveInLocalStorage("users", state.users);
+  saveStateInLocalStorage();
 }
 
 export function getUserById(id) {
@@ -2291,8 +2291,8 @@ export function getUserByEmail(email) {
 
 export function getAllOrdersByOrderIds(orderIds) {
   const allOrders = [];
-  let ordersFromLocalStorage = localStorage.getItem('orders')
-  let orders = JSON.parse(ordersFromLocalStorage)
+  let ordersFromLocalStorage = localStorage.getItem("orders");
+  let orders = JSON.parse(ordersFromLocalStorage);
   // Iterate through the order IDs
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
@@ -2320,16 +2320,15 @@ export function getAllOrdersByOrderIds(orderIds) {
   return result;
 }
 
-function getAllProductsBySellerId(allProducts){
-  if(state.currentUser.accountType === 'seller'){
-    if(allProducts){
+function getAllProductsBySellerId(allProducts) {
+  if (state.currentUser.accountType === "seller") {
+    if (allProducts) {
       let id = state.currentUser.id;
-      const result = allProducts.filter(obj => obj.sellerId === id);
-      return result
+      const result = allProducts.filter((obj) => obj.sellerId === id);
+      return result;
     }
     //
-  }else
-    return
+  } else return;
 }
 export function getAllProductsByProductIds(productIds) {
   // // console.log(productIds);
@@ -2342,15 +2341,15 @@ export function getAllProductsByProductIds(productIds) {
     // console.log(productId);
 
     //const foundProduct = state.products.find((product) => product.id === productId.productId);
-    const foundProduct = localStorage.getItem('products')
-    
+    const foundProduct = localStorage.getItem("products");
+
     // If the order is found, add it to the allOrders array
     if (foundProduct) {
       // console.log(foundProduct);
       allProducts.push(JSON.parse(foundProduct));
     }
-    }
-  const arrProducts = getAllProductsBySellerId(allProducts[0])
+  }
+  const arrProducts = getAllProductsBySellerId(allProducts[0]);
   return arrProducts;
 }
 export function getCustomers() {
@@ -2511,6 +2510,15 @@ export function deleteMessageById(id) {
 }
 export function testLog() {
   console.log("test");
+}
+
+export function moveGuestCartToUserCart(id) {
+  const index = state.users.findIndex((user) => user.id === +id);
+  console.log("index :>> ", index);
+  console.log("state.users[index] :>> ", state.users[index]);
+  state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
+  state.guestCart = [];
+  saveStateInLocalStorage();
 }
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

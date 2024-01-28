@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Commerce</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -14,58 +18,103 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../sass/main.css" />
-    <script type="module" src="../js/signup.js"></script>
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="../style/authentication.css">
+    <script type="module" src="../js/auth/signup.js"></script>
   </head>
   <body>
-    <main class="form form-signup">
-      <div class="form__img">
-        Techno
-      </div>
-      <form class="text-center" novalidate>
-        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
-        <div class="form__group">
-          <label for="floatingInput">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div class="validation-message">
-          Email must be a valid email address
-        </div>
-        <div class="form__group">
-          <label for="name">Name:</label>
-          <input
-            id="name"
-            class="form-control"
-            name="name"
-            type="text"
-            placeholder="Enter your full name"
-          />
-          <div class="validation-message">
-            name must be 4 or more characters
+    <div id="cont">
+      <nav class="navbar navbar-expand-lg justify-content-between bg-light mb-5 " data-bs-theme="light">
+        <div class="container-fluid ">
+          <div class="col-2 ">
+            <a class="navbar-brand ms-3" href="newMain.html">
+              <img width="50px" src="../assets/logo.png" alt="logo"> Furniro
+            </a>
           </div>
-        </div>
-
-        <div class="form__group">
-          <label for="floatingPassword">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <div class="validation-message">
-            passord must be 6 or more characters
+        </nav>
+      <main class="form form--signup rounded-3 ">
+        <!-- <div class="form__img"><img width="70px" src="../assets/logo.png" alt="logo"> <span class="fs-4">Furniro</span></div> -->
+        <form novalidate>
+          <h1 class="h3 mb-3 fw-bold mb-4  ">Get ready to innovate your home !</h1>
+      
+          <div class="input-group">
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="name@example.com"
+              />
+              <label style="color: rgb(121, 121, 121);" for="email">Email address</label>
+            </div>
+            <div class="invalid-feedback email">Please choose a valid Email.</div>
           </div>
-        </div>
-        <div class="error-message">Error</div>
-        <button class="btn btn-primary py-2" type="submit">Sign up</button>
-      </form>
-    </main>
+          <div class="input-group has-validation">
+            <div class="form-floating mt-3">
+              <input
+                type="text"
+                class="form-control mt-3"
+                id="userName"
+                placeholder="username"
+              />
+              <label style="color: rgb(121, 121, 121);" for="userName">Full Name</label>
+            </div>
+            <div class="invalid-feedback name">
+              Please choose a valid Full name must contain a at least first and
+              last name (3-16 letters).
+            </div>
+          </div>
+          <div class="input-group has-validation">
+            <div class="form-floating mt-3">
+              <input
+                type="password"
+                class="form-control mt-3"
+                id="password"
+                placeholder="Password"
+                aria-describedby="invalidCheckPasswordFeedback"
+              />
+      
+              <label style="color: rgb(121, 121, 121);" for="password">Password</label>
+            </div>
+            <div
+              class="invalid-feedback password"
+              id="invalidCheckPasswordFeedback"
+            >
+              Password must be at least 8 characters, at least a symbol, upper and
+              lower case letters and a number.
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="showPassword"
+                id="showPasswordCheckBox"
+              />
+              <label class="form-check-label" for="showPasswordCheckBox">
+                show password
+              </label>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="seller"
+                id="sellerCheckBox"
+              />
+              <label class="form-check-label" for="sellerCheckBox">
+                Join us as a seller💸
+              </label>
+            </div>
+          </div>
+          <div class="mt-3 d-flex justify-content-around">
+            <button style="background-color:#eec28c; border: none;" class="w-25 btn btn-primary py-2" type="submit">Sign up</button>
+            <a href="login.html"style=" border: none;" class=" py-2" >already a user? <span style="text-decoration: underline;">  click here to login</span></a>
+          </div>
+        </form>
+      </main>
+      
+    </div>  
   </body>
 </html>

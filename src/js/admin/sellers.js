@@ -1,5 +1,5 @@
-import { signUp } from "../auth.js";
-import { isValidEmail, isValidName, isValidPassword } from "../helper.js";
+import { signUp } from "../auth/auth.js";
+import { isValidEmail, isValidName, isValidPassword, validateEmail, validateName, validatePassword } from "../helper.js";
 import {
   deleteSellerById,
   editUserById,
@@ -213,33 +213,7 @@ function getSelectSearchByHTML() {
   `;
 }
 
-function validateEmail(email, emailInvalidFeedback) {
-  if (!isValidEmail(email.value)) {
-    email.classList.add("is-invalid");
-    emailInvalidFeedback.style.display = "block";
-  } else {
-    email.classList.remove("is-invalid");
-    emailInvalidFeedback.style.display = "none";
-  }
-}
-function validateName(name, nameInvalidFeedback) {
-  if (!isValidName(name.value)) {
-    name.classList.add("is-invalid");
-    nameInvalidFeedback.style.display = "block";
-  } else {
-    name.classList.remove("is-invalid");
-    nameInvalidFeedback.style.display = "none";
-  }
-}
-function validatePassword(password, passwordInvalidFeedback) {
-  if (!isValidPassword(password.value)) {
-    password.classList.add("is-invalid");
-    passwordInvalidFeedback.style.display = "block";
-  } else {
-    password.classList.remove("is-invalid");
-    passwordInvalidFeedback.style.display = "none";
-  }
-}
+
 
 export function handleEditUser(
   id,

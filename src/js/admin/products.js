@@ -82,7 +82,14 @@ export function renderProductsPage(
 
       renderProductsPage(
         container,
-        sortByField(state.products, newSortBy.field, newSortBy.order),
+        sortByField(
+          state.products.map((p) => ({
+            ...p,
+            sellerName: getUserById(p.sellerId)?.name || "Deleted Seller🥲",
+          })),
+          newSortBy.field,
+          newSortBy.order
+        ),
         pageNumber,
         itemsPerPage,
         newSortBy,
@@ -139,7 +146,7 @@ export function generateProductsTableHeader() {
       <th scope="col" data-field="id">ID</th>
       <th scope="col" data-field="title">Product title</th>
       <th scope="col" data-field="description" >Description</th>
-      <th scope="col" >Seller Name</th>
+      <th scope="col" data-field="sellerName">Seller</th>
       <th scope="col" data-field="price">Price</th>
       <th scope="col" data-field="category">Category</th>
       <th scope="col" >Image</th>
@@ -157,11 +164,7 @@ export function generateProductsTableBody(arrayOfProducts) {
       <td>${product.id}</td>
       <td>${product.title}</td>
       <td>${product.description}</td>
-      <td>${
-        getUserById(product.sellerId)
-          ? getUserById(product.sellerId).name
-          : "Deleted Seller🥲"
-      }</td>
+      <td>${getUserById(product.sellerId)?.name || "Deleted Seller🥲"}</td>
       <td>${product.price}</td>
       <td>${product.category}</td>
       <td><img class="table-img--sm"src="${product.img}"/></td>
