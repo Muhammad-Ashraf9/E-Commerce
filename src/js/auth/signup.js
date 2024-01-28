@@ -54,7 +54,7 @@ form.addEventListener("submit", (e) => {
   }
   try {
     signUp(email.value, password.value, name.value, userType);
-    location.assign(`../html/login.html`);
+    location.assign("/src/html/NewMain.html");
   } catch (error) {
     email.classList.add("is-invalid");
     emailInvalidFeedback.textContent = error.message;

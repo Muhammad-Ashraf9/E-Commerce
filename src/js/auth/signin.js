@@ -46,12 +46,11 @@ export default function handleSignIn() {
     try {
       signIn(email.value, password.value);
       const currentUser = getCurrentUser();
-      location.assign(`../html/${currentUser.accountType}.html`);
-      // if (currentUser.accountType !== "customer") {
-      //   return;
-      // } else {
-      //   location.assign(`../html/${currentUser.accountType}.html`);
-      // }
+      if (currentUser.accountType === "customer") {
+        location.assign(`/src/html/NewMain.html`);
+      } else {
+        location.assign(`/src/html/${currentUser.accountType}.html`);
+      }
     } catch (error) {
       if (error.message === "No user with this email") {
         email.classList.add("is-invalid");

@@ -23,7 +23,7 @@ export const state = {
       id: 2,
       name: "ash admin",
       email: "ash@admin.ash",
-      password: "ash123",
+      password: "Ash@1234",
       accountType: "admin",
     },
     {
