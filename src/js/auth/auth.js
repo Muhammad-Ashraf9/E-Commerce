@@ -17,7 +17,10 @@ export function signIn(email, password) {
   if (password !== user.password) {
     throw new Error("Wrong password");
   }
-  moveGuestCartToUserCart(user.id);
+  console.log("user.id :>> ", user.id);
+  if (user.accountType === "customer") {
+    moveGuestCartToUserCart(user.id);
+  }
   setCookie("id", user.id, 7);
   setCurrentUser(user);
 }
@@ -25,7 +28,7 @@ export function signIn(email, password) {
 export function signOut() {
   deleteCookie("id");
   setCurrentUser(null);
-  location.assign('../html/main.html')
+  location.assign("../html/main.html");
 }
 
 export function signUp(email, password, name, accountType) {

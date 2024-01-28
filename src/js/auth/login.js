@@ -1,4 +1,4 @@
-import { signIn, signin } from "./auth.js";
+import { signIn } from "./auth.js";
 import {
   isValidEmail,
   isValidName,
@@ -7,6 +7,7 @@ import {
   validateName,
   validatePassword,
 } from "../helper.js";
+import { getCurrentUser } from "../model.js";
 
 const form = document.querySelector("form");
 const email = document.querySelector("#email");
@@ -36,17 +37,25 @@ showPasswordCheckBox.addEventListener("change", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signin function
+  emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signin function
   passwordInvalidFeedback.textContent = `Password must be at least 8 characters, at least a symbol, upper and lower case letters and a number..`; //to reset the error message after being changed by signin function
 
   //   can be done with one function make validate function return true or false
   validateEmail(email, emailInvalidFeedback);
   validatePassword(password, passwordInvalidFeedback);
+
   if (!isValidEmail(email.value) || !isValidPassword(password.value)) {
     return;
   }
   try {
     signIn(email.value, password.value);
+    const currentUser = getCurrentUser();
+    location.assign(`../html/${currentUser.accountType}.html`);
+    // if (currentUser.accountType !== "customer") {
+    //   return;
+    // } else {
+    //   location.assign(`../html/${currentUser.accountType}.html`);
+    // }
   } catch (error) {
     if (error.message === "No user with this email") {
       email.classList.add("is-invalid");
