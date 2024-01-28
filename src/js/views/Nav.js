@@ -12,7 +12,6 @@ export default function renderNav(element) {
         <img width="50px" src="../assets/logo.png" alt="logo"> Furniro
       </a>
     </div>
-
     <button class="m-auto navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
