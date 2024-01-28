@@ -8,6 +8,7 @@ import {
   getCurrentUser,
   getProductById,
 } from "./model.js";
+
 let prodID = localStorage.getItem("id");
 // get data from local storage
 let state = JSON.parse(localStorage.getItem("state"));
