@@ -2506,5 +2506,12 @@ export function deleteMessageById(id) {
 export function testLog() {
   console.log("test");
 }
+
+export function moveGuestCartToUserCart(id) {
+  const index = state.users.findIndex((user) => user.id === +id);
+  state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
+  state.guestCart = [];
+  saveStateInLocalStorage();
+}
 //this runs once when the app starts sets the state from local storage
 loadStateFromLocalStorage();

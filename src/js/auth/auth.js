@@ -4,6 +4,7 @@ import {
   getCurrentUser,
   getUserByEmail,
   getUserById,
+  moveGuestCartToUserCart,
   setCurrentUser,
   state,
 } from "../model.js";
@@ -16,7 +17,7 @@ export function signIn(email, password) {
   if (password !== user.password) {
     throw new Error("Wrong password");
   }
-
+  moveGuestCartToUserCart(user.id);
   setCookie("id", user.id, 7);
   setCurrentUser(user);
 }

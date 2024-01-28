@@ -39,7 +39,7 @@ showPasswordCheckBox.addEventListener("change", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+  emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signUp function
   const userType = sellerCheckBox.checked ? "seller" : "customer";
 
   validateEmail(email, emailInvalidFeedback);
@@ -54,6 +54,7 @@ form.addEventListener("submit", (e) => {
   }
   try {
     signUp(email.value, password.value, name.value, userType);
+    location.assign(`../html/login.html`);
   } catch (error) {
     email.classList.add("is-invalid");
     emailInvalidFeedback.textContent = error.message;

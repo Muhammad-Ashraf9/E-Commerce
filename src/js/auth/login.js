@@ -37,7 +37,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
-  passwordInvalidFeedback.textContent = `Please choose a Password.`; //to reset the error message after being changed by signUp function
+  passwordInvalidFeedback.textContent = `Password must be at least 8 characters, at least a symbol, upper and lower case letters and a number..`; //to reset the error message after being changed by signUp function
 
   //   can be done with one function make validate function return true or false
   validateEmail(email, emailInvalidFeedback);
@@ -48,12 +48,14 @@ form.addEventListener("submit", (e) => {
   try {
     signIn(email.value, password.value);
   } catch (error) {
-    email.classList.add("is-invalid");
-    emailInvalidFeedback.textContent = error.message;
-    emailInvalidFeedback.style.display = "block";
-
-    password.classList.add("is-invalid");
-    passwordInvalidFeedback.textContent = error.message;
-    passwordInvalidFeedback.style.display = "block";
+    if (error.message === "No user with this email") {
+      email.classList.add("is-invalid");
+      emailInvalidFeedback.textContent = error.message;
+      emailInvalidFeedback.style.display = "block";
+    } else {
+      password.classList.add("is-invalid");
+      passwordInvalidFeedback.textContent = error.message;
+      passwordInvalidFeedback.style.display = "block";
+    }
   }
 });
