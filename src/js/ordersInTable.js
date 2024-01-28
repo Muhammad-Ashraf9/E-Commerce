@@ -1,7 +1,9 @@
-import { state as stateinmycomputer } from "./model.js";
-localStorage.setItem("state", JSON.stringify(stateinmycomputer));
+import { saveStateInLocalStorage, state as stateinmycomputer } from "./model.js";
+// localStorage.setItem("state", JSON.stringify(stateinmycomputer));
 // localStorage.setItem("orders", JSON.stringify(state.orders));
-let state = JSON.parse(localStorage.getItem("state"));
+import { state } from "../js/model.js";
+
+// let state = JSON.parse(localStorage.getItem("state"));
 
 let orders = state.orders;
 let myID = 2; // get it from the function
@@ -137,7 +139,8 @@ function changeState(e) {
       });
       orders[e.target.id]["status"] = "deleverd";
       state.orders = orders;
-      localStorage.setItem("state", JSON.stringify(state));
+      // localStorage.setItem("state", JSON.stringify(state));
+      saveStateInLocalStorage();
       renderOrders(tableDiv, myID);
     } else {
       swal("Your order in safe hands!");
