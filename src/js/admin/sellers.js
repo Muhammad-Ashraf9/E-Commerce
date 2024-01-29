@@ -1,5 +1,12 @@
 import { signUp } from "../auth/auth.js";
-import { isValidEmail, isValidName, isValidPassword, validateEmail, validateName, validatePassword } from "../helper.js";
+import {
+  isValidEmail,
+  isValidName,
+  isValidPassword,
+  validateEmail,
+  validateName,
+  validatePassword,
+} from "../helper.js";
 import {
   deleteSellerById,
   editUserById,
@@ -75,7 +82,8 @@ export function renderSellersPage(
     renderSellersPage(
       container,
       searchByField(getSellers(), newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1, //reset page number to 1
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -179,7 +187,8 @@ export function renderSellersPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1, //reset page number to 1
     itemsPerPage,
     sortBy,
     searchBy,
@@ -203,7 +212,7 @@ export function renderSellersPage(
 
 function getSelectSearchByHTML() {
   return `
-  <div> Search By
+  <div class="col-4"> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
   <option value="id">id</option>
   <option value="name">name</option>
@@ -212,8 +221,6 @@ function getSelectSearchByHTML() {
   </div>
   `;
 }
-
-
 
 export function handleEditUser(
   id,
@@ -244,7 +251,7 @@ export function handleEditUser(
       ".invalid-feedback.name"
     );
 
-    emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+    emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signUp function
 
     validateEmail(email, emailInvalidFeedback);
     validatePassword(password, passwordInvalidFeedback);
@@ -306,7 +313,7 @@ export function handleAddUser(
         ".invalid-feedback.name"
       );
 
-      emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+      emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signUp function
       validateEmail(email, emailInvalidFeedback);
       validatePassword(password, passwordInvalidFeedback);
       validateName(name, nameInvalidFeedback);
@@ -376,7 +383,8 @@ function getAddModalFormHTML(userType, user) {
             <label for="userName">${userType} name</label>
           </div>
           <div class="invalid-feedback name">
-              Please choose a valid username.
+              Please choose a valid Full name must contain a at least first and
+              last name (3-16 letters).
            </div>
         </div>
       <div class="input-group has-validation">

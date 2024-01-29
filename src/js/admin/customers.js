@@ -69,7 +69,8 @@ export function renderCustomersPage(
     renderCustomersPage(
       container,
       searchByField(getCustomers(), newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1,
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -111,7 +112,8 @@ export function renderCustomersPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1,//reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
     searchBy,
@@ -198,7 +200,7 @@ export function renderCustomersPage(
 
 function getSelectSearchByHTML() {
   return `
-  <div> Search By
+  <div class="col-4"> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
   <option value="id">id</option>
   <option value="name">name</option>
