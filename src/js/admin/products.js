@@ -34,7 +34,8 @@ export function renderProductsPage(
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1,//reset page number to 1 on search
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -118,7 +119,8 @@ export function renderProductsPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1,//reset page number to 1 on change items per page
     itemsPerPage,
     sortBy,
     searchBy,
@@ -167,7 +169,7 @@ export function generateProductsTableBody(arrayOfProducts) {
       <td>${getUserById(product.sellerId)?.name || "Deleted Seller🥲"}</td>
       <td>${product.price}</td>
       <td>${product.category}</td>
-      <td><img class="table-img--sm"src="${product.img}"/></td>
+      <td><img class="table-img--sm"src="${product.imgURL0}"/></td>
       <td>
       <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" 
        data-bs-target="#modal"            
@@ -181,7 +183,7 @@ export function generateProductsTableBody(arrayOfProducts) {
 
 export function getSelectSearchByHTML() {
   return `
-  <div> Search By
+  <div class="col-4"> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
   <option value="id">id</option>
   <option value="title">title</option>
