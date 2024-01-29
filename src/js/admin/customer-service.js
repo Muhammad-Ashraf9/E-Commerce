@@ -31,7 +31,8 @@ export function renderCustomerServicePage(
     renderCustomerServicePage(
       container,
       searchByField(state.messages, newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1, //reset page number to 1 on search
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -108,7 +109,8 @@ export function renderCustomerServicePage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1, //reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
     searchBy,
@@ -133,7 +135,7 @@ export function renderCustomerServicePage(
 
 function getSelectSearchByHTML() {
   return `
-  <div> Search By
+  <div class="col-4"> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
   <option value="mId">Message ID</option>
   <option value="uId">User ID</option>

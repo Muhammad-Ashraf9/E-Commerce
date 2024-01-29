@@ -7,6 +7,10 @@ const body = document.querySelector("body");
 console.log("body :>> ", body);
 setAuthStateFromCookie();
 
+
+let div = document.getElementById("ProductShow");
+console.log(div);
+
 renderNav(body);
 renderFooter(body);
 

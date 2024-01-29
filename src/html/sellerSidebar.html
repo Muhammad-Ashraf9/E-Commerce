@@ -4,16 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+.side-left ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-left li {
+    margin: 20px; /* Adjust as needed */
+}
+
+.side-left span {
+    display: flex;
+    align-items: center;
+}
+
+.side-left i {
+    margin-right: 10px; /* Adjust as needed */
+}
+#menu{
+    background-color: #F9F1E7;
+    width: 25vw;
+    height: 100vh;
+}
+
+
+#menu .items li:hover{
+    cursor: pointer;
+    background: #c8cdd8;
+    transform: scaleY(1.1);
+    border-left: 4px solid black;
+}
+#menu .items li i{
+    color: rgb(134, 141, 151);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#menu .items li a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 300px;
+    transition: 0.3 ease;
+}
+#menu .items li i,
+#menu .items li a{
+    font-weight: 600;
+}
+
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .side-left span {
+        flex-direction: column; /* Change to column layout on smaller screens */
+        align-items: flex-start; /* Adjust alignment for column layout */
+    }
+
+    .side-left i {
+        margin-top: 20px; /* Remove right margin for icons in column layout */
+    }
+    .side-left a {
+        display: none;
+    }
+    #menu .items li i{
+        color: rgb(86, 148, 235);
+    }
+}
+
+    </style>
 </head>
 <body>
-    <div class="side-left  pl-2" >
-        <div class="items">
-            <li><i class="fa-solid fa-chart-pie"></i> <a href="seller.html">Dashboard</a> </li>
-            <li><i class="fa-solid fa-cart-shopping"></i> <a href="order.html">Orders</a> </li>
-            <li><i class="fa-solid fa-chart-simple"></i> <a href="sellerAnalysis.html">Insights</a> </li>
-            <li> <i class="fa-solid fa-user"></i> <a href="profile.html">Profile</a> </li>
-            <li> <i class="fa-solid fa-arrow-right-from-bracket"></i> <a href="main.html">Logout</a> </li>
-        </div>
+    <div class="side-left items">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <span>
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <a class="nav-link" href="seller.html">Dashboard</a>
+                </span>
+            </li>
+            <li class="nav-item">
+                <span>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a class="nav-link" href="order.html">Orders</a>
+                </span>
+            </li>
+            <li class="nav-item">
+                <span>
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <a class="nav-link" href="sellerAnalysis.html">Insights</a>
+                </span>
+            </li>
+            <li class="nav-item">
+                <span>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <a class="nav-link" href="main.html">Logout</a>
+                </span>
+            </li>
+        </ul>
     </div>
+    
 </body>
 </html>

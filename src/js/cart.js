@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
           <span class="fs-1 fw-bold">your cart is empty !</span>
         </div>       
         <div class="pt-3 col-lg-6">
-         <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="newMain.html">Go to home page</a></button>
+         <button style="background:#B88E2F" class="btn "><a class="text-decoration-none text-light" href="NewMain.html">Go to home page</a></button>
          <button style="background:#B88E2F" class="btn ms-2"><a class="text-decoration-none text-light" href="Products_tester.html">Go to Products page</a></button>
         </div>
       </div>
@@ -133,7 +133,7 @@ window.addEventListener("load", function () {
         title: "Oops...",
         text: "You need to sign in in order to make an order",
       }).then(() => {
-        location.assign("../html/newMain.html");
+        location.assign("../html/NewMain.html");
       });
     }
   });

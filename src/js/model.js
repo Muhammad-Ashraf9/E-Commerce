@@ -36,8 +36,17 @@ export const state = {
       products: [
         {
           productId: 1,
+        },
+        {
           productId: 2,
+        },
+        {
           productId: 3,
+        },
+        {
+          productId: 4,
+        },
+        {
           productId: 5,
         },
       ],
@@ -49,19 +58,12 @@ export const state = {
       password: "ash12345",
       orders: [3],
       accountType: "seller",
-      products: [
-        {
-          productId: 3,
-        },
-        {
-          productId: 4,
-        },
-      ],
+      products: [],
     },
   ],
   orders: [
     {
-      id: 189770,
+      id: 354028,
       items: [
         {
           id: 1,
@@ -117,93 +119,21 @@ export const state = {
     {
       id: 354028,
       items: [
-        //
-        {
-          id: 2,
-          title: "id2item1",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test1.jpeg",
-          img1: "../assets/test1.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 7,
-          price: 100,
-          quantity: 4,
-        },
-        {
-          id: 4,
-          title: "id4item2",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test2.jpeg",
-          img1: "../assets/test2.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 8,
-          price: 10,
-          quantity: 4,
-        },
-      ],
-      customerId: 2,
-      status: "pending",
-      date: "2024-01-25",
-      customerDetails: {
-        FirstName: "abdelhameed",
-        lastname: "abdelhameed",
-        userAddress: "78 madrab st,ezbet elshal,qism tani",
-        Email: "abdelhameedosamaiti@gmail.com",
-        Phone: "01094335757",
-        streetAddress: "78 madrab st,ezbet elshal,qism tani",
-        City: "mansoura",
-        Zip: "35511",
-      },
-    },
-    {
-      id: 354028,
-      items: [],
-      customerId: 3,
-      status: "pending",
-      date: "2024-01-25",
-      customerDetails: {
-        FirstName: "abdelhameed",
-        lastname: "abdelhameed",
-        userAddress: "78 madrab st,ezbet elshal,qism tani",
-        Email: "abdelhameedosamaiti@gmail.com",
-        Phone: "01094335757",
-        streetAddress: "78 madrab st,ezbet elshal,qism tani",
-        City: "mansoura",
-        Zip: "35511",
-      },
-    },
-    {
-      id: 354028,
-      items: [
-        {
-          id: 2,
-          title: "id2item1",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test1.jpeg",
-          img1: "../assets/test1.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 7,
-          price: 100,
-          quantity: 4,
-        },
-        {
-          id: 4,
-          title: "id4item2",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test2.jpeg",
-          img1: "../assets/test2.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 8,
-          price: 10,
-          quantity: 4,
-        },
         {
           id: 1,
-          title: "id4item2",
+          title: "a",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test1.jpeg",
+          img1: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 7,
+          quantity: 4,
+          price: 100,
+        },
+        {
+          id: 2,
+          title: "b",
           description: "TV/storage combination, 109x18 1/8x78 3/8",
           img0: "../assets/test2.jpeg",
           img1: "../assets/test2.jpeg",
@@ -214,32 +144,8 @@ export const state = {
           quantity: 4,
         },
         {
-          id: 4,
-          title: "id4item2",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test2.jpeg",
-          img1: "../assets/test2.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 8,
-          price: 10,
-          quantity: 4,
-        },
-        {
-          id: 4,
-          title: "id4item2",
-          description: "TV/storage combination, 109x18 1/8x78 3/8",
-          img0: "../assets/test2.jpeg",
-          img1: "../assets/test2.jpeg",
-          sellerId: 3,
-          category: "any",
-          stock: 8,
-          price: 10,
-          quantity: 4,
-        },
-        {
-          id: 4,
-          title: "id4item2",
+          id: 3,
+          title: "abc",
           description: "TV/storage combination, 109x18 1/8x78 3/8",
           img0: "../assets/test2.jpeg",
           img1: "../assets/test2.jpeg",
@@ -250,7 +156,7 @@ export const state = {
           quantity: 4,
         },
       ],
-      customerId: 2,
+      customerId: 1,
       status: "pending",
       date: "2024-01-25",
       customerDetails: {
@@ -263,6 +169,49 @@ export const state = {
         City: "mansoura",
         Zip: "35511",
       },
+    },
+    {
+      id: 189773,
+      items: [
+        {
+          id: 1,
+          title: "a",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test1.jpeg",
+          img1: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 7,
+          price: 100,
+          quantity: 4,
+        },
+        {
+          id: 2,
+          title: "b",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test2.jpeg",
+          img1: "../assets/test2.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 8,
+          price: 10,
+          quantity: 4,
+        },
+        {
+          id: 3,
+          title: "abc",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test2.jpeg",
+          img1: "../assets/test2.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 8,
+          price: 10,
+          quantity: 4,
+        },
+      ],
+      customerId: 1,
+      status: "deleverd",
       date: "2024-01-25",
       customerDetails: {
         FirstName: "abdelhameed",
@@ -275,6 +224,79 @@ export const state = {
         Zip: "35511",
       },
     },
+    {
+      id: 189774,
+      items: [
+        {
+          id: 1,
+          title: "a",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test1.jpeg",
+          img1: "../assets/test1.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 7,
+          price: 100,
+          quantity: 4,
+        },
+        {
+          id: 2,
+          title: "b",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test2.jpeg",
+          img1: "../assets/test2.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 8,
+          price: 10,
+          quantity: 4,
+        },
+        {
+          id: 3,
+          title: "abc",
+          description: "TV/storage combination, 109x18 1/8x78 3/8",
+          img0: "../assets/test2.jpeg",
+          img1: "../assets/test2.jpeg",
+          sellerId: 3,
+          category: "any",
+          stock: 8,
+          price: 10,
+          quantity: 4,
+        },
+      ],
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
+    {
+      id: 189775,
+      items: [
+      ],
+      customerId: 1,
+      status: "pending",
+      date: "2024-01-25",
+      customerDetails: {
+        FirstName: "abdelhameed",
+        lastname: "abdelhameed",
+        userAddress: "78 madrab st,ezbet elshal,qism tani",
+        Email: "abdelhameedosamaiti@gmail.com",
+        Phone: "01094335757",
+        streetAddress: "78 madrab st,ezbet elshal,qism tani",
+        City: "mansoura",
+        Zip: "35511",
+      },
+    },
+
   ],
   products: [
     {
@@ -588,7 +610,7 @@ export const state = {
       price: 6843,
       prevPrice: 6843,
       category: "Tables",
-      sellerId: 2,
+      sellerId: 3,
       stock: 17,
       numberofsales: 6,
     },
@@ -633,7 +655,7 @@ export const state = {
       price: 4589,
       prevPrice: 6924,
       category: "chairs",
-      sellerId: 1,
+      sellerId: 3,
       stock: 17,
       numberofsales: 5,
     },
@@ -648,7 +670,7 @@ export const state = {
       price: 5200,
       prevPrice: 5200,
       category: "chairs",
-      sellerId: 2,
+      sellerId: 3,
       stock: 15,
       numberofsales: 9,
     },
@@ -693,7 +715,7 @@ export const state = {
       price: 7823,
       prevPrice: 8000,
       category: "chairs",
-      sellerId: 1,
+      sellerId: 3,
       stock: 9,
       numberofsales: 5,
     },
@@ -708,7 +730,7 @@ export const state = {
       price: 9000,
       prevPrice: 9000,
       category: "chairs",
-      sellerId: 2,
+      sellerId: 3,
       stock: 5,
       numberofsales: 3,
     },
@@ -738,7 +760,7 @@ export const state = {
       price: 7200,
       prevPrice: 7800,
       category: "chairs",
-      sellerId: 4,
+      sellerId: 3,
       stock: 14,
       numberofsales: 0,
     },
@@ -779,62 +801,58 @@ export function getUserByEmail(email) {
 }
 
 export function getAllOrdersByOrderIds(orderIds) {
-  const allOrders = [];
-  let ordersFromLocalStorage = localStorage.getItem("orders");
-  let orders = JSON.parse(ordersFromLocalStorage);
-  // Iterate through the order IDs
+  let allOrders = [];
+  let state = JSON.parse(localStorage.getItem("state"));
+  let orders = state.orders;
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
     const foundOrder = orders.find((order) => order.id === orderId);
+    console.log(foundOrder);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
       allOrders.push(foundOrder);
     }
   }
-  const result = [];
-
+  let result =[]
   for (let i = 0; i < allOrders.length; i++) {
     // Create a new array for each iteration of the outer loop
     const matchedItems = [];
     for (let j = 0; j < allOrders[i].items.length; j++) {
       if (allOrders[i].items[j].sellerId === state.currentUser.id) {
+        console.log(allOrders[i].status);
+        allOrders[i].items[j].orderId =  allOrders[i].id
+        allOrders[i].items[j].orderDate=  allOrders[i].date
+        allOrders[i].items[j].orderStatus=  allOrders[i].status
         matchedItems.push(allOrders[i].items[j]);
-        matchedItems.push(allOrders[i].date);
-        matchedItems.push(allOrders[i].id);
       }
     }
     result.push(matchedItems);
   }
-  console.log(result);
   return result;
 }
 
-function getAllProductsBySellerId(allProducts) {
-  if (state.currentUser.accountType === "seller") {
-    if (allProducts) {
+function getAllProductsBySellerId(allProducts){
+  if(state.currentUser.accountType === 'seller'){
+    if(allProducts){
       let id = state.currentUser.id;
-      const result = allProducts.filter((obj) => obj.sellerId === id);
-      return result;
+      const result = allProducts
+      .filter(obj => obj.sellerId === id)
+      .map(({ id, title,description,category,stock,price }) => ({ id, title,description,category,stock,price }));
+      return result
     }
+  }else
     //
-  } else return;
+    return
 }
 export function getAllProductsByProductIds(productIds) {
-  // // console.log(productIds);
   // Initialize an array to store the found orders
   const allProducts = [];
 
   // Iterate through the order IDs
   for (const productId of productIds) {
-    // Find the order in the state.orders array
-    // console.log(productId);
-
-    //const foundProduct = state.products.find((product) => product.id === productId.productId);
     const foundProduct = localStorage.getItem("products");
 
-    // If the order is found, add it to the allOrders array
     if (foundProduct) {
-      // console.log(foundProduct);
       allProducts.push(JSON.parse(foundProduct));
     }
   }
