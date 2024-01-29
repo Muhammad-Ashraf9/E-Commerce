@@ -9,6 +9,7 @@ setAuthStateFromCookie();
 
 let div = document.getElementById("ProductShow");
 console.log(div);
+
 renderNav(body);
 renderFooter(body);
 renderCards(1, 4, "", "");
