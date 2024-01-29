@@ -34,7 +34,6 @@ const main = document.querySelector("main");
 const signoutBtn = document.querySelector(".signout");
 const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
-const spinner = document.querySelector(".spinner-border");
 
 let pageNumber = 1;
 let itemsPerPage = 5;
@@ -187,7 +186,6 @@ const currentUser = getCurrentUser();
 if (!currentUser || currentUser.accountType !== "admin") {
   location.assign("../html/NewMain.html");
 }
-spinner.remove()
 
 
 //hide dashboard with spinner
