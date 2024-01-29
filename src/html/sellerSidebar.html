@@ -23,9 +23,25 @@
     margin-right: 10px; /* Adjust as needed */
 }
 #menu{
-    background-color: #F9F1E7;
+    background-color: #FFF8F8;
     width: 25vw;
     height: 100vh;
+}
+@media (max-width: 760px) {
+    #menu {
+        width: 20vw;
+    }
+    #menu .items li i{
+
+        margin-top: 80px;
+    }
+    #menu .items li:hover{
+    cursor: pointer;
+    background: #FFF8F8;
+    transform: scaleY(1.1);
+    border-left: none;
+
+}
 }
 
 
@@ -77,8 +93,8 @@
     </style>
 </head>
 <body>
-    <div class="side-left items">
-        <ul class="nav flex-column">
+    <div class="side-left items ">
+        <ul class="nav flex-column ">
             <li class="nav-item">
                 <span>
                     <i class="fa-solid fa-chart-pie"></i>
@@ -95,12 +111,6 @@
                 <span>
                     <i class="fa-solid fa-chart-simple"></i>
                     <a class="nav-link" href="sellerAnalysis.html">Insights</a>
-                </span>
-            </li>
-            <li class="nav-item">
-                <span>
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <a class="nav-link" href="main.html">Logout</a>
                 </span>
             </li>
         </ul>

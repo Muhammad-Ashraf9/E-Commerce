@@ -1,9 +1,21 @@
-import { getAllOrdersByOrderIds } from "../model.js";
+import { getAllOrdersByOrderIds,getCurrentUser } from "../model.js";
+import renderFooter from "../views/Footer.js";
+import renderNav from "../views/Nav.js";
 let body = document.querySelector('body')
 let section = document.getElementById('interface')
 // Retrieve the data from localStorage
 
 // Log or use the allOrders array as needed
+const currentUserForAuth = getCurrentUser();
+console.log('from outer auth ');
+if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
+    console.log('from inner auth ');
+    location.assign("/src/html/NewMain.html");
+}
+const bodys=document.querySelector("body");
+renderNav(bodys);
+
+renderFooter(bodys);
 
 function display(){
   const userDataFromLocalStorage = localStorage.getItem('currentUser');

@@ -30,8 +30,8 @@ export const state = {
       id: 3,
       name: "ash sellerB",
       email: "ash@seller.ash",
-      password: "Aaassshh%123456",
-      orders: [354028,189771],
+      password: "abcdefghijAAAA@123",
+      orders: [354028, 3528],
       accountType: "seller",
       products: [
         {
@@ -117,7 +117,7 @@ export const state = {
       },
     },
     {
-      id: 354028,
+      id: 189771,
       items: [
         {
           id: 1,
@@ -802,11 +802,10 @@ export function getUserByEmail(email) {
 
 export function getAllOrdersByOrderIds(orderIds) {
   let allOrders = [];
-  let state = JSON.parse(localStorage.getItem("state"));
-  let orders = state.orders;
+ // let orders = JSON.parse(localStorage.getItem("orders"));
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
-    const foundOrder = orders.find((order) => order.id === orderId);
+    const foundOrder = state.orders.find((order) => order.id === orderId);
     console.log(foundOrder);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
@@ -817,6 +816,7 @@ export function getAllOrdersByOrderIds(orderIds) {
   for (let i = 0; i < allOrders.length; i++) {
     // Create a new array for each iteration of the outer loop
     const matchedItems = [];
+    console.log(state.currentUser);
     for (let j = 0; j < allOrders[i].items.length; j++) {
       if (allOrders[i].items[j].sellerId === state.currentUser.id) {
         console.log(allOrders[i].status);
@@ -828,6 +828,7 @@ export function getAllOrdersByOrderIds(orderIds) {
     }
     result.push(matchedItems);
   }
+  console.log(result);
   return result;
 }
 

@@ -4,6 +4,7 @@ import { renderModal } from "./SigninModal.js";
 import { renderCustomerModal } from "./customerSupportModal.js";
 
 export default function renderNav(element) {
+  let user = getCurrentUser();
   const Nav = `   
   <nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
@@ -22,30 +23,56 @@ export default function renderNav(element) {
         <li class="nav-item mx-lg-3">
           <a class="nav-link" aria-current="page" href="NewMain.html">Home</a>
         </li>
-        <li class="nav-item mx-3">
+        
+        ${
+          !user || user.accountType !== "seller"
+            ? `<li class="nav-item mx-3">
           <a class="nav-link" href="Products_tester.html">Products</a>
-        </li>
+        </li> `
+            : ""
+        }
         <li class="nav-item mx-lg-3">
           <a class="nav-link" href="#about">About</a>
         </li>
+       
         <li class="nav-item mx-2">
           <a class="nav-link" href="#contact">Contact us</a>
         </li>
+        </li>
+        ${
+          user && user.accountType === "customer"
+            ? `<li class="nav-item mx-2">
+          <a class="nav-link" href="profile.html">profile</a>
+                  </li>`
+            : ""
+        }
+        ${
+          user && user.accountType !== "customer"
+            ? `<li class="nav-item mx-2">
+          <a class="nav-link" href="${user.accountType}.html">Dashboard</a>
+                  </li>`
+            : ""
+        }
+        
+
       </ul>
     </div>
 
     <div class="me-3">
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row">
-        <li class="nav-item me-3">
           ${
-            !getCurrentUser()
+            !user
               ? `<a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>`
               : `<button class="nav-link">Sign out</button> <button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
           }
         </li>
-        <li class="nav-item px-2">
+        ${
+          !user || user.accountType === "customer"
+            ? `<li class="nav-item px-2">
           <a class="nav-link" href="cart_page.html"><i class="fa-solid fa-cart-plus"></i></a>
-        </li>
+          </li>`
+            : ""
+        }
       </ul>
     </div>
   </div>

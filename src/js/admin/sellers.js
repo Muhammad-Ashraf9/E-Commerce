@@ -51,7 +51,7 @@ export function generateSellersTabelBody(arrayOfSellers) {
         <td>${seller.email}</td>
         <td>${seller.products.length}</td>
         <td>${seller.orders.length}</td>
-        <td>
+        <td class="d-flex">
         <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
        data-bs-target="#modal"   data-del-id="${seller.id}">Delete</button>
         <button class="btn btn-sm btn-primary"        data-bs-toggle="modal" 
