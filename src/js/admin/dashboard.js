@@ -181,7 +181,6 @@ function renderDashboard(container) {
     });
   });
 }
-const spinner = document.querySelector(".spinner-border");
 
 //protecting admin dashboard
 const currentUser = getCurrentUser();
