@@ -1,4 +1,7 @@
 import { getAllOrdersByOrderIds,getCurrentUser } from "../model.js";
+
+import renderFooter from "../views/Footer.js";
+import renderNav from "../views/Nav.js";
 let body = document.querySelector('body')
 let section = document.getElementById('interface')
 // Retrieve the data from localStorage
@@ -10,6 +13,10 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
     console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
+const bodys=document.querySelector("body");
+renderNav(bodys);
+
+renderFooter(bodys);
 
 function display(){
   const userDataFromLocalStorage = localStorage.getItem('currentUser');
@@ -17,6 +24,8 @@ function display(){
   const currentUserData = JSON.parse(userDataFromLocalStorage);
   // Example usage:
   const data = getAllOrdersByOrderIds(currentUserData.orders);
+  console.log(data);
+
 
   const extractObjects = (arr) => arr.filter(item => typeof item === 'object');
 
@@ -25,8 +34,15 @@ const allObjects = data.reduce((acc, innerArray) => {
   const objectsInInnerArray = extractObjects(innerArray);
   return acc.concat(objectsInInnerArray);
 }, []);
-console.log(allObjects);
+
    let table = document.querySelector('table');
+   if (data.length==0) {
+    let alert = document.createElement('h1');
+    alert.setAttribute('class','alert alert-danger')
+    alert.innerText = 'There is no Product to display.'
+    table.appendChild(alert)
+    return
+  }
   let thead = `
   <thead>
     <tr>

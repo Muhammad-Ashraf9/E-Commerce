@@ -31,14 +31,10 @@ export function renderCards(
   }
   for (let i = startCard; i <= endCard; i++) {
     const iID = Products[i - 1].id;
-    if (
-      state.currentUser === null ||
-      state.currentUser.accountType === "customer"
-    ) {
-      var prodQ = getQuantityFromCart(iID);
-    }
+          var prodQ = getQuantityFromCart(iID);
 
-    productOuterDiv += `
+    productOuterDiv = 
+      `
         <div class="col-md-3">
           <div class="wsk-cp-product">
             <img id="two" class="wsk-cp-img" alt="${
@@ -59,29 +55,26 @@ export function renderCards(
       Products[i - 1].prevPrice
     } $</del></span>
                 </div>
-      `;
-    if (
-      state.currentUser === null ||
-      state.currentUser.accountType === "customer"
-    ) {
-      productOuterDiv += `
                     <div class="wcf-right">
                       <input type="text" class="quantity" value="${prodQ}" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
                       <button id="${iID}" style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
                         <i id="${iID}" class="fa-solid fa-cart-plus"></i>
                       </button>
                     </div>
-          `;
-    }
-    productOuterDiv += `
+
                   </div>
                 </div>
               </div>
             </div>
           `;
+      
+      firstRow.innerHTML += productOuterDiv;
+      }
+    
 
-    firstRow.innerHTML += productOuterDiv;
-  }
+  
+
+
 
   // add an event listener to all the created buttons
   let addbuttons = document.getElementsByClassName("buy-btn");
@@ -95,7 +88,7 @@ export function renderCards(
       var prodID = e.target.id;
       localStorage.setItem("id", prodID);
       // location.assign("../html/ProductDetails.html");
-      window.open("../html/ProductDetails.html", "_blank");
+      window.open("../html/ProductDetails.html", );
     }
   });
 

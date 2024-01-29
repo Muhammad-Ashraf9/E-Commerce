@@ -99,7 +99,14 @@
 }
 .chart-container {
   position: relative;
-  margin: auto; 
-  height: 20vh;
-  width: 50vw;
+  margin: 1rem auto;
+  height: 20rem;
+  width: 100%;
+}
+
+.navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0rem;
+  background-color: transparent;
+  box-shadow: none;
 }
