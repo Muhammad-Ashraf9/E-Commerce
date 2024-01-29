@@ -17,7 +17,6 @@ export function signIn(email, password) {
   if (password !== user.password) {
     throw new Error("Wrong password");
   }
-  console.log("user.id :>> ", user.id);
   if (user.accountType === "customer") {
     moveGuestCartToUserCart(user.id);
   }
@@ -43,10 +42,11 @@ export function signUp(email, password, name, accountType) {
     password,
     orders: [],
   };
+  const currentUser = getCurrentUser();
   if (customer.accountType === "seller") {
     customer.products = [];
   } else if (customer.accountType === "customer") {
-    if (!getCurrentUser() || getCurrentUser().accountType !== "admin") {
+    if (!currentUser || currentUser.accountType !== "admin") {
       //i use signup to add customers so i need to add guestCart only when no user is logged in
       customer.cart = [...state.guestCart];
       state.guestCart = [];
@@ -55,7 +55,9 @@ export function signUp(email, password, name, accountType) {
     }
   }
   addUser(customer);
-  // signIn(email, password);
+  if (currentUser === null) {
+    signIn(email, password);
+  }
 }
 
 export function setAuthStateFromCookie() {

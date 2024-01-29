@@ -2,7 +2,7 @@ import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
   const footer = `
 </li>
-  <div class="p-2 ps-5 mt-2">
+  <div class="p-2 ps-5 mt-2 bg-light">
     <div class="container-fluid">
       <div class="row text-center p-3">
         <div class="col-lg-3 col-md-6 p-2">
@@ -61,7 +61,7 @@ export default function renderFooter(element) {
               <p><i class="fas fa-map-marker-alt"></i> 78 madrb st, Mansoura Egypt</p>
               <p><i class="fas fa-phone"></i> Phone: 01094335757</p>
               <p><i class="fas fa-envelope"></i> Email: <a href="mailto:furniro@domain.com">furniro@domain.com</a></p>
-              <p><i class="fab fa-telegram"></i> 01094335757</p>
+              <p><i class="fab fa-telegram"></i> Telegram: 01094335757</p>
               </div>
               <div class="col-md-4 footer-links p">
                 <div class="row">
@@ -71,10 +71,9 @@ export default function renderFooter(element) {
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <p><a class="scroll-link" href="newMain.html">Home</a></p>
+                    <p><a class="scroll-link" href="NewMain.html">Home</a></p>
                     <p><a href="Products_tester.html">Products</a></p>
                     <p><a href="cart_page.html">Your Cart</a></p>
-                    <p><a href="newMain.html">Our clients</a></p>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,19 @@
+#cont{
+    height:100vh ;
+    background-image: linear-gradient(rgba(0, 0,0, .7),rgba(0,0,0,.7)),url(../assets/signUP.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+main{
+    width: 70vw;    
+    background: #F9F1E7;
+}
+a{
+    color: rgb(60, 59, 59);
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(60, 59, 59);
+
+}

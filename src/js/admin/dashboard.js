@@ -36,7 +36,7 @@ const sidebar = document.querySelector(".sidebar");
 const modal = document.querySelector("#modal");
 
 let pageNumber = 1;
-let itemsPerPage = 3;
+let itemsPerPage = 5;
 const sortBy = { field: "id", order: "desc" };
 const searchBy = { field: "id", value: "" };
 
@@ -71,7 +71,7 @@ export function getModalHTML(id) {
   `;
 }
 function getSummaryCardHTML(array, title) {
-  return ` <div class="col-12 col-md-6 col-lg-3 m-auto">
+  return ` <div class="col-12 col-md-6 col-xl-4 m-auto">
               <div class="summary-card">
                 <div class="d-flex justify-content-between">
                   <div>
@@ -86,7 +86,7 @@ function getSummaryCardHTML(array, title) {
             </div>`;
 }
 function getTotalCardHTML(number, title) {
-  return `<div class="col-12 col-md-6 col-lg-4 m-auto">
+  return `<div class="col-12 col-md-6 col-xl-4 m-auto">
               <div class="total-card d-flex align-items-center">
                 <div class="total-card__icon">
                   <i class="fa-solid fa-money-bill"></i>
@@ -106,25 +106,25 @@ function renderDashboard(container) {
   //set on change event to not use the last onchange event(and render the last page)
   search.onchange = "";
   container.innerHTML = "";
-  container.insertAdjacentHTML("afterbegin", `<canvas id="myChart"></canvas>`);
   container.insertAdjacentHTML(
     "afterbegin",
-    `<div class="row">${getTotalCardHTML(
-      getTotalOrdersRevenue(),
-      "Total Revenue"
-    )}${getTotalCardHTML(state.products.length, "Total Products")}
-      ${getTotalCardHTML(state.orders.length, "Total Orders")}
+    `
+    <div class="chart-container">
+      <canvas id="myChart">
+      </canvas>
       </div>`
   );
   container.insertAdjacentHTML(
     "afterbegin",
-    `<div class="row">${getSummaryCardHTML(
-      state.orders,
-      "orders"
-    )}${getSummaryCardHTML(state.products, "products")}${getSummaryCardHTML(
-      getCustomers(),
-      "customers"
-    )}${getSummaryCardHTML(getSellers(), "sellers")}</div>`
+    `
+      <div class="row">
+    ${getTotalCardHTML(getTotalOrdersRevenue(), "Total Revenue")}
+    ${getSummaryCardHTML(state.orders, "orders")}
+    ${getSummaryCardHTML(state.products, "products")}
+    ${getSummaryCardHTML(getCustomers(), "customers")}
+    ${getSummaryCardHTML(getSellers(), "sellers")}
+    </div>
+    `
   );
 
   const createdChart = new Chart(document.querySelector("#myChart"), {
@@ -146,7 +146,9 @@ function renderDashboard(container) {
       ],
     },
     options: {
+      maintainAspectRatio: false,
       responsive: true,
+      aspectRatio: 1,
       scales: {
         y: {
           beginAtZero: true,
@@ -156,10 +158,13 @@ function renderDashboard(container) {
   });
   container.insertAdjacentHTML(
     "beforeend",
-    generateTabel(
-      generateProductsTableHeader(),
-      generateProductsTableBody(getLastAddedProducts(3))
-    )
+    `
+    <hr>
+    <h2>Last 5 added products</h2>` +
+      generateTabel(
+        generateProductsTableHeader(),
+        generateProductsTableBody(getLastAddedProducts(5))
+      )
   );
   document.querySelector("table").addEventListener("click", (e) => {
     console.log("Proucts table dashboard event");
@@ -177,8 +182,9 @@ function renderDashboard(container) {
 }
 
 //protecting admin dashboard
-if (!getCurrentUser() || getCurrentUser().accountType !== "admin") {
-  location.assign("../html/main.html");
+const currentUser = getCurrentUser();
+if (!currentUser || currentUser.accountType !== "admin") {
+  location.assign("../html/NewMain.html");
 }
 //hide dashboard with spinner
 
@@ -255,8 +261,8 @@ sidebar.addEventListener("click", (e) => {
 });
 signoutBtn.addEventListener("click", () => {
   signOut();
-  location.assign("../html/main.html");
+  location.assign("../html/NewMain.html");
 });
 
 /// render Dashboard by default
-renderDashboard(main, modal);
+renderDashboard(main);

@@ -3,14 +3,18 @@
 import { renderCards } from "../js/renderCards.js";
 import { ProductsFiltered } from "./ProductsFiltered.js";
 import {
+  state,
   changeCartItemCount,
   getCurrentCart,
   getCurrentUser,
   getProductById,
+  saveStateInLocalStorage,
 } from "./model.js";
+
+
 let prodID = localStorage.getItem("id");
 // get data from local storage
-let state = JSON.parse(localStorage.getItem("state"));
+// let state = JSON.parse(localStorage.getItem("state"));
 const Product = state.products[prodID];
 const prodImgtwo = document.getElementById("two");
 const prodImgone = document.getElementById("one");
@@ -93,63 +97,137 @@ wishIcon.addEventListener("click", function () {
 //     changeCartItemCount(prodID, cart.filter((item) => item.id === prodID).length + 1);
 //   }
 // });
-  let cartElement = getCurrentCart().map((item) => ({
-    id: prodID
-  }));
-  console.log(cartElement);
+let cartElement = getCurrentCart().map((item) => ({ id: prodID }));
 
-window.addEventListener("load", function () {
-  let state = JSON.parse(localStorage.getItem("state"));
-  let me = state.currentUser;
-  if (me) {
-    let mycart = me.cart;
-    let item = mycart.filter((item) => item.id == prodID);
-    if (item.length > 0) {
-      document.querySelector(".numOfItems span").innerText = item[0].quantity;
-    } else {
-      document.querySelector(".numOfItems span").innerText = 0;
-    }
+// Show the number of items in the cart icon
+let me = state.currentUser;
+if (me) {
+  let mycart = me.cart;
+  let item = mycart.filter((item) => item.id == prodID);
+  if (item.length > 0) {
+    document.querySelector(".numOfItems span").innerText = item[0].quantity;
   } else {
-    let mycart = state.guestCart;
-    let item = mycart.filter((item) => item.id == prodID);
-    if (item.length > 0) {
-      document.querySelector(".numOfItems span").innerText = item[0].quantity;
-    } else {
-      document.querySelector(".numOfItems span").innerText = 0;
-    }
+    document.querySelector(".numOfItems span").innerText = 0;
   }
-  // listen to the + and - buttons and
-  // change the quantity in the cart accordingly and
-  // change the counter in the cart icon
-  
+} else {
+  let mycart = state.guestCart;
+  let item = mycart.filter((item) => item.id == prodID);
+  if (item.length > 0) {
+    document.querySelector(".numOfItems span").innerText = item[0].quantity;
+  } else {
+    document.querySelector(".numOfItems span").innerText = 0;
+  }
+}
+// listen to the + and - buttons and
+// change the quantity in the cart accordingly and
+// change the counter in the cart icon
 
-  let cards = this.document.getElementById("items");
-  cards.addEventListener("click", function (e) {
-    if (e.target.innerText == "+") {
-      let cardID = +e.target.id;
-      console.log(cardID);
-      console.log(cart);
-      if (cart[cardID].quantity == cart[cardID].id.stock) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Sorry, there is no more of this item in the seller's stock",
-        });
-        return;
+let cards = document.getElementById("items");
+console.log(cards);
+cards.addEventListener("click", function (e) {
+  console.log(e.target);
+  if (state.currentUser) {
+    var cart = state.currentUser.cart;
+  } else {
+    var cart = state.guestCart;
+  }
+  if (e.target.innerText == "+") {
+    let flag = false;
+    let targetI = -1;
+    for (let ii = 0; ii < cart.length; ii++) {
+      if (cart[ii].id == prodID) {
+        cart[ii].quantity++;
+        flag = true;
+        targetI = ii;
+        break;
       }
-      changeCartItemCount(cart[cardID].id.id, cart[cardID].quantity + 1);
-      cart[cardID].quantity += +1;
-      // change the counter in the cart icon
-      document.querySelector(".numOfItems span").innerText++;
     }
-    if (e.target.innerText == "-") {
-      let cardID = e.target.id;
-      console.log(cardID);
-      if (cart[cardID].quantity - 1 == 0) return;
-      changeCartItemCount(cart[cardID].product.id, cart[cardID].quantity - 1);
-      cart[cardID].quantity += -1;
-      // change the counter in the cart icon
+    if (flag == true && cart[targetI].quantity > Product.stock) {
+      cart[targetI].quantity--;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Sorry, there is no more of this item in the seller's stock",
+      });
+      return;
+    }
+    if (!flag) {
+      cart.push({ id: parseInt(prodID), quantity: 1 });
+    }
+    document.querySelector(".numOfItems span").innerText++;
+  } else if (e.target.innerText == "-") {
+    var cart = state.currentUser.cart;
+    let flag = false;
+    let targetI = -1;
+    for (let ii = 0; ii < cart.length; ii++) {
+      if (cart[ii].id == prodID) {
+        cart[ii].quantity--;
+        flag = true;
+        targetI = ii;
+        break;
+      }
+    }
+    if (/*flag == true &&*/ cart[targetI]  && cart[targetI].quantity == 0) {
+      cart.splice(targetI, 1);
+      flag = false;
+    }
+    // if (!flag) {
+    //   cart.push({ id: parseInt(prodID), quantity: 1 });
+    // }
+    let notminus = document.querySelector(".numOfItems span").innerText;
+    if (notminus > 0) {
       document.querySelector(".numOfItems span").innerText--;
     }
-  });
+    
+    state.currentUser.cart = cart;
+    state.users.forEach((user) => {
+      if (user.id == state.currentUser.id) {
+        user.cart = cart;
+      }
+    });
+    // localStorage.setItem("state", JSON.stringify(state));
+    saveStateInLocalStorage();
+  } else {
+    console.log("not + or -");
+  }
+
+  if (state.currentUser) {
+    state.currentUser.cart = cart;
+    state.users.forEach((user) => {
+      if (user.id == state.currentUser.id) {
+        user.cart = cart;
+      }
+    });
+  } else {
+    state.guestCart = cart;
+  }
+  // localStorage.setItem("state", JSON.stringify(state));
+  saveStateInLocalStorage();  
 });
+
+//     if (e.target.innerText == "+") {
+//       let cardID = +e.target.id;
+//       if (cart[cardID].quantity == cart[cardID].id.stock) {
+//         Swal.fire({
+//           icon: "error",
+//           title: "Oops...",
+//           text: "Sorry, there is no more of this item in the seller's stock",
+//         });
+//         return;
+//       }
+//       changeCartItemCount(cart[cardID].id.id, cart[cardID].quantity + 1);
+//       cart[cardID].quantity += +1;
+//       // change the counter in the cart icon
+//       document.querySelector(".numOfItems span").innerText++;
+//     }
+//     if (e.target.innerText == "-") {
+//       let cardID = e.target.id;
+//       console.log(cardID);
+//       if (cart[cardID].quantity - 1 == 0) return;
+//       changeCartItemCount(cart[cardID].product.id, cart[cardID].quantity - 1);
+//       cart[cardID].quantity += -1;
+//       // change the counter in the cart icon
+//       document.querySelector(".numOfItems span").innerText--;
+//     }
+//   }
+// });

@@ -1,10 +1,5 @@
 import handleSignIn from "../auth/signin.js";
-import {
-  isValidEmail,
-  isValidPassword,
-  validateEmail,
-  validatePassword,
-} from "../helper.js";
+
 
 export function renderModal(element) {
   const modal = ` <div class="modal fade" id="signIn" aria-labelledby="signIn" aria-hidden="true">
@@ -16,7 +11,6 @@ export function renderModal(element) {
               </div>
               <div class="modal-body">
   <form novalidate>
-        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
         <div class="input-group">
           <div class="form-floating">
             <input
@@ -61,11 +55,10 @@ export function renderModal(element) {
           </label>
         </div>
 
-        <button class="btn btn-primary py-2" type="submit">Login</button>
+        <button class="btn btn-warning py-2 w-100 mt-3" type="submit">Login</button>
           </form>
             </div>
-           
-            <p>new user? <a href="signup.html">signup</a></p>
+            <p class="text-center">Dont have an account? click here to <a href="signup.html" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> signup </a></p>
           </div>
         </div>`;
   element.insertAdjacentHTML("beforeend", modal);
