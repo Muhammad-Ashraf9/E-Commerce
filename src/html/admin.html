@@ -128,9 +128,18 @@
     <link rel="stylesheet" href="../style/main.css" />
   </head>
   <body>
-  <div class="spinner-border" role="status" style="width: 50vw;height: 50vh;">
+    <div
+      class="spinner-border"
+      role="status"
+      style="
+        width: 100vw;
+        height: 100vh;
+        opacity: 1;
+        transition: all 5s ease-in-out;
+      "
+    >
       <span class="visually-hidden">Loading...</span>
-  </div>
+    </div>
     <div
       class="modal fade"
       id="modal"
@@ -352,11 +361,9 @@
       class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
       data-bs-theme="dark"
     >
-      <a
-        class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
-        href="#"
-        >Techno</a
-      >
+      <a class="navbar-brand ms-3" href="NewMain.html">
+        <img width="50px" src="../assets/logo.png" alt="logo" /> Furniro
+      </a>
 
       <ul class="navbar-nav flex-row d-md-none">
         <li class="nav-item text-nowrap">
@@ -561,7 +568,7 @@
         </div>
 
         <main
-          class="row justify-content-around col-md-9  col-lg-10 px-md-4"
+          class="row justify-content-around col-md-9 col-lg-10 px-md-4"
         ></main>
       </div>
     </div>
