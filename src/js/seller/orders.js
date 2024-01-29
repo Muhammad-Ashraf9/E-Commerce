@@ -1,4 +1,5 @@
 import { getAllOrdersByOrderIds,getCurrentUser } from "../model.js";
+
 import renderFooter from "../views/Footer.js";
 import renderNav from "../views/Nav.js";
 let body = document.querySelector('body')
@@ -23,6 +24,8 @@ function display(){
   const currentUserData = JSON.parse(userDataFromLocalStorage);
   // Example usage:
   const data = getAllOrdersByOrderIds(currentUserData.orders);
+  console.log(data);
+
 
   const extractObjects = (arr) => arr.filter(item => typeof item === 'object');
 
@@ -31,8 +34,15 @@ const allObjects = data.reduce((acc, innerArray) => {
   const objectsInInnerArray = extractObjects(innerArray);
   return acc.concat(objectsInInnerArray);
 }, []);
-console.log(allObjects);
+
    let table = document.querySelector('table');
+   if (data.length==0) {
+    let alert = document.createElement('h1');
+    alert.setAttribute('class','alert alert-danger')
+    alert.innerText = 'There is no Product to display.'
+    table.appendChild(alert)
+    return
+  }
   let thead = `
   <thead>
     <tr>

@@ -181,13 +181,15 @@ function renderDashboard(container) {
     });
   });
 }
+const spinner = document.querySelector(".spinner-border");
 
 //protecting admin dashboard
 const currentUser = getCurrentUser();
 if (!currentUser || currentUser.accountType !== "admin") {
   location.assign("../html/NewMain.html");
 }
-spinner.remove();
+spinner.remove()
+
 
 //hide dashboard with spinner
 

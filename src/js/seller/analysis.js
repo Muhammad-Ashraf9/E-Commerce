@@ -1,4 +1,5 @@
 import {getAllOrdersByOrderIds,getCurrentUser, state} from '../model.js'
+
 import renderFooter from '../views/Footer.js'
 import renderNav from '../views/Nav.js'
 let totalOrders = document.querySelector('#totalOrders h3')
@@ -7,6 +8,7 @@ let deliveredOrders = document.querySelector('#deliveredOrders h3')
 let totaProfit = document.querySelector('#totaProfit h3')
 let totalProducts = document.querySelector('#totalProducts h3')
 const userDataFromLocalStorage = localStorage.getItem('currentUser');
+
 const bodys=document.querySelector("body");
 renderNav(bodys);
 
