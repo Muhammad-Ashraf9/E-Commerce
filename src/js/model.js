@@ -525,7 +525,7 @@ function getAllProductsBySellerId(allProducts){
       let id = state.currentUser.id;
       const result = allProducts
       .filter(obj => obj.sellerId === id)
-      .map(({ id, title,description,stock,price }) => ({ id, title,description,stock,price }));
+      .map(({ id, title,description,category,stock,price }) => ({ id, title,description,category,stock,price }));
       return result
     }
   }else

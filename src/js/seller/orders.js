@@ -24,14 +24,14 @@ console.log(allObjects);
   let thead = `
   <thead>
     <tr>
-      <th scope="col"  >Order Id</th>
-      <th scope="col"  >Order Date</th>
-      <th scope="col" >Product Id</th>
-      <th scope="col" >Title</th>
-      <th scope="col" >Category</th>
-      <th scope="col" >Quantity</th>
-      <th scope="col" >Total Price</th>
-      <th scope="col" >Status</th>
+      <th scope="col">Order Id</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Product Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
 `  

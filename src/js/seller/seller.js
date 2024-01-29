@@ -7,11 +7,6 @@ let formProduct = document.getElementById('form-product')
 let errorMessage = document.querySelector('.error-message')
 let currentMode = "";
 
-const currentUserForAuth = getCurrentUser();
-if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
-location.assign("../html/NewMain.html");
-}
-
 uploadImg.addEventListener('change', (e) =>{
     const file = uploadImg.files[0];
     if (file) {
@@ -34,7 +29,7 @@ display()
 function display(){
     section.innerHTML = ''
     let allProducts = getAllProductsByProductIds(currentUserData.products);
-     //console.log(allProducts);
+     console.log(allProducts);
     if (!allProducts) {
         let alert = document.createElement('h1');
         alert.setAttribute('class','alert alert-danger')
@@ -47,6 +42,7 @@ function display(){
     let table = document.createElement('table');
     //table.innerHTML = '';
     table.setAttribute('id','productsTable')
+    // table.setAttribute('class','table')
   // Create header row with custom header names
   let headerRow = table.insertRow();
   for (let customHeader of customHeaders) {
@@ -106,7 +102,7 @@ body.addEventListener('click', function(e) {
     }else if(e.target.classList.contains('fa-eye')){
         let productId = e.target.parentNode.parentNode.firstChild.id
         localStorage.setItem("id",productId);
-        location.assign('./ProductDetails.html')
+        location.assign('./ProductDetails_for_seller.html')
     }
 });
 
@@ -238,19 +234,6 @@ function deleteProduct(e){
         // Delete Product From Products Array
         let productId = e.target.parentNode.parentNode.firstChild.id
         deleteProductById(productId)
-        // console.log(productId);
-        // let product = getProductById(productId)
-        // let indexOfProduct = state.products.indexOf(product)
-        // state.products.splice(indexOfProduct,1)
-        // // Delete Product From Products Array in User Array
-        // let user = getUserById(sellerId.id)
-        // let targetProdact = user.products.findIndex((item) => item.productId == +productId);
-        // user.products.splice(targetProdact,1)
-        // // Delete Product From Products Array in Current User Array
-        // user.products = user.products
-
-        // setCurrentUser(user)
-        // // console.log(currentUser);
         saveStateInLocalStorage()
     }
     //######################################################################################################
@@ -354,31 +337,31 @@ function fillFormFields(data) {
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
 function inputValidation(obj){
-    // if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductName)) {
-    //     throw new Error("Invalid Product Name.");
-    // }
-    //     // Validate price (numbers only)
-    //     if (!/^\d+$/.test((obj.NewProductprice)) || obj.NewProductprice <= 0 ) {
-    //     console.log(NewProductprice);
-    //     throw new Error("Invalid Product Price. Please enter a valid number.");
-    // }
+    if (!/^[\s\S]+$/.test(obj.NewProductName.trim())) {
+        throw new Error("Invalid Product Name.");
+    }
+        // Validate price (numbers only)
+    if (!/^\d+$/.test((obj.NewProductprice)) || obj.NewProductprice <= 0 ) {
+        console.log(NewProductprice);
+        throw new Error("Invalid Product Price. Please enter a valid number.");
+    }
 
-    // // Validate category (letters and spaces only)
-    // if (!/^[A-Za-z\s]{3,}$/.test(obj.NewProductcatagory)) {
-    //     // Check if NewProductcatagory contains invalid characters
-    //     throw new Error("Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters.");
-    // }
+    // Validate category (letters and spaces only)
+    if (!/^[\s\S]+$/.test(obj.NewProductcatagory)) {
+        // Check if NewProductcatagory contains invalid characters
+        throw new Error("Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters.");
+    }
 
 
-    // // Validate quantity (numbers only)
-    // if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
-    //     // Check if NewProductQuantity is not a positive integer
-    //     throw new Error("Invalid Product Quantity. Please enter a valid positive number.");
-    // }
+    // Validate quantity (numbers only)
+    if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
+        // Check if NewProductQuantity is not a positive integer
+        throw new Error("Invalid Product Quantity. Please enter a valid positive number.");
+    }
 
-    // // Validate description (letters and spaces only)
-    // if (!/^[A-Za-z\s]{10,}$/.test(obj.NewProductDescription)) {
-    //     throw new Error("Invalid Description.");
+    // Validate description (letters and spaces only)
+    if (!/^[\s\S]+$/.test(obj.NewProductDescription)) {
+        throw new Error("Invalid Description.");
 
-    // }
+    }
 }

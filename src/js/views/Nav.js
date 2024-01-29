@@ -4,7 +4,7 @@ import { renderModal } from "./SigninModal.js";
 import { renderCustomerModal } from "./customerSupportModal.js";
 
 export default function renderNav(element) {
-  const Nav = `  
+  const Nav = `   
   <nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
     <div class="col-2">
