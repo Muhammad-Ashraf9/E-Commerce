@@ -38,10 +38,7 @@ Array.from(parentDiv.children).forEach((child) => {
   child.id = `${prodID}`;
 });
 
-if (
-  state.currentUser === null ||
-  state.currentUser.accountType === "customer"
-) {
+
   // add the quantity of this item in the span
   let mycart = getCurrentCart();
   // fint the item in the cart (by id)
@@ -51,7 +48,7 @@ if (
   } else {
     document.querySelector(".numOfItems span").innerText = 0;
   }
-}
+
 // Render after click on the pagination buttons
 let numberOfCardsPerPage = 4;
 let page = 1; // Current page
@@ -105,10 +102,7 @@ wishIcon.addEventListener("click", function () {
 
 // Show the number of items in the cart icon
 let me = state.currentUser;
-if (
-  state.currentUser === null ||
-  state.currentUser.accountType === "customer"
-) {
+if (me) {
   let mycart = me.cart;
   let item = mycart.filter((item) => item.id == prodID);
   if (item.length > 0) {

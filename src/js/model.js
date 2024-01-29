@@ -299,36 +299,36 @@ export const state = {
 
   ],
   products: [
-    {
-      id: 1,
-      title: "Coush",
-      description: "Desk, 89 1/50 8/8",
-      imgURL0:
-        "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
-      imgURL1:
-        "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1158868_pe888215_s5.jpg?f=xxs",
-      price: 100,
-      prevPrice: 200,
-      category: "Sofas",
-      sellerId: 3,
-      stock: 10,
-      numberofsales: 0,
-    },
-    {
-      id: 2,
-      title: "Coush",
-      description: "Desk,68 1/8 22 7/8",
-      imgURL0:
-        "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194843_pe902111_s5.jpg?f=xxs",
-      imgURL1:
-        "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194842_pe902092_s5.jpg?f=xxs",
-      price: 890,
-      prevPrice: 1000,
-      category: "Sofas",
-      sellerId: 3,
-      stock: 7,
-      numberofsales: 3,
-    },
+    // {
+    //   id: 1,
+    //   title: "Coush",
+    //   description: "Desk, 89 1/50 8/8",
+    //   imgURL0:
+    //     "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
+    //   imgURL1:
+    //     "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1158868_pe888215_s5.jpg?f=xxs",
+    //   price: 100,
+    //   prevPrice: 200,
+    //   category: "Sofas",
+    //   sellerId: 3,
+    //   stock: 10,
+    //   numberofsales: 0,
+    // },
+    // {
+    //   id: 2,
+    //   title: "Coush",
+    //   description: "Desk,68 1/8 22 7/8",
+    //   imgURL0:
+    //     "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194843_pe902111_s5.jpg?f=xxs",
+    //   imgURL1:
+    //     "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194842_pe902092_s5.jpg?f=xxs",
+    //   price: 890,
+    //   prevPrice: 1000,
+    //   category: "Sofas",
+    //   sellerId: 3,
+    //   stock: 7,
+    //   numberofsales: 3,
+    // },
     {
       id: 3,
       title: "Coush",
