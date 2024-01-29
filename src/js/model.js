@@ -313,7 +313,7 @@ export const state = {
       sellerId: 3,
       stock: 10,
       rating: 4,
-      numberofsales: 0,
+      numberofsales: 10,
       countSold: 0,
       reviews: [
         {
@@ -343,7 +343,7 @@ export const state = {
       category: "chairs",
       stock: 10,
       rating: 4,
-      numberofsales: 0,
+      numberofsales: 20,
       countSold: 0,
       reviews: [
         {
@@ -374,7 +374,7 @@ export const state = {
       sellerId: 3,
       stock: 10,
       rating: 4,
-      numberofsales: 0,
+      numberofsales: 30,
       countSold: 0,
       reviews: [
         {
@@ -405,7 +405,7 @@ export const state = {
       sellerId: 3,
       stock: 10,
       rating: 4,
-      numberofsales: 0,
+      numberofsales: 40,
       countSold: 0,
       reviews: [
         {
@@ -436,7 +436,7 @@ export const state = {
       sellerId: 3,
       stock: 10,
       rating: 4,
-      numberofsales: 0,
+      numberofsales: 50,
       countSold: 0,
       reviews: [
         {

@@ -7,6 +7,11 @@ let formProduct = document.getElementById('form-product')
 let errorMessage = document.querySelector('.error-message')
 let currentMode = "";
 
+const currentUserForAuth = getCurrentUser();
+if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
+location.assign("../html/NewMain.html");
+}
+
 uploadImg.addEventListener('change', (e) =>{
     const file = uploadImg.files[0];
     if (file) {
@@ -42,7 +47,6 @@ function display(){
     let table = document.createElement('table');
     //table.innerHTML = '';
     table.setAttribute('id','productsTable')
-    table.setAttribute('class','table')
   // Create header row with custom header names
   let headerRow = table.insertRow();
   for (let customHeader of customHeaders) {

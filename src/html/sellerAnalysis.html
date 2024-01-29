@@ -53,6 +53,10 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+button{
+    margin: 10px;
+}
 </style>
 </head>
 <body>
@@ -67,9 +71,9 @@
             <div class="values">
                 <div class="val-box">
                     <i class="fas fa-shopping-cart"></i>
-                    <div id="numOfProducts">
+                    <div id="totalProducts">
                         <h3></h3>
-                        <span>Number of Products</span>
+                        <span>Total Products</span>
                     </div>
                 </div>
                 <div class="val-box">
@@ -80,17 +84,10 @@
                     </div>
                 </div>
                 <div class="val-box">
-                    <i class="fas fa-users"></i>
+                    <i class="fa-solid fa-hourglass-half"></i>
                     <div id="pendingOrders">
                         <h3></h3>
                         <span>Pending Orders</span>
-                    </div>
-                </div>
-                <div class="val-box">
-                    <i class="fas fa-shopping-cart"></i>
-                    <div id="deliveredOrders">
-                        <h3></h3>
-                        <span>Delivered Orders</span>
                     </div>
                 </div>
                 <div class="val-box">
@@ -109,18 +106,34 @@
                 </div>
             </div>
         </div>
-        <input type="button" value="Display">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-outline-success" type="button" id="stock">View Stock</button>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-outline-success" type="button" id="sales">View Sales</button>
+        </div>
         <div id="myModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close">&times;</span>
               <div>
-                <canvas id="myChart">
+                <canvas id="myChart1">
                 </canvas>
               </div>
             </div>
 
-          </div>
+        </div>
+        <div id="myModal2" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close2">&times;</span>
+              <div>
+                <canvas id="myChart2">
+                </canvas>
+              </div>
+            </div>
+
+        </div>
     </div>
 </section>
       
