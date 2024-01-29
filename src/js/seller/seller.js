@@ -1,4 +1,6 @@
 import { getAllProductsByProductIds,state, saveStateInLocalStorage,getUserById,getProductById, setCurrentUser,deleteProductById, getCurrentUser} from "../model.js";
+import renderFooter from "../views/Footer.js";
+import renderNav from "../views/Nav.js";
 let section = document.getElementById('table')
 let saveBtn = document.getElementById('AddNewProduct')
 let closeBtn = document.getElementById('cancelAdd')
@@ -8,7 +10,11 @@ let errorMessage = document.querySelector('.error-message')
 let currentMode = "";
 const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
+
+console.log('from outer auth ');
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
+    console.log('from inner auth ');
+
     location.assign("/src/html/NewMain.html");
 }
 spinner.remove()
@@ -28,6 +34,10 @@ let currentUser = localStorage.getItem('currentUser')
 const currentUserData = JSON.parse(currentUser);
 console.log(currentUserData);
 
+const bodys=document.querySelector("body");
+renderNav(bodys);
+
+renderFooter(bodys);
 
 display()
 
