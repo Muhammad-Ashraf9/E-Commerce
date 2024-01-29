@@ -59,6 +59,11 @@ Array.from(forms).forEach((form) => {
             location.assign("../html/newMain.html");
           });
         } else {
+          const uindex = state.users.findIndex(
+            (user) => user.id === state.currentUser.id
+          );
+          state.users[uindex].cart = [];
+          saveStateInLocalStorage();
           Swal.fire({
             title: "Sorry!",
             text: `Your order can't be submitted because their is no more of ${x.product.title}\n in the sellers stock`,
