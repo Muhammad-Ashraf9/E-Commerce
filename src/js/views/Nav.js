@@ -23,12 +23,18 @@ export default function renderNav(element) {
         <li class="nav-item mx-lg-3">
           <a class="nav-link" aria-current="page" href="NewMain.html">Home</a>
         </li>
-        <li class="nav-item mx-3">
+        
+        ${
+          !user || user.accountType !== "seller"
+            ? `<li class="nav-item mx-3">
           <a class="nav-link" href="Products_tester.html">Products</a>
-        </li>
+        </li> `
+            : ""
+        }
         <li class="nav-item mx-lg-3">
           <a class="nav-link" href="#about">About</a>
         </li>
+       
         <li class="nav-item mx-2">
           <a class="nav-link" href="#contact">Contact us</a>
         </li>

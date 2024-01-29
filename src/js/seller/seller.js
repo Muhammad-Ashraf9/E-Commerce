@@ -1,4 +1,6 @@
 import { getAllProductsByProductIds,state, saveStateInLocalStorage,getUserById,getProductById, setCurrentUser,deleteProductById, getCurrentUser} from "../model.js";
+import renderFooter from "../views/Footer.js";
+import renderNav from "../views/Nav.js";
 let section = document.getElementById('table')
 let saveBtn = document.getElementById('AddNewProduct')
 let closeBtn = document.getElementById('cancelAdd')
@@ -30,6 +32,10 @@ let currentUser = localStorage.getItem('currentUser')
 const currentUserData = JSON.parse(currentUser);
 console.log(currentUserData);
 
+const bodys=document.querySelector("body");
+renderNav(bodys);
+
+renderFooter(bodys);
 
 display()
 

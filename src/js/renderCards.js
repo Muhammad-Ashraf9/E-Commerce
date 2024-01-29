@@ -27,7 +27,7 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   for (let i = startCard; i <= endCard; i++) {
     const iID = Products[i - 1].id;
           if (state.currentUser === null || state.currentUser.accountType === "customer" ){
-            const prodQ = getQuantityFromCart(iID);
+            var prodQ = getQuantityFromCart(iID);
           }
 
     productOuterDiv += 

@@ -27,7 +27,6 @@ export function signIn(email, password) {
 export function signOut() {
   deleteCookie("id");
   setCurrentUser(null);
-  saveStateInLocalStorage(); 
 }
 
 export function signUp(email, password, name, accountType) {
