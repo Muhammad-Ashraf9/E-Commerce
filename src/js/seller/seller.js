@@ -8,9 +8,7 @@ let errorMessage = document.querySelector('.error-message')
 let currentMode = "";
 const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
-console.log('from outer auth ');
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
-    console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
 spinner.remove()
@@ -44,6 +42,7 @@ function display(){
         section.appendChild(alert)
         return
     }
+
     let customHeaders = ['Product ID', 'Title', 'Description','Category', 'Stock','Price'];
     // Create a table element
     let table = document.createElement('table');
@@ -139,14 +138,11 @@ closeBtn.addEventListener('click', function() {
 let sellerId = JSON.parse(currentUser)
 
 saveBtn.addEventListener('click',(e)=>{
-    console.log(sellerId.accountType);
     if (sellerId.accountType === 'seller' && currentMode == "Add") {
         AddNewProduct(e);
     }
-    display()
 })
 function AddNewProduct(e){
-    console.log(e);
     e.preventDefault();
     let img = localStorage.getItem('savedImage')
     const imageElement = new Image();
@@ -181,8 +177,9 @@ function AddNewProduct(e){
         currentMode = ''
         formProduct.reset()
         modal.style.display = 'none';
+        location.reload()
+        //display();
     } catch (error) {
-        console.log(error);
         errorMessage.innerText = error.message;
         errorMessage.style.opacity = 1;
     }
@@ -222,7 +219,7 @@ removeItem.forEach(addEventListener('click', function (e) {
                     // Delete the product
                     deleteProduct(e);
                     // Update the table
-                    display();
+                    location.reload()
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
@@ -302,10 +299,10 @@ function editProduct(e){
                         icon: "success"
                       });
                     } catch (error) {
-                    console.log(error);
                     errorMessage.innerText = error.message;
                     errorMessage.style.opacity = 1;
                 }
+            location.reload()
             display()
         })
     }
