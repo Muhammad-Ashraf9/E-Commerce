@@ -105,10 +105,7 @@ wishIcon.addEventListener("click", function () {
 
 // Show the number of items in the cart icon
 let me = state.currentUser;
-if (
-  state.currentUser === null ||
-  state.currentUser.accountType === "customer"
-) {
+if (me) {
   let mycart = me.cart;
   let item = mycart.filter((item) => item.id == prodID);
   if (item.length > 0) {
