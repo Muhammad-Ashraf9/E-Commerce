@@ -1,7 +1,5 @@
-import { getQuantityFromguestCart } from "./getQuantityFromguestCart.js";
 // let state = JSON.parse(localStorage.getItem("state"));
 import { saveStateInLocalStorage, state } from "./model.js";
-console.log(state);
 // let myID = 2; // get it from the function
 // let currentUser = state.currentUser;
 // // if(currentUser){ orders of current user }
@@ -53,7 +51,6 @@ export function addtoCart(e) {
       saveStateInLocalStorage();
     } else {
       let cartGuest = state.guestCart;
-      console.log(cartGuest);
       let flag = false;
       let targetI = -1;
       for (let ii = 0; ii < cartGuest.length; ii++) {

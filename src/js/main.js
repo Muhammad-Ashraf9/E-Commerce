@@ -7,9 +7,40 @@ const body = document.querySelector("body");
 console.log("body :>> ", body);
 setAuthStateFromCookie();
 
+
 let div = document.getElementById("ProductShow");
 console.log(div);
 
 renderNav(body);
 renderFooter(body);
-renderCards(1, 4, "", "");
+
+let page = 1;
+document.addEventListener("DOMContentLoaded", function () {
+  let firstRow = document.getElementById("ProductShow");
+  console.log(firstRow);
+  renderCards(page, 4, "", "");
+});
+
+// Render after click on the pagination buttons
+const pagSec = document.getElementById("paginationSection");
+pagSec.addEventListener("click", function (event) {
+  if (event.target.nodeName == "A") {
+    pagSec.innerHTML = "";
+    if (event.target.textContent === "Previous") {
+      if (page === 1) {
+        page = 1;
+      } else {
+        page--;
+      }
+    } else if (event.target.textContent === "Next") {
+      if (page === pagesCount) {
+        page = pagesCount;
+      } else {
+        page++;
+      }
+    } else {
+      page = parseInt(event.target.textContent);
+    }
+  }
+  renderCards(page, 4, "", "");
+});

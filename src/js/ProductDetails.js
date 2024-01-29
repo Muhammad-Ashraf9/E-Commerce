@@ -11,7 +11,6 @@ import {
   saveStateInLocalStorage,
 } from "./model.js";
 
-
 let prodID = localStorage.getItem("id");
 // get data from local storage
 // let state = JSON.parse(localStorage.getItem("state"));
@@ -38,16 +37,21 @@ let parentDiv = document.querySelector(".numOfItems");
 Array.from(parentDiv.children).forEach((child) => {
   child.id = `${prodID}`;
 });
-// add the quantity of this item in the span
-let mycart = getCurrentCart();
-// fint the item in the cart (by id)
-let item = mycart.filter((item) => item.id == prodID);
-if (item.length > 0) {
-  document.querySelector(".numOfItems span").innerText = item[0].quantity;
-} else {
-  document.querySelector(".numOfItems span").innerText = 0;
-}
 
+if (
+  state.currentUser === null ||
+  state.currentUser.accountType === "customer"
+) {
+  // add the quantity of this item in the span
+  let mycart = getCurrentCart();
+  // fint the item in the cart (by id)
+  let item = mycart.filter((item) => item.id == prodID);
+  if (item.length > 0) {
+    document.querySelector(".numOfItems span").innerText = item[0].quantity;
+  } else {
+    document.querySelector(".numOfItems span").innerText = 0;
+  }
+}
 // Render after click on the pagination buttons
 let numberOfCardsPerPage = 4;
 let page = 1; // Current page
@@ -97,11 +101,14 @@ wishIcon.addEventListener("click", function () {
 //     changeCartItemCount(prodID, cart.filter((item) => item.id === prodID).length + 1);
 //   }
 // });
-let cartElement = getCurrentCart().map((item) => ({ id: prodID }));
+// let cartElement = getCurrentCart().map((item) => ({ id: prodID }));
 
 // Show the number of items in the cart icon
 let me = state.currentUser;
-if (me) {
+if (
+  state.currentUser === null ||
+  state.currentUser.accountType === "customer"
+) {
   let mycart = me.cart;
   let item = mycart.filter((item) => item.id == prodID);
   if (item.length > 0) {
@@ -167,7 +174,7 @@ cards.addEventListener("click", function (e) {
         break;
       }
     }
-    if (/*flag == true &&*/ cart[targetI]  && cart[targetI].quantity == 0) {
+    if (/*flag == true &&*/ cart[targetI] && cart[targetI].quantity == 0) {
       cart.splice(targetI, 1);
       flag = false;
     }
@@ -178,7 +185,7 @@ cards.addEventListener("click", function (e) {
     if (notminus > 0) {
       document.querySelector(".numOfItems span").innerText--;
     }
-    
+
     state.currentUser.cart = cart;
     state.users.forEach((user) => {
       if (user.id == state.currentUser.id) {
@@ -202,7 +209,7 @@ cards.addEventListener("click", function (e) {
     state.guestCart = cart;
   }
   // localStorage.setItem("state", JSON.stringify(state));
-  saveStateInLocalStorage();  
+  saveStateInLocalStorage();
 });
 
 //     if (e.target.innerText == "+") {
