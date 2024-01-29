@@ -24,7 +24,6 @@ let cart = ucart.map((item) => ({
   product: getProductById(item.id),
   num: item.quantity,
 }));
-console.log(cart);
 window.addEventListener("load", function () {
   let cards = this.document.getElementById("items");
   generateCards();
@@ -97,7 +96,6 @@ window.addEventListener("load", function () {
   cards.addEventListener("click", function (e) {
     if (e.target.innerText == "+") {
       let cardID = +e.target.id;
-      console.log(cardID);
 
       if (cart[cardID].num == cart[cardID].product.stock) {
         Swal.fire({
@@ -113,14 +111,12 @@ window.addEventListener("load", function () {
     }
     if (e.target.innerText == "-") {
       let cardID = e.target.id;
-      console.log(cardID);
       if (cart[cardID].num - 1 == 0) return;
       changeCartItemCount(cart[cardID].product.id, cart[cardID].num - 1);
       cart[cardID].num += -1;
       generateCards();
     }
     if (e.target.dataset.id) {
-      console.log("e.target.dataset.id", e.target.dataset.id);
       const itemId = +e.target.dataset.id;
       DeleteFromCart(itemId);
       generateCards();

@@ -1,13 +1,11 @@
 import { state } from "./model.js";
 export function getQuantityFromCart(prodID) {
-  console.log("this id: " + prodID);
   // let state = JSON.parse(localStorage.getItem("state"));
   if (state["currentUser"]) {
     let userCart = state["currentUser"].cart;
     // for loop in array of objects
     for (let item of userCart) {
       if (item.id == prodID) {
-        console.log(item.quantity);
         return item.quantity;
       }
     }
@@ -17,7 +15,6 @@ export function getQuantityFromCart(prodID) {
     // for loop in array of objects
     for (let item of guestCart) {
       if (item.id == prodID) {
-        console.log(item.quantity);
         return item.quantity;
       }
     }

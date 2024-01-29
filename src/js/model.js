@@ -30,7 +30,7 @@ export const state = {
       id: 3,
       name: "ash sellerB",
       email: "ash@seller.ash",
-      password: "ash123",
+      password: "abcdefghijAAAA@123",
       orders: [354028, 3528],
       accountType: "seller",
       products: [
