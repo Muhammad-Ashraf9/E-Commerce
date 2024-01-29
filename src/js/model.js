@@ -2,9 +2,6 @@ export const state = {
   currentUser: null,
   messages: [],
   guestCart: [
-    { id: 1, quantity: 5 },
-    { id: 2, quantity: 2 },
-    { id: 3, quantity: 1 },
   ],
   users: [
     {
