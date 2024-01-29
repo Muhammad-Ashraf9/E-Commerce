@@ -6,7 +6,7 @@ import { state } from "../js/model.js";
 // let state = JSON.parse(localStorage.getItem("state"));
 
 let orders = state.orders;
-let myID = 2; // get it from the function
+let myID = state.currentUser.id; // get it from the function
 function renderOrders(tableDiv, myID) {
   // render table to print all the orders in a table
   let tableinnerHTML = "";
@@ -126,7 +126,7 @@ let tableDiv = document.getElementById("table");
 renderOrders(tableDiv, myID);
 function changeState(e) {
   console.log("changeState");
-  swal({
+  Swal.fire({
     title: "Delivery Confirmation!",
     text: "Are you sure you want to confirm the delivery?",
     icon: "warning",
@@ -134,7 +134,7 @@ function changeState(e) {
     dangerMode: false,
   }).then((willDelete) => {
     if (willDelete) {
-      swal("Thanks for order from us ❤;", {
+      Swal.fire("Thanks for order from us ❤;", {
         icon: "success",
       });
       orders[e.target.id]["status"] = "deleverd";
@@ -143,7 +143,7 @@ function changeState(e) {
       saveStateInLocalStorage();
       renderOrders(tableDiv, myID);
     } else {
-      swal("Your order in safe hands!");
+      Swal.fire("Your order in safe hands!");
     }
   });
 

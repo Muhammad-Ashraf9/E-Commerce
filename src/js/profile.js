@@ -10,7 +10,7 @@ console.log(CurrentUser)
 window.addEventListener("load",function(){
     document.getElementById("UserFullName").innerText  = CurrentUser.name
     document.getElementById("mail").innerText  = CurrentUser.email
-    document.getElementById("number").innerText  = CurrentUser.
+    // document.getElementById("number").innerText  = CurrentUser.
   document.getElementById("username").innerText  = "Hello, "+ CurrentUser.name
 
 console.log(CurrentUser.accountType)
