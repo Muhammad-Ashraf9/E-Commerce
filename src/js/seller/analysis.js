@@ -1,10 +1,19 @@
-import {getAllOrdersByOrderIds, state} from '../model.js'
+import {getAllOrdersByOrderIds,getCurrentUser, state} from '../model.js'
 let totalOrders = document.querySelector('#totalOrders h3')
 let pendingOrders = document.querySelector('#pendingOrders h3')
 let deliveredOrders = document.querySelector('#deliveredOrders h3')
 let totaProfit = document.querySelector('#totaProfit h3')
 let totalProducts = document.querySelector('#totalProducts h3')
 const userDataFromLocalStorage = localStorage.getItem('currentUser');
+
+const currentUserForAuth = getCurrentUser();
+console.log('from outer auth ');
+if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
+    console.log('from inner auth ');
+    location.assign("/src/html/NewMain.html");
+}
+
+
   // Parse the JSON string to get the JavaScript object
   const currentUserData = JSON.parse(userDataFromLocalStorage);
     // Example usage:
