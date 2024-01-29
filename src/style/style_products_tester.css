@@ -12,12 +12,13 @@ body {
 }
 
 #breadcrumb {
-  background-image: url("../assets/hero.jpg");
+  height: 20vh;
+  background-image: url(../assets/header.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 30vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
