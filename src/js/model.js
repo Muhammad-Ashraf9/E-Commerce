@@ -1,8 +1,7 @@
 export const state = {
   currentUser: null,
   messages: [],
-  guestCart: [
-  ],
+  guestCart: [],
   users: [
     {
       id: 1,
@@ -277,8 +276,7 @@ export const state = {
     },
     {
       id: 189775,
-      items: [
-      ],
+      items: [],
       customerId: 1,
       status: "pending",
       date: "2024-01-25",
@@ -293,7 +291,6 @@ export const state = {
         Zip: "35511",
       },
     },
-
   ],
   products: [
     // {
@@ -799,7 +796,7 @@ export function getUserByEmail(email) {
 
 export function getAllOrdersByOrderIds(orderIds) {
   let allOrders = [];
- // let orders = JSON.parse(localStorage.getItem("orders"));
+  // let orders = JSON.parse(localStorage.getItem("orders"));
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
     const foundOrder = state.orders.find((order) => order.id === orderId);
@@ -809,7 +806,7 @@ export function getAllOrdersByOrderIds(orderIds) {
       allOrders.push(foundOrder);
     }
   }
-  let result =[]
+  let result = [];
   for (let i = 0; i < allOrders.length; i++) {
     // Create a new array for each iteration of the outer loop
     const matchedItems = [];
@@ -817,9 +814,9 @@ export function getAllOrdersByOrderIds(orderIds) {
     for (let j = 0; j < allOrders[i].items.length; j++) {
       if (allOrders[i].items[j].sellerId === state.currentUser.id) {
         console.log(allOrders[i].status);
-        allOrders[i].items[j].orderId =  allOrders[i].id
-        allOrders[i].items[j].orderDate=  allOrders[i].date
-        allOrders[i].items[j].orderStatus=  allOrders[i].status
+        allOrders[i].items[j].orderId = allOrders[i].id;
+        allOrders[i].items[j].orderDate = allOrders[i].date;
+        allOrders[i].items[j].orderStatus = allOrders[i].status;
         matchedItems.push(allOrders[i].items[j]);
       }
     }
@@ -829,18 +826,25 @@ export function getAllOrdersByOrderIds(orderIds) {
   return result;
 }
 
-function getAllProductsBySellerId(allProducts){
-  if(state.currentUser.accountType === 'seller'){
-    if(allProducts){
+function getAllProductsBySellerId(allProducts) {
+  if (state.currentUser.accountType === "seller") {
+    if (allProducts) {
       let id = state.currentUser.id;
       const result = allProducts
-      .filter(obj => obj.sellerId === id)
-      .map(({ id, title,description,category,stock,price }) => ({ id, title,description,category,stock,price }));
-      return result
+        .filter((obj) => obj.sellerId === id)
+        .map(({ id, title, description, category, stock, price }) => ({
+          id,
+          title,
+          description,
+          category,
+          stock,
+          price,
+        }));
+      return result;
     }
-  }else
-    //
-    return
+  }
+  //
+  else return;
 }
 export function getAllProductsByProductIds(productIds) {
   // Initialize an array to store the found orders
@@ -894,7 +898,7 @@ export function deleteProductById(id) {
 
   //loop over users
   state.users.forEach((user) => {
-    if (user.id === product.sellerId) {
+    if (user.id === product?.sellerId) {
       //delete product from seller products
       user.products = user.products.filter(
         (product) => product.productId !== +id
