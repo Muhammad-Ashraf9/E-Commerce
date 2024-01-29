@@ -178,7 +178,7 @@ function renderDashboard(container) {
 
 //protecting admin dashboard
 if (!getCurrentUser() || getCurrentUser().accountType !== "admin") {
-  location.assign("../html/main.html");
+  location.assign("../html/NewMain.html");
 }
 //hide dashboard with spinner
 
@@ -255,7 +255,7 @@ sidebar.addEventListener("click", (e) => {
 });
 signoutBtn.addEventListener("click", () => {
   signOut();
-  location.assign("../html/main.html");
+  location.assign("../html/NewMain.html");
 });
 
 /// render Dashboard by default
