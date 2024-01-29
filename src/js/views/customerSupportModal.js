@@ -1,5 +1,5 @@
 import { state, getCurrentUser, saveStateInLocalStorage } from "../model.js";
-import {generateRandomId}from"../helper.js"
+import { generateRandomId } from "../helper.js";
 export function renderCustomerModal(element) {
   const modal = ` <div class="modal fade" id="support" aria-labelledby="support" aria-hidden="true">
             <div class="modal-dialog">
@@ -29,11 +29,18 @@ export function renderCustomerModal(element) {
     const msg = document.getElementById("message-text").value.trim();
     console.log(msg);
     const user = getCurrentUser();
-    const MId=generateRandomId();
-    const UID=user.id;
-    const Email=user.email;
-    const name=user.name;
-    const newMsg = { mId: MId , uId:UID ,name:name,email:Email ,message: msg,date: Date.now() };
+    const MId = generateRandomId();
+    const UID = user.id;
+    const Email = user.email;
+    const name = user.name;
+    const newMsg = {
+      mId: MId,
+      uId: UID,
+      name: name,
+      email: Email,
+      message: msg,
+      date: Date.now(),
+    };
     state.messages.push(newMsg);
     console.log(state);
     saveStateInLocalStorage();
@@ -42,7 +49,7 @@ export function renderCustomerModal(element) {
       text: "Your message has been submitted successfully",
       icon: "success",
     }).then(() => {
-      location.assign("../html/main.html");
+      location.assign("../html/NewMain.html");
     });
 
     console.log(state);

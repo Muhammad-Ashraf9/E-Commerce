@@ -3,7 +3,9 @@ import {
   getOrderTotal,
   getProductById,
   getUserById,
+  searchByField,
   searchOrdersByCustomerName,
+  sortByField,
   state,
 } from "../model.js";
 import { generateTabel } from "./dashboard.js";
@@ -16,11 +18,11 @@ export function generateOrdersTableHeader() {
   return `
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Customer Name</th>
-
-      <th scope="col">Total</th>
-      <th scope="col">Date</th>
+      <th scope="col" data-field="id">Order Id</th>
+      <th scope="col" data-field="customerId">Customer Id</th>
+      <th scope="col" data-field="customerName">Customer Name</th>
+      <th scope="col" data-field="date">Date</th>
+      <th scope="col" data-field="orderTotal">Order Total</th>
     </tr>
   </thead>
 `;
@@ -33,6 +35,7 @@ export function generateOrdersTableBody(arrayOfOrders) {
       <tbody>
       <tr>
       <td>${order.id}</td>
+      <td>${order.customerId}</td>
       <td>${
         getUserById(order.customerId) //better to put all orders data in order object instead of only the id
           ? getUserById(order.customerId).name
@@ -40,8 +43,8 @@ export function generateOrdersTableBody(arrayOfOrders) {
       }</td>
    
     
+      <td>${new Date(order.date).toISOString().split("T")[0]}</td>
       <td>${getOrderTotal(order)}</td>
-      <td>${new Date(order.id).toISOString().split("T")[0]}</td>
     </tr> 
     </tbody>
     `
@@ -61,13 +64,16 @@ export function renderOrdersPage(
 
   //set on change event to search input to sellers
   search.onchange = (e) => {
+    const newSearchBy = { ...searchBy, value: e.target.value.trim() };
+
     renderOrdersPage(
       container,
-      searchOrdersByCustomerName(e.target.value),
-      pageNumber,
+      searchByField(state.orders, newSearchBy.field, newSearchBy.value),
+      // pageNumber,
+      1, //reset page number to 1
       itemsPerPage,
       sortBy,
-      searchBy
+      newSearchBy
     );
   };
   container.innerHTML = "";
@@ -78,6 +84,7 @@ export function renderOrdersPage(
       generateOrdersTableBody(getByPageNumber(array, pageNumber, itemsPerPage))
     )
   );
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   container.insertAdjacentHTML(
     "beforeend",
     getPaginationHTML(array, pageNumber, itemsPerPage)
@@ -94,10 +101,71 @@ export function renderOrdersPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1, //reset page number to 1
     itemsPerPage,
     sortBy,
     searchBy,
     renderOrdersPage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
+  document.querySelector("table").addEventListener("click", (e) => {
+    const field = e.target.dataset?.field;
+    if (field) {
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
+      } else {
+        newSortBy.field = field;
+        newSortBy.order = "asc";
+      }
+
+      renderOrdersPage(
+        container,
+        sortByField(
+          state.orders.map((o) => ({
+            ...o,
+            orderTotal: getOrderTotal(o),
+            customerName: getUserById(o.customerId)
+              ? getUserById(o.customerId).name
+              : "Deleted Customer",
+          })),
+          newSortBy.field,
+          newSortBy.order
+        ),
+        pageNumber,
+        itemsPerPage,
+        newSortBy,
+        searchBy
+      );
+    }
+  });
+  const searchBySelectElement = document.querySelector("select[name=searchBy]");
+  searchBySelectElement.value = searchBy.field;
+  searchBySelectElement.addEventListener("change", (e) => {
+    const newSearchBy = { ...searchBy, field: e.target.value };
+    renderOrdersPage(
+      container,
+      searchByField(state.orders, newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
+  });
+}
+
+function getSelectSearchByHTML() {
+  return `
+  <div class="col-4"> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="id">Order Id</option>
+  <option value="customerId">customer Id</option>
+  </select>
+  </div>
+  `;
 }

@@ -1,19 +1,17 @@
-import { signOut } from "../auth.js";
+import { signOut } from "../auth/auth.js";
 import { getCurrentUser } from "../model.js";
 import { renderModal } from "./SigninModal.js";
 import { renderCustomerModal } from "./customerSupportModal.js";
 
 export default function renderNav(element) {
-  
-  const Nav = `  
+  const Nav = `   
   <nav class="navbar navbar-expand-lg justify-content-between sticky-top bg-light" data-bs-theme="light">
   <div class="container-fluid">
     <div class="col-2">
-      <a class="navbar-brand ms-3" href="main.html">
+      <a class="navbar-brand ms-3" href="NewMain.html">
         <img width="50px" src="../assets/logo.png" alt="logo"> Furniro
       </a>
     </div>
-
     <button class="m-auto navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,16 +20,16 @@ export default function renderNav(element) {
     <div class="col-4 collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
         <li class="nav-item mx-lg-3">
-          <a class="nav-link" aria-current="page" href="main.html">Home</a>
+          <a class="nav-link" aria-current="page" href="NewMain.html">Home</a>
         </li>
         <li class="nav-item mx-3">
           <a class="nav-link" href="Products_tester.html">Products</a>
         </li>
         <li class="nav-item mx-lg-3">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="#about">About</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link" href="#">Contact us</a>
+          <a class="nav-link" href="#contact">Contact us</a>
         </li>
       </ul>
     </div>
@@ -58,9 +56,10 @@ export default function renderNav(element) {
   nav.addEventListener("click", (e) => {
     if (e.target.textContent !== "Sign out") return;
     signOut();
+    location.assign("/src/html/NewMain.html");
     nav.remove();
     renderNav(element);
   });
   renderModal(element);
-  renderCustomerModal(element)
+  renderCustomerModal(element);
 }

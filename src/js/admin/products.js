@@ -30,12 +30,12 @@ export function renderProductsPage(
   //onchange instead of addEventListener to remove previous event listeners
   search.onchange = (e) => {
     const newSearchBy = { ...searchBy, value: e.target.value.trim() };
-    console.log("newSearchBy search  valuue:>> ", newSearchBy);
 
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1,//reset page number to 1 on search
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -65,22 +65,35 @@ export function renderProductsPage(
     searchBy,
     renderProductsPage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
-      if (sortBy.field === field) {
-        sortBy.order = sortBy.order === "asc" ? "desc" : "asc";
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
       } else {
-        sortBy.field = field;
-        sortBy.order = "asc";
+        newSortBy.field = field;
+        newSortBy.order = "asc";
       }
 
       renderProductsPage(
         container,
-        sortByField(array, sortBy.field, sortBy.order),
+        sortByField(
+          state.products.map((p) => ({
+            ...p,
+            sellerName: getUserById(p.sellerId)?.name || "Deleted Seller🥲",
+          })),
+          newSortBy.field,
+          newSortBy.order
+        ),
         pageNumber,
         itemsPerPage,
-        sortBy,
+        newSortBy,
         searchBy
       );
     }
@@ -106,7 +119,8 @@ export function renderProductsPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1,//reset page number to 1 on change items per page
     itemsPerPage,
     sortBy,
     searchBy,
@@ -117,7 +131,6 @@ export function renderProductsPage(
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {
     const newSearchBy = { ...searchBy, field: e.target.value };
-    console.log("newSearchBy fierld :>> ", newSearchBy);
     renderProductsPage(
       container,
       searchByField(state.products, newSearchBy.field, newSearchBy.value),
@@ -135,7 +148,7 @@ export function generateProductsTableHeader() {
       <th scope="col" data-field="id">ID</th>
       <th scope="col" data-field="title">Product title</th>
       <th scope="col" data-field="description" >Description</th>
-      <th scope="col" >Seller Name</th>
+      <th scope="col" data-field="sellerName">Seller</th>
       <th scope="col" data-field="price">Price</th>
       <th scope="col" data-field="category">Category</th>
       <th scope="col" >Image</th>
@@ -153,14 +166,10 @@ export function generateProductsTableBody(arrayOfProducts) {
       <td>${product.id}</td>
       <td>${product.title}</td>
       <td>${product.description}</td>
-      <td>${
-        getUserById(product.sellerId)
-          ? getUserById(product.sellerId).name
-          : "Deleted Seller🥲"
-      }</td>
+      <td>${getUserById(product.sellerId)?.name || "Deleted Seller🥲"}</td>
       <td>${product.price}</td>
       <td>${product.category}</td>
-      <td><img class="table-img--sm"src="${product.img}"/></td>
+      <td><img class="table-img--sm"src="${product.imgURL0}"/></td>
       <td>
       <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" 
        data-bs-target="#modal"            
@@ -174,7 +183,7 @@ export function generateProductsTableBody(arrayOfProducts) {
 
 export function getSelectSearchByHTML() {
   return `
-  <div> Search By
+  <div class="col-4"> Search By
   <select name="searchBy" class="dashborad-select" aria-label="search by">
   <option value="id">id</option>
   <option value="title">title</option>

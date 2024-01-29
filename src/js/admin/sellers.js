@@ -1,5 +1,12 @@
-import { signUp } from "../auth.js";
-import { isValidEmail, isValidName, isValidPassword } from "../helper.js";
+import { signUp } from "../auth/auth.js";
+import {
+  isValidEmail,
+  isValidName,
+  isValidPassword,
+  validateEmail,
+  validateName,
+  validatePassword,
+} from "../helper.js";
 import {
   deleteSellerById,
   editUserById,
@@ -7,7 +14,9 @@ import {
   getCustomers,
   getSellers,
   getUserById,
+  searchByField,
   searchSellerByName,
+  sortByField,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
 import {
@@ -19,11 +28,11 @@ export function generateSellersTabelHead() {
   return `
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Seller Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">No. Products</th>
-      <th scope="col">No. Orders</th>
+      <th scope="col" data-field="id" >Id</th>
+      <th scope="col" data-field="name" >Name</th>
+      <th scope="col" data-field="email">Email</th>
+      <th scope="col" data-field="numberOfProducts">No. Products</th>
+      <th scope="col" data-field="numberOfOrders">No. Orders</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -68,13 +77,16 @@ export function renderSellersPage(
 
   //set on change event to search input to sellers
   search.onchange = (e) => {
+    const newSearchBy = { ...searchBy, value: e.target.value.trim() };
+
     renderSellersPage(
       container,
-      searchSellerByName(e.target.value),
-      pageNumber,
+      searchByField(getSellers(), newSearchBy.field, newSearchBy.value),
+      // pageNumber,
+      1, //reset page number to 1
       itemsPerPage,
       sortBy,
-      searchBy
+      newSearchBy
     );
   };
   container.innerHTML = "";
@@ -109,7 +121,39 @@ export function renderSellersPage(
     renderSellersPage
   );
 
+  //to change the arrow direction of the sorted field after rendering the table
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
+    const field = e.target.dataset?.field;
+    if (field) {
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
+      } else {
+        newSortBy.field = field;
+        newSortBy.order = "asc";
+      }
+      renderSellersPage(
+        container,
+        sortByField(
+          getSellers().map((s) => ({
+            ...s,
+            numberOfProducts: s.products.length,
+            numberOfOrders: s.orders.length,
+          })),
+          newSortBy.field,
+          newSortBy.order
+        ),
+        pageNumber,
+        itemsPerPage,
+        newSortBy,
+        searchBy
+      );
+    }
+
     if (e.target.dataset?.delId) {
       modal.innerHTML = getModalHTML(e.target.dataset.delId);
       document.querySelector(".modal-footer").addEventListener("click", (e) => {
@@ -143,40 +187,39 @@ export function renderSellersPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1, //reset page number to 1
     itemsPerPage,
     sortBy,
     searchBy,
     renderSellersPage
   );
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
+  const searchBySelectElement = document.querySelector("select[name=searchBy]");
+  searchBySelectElement.value = searchBy.field;
+  searchBySelectElement.addEventListener("change", (e) => {
+    const newSearchBy = { ...searchBy, field: e.target.value };
+    renderSellersPage(
+      container,
+      searchByField(getSellers(), newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
+  });
 }
 
-function validateEmail(email, emailInvalidFeedback) {
-  if (!isValidEmail(email.value)) {
-    email.classList.add("is-invalid");
-    emailInvalidFeedback.style.display = "block";
-  } else {
-    email.classList.remove("is-invalid");
-    emailInvalidFeedback.style.display = "none";
-  }
-}
-function validateName(name, nameInvalidFeedback) {
-  if (!isValidName(name.value)) {
-    name.classList.add("is-invalid");
-    nameInvalidFeedback.style.display = "block";
-  } else {
-    name.classList.remove("is-invalid");
-    nameInvalidFeedback.style.display = "none";
-  }
-}
-function validatePassword(password, passwordInvalidFeedback) {
-  if (!isValidPassword(password.value)) {
-    password.classList.add("is-invalid");
-    passwordInvalidFeedback.style.display = "block";
-  } else {
-    password.classList.remove("is-invalid");
-    passwordInvalidFeedback.style.display = "none";
-  }
+function getSelectSearchByHTML() {
+  return `
+  <div class="col-4"> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="id">id</option>
+  <option value="name">name</option>
+  <option value="email">email</option>
+  </select>
+  </div>
+  `;
 }
 
 export function handleEditUser(
@@ -208,7 +251,7 @@ export function handleEditUser(
       ".invalid-feedback.name"
     );
 
-    emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+    emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signUp function
 
     validateEmail(email, emailInvalidFeedback);
     validatePassword(password, passwordInvalidFeedback);
@@ -270,7 +313,7 @@ export function handleAddUser(
         ".invalid-feedback.name"
       );
 
-      emailInvalidFeedback.textContent = `Please choose a Email.`; //to reset the error message after being changed by signUp function
+      emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signUp function
       validateEmail(email, emailInvalidFeedback);
       validatePassword(password, passwordInvalidFeedback);
       validateName(name, nameInvalidFeedback);
@@ -340,7 +383,8 @@ function getAddModalFormHTML(userType, user) {
             <label for="userName">${userType} name</label>
           </div>
           <div class="invalid-feedback name">
-              Please choose a valid username.
+              Please choose a valid Full name must contain a at least first and
+              last name (3-16 letters).
            </div>
         </div>
       <div class="input-group has-validation">

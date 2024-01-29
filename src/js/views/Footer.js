@@ -1,9 +1,8 @@
 import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
-  console.log(getCurrentUser());
   const footer = `
 </li>
-  <div class="p-2 ps-5 mt-2">
+  <div class="p-2 ps-5 mt-2 bg-light">
     <div class="container-fluid">
       <div class="row text-center p-3">
         <div class="col-lg-3 col-md-6 p-2">
@@ -49,7 +48,7 @@ export default function renderFooter(element) {
   <div class="footer-top">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 footer-about ">
+        <div id="about" class="col-md-3 footer-about ">
         
           <h3> <img width="60vw" src="../assets/logo.png" alt="logo">  Furniro</h3>
           <p>
@@ -57,12 +56,12 @@ export default function renderFooter(element) {
           </p>
           <p class="fs-3 fw-bold ">&copy; Furniro Inc.</p>
               </div>
-        <div class="col-md-4 offset-md-1 footer-contact ">
+        <div id="contact" class="col-md-4 offset-md-1 footer-contact ">
           <h3 class="pb-3">Contact</h3>
               <p><i class="fas fa-map-marker-alt"></i> 78 madrb st, Mansoura Egypt</p>
               <p><i class="fas fa-phone"></i> Phone: 01094335757</p>
               <p><i class="fas fa-envelope"></i> Email: <a href="mailto:furniro@domain.com">furniro@domain.com</a></p>
-              <p><i class="fab fa-telegram"></i> 01094335757</p>
+              <p><i class="fab fa-telegram"></i> Telegram: 01094335757</p>
               </div>
               <div class="col-md-4 footer-links p">
                 <div class="row">
@@ -72,10 +71,9 @@ export default function renderFooter(element) {
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <p><a class="scroll-link" href="main.html">Home</a></p>
-                    <p><a href="Products_tester">Products</a></p>
-                    <p><a href="#">How it works</a></p>
-                    <p><a href="#">Our clients</a></p>
+                    <p><a class="scroll-link" href="NewMain.html">Home</a></p>
+                    <p><a href="Products_tester.html">Products</a></p>
+                    <p><a href="cart_page.html">Your Cart</a></p>
                   </div>
                 </div>
               </div>

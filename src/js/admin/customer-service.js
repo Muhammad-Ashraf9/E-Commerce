@@ -12,15 +12,14 @@ import {
   handleChangingItemsPerPage,
   handlePagination,
 } from "./pagination.js";
-import { getSelectSearchByHTML } from "./products.js";
 
 export function renderCustomerServicePage(
   container,
   array,
   pageNumber,
   itemsPerPage,
-  sortBy,
-  searchBy
+  sortBy = { field: "mId", order: "asc" },
+  searchBy = { field: "mId", value: "" }
 ) {
   const modal = document.querySelector("#modal");
   const search = document.querySelector("#navbarSearch input");
@@ -32,7 +31,8 @@ export function renderCustomerServicePage(
     renderCustomerServicePage(
       container,
       searchByField(state.messages, newSearchBy.field, newSearchBy.value),
-      pageNumber,
+      // pageNumber,
+      1, //reset page number to 1 on search
       itemsPerPage,
       sortBy,
       newSearchBy
@@ -62,22 +62,28 @@ export function renderCustomerServicePage(
     searchBy,
     renderCustomerServicePage
   );
+
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
     const field = e.target.dataset?.field;
     if (field) {
-      if (sortBy.field === field) {
-        sortBy.order = sortBy.order === "asc" ? "desc" : "asc";
+      const newSortBy = { ...sortBy };
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
       } else {
-        sortBy.field = field;
-        sortBy.order = "asc";
+        newSortBy.field = field;
+        newSortBy.order = "asc";
       }
 
       renderCustomerServicePage(
         container,
-        sortByField(array, sortBy.field, sortBy.order),
+        sortByField(state.messages, newSortBy.field, newSortBy.order),
         pageNumber,
         itemsPerPage,
-        sortBy,
+        newSortBy,
         searchBy
       );
     }
@@ -103,26 +109,41 @@ export function renderCustomerServicePage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1, //reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
     searchBy,
     renderCustomerServicePage
   );
+
   container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
   const searchBySelectElement = document.querySelector("select[name=searchBy]");
   searchBySelectElement.value = searchBy.field;
   searchBySelectElement.addEventListener("change", (e) => {
     const newSearchBy = { ...searchBy, field: e.target.value };
-    renderProductsPage(
+    renderCustomerServicePage(
       container,
-      searchByField(state.products, newSearchBy.field, newSearchBy.value),
+      searchByField(state.messages, newSearchBy.field, newSearchBy.value),
       pageNumber,
       itemsPerPage,
       sortBy,
       newSearchBy
     );
   });
+}
+
+function getSelectSearchByHTML() {
+  return `
+  <div class="col-4"> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="mId">Message ID</option>
+  <option value="uId">User ID</option>
+  <option value="name">User Name</option>
+  <option value="email">Email</option>
+  </select>
+  </div>
+  `;
 }
 function generateCustomerServiceTableHeader() {
   return `

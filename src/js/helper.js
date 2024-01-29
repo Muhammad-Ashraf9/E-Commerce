@@ -27,7 +27,9 @@ export function isValidPassword(password) {
 }
 
 export function isValidName(string) {
-  return /^[a-zA-Z]{4,50}$/.test(string);
+  return /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/.test(
+    string
+  );
 }
 export function isValidEmail(emailString) {
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -36,4 +38,32 @@ export function isValidEmail(emailString) {
 }
 export function generateRandomId() {
   return Math.floor(Math.random() * 1000000) + 1;
+}
+
+export function validateEmail(email, emailInvalidFeedback) {
+  if (!isValidEmail(email.value)) {
+    email.classList.add("is-invalid");
+    emailInvalidFeedback.style.display = "block";
+  } else {
+    email.classList.remove("is-invalid");
+    emailInvalidFeedback.style.display = "none";
+  }
+}
+export function validateName(name, nameInvalidFeedback) {
+  if (!isValidName(name.value)) {
+    name.classList.add("is-invalid");
+    nameInvalidFeedback.style.display = "block";
+  } else {
+    name.classList.remove("is-invalid");
+    nameInvalidFeedback.style.display = "none";
+  }
+}
+export function validatePassword(password, passwordInvalidFeedback) {
+  if (!isValidPassword(password.value)) {
+    password.classList.add("is-invalid");
+    passwordInvalidFeedback.style.display = "block";
+  } else {
+    password.classList.remove("is-invalid");
+    passwordInvalidFeedback.style.display = "none";
+  }
 }

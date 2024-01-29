@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: #E5E7EB;
+    position: relative;
+}
+
+
+#interface{
+    width: calc(100% - 25vw);
+}
+.i-name{
+    color: #444a53;
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: 700;
+}
+.values{
+    padding: 30px 30px 0 30px;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    flex-wrap: wrap;  
+}
+.values .val-box{
+    background: rgb(243, 222, 222);
+    margin: 10px;
+    width: 250px;
+    padding: 16px 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.values .val-box i{
+    font-size: 25px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 15px;
+}
+.values .val-box:nth-child(1) i{
+    background-color: rgba(53, 189, 19, 0.685);
+}
+.values .val-box:nth-child(2) i{
+    background-color: rgb(0, 217, 255);
+}
+.values .val-box:nth-child(3) i{
+    background-color: chartreuse;
+}
+.values .val-box:nth-child(4) i{
+    background-color: rgb(10, 252, 30);
+}
+.values .val-box:nth-child(5) i{
+    background-color: rgb(10, 252, 30);
+}
+
+.values .val-box h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+.values .val-box span{
+    font-size: 15px;
+    color: #828997;
+}
+
+.error-message {
+    color: #ff4f30;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s;
+}

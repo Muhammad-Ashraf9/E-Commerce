@@ -5,7 +5,9 @@ import {
   getByPageNumber,
   getCustomers,
   getUserById,
+  searchByField,
   searchCustomerByName,
+  sortByField,
   state,
 } from "../model.js";
 import { generateTabel, getModalHTML } from "./dashboard.js";
@@ -14,19 +16,16 @@ import {
   handleChangingItemsPerPage,
   handlePagination,
 } from "./pagination.js";
-import {
-  handleAddUser,
-  handleEditUser,
-} from "./sellers.js";
+import { handleAddUser, handleEditUser } from "./sellers.js";
 export function generateCustomersTabelHead() {
   return `  
   <thead>
     <tr>
-      <th scope="col">ID
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">No. orders</th>
-           <th scope="col">Date</th>
+          <th scope="col" data-field="id">Id</th>
+          <th scope="col" data-field="name">Name</th>
+          <th scope="col" data-field="email">Email</th>
+          <th scope="col" data-field="numberOfOrders">Number Of Orders</th>
+          <th scope="col" data-field="date">Date</th>
           <th scope="col">Actions</th>
             </tr>
        </thead>
@@ -43,10 +42,10 @@ export function generateCustomersTabelBody(arrayOfCustomers) {
         <td>${customer.orders.length}</td>
         <td>${new Date(customer.id).toISOString().split("T")[0]}</td>
         <td>
-      <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-del-id="${customer.id}">Delete</button>
+        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" 
+        data-bs-target="#modal" data-del-id="${customer.id}">Delete</button>
         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" 
-       data-bs-target="#modal" data-edit-id="${customer.id}">Edit</button>
+          data-bs-target="#modal" data-edit-id="${customer.id}">Edit</button>
         </td>
       </tr>`
     )
@@ -65,13 +64,16 @@ export function renderCustomersPage(
 
   //set on change event to search input to sellers
   search.onchange = (e) => {
+    const newSearchBy = { ...searchBy, value: e.target.value.trim() };
+
     renderCustomersPage(
       container,
-      searchCustomerByName(e.target.value),
-      pageNumber,
+      searchByField(getCustomers(), newSearchBy.field, newSearchBy.value),
+      // pageNumber,
+      1,
       itemsPerPage,
       sortBy,
-      searchBy
+      newSearchBy
     );
   };
   container.innerHTML = "";
@@ -110,13 +112,48 @@ export function renderCustomersPage(
   handleChangingItemsPerPage(
     container,
     array,
-    pageNumber,
+    // pageNumber,
+    1,//reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
     searchBy,
     renderCustomersPage
   );
+
+  //
+  document.querySelector(
+    `[data-field="${sortBy.field}"]`
+  ).className = `${sortBy.order}`;
+
   document.querySelector("table").addEventListener("click", (e) => {
+    const field = e.target.dataset?.field;
+
+    if (field) {
+      const newSortBy = { ...sortBy}; //to avoid mutation as it affects other pages
+      if (newSortBy.field === field) {
+        newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
+      } else {
+        newSortBy.field = field;
+        newSortBy.order = "asc";
+      }
+
+      renderCustomersPage(
+        container,
+        sortByField(
+          getCustomers().map((c) => ({
+            ...c,
+            numberOfOrders: c.orders.length,
+            date: c.id,
+          })),
+          newSortBy.field,
+          newSortBy.order
+        ),
+        pageNumber,
+        itemsPerPage,
+        newSortBy,
+        searchBy
+      );
+    }
     if (e.target.dataset?.delId) {
       modal.innerHTML = getModalHTML(+e.target.dataset?.delId);
       document.querySelector(".modal-footer").addEventListener("click", (e) => {
@@ -145,4 +182,30 @@ export function renderCustomersPage(
       );
     }
   });
+  container.insertAdjacentHTML("afterbegin", getSelectSearchByHTML());
+  const searchBySelectElement = document.querySelector("select[name=searchBy]");
+  searchBySelectElement.value = searchBy.field;
+  searchBySelectElement.addEventListener("change", (e) => {
+    const newSearchBy = { ...searchBy, field: e.target.value };
+    renderCustomersPage(
+      container,
+      searchByField(getCustomers(), newSearchBy.field, newSearchBy.value),
+      pageNumber,
+      itemsPerPage,
+      sortBy,
+      newSearchBy
+    );
+  });
+}
+
+function getSelectSearchByHTML() {
+  return `
+  <div class="col-4"> Search By
+  <select name="searchBy" class="dashborad-select" aria-label="search by">
+  <option value="id">id</option>
+  <option value="name">name</option>
+  <option value="email">email</option>
+  </select>
+  </div>
+  `;
 }
