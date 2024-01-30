@@ -28,9 +28,9 @@ let cart = ucart.map((item) => ({
 
 const forms = document.querySelectorAll(".needs-validation");
 const form = document.querySelector("#checkoutForm");
-console.log('form', form)
-form.addEventListener("submit",(e)=>e.preventDefault())
-console.log('forms', forms)
+console.log("form", form);
+form.addEventListener("submit", (e) => e.preventDefault());
+console.log("forms", forms);
 Array.from(forms).forEach((form) => {
   (function () {
     document.getElementById("placing").addEventListener("click", (event) => {
@@ -54,16 +54,15 @@ Array.from(forms).forEach((form) => {
         });
         if (enough) {
           newOrder();
-            //function to create all the new order tasks
-            Swal.fire({
-              title: "Congratulations!",
-              text: "Your order has been submitted successfully",
-              icon: "success",
-            }).then(() => {
-              location.assign("../html/newMain.html");
-            });
-          
-          } else {
+          //function to create all the new order tasks
+          Swal.fire({
+            title: "Congratulations!",
+            text: "Your order has been submitted successfully",
+            icon: "success",
+          }).then(() => {
+            location.assign("../html/newMain.html");
+          });
+        } else {
           const uindex = state.users.findIndex(
             (user) => user.id === state.currentUser.id
           );
@@ -102,7 +101,7 @@ function newOrder() {
   formData.forEach(function (value, key) {
     formDataObject[key] = value;
   });
-  console.log(formData.entries(),"eeee");
+  console.log(formData.entries(), "eeee");
   let newOrder = {
     //creating a new order object
     id: orderID,
@@ -130,9 +129,8 @@ function newOrder() {
       (seller) => seller.id === item.sellerId
     ); // getting the index of the seller in users list
 
-
-    state.products[index].stock -= cart[flagx].num;///updating the stock in product list
-    state.products[index].numberofsales += cart[flagx].num; 
+    state.products[index].stock -= cart[flagx].num; ///updating the stock in product list
+    state.products[index].numberofsales += cart[flagx].num;
 
     if (!sellers.includes(item.sellerId)) {
       //checking if the seller is already notified with the order id
@@ -141,13 +139,12 @@ function newOrder() {
       state.users[sellerIndex].orders.push(orderID); //notifing the seller with the order id
     }
 
-
     flagx++;
   });
-  console.log("before save local")
+  console.log("before save local");
   saveStateInLocalStorage();
 
-  console.log('state saved')
+  console.log("state saved");
 }
 
 window.addEventListener("load", function () {
@@ -220,12 +217,14 @@ window.addEventListener("load", function () {
       flag++;
     });
     //updating the checkout section
-    document.getElementById("numOfItems").innerText = `items(${numOfItems})`;
-    document.getElementById("SubTotal").innerText = total.toFixed(2);
-    document.getElementById("beforeTax").innerText = (25 + total).toFixed(2);
-    document.getElementById("Tax").innerText = (total * 0.14).toFixed(2);
-    document.getElementById("AfterTax").innerText =
-      "Egp " + (total + 25 + total * 0.14).toFixed(2);
+    try {
+      document.getElementById("numOfItems").innerText = `items(${numOfItems})`;
+      document.getElementById("SubTotal").innerText = total.toFixed(2);
+      document.getElementById("beforeTax").innerText = (25 + total).toFixed(2);
+      document.getElementById("Tax").innerText = (total * 0.14).toFixed(2);
+      document.getElementById("AfterTax").innerText =
+        "Egp " + (total + 25 + total * 0.14).toFixed(2);
+    } catch (error) {}
   }
 
   cards.addEventListener("click", function (e) {
