@@ -10,7 +10,7 @@ export function renderModal(element) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-  <form novalidate>
+  <form novalidate id="loginForm">
         <div class="input-group">
           <div class="form-floating">
             <input
