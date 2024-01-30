@@ -113,7 +113,7 @@ export function renderCustomersPage(
     container,
     array,
     // pageNumber,
-    1,//reset page number to 1 on changing items per page
+    1, //reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
     searchBy,
@@ -129,7 +129,7 @@ export function renderCustomersPage(
     const field = e.target.dataset?.field;
 
     if (field) {
-      const newSortBy = { ...sortBy}; //to avoid mutation as it affects other pages
+      const newSortBy = { ...sortBy }; //to avoid mutation as it affects other pages
       if (newSortBy.field === field) {
         newSortBy.order = newSortBy.order === "asc" ? "desc" : "asc";
       } else {
@@ -164,7 +164,9 @@ export function renderCustomersPage(
           container,
           getCustomers(),
           pageNumber,
-          itemsPerPage
+          itemsPerPage,
+          sortBy,
+          searchBy
         );
       });
     } else if (e.target.dataset?.editId) {
