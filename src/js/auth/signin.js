@@ -8,7 +8,8 @@ import {
 } from "../helper.js";
 
 export default function handleSignIn() {
-  const form = document.querySelector("form");
+  console.log("sign in")
+  const form = document.querySelector("#loginForm");
   const email = document.querySelector("#email");
   const emailInvalidFeedback = document.querySelector(
     ".invalid-feedback.email"
@@ -29,10 +30,8 @@ export default function handleSignIn() {
   showPasswordCheckBox.addEventListener("change", () => {
     password.type = showPasswordCheckBox.checked ? "text" : "password";
   });
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     emailInvalidFeedback.textContent = `Please choose a valid Email.`; //to reset the error message after being changed by signin function
     passwordInvalidFeedback.textContent = `Password must be at least 8 characters, at least a symbol, upper and lower case letters and a number..`; //to reset the error message after being changed by signin function
 
