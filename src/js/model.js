@@ -57,7 +57,7 @@ export const state = {
       id: 4,
       name: "ash sellerA",
       email: "ash@seller.ash",
-      password: "ash12345",
+      password: "Ash@12345",
       orders: [100],
       accountType: "seller",
       products: [
