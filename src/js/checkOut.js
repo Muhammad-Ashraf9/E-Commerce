@@ -27,6 +27,10 @@ let cart = ucart.map((item) => ({
 // validating the form and handling the checkout btn
 
 const forms = document.querySelectorAll(".needs-validation");
+const form = document.querySelector("#checkoutForm");
+console.log('form', form)
+form.addEventListener("submit",(e)=>e.preventDefault())
+console.log('forms', forms)
 Array.from(forms).forEach((form) => {
   (function () {
     document.getElementById("placing").addEventListener("click", (event) => {
@@ -49,16 +53,17 @@ Array.from(forms).forEach((form) => {
           }
         });
         if (enough) {
-
-          newOrder(); //function to create all the new order tasks
-          Swal.fire({
-            title: "Congratulations!",
-            text: "Your order has been submitted successfully",
-            icon: "success",
-          }).then(() => {
-            location.assign("../html/newMain.html");
-          });
-        } else {
+          newOrder();
+            //function to create all the new order tasks
+            Swal.fire({
+              title: "Congratulations!",
+              text: "Your order has been submitted successfully",
+              icon: "success",
+            }).then(() => {
+              location.assign("../html/newMain.html");
+            });
+          
+          } else {
           const uindex = state.users.findIndex(
             (user) => user.id === state.currentUser.id
           );
@@ -89,7 +94,7 @@ function newOrder() {
     item.product["quantity"] = item.num;
     Items.push(item.product);
   });
-  var formData = new FormData(document.getElementById("form"));
+  var formData = new FormData(document.getElementById("checkoutForm"));
   // Create an object to store form data
   var formDataObject = {};
 
@@ -97,7 +102,7 @@ function newOrder() {
   formData.forEach(function (value, key) {
     formDataObject[key] = value;
   });
-  console.log(formData.entries());
+  console.log(formData.entries(),"eeee");
   let newOrder = {
     //creating a new order object
     id: orderID,
@@ -139,7 +144,10 @@ function newOrder() {
 
     flagx++;
   });
+  console.log("before save local")
   saveStateInLocalStorage();
+
+  console.log('state saved')
 }
 
 window.addEventListener("load", function () {
