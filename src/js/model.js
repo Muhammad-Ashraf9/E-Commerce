@@ -790,7 +790,7 @@ export function getSellers() {
   return state.users.filter((u) => u.accountType === "seller");
 }
 export function getLastAddedProducts(number = 0) {
-  return state.products.slice(-number);
+  return state.products.slice(-number).reverse();
 }
 export function getTotalOrdersRevenue() {
   return getOrdersRevenue(state.orders);

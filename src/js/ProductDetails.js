@@ -14,7 +14,7 @@ import {
 let prodID = localStorage.getItem("id");
 // get data from local storage
 // let state = JSON.parse(localStorage.getItem("state"));
-const Product = state.products[prodID];
+const Product = getProductById(prodID);
 const prodImgtwo = document.getElementById("two");
 const prodImgone = document.getElementById("one");
 prodImgtwo.src = Product.imgURL0;
@@ -34,20 +34,20 @@ prodCategoryDiv.innerText += ` ${Product.category}`;
 let category = `${Product.category}`;
 
 let parentDiv = document.querySelector(".numOfItems");
+console.log(parentDiv);
 Array.from(parentDiv.children).forEach((child) => {
   child.id = `${prodID}`;
 });
 
-
-  // add the quantity of this item in the span
-  let mycart = getCurrentCart();
-  // fint the item in the cart (by id)
-  let item = mycart.filter((item) => item.id == prodID);
-  if (item.length > 0) {
-    document.querySelector(".numOfItems span").innerText = item[0].quantity;
-  } else {
-    document.querySelector(".numOfItems span").innerText = 0;
-  }
+// add the quantity of this item in the span
+let mycart = getCurrentCart();
+// fint the item in the cart (by id)
+let item = mycart.filter((item) => item.id == prodID);
+if (item.length > 0) {
+  document.querySelector(".numOfItems span").innerText = item[0].quantity;
+} else {
+  document.querySelector(".numOfItems span").innerText = 0;
+}
 
 // Render after click on the pagination buttons
 let numberOfCardsPerPage = 4;

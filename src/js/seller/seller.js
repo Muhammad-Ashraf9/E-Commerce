@@ -174,7 +174,7 @@ function AddNewProduct(e) {
       title: obj.NewProductName,
       description: obj.NewProductDescription,
       imgURL0: imageDataURL,
-      imgURL1: "",
+      imgURL1: imageDataURL,
       category: obj.NewProductcatagory,
       stock: obj.NewProductQuantity,
       price: obj.NewProductprice,
@@ -297,7 +297,7 @@ function editProduct(e) {
           title: obj.NewProductName,
           description: obj.NewProductDescription,
           imgURL0: imageDataURL,
-          imgURL1: product.imgURL1,
+          imgURL1: imageDataURL,
           category: obj.NewProductcatagory,
           stock: obj.NewProductQuantity,
           price: obj.NewProductprice,
@@ -324,11 +324,11 @@ function editProduct(e) {
           text: "Your updates has been saved",
           icon: "success",
         });
+        location.reload();
       } catch (error) {
         errorMessage.innerText = error.message;
         errorMessage.style.opacity = 1;
       }
-      location.reload();
       display();
     });
   }
@@ -376,7 +376,7 @@ function inputValidation(obj) {
   }
 
   // Validate category (letters and spaces only)
-  if (!/^[\s\S]+$/.test(obj.NewProductcatagory)) {
+  if (!/^[A-Za-z0-9][A-Za-z0-9\s\S]*$/.test(obj.NewProductcatagory)) {
     // Check if NewProductcatagory contains invalid characters
     throw new Error(
       "Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters."
@@ -392,7 +392,7 @@ function inputValidation(obj) {
   }
 
   // Validate description (letters and spaces only)
-  if (!/^[\s\S]+$/.test(obj.NewProductDescription)) {
+  if (!/^[A-Za-z0-9][A-Za-z0-9\s\S]*$/.test(obj.NewProductDescription)) {
     throw new Error("Invalid Description.");
   }
 }
