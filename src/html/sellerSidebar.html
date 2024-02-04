@@ -42,7 +42,7 @@ body {
     background-color:rgb(255, 248, 248);
     display: flex;
     flex-direction: column;
-  }
+}
 
 #sidebar.expand {
     width: fit-content;
@@ -60,8 +60,16 @@ body {
     font-size: 1.5rem;
     color: black;
 }
-
-
+#sidebar:not(.expand) .d-flex i{
+    transform: rotate(-90deg);
+    transition: transform 900ms;
+    color:#000;
+}
+#sidebar .d-flex i{
+    transform: rotate(90deg);
+    transition: transform 800ms;
+    color:#B88E2F;
+    }
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;

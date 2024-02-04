@@ -19,6 +19,8 @@ let errorMessage = document.querySelector(".error-message");
 let currentMode = "";
 const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
+let thead = 
+
 
 console.log("from outer auth ");
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
@@ -28,6 +30,7 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
 }
 spinner.remove();
 uploadImg.addEventListener("change", (e) => {
+  console.log('kjbjhvhjvjhvhvhjvjh');
   const file = uploadImg.files[0];
   if (file) {
     const reader = new FileReader();
@@ -51,70 +54,122 @@ renderFooter(bodys);
 display();
 
 function display() {
-  section.innerHTML = "";
-  let allProducts = getAllProductsByProductIds(currentUserData.products);
-  console.log(allProducts);
-  if (!allProducts) {
-    let alert = document.createElement("h1");
-    alert.setAttribute("class", "alert alert-danger");
-    alert.innerText = "There is no Product to display.";
-    section.appendChild(alert);
-    return;
-  }
-
-  let customHeaders = [
-    "Product ID",
-    "Title",
-    "Description",
-    "Category",
-    "Stock",
-    "Price",
-  ];
-  // Create a table element
-  let table = document.createElement("table");
-  //table.innerHTML = '';
-  table.setAttribute("id", "productsTable");
-  // table.setAttribute('class','table')
-  // Create header row with custom header names
-  let headerRow = table.insertRow();
-  for (let customHeader of customHeaders) {
-    let th = document.createElement("th");
-    th.setAttribute("scope", "col");
-    th.textContent = customHeader;
-    headerRow.appendChild(th);
-  }
-  for (let i = 0; i < allProducts.length; i++) {
-    let row = table.insertRow();
-    for (let key in allProducts[i]) {
-      if (key === "id") {
-        let cell = row.insertCell();
-        cell.setAttribute("scope", "row");
-        cell.textContent = allProducts[i][key];
-        cell.setAttribute("id", allProducts[i][key]);
-      } else if (key === "description") {
-        let cell = row.insertCell();
-        cell.setAttribute("scope", "row");
-        cell.textContent = allProducts[i][key].slice(0, 20);
-      } else {
-        let cell = row.insertCell();
-        cell.setAttribute("scope", "row");
-        cell.textContent = allProducts[i][key];
-      }
-    }
-    let cell1 = row.insertCell();
-    cell1.setAttribute("scope", "row");
-    let cell2 = row.insertCell();
-    cell2.setAttribute("scope", "row");
-    let cell3 = row.insertCell();
-    cell3.setAttribute("scope", "row");
-    cell1.innerHTML = `<i class=" fa-regular fa-pen-to-square"></i>`;
-    cell2.innerHTML = '<i class=" fa-solid fa-trash"></i>';
-    cell3.innerHTML = '<i class="fa-solid fa-eye"></i>';
-  }
-
-  // Append the table to the body
-  section.appendChild(table);
+    section.innerHTML = "";
+    let allProducts = getAllProductsByProductIds(currentUserData.products);
+    let table = document.querySelector('table');
+    if (allProducts.length==0) {
+     let alert = document.createElement('h1');
+     alert.setAttribute('class','alert alert-danger')
+     alert.innerText = 'There is no Product to display.'
+     table.appendChild(alert)
+     return
+   }
+   let thead = `
+   <thead>
+     <tr>
+       <th scope="col">Product Id</th>
+       <th scope="col">Title</th>
+       <th scope="col">Description</th>
+       <th scope="col">Category</th>
+       <th scope="col">Stock</th>
+       <th scope="col">Price</th>
+     </tr>
+   </thead>
+ `  
+ /*
+ 
+ 
+ */
+ table.insertAdjacentHTML('afterbegin',thead)
+   console.log(allProducts);
+ let tbody = allProducts
+ .map(
+     (item) =>
+       `
+       <tbody>
+       <tr>
+         <td  data-label = "Product Id" id = ${item.id}>${item.id}</td>
+         <td data-label = "Title">  ${item.title}</td> 
+         <td data-label = "Description">  ${item.description.slice(0, 20)}</td> 
+         <td data-label = "Category">  ${item.category}</td> 
+         <td data-label = "Stock">  ${item.stock}</td> 
+         <td data-label = "Price">  ${item.price}</td>
+         <td data-label = "View">   <i class="fa-solid fa-eye"></i> </td>
+         <td data-label = "Delete">   <i class=" fa-solid fa-trash"></i> </td>
+         <td data-label = "Edit">   <i class=" fa-regular fa-pen-to-square"></i> </td>
+       </tr>
+     </tbody>
+     `
+     )
+   .join("");
+   table.insertAdjacentHTML('beforeend',tbody)
 }
+
+// function display() {
+//   section.innerHTML = "";
+//   let allProducts = getAllProductsByProductIds(currentUserData.products);
+//   console.log(allProducts);
+//   if (!allProducts) {
+//     let alert = document.createElement("h1");
+//     alert.setAttribute("class", "alert alert-danger");
+//     alert.innerText = "There is no Product to display.";
+//     section.appendChild(alert);
+//     return;
+//   }
+
+//   let customHeaders = [
+//     "Product ID",
+//     "Title",
+//     "Description",
+//     "Category",
+//     "Stock",
+//     "Price",
+//   ];
+//   // Create a table element
+//   let table = document.createElement("table");
+//   //table.innerHTML = '';
+//   table.setAttribute("id", "productsTable");
+//   // table.setAttribute('class','table')
+//   // Create header row with custom header names
+//   let headerRow = table.insertRow();
+//   for (let customHeader of customHeaders) {
+//     let th = document.createElement("th");
+//     th.setAttribute("scope", "col");
+//     th.textContent = customHeader;
+//     headerRow.appendChild(th);
+//   }
+//   for (let i = 0; i < allProducts.length; i++) {
+//     let row = table.insertRow();
+//     for (let key in allProducts[i]) {
+//       if (key === "id") {
+//         let cell = row.insertCell();
+//         cell.setAttribute("scope", "row");
+//         cell.textContent = allProducts[i][key];
+//         cell.setAttribute("id", allProducts[i][key]);
+//       } else if (key === "description") {
+//         let cell = row.insertCell();
+//         cell.setAttribute("scope", "row");
+//         cell.textContent = allProducts[i][key].slice(0, 20);
+//       } else {
+//         let cell = row.insertCell();
+//         cell.setAttribute("scope", "row");
+//         cell.textContent = allProducts[i][key];
+//       }
+//     }
+//     let cell1 = row.insertCell();
+//     cell1.setAttribute("scope", "row");
+//     let cell2 = row.insertCell();
+//     cell2.setAttribute("scope", "row");
+//     let cell3 = row.insertCell();
+//     cell3.setAttribute("scope", "row");
+//     cell1.innerHTML = `<i class=" fa-regular fa-pen-to-square"></i>`;
+//     cell2.innerHTML = '<i class=" fa-solid fa-trash"></i>';
+//     cell3.innerHTML = '<i class="fa-solid fa-eye"></i>';
+//   }
+
+//   // Append the table to the body
+//   section.appendChild(table);
+// }
 
 let body = document.querySelector("body");
 let modal = document.getElementById("myModal");
@@ -130,7 +185,8 @@ body.addEventListener("click", function (e) {
     editProduct(e);
     console.log(currentMode);
   } else if (e.target.classList.contains("fa-eye")) {
-    let productId = e.target.parentNode.parentNode.firstChild.id;
+    // let productId = e.target.parentNode.parentNode.firstChild.id;
+    let productId = e.target.parentNode.parentNode.firstElementChild.id;
     localStorage.setItem("id", productId);
     location.assign("./ProductDetails_for_seller.html");
   }
@@ -195,8 +251,8 @@ function AddNewProduct(e) {
     currentMode = "";
     formProduct.reset();
     modal.style.display = "none";
-    location.reload();
-    //display();
+    // location.reload();
+    display();
   } catch (error) {
     errorMessage.innerText = error.message;
     errorMessage.style.opacity = 1;
@@ -207,7 +263,7 @@ function AddNewProduct(e) {
 //########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
 //######################################################################################################
 let removeItem = document.querySelectorAll(".fa-trash");
-console.log(removeItem);
+// console.log(removeItem);
 removeItem.forEach(
   addEventListener("click", function (e) {
     if (e.target.classList.contains("fa-trash")) {
@@ -242,7 +298,7 @@ removeItem.forEach(
                 // Delete the product
                 deleteProduct(e);
                 // Update the table
-                location.reload();
+                // location.reload();
               });
           } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire({
@@ -259,14 +315,19 @@ removeItem.forEach(
 function deleteProduct(e) {
   if (sellerId.accountType === "seller") {
     // Delete Product From Products Array
-    let productId = e.target.parentNode.parentNode.firstChild.id;
+    // console.log(e.target.parentNode.parentNode.firstChild.id);
+    // let productId = e.target.parentNode.parentNode.firstChild.id;
+    console.log(e.target.parentNode.parentNode.firstElementChild.id);
+    let productId = e.target.parentNode.parentNode.firstElementChild.id
+
+    console.log(productId);
     deleteProductById(productId);
     saveStateInLocalStorage();
   }
-  //######################################################################################################
   display();
 }
 
+  //######################################################################################################
 //################################## UPDATE PRODUCT #############################################
 //######################################################################################################
 function editProduct(e) {
@@ -276,20 +337,22 @@ function editProduct(e) {
     currentMode === "Edit"
   ) {
     errorMessage.innerText = "";
-    let productId = e.target.parentNode.parentNode.firstChild.id;
+    // let productId = e.target.parentNode.parentNode.firstChild.id;
+    let productId = e.target.parentNode.parentNode.firstElementChild.id;
     let product = getProductById(productId);
-    localStorage.setItem("tempSavedImage", product.imgURL0);
+    localStorage.setItem("savedImage", product.imgURL0);
     fillFormFields(product);
     modal.style.display = "block";
     // after display model will be wating until user hit save button
     //############################################################
     //############################################################
     saveBtn.addEventListener("click", (e) => {
-      let img = localStorage.getItem("tempSavedImage");
+      let img = localStorage.getItem("savedImage");
       const imageElement = new Image();
       imageElement.src = img;
       let imageDataURL = imageElement.src;
       let obj = getFormValues();
+      console.log(imageDataURL);
       try {
         inputValidation(obj);
         let updatedProduct = {
@@ -324,7 +387,7 @@ function editProduct(e) {
           text: "Your updates has been saved",
           icon: "success",
         });
-        location.reload();
+        // location.reload();
       } catch (error) {
         errorMessage.innerText = error.message;
         errorMessage.style.opacity = 1;
@@ -340,9 +403,7 @@ function getFormValues() {
   let NewProductprice = document.getElementById("NewProductprice").value;
   let NewProductcatagory = document.getElementById("NewProductcatagory").value;
   let NewProductQuantity = document.getElementById("NewProductQuantity").value;
-  let NewProductDescription = document.getElementById(
-    "NewProductDescription"
-  ).value;
+  let NewProductDescription = document.getElementById("NewProductDescription").value;
   let NewProduct = {
     NewProductName: NewProductName,
     NewProductprice: NewProductprice,
