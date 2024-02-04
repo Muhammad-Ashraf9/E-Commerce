@@ -19,7 +19,7 @@ let errorMessage = document.querySelector(".error-message");
 let currentMode = "";
 const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
-let thead = 
+let sort = 'sort-up'
 
 
 console.log("from outer auth ");
@@ -29,9 +29,8 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
   location.assign("/src/html/NewMain.html");
 }
 spinner.remove();
+const file = uploadImg.files[0];
 uploadImg.addEventListener("change", (e) => {
-  console.log('kjbjhvhjvjhvhvhjvjh');
-  const file = uploadImg.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -51,11 +50,10 @@ renderNav(bodys);
 
 renderFooter(bodys);
 
-display();
+display(getAllProductsByProductIds(currentUserData.products));
 
-function display() {
+function display(allProducts = getAllProductsByProductIds(currentUserData.products)) {
     section.innerHTML = "";
-    let allProducts = getAllProductsByProductIds(currentUserData.products);
     let table = document.querySelector('table');
     if (allProducts.length==0) {
      let alert = document.createElement('h1');
@@ -67,20 +65,16 @@ function display() {
    let thead = `
    <thead>
      <tr>
-       <th scope="col">Product Id</th>
-       <th scope="col">Title</th>
-       <th scope="col">Description</th>
-       <th scope="col">Category</th>
-       <th scope="col">Stock</th>
-       <th scope="col">Price</th>
+     <th scope="col" sort="desc" name="id">Product Id <i class="fa-solid fa-${sort}"></i> </th>
+     <th scope="col" sort = "desc" name = "" >Title</th>
+       <th scope="col" sort = "desc" name = "" >Description</th>
+       <th scope="col" sort = "desc" name = "" >Category</th>
+       <th scope="col" sort = "desc" name = "stock" >Stock  <i class="fa-solid fa-${sort}"></i> </i> </th>
+       <th scope="col" sort = "desc" name = "price" >Price  <i class="fa-solid fa-${sort}"></i> </i> </th>
      </tr>
    </thead>
  `  
- /*
- 
- 
- */
- table.insertAdjacentHTML('afterbegin',thead)
+  table.insertAdjacentHTML('afterbegin',thead)
    console.log(allProducts);
  let tbody = allProducts
  .map(
@@ -103,6 +97,33 @@ function display() {
      )
    .join("");
    table.insertAdjacentHTML('beforeend',tbody)
+
+
+let sortUp = document.querySelector('.fa-sort-up')
+let sortDown = document.querySelector('.fa-sort-down')
+let theadForSort = document.querySelector("thead");
+theadForSort.addEventListener("click", function (e) {
+  console.log(e);
+    let colName = e.target.parentNode.getAttribute("name")
+    if(e.target.classList.contains('fa-sort-up')){
+      allProducts.sort(function (x, y) {
+        if (x[colName] > y[colName]) return -100;
+        else if (x[colName] < y[colName]) return 100;
+        else return 0;
+      });
+      sort = 'sort-down'
+      display(allProducts);
+    }else{
+      allProducts.sort(function (x, y) {
+        if (x[colName] > y[colName]) return 100;
+        else if (x[colName] < y[colName]) return -100;
+        else return 0
+      });
+        sort = 'sort-up'
+        display(allProducts);
+      }
+  })
+
 }
 
 // function display() {
@@ -117,11 +138,11 @@ function display() {
 //     return;
 //   }
 
-//   let customHeaders = [
 //     "Product ID",
 //     "Title",
 //     "Description",
 //     "Category",
+//   let customHeaders = [
 //     "Stock",
 //     "Price",
 //   ];
@@ -259,76 +280,10 @@ function AddNewProduct(e) {
   }
 }
 
-//######################################################################################################
-//########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
-//######################################################################################################
-let removeItem = document.querySelectorAll(".fa-trash");
-// console.log(removeItem);
-removeItem.forEach(
-  addEventListener("click", function (e) {
-    if (e.target.classList.contains("fa-trash")) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
-      });
-      swalWithBootstrapButtons
-        .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            swalWithBootstrapButtons
-              .fire({
-                title: "Deleted!",
-                text: "Your Product has been deleted.",
-                icon: "success",
-              })
-              .then(() => {
-                // Remove the product's row from the table
-                e.target.parentNode.parentNode.remove();
-                // Delete the product
-                deleteProduct(e);
-                // Update the table
-                // location.reload();
-              });
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire({
-              title: "Cancelled",
-              text: "Your Product is safe :)",
-              icon: "error",
-            });
-          }
-        });
-      display();
-    }
-  })
-);
-function deleteProduct(e) {
-  if (sellerId.accountType === "seller") {
-    // Delete Product From Products Array
-    // console.log(e.target.parentNode.parentNode.firstChild.id);
-    // let productId = e.target.parentNode.parentNode.firstChild.id;
-    console.log(e.target.parentNode.parentNode.firstElementChild.id);
-    let productId = e.target.parentNode.parentNode.firstElementChild.id
 
-    console.log(productId);
-    deleteProductById(productId);
-    saveStateInLocalStorage();
-  }
-  display();
-}
 
-  //######################################################################################################
-//################################## UPDATE PRODUCT #############################################
+//######################################################################################################
+//######################################### UPDATE PRODUCT #############################################
 //######################################################################################################
 function editProduct(e) {
   currentMode = "Edit";
@@ -423,6 +378,96 @@ function fillFormFields(data) {
   NewProductDescription.value = data.description;
   // Add logic to handle image if needed
 }
+
+
+//######################################################################################################
+//################################## BEGINING OF SORT OPERATION ########################################
+//######################################################################################################
+// let theadForSort = document.querySelector("thead");
+// theadForSort.addEventListener("click", function (e) {
+//   console.log(e);
+//     dataArr.sort(function (x, y) {
+//       if (x[colName].toLowerCase() > y[colName].toLowerCase()) return 100;
+//       else if (x[colName].toLowerCase() < y[colName].toLowerCase()) return -100;
+//       else return 0;
+//     });
+//     display() 
+// });
+//######################################################################################################
+//################################## END OF SORT OPERATION #############################################
+//######################################################################################################
+
+
+//######################################################################################################
+//########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
+//######################################################################################################
+let removeItem = document.querySelectorAll(".fa-trash");
+// console.log(removeItem);
+removeItem.forEach(addEventListener("click", function (e) {
+      if (e.target.classList.contains("fa-trash")) {
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
+        });
+        swalWithBootstrapButtons
+          .fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              swalWithBootstrapButtons
+                .fire({
+                  title: "Deleted!",
+                  text: "Your Product has been deleted.",
+                  icon: "success",
+                })
+                .then(() => {
+                  // Remove the product's row from the table
+                  e.target.parentNode.parentNode.remove();
+                  // Delete the product
+                  deleteProduct(e);
+                  // Update the table
+                  // location.reload();
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your Product is safe :)",
+                icon: "error",
+              });
+            }
+          });
+        display();
+      }
+    })
+  );
+
+function deleteProduct(e) {
+  if (sellerId.accountType === "seller") {
+    // Delete Product From Products Array
+    // console.log(e.target.parentNode.parentNode.firstChild.id);
+    // let productId = e.target.parentNode.parentNode.firstChild.id;
+    console.log(e.target.parentNode.parentNode.firstElementChild.id);
+    let productId = e.target.parentNode.parentNode.firstElementChild.id
+
+    console.log(productId);
+    deleteProductById(productId);
+    saveStateInLocalStorage();
+  }
+  display();
+}
+
+
+
 
 //######################################################################################################
 //################################## END OF CRUD OPERATION #############################################
