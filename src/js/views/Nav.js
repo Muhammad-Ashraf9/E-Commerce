@@ -25,7 +25,7 @@ export default function renderNav(element) {
         </li>
         
         ${
-          !user || user.accountType !== "seller"
+          !user || user.accountType === "customer"
             ? `<li class="nav-item mx-3">
           <a class="nav-link" href="Products_tester.html">Products</a>
         </li> `

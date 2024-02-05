@@ -133,7 +133,7 @@ window.addEventListener("load", function () {
         title: "Oops...",
         text: "You need to sign in in order to make an order",
       }).then(() => {
-        location.assign("../html/NewMain.html");
+        location.assign("../html/login.html");
       });
     }
   });

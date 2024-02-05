@@ -50,12 +50,11 @@ form.addEventListener("submit", (e) => {
   try {
     signIn(email.value, password.value);
     const currentUser = getCurrentUser();
-    location.assign(`../html/${currentUser.accountType}.html`);
-    // if (currentUser.accountType !== "customer") {
-    //   return;
-    // } else {
-    //   location.assign(`../html/${currentUser.accountType}.html`);
-    // }
+    if (currentUser.accountType === "customer") {
+      location.assign(`../html/NewMain.html`);
+    } else {
+      location.assign(`../html/${currentUser.accountType}.html`);
+    }
   } catch (error) {
     if (error.message === "No user with this email") {
       email.classList.add("is-invalid");
