@@ -82,15 +82,24 @@ export function renderCards(
     addbuttons[i].addEventListener("click", addtoCart);
   }
 
-  // Open the product details page
-  body.addEventListener("click", function (e) {
-    if (e.target.classList.contains("viewProductPage")) {
+  let pagebuttons = document.getElementsByClassName("viewProductPage");
+  for (let i = 0; i < pagebuttons.length; i++) {
+    pagebuttons[i].addEventListener("click", function (e) {
       var prodID = e.target.id;
       localStorage.setItem("id", prodID);
-      // location.assign("../html/ProductDetails.html");
       window.open("../html/ProductDetails.html", );
-    }
-  });
+    });
+  }
+
+  // Open the product details page
+  // body.addEventListener("click", function (e) {
+  //   if (e.target.classList.contains("viewProductPage")) {
+  //     var prodID = e.target.id;
+  //     localStorage.setItem("id", prodID);
+  //     // location.assign("../html/ProductDetails.html");
+  //     window.open("../html/ProductDetails.html", );
+  //   }
+  // });
 
   let pagesCount = 0;
   if (Products.length == 0) {

@@ -1,4 +1,7 @@
-import { saveStateInLocalStorage, state as stateinmycomputer } from "./model.js";
+import {
+  saveStateInLocalStorage,
+  state as stateinmycomputer,
+} from "./model.js";
 // localStorage.setItem("state", JSON.stringify(stateinmycomputer));
 // localStorage.setItem("orders", JSON.stringify(state.orders));
 import { state } from "../js/model.js";
@@ -63,7 +66,7 @@ function renderOrders(tableDiv, myID) {
         myorderitemscounter++;
         tableinnerHTML += `<tr><th >${myorderitemscounter}</th>`;
         for (const key in item) {
-          if (key === "img0" || key === "img1") {
+          if (key === "imgURL0" || key === "imgURL1") {
             tableinnerHTML += `<td class="" style="" >
                                   <img title="Click To Show" src="${item[key]}" class="imageResize img-fluid img-thumbnail" style="max-width: 10vw ">
                                   </img>
