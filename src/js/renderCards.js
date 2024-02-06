@@ -45,7 +45,7 @@ export function renderCards(
             <div class="wsk-cp-text">
               <div class="title-product">
                 <h3 class="viewProductPage" id="${Products[i - 1].id}">
-                  ${Products[i - 1].title}${i}
+                  ${Products[i - 1].title}
                 </h3>
               </div>
               <div class="card-footer">
