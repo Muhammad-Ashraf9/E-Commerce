@@ -11,14 +11,14 @@ import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
 
 const body = document.querySelector("body");
-
 renderFooter(body);
 renderNav(body);
 
 const user = getCurrentUser();
-// if (!getCurrentUser() || getCurrentUser().accountType == "admin") {
-//   location.assign("../html/main.html");
-// }
+if (user.accountType == "admin" || user.accountType == "seller") {
+  location.assign("../html/newmain.html");
+}
+
 let ucart = getCurrentCart();
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
