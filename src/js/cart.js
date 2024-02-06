@@ -50,6 +50,17 @@ window.addEventListener("load", function () {
     }
     let total = 0;
     cart.forEach((item) => {
+      // Qamary Add this to check if the item is out of stock
+      // if(item.num > item.product.stock){
+      //   item.num = item.product.stock;
+      //   if (item.product.stock === 0) {
+      //     DeleteFromCart(item.product.id);
+      //   } else {
+      //   changeCartItemCount(item.product.id, item.product.stock);
+      //   }
+      //   alert(`Sorry, may be one of the items in your cart is out of stock, we have updated the quantity of the item in your cart`);
+        
+      // } 
       total += item.product.price * item.num;
       cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
