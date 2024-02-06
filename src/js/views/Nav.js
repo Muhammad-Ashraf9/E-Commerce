@@ -19,7 +19,7 @@ export default function renderNav(element) {
     </button>
 
     <div class="col-4 collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row justify-content-around ">
         <li class="nav-item mx-lg-3">
           <a class="nav-link" aria-current="page" href="NewMain.html">Home</a>
         </li>
@@ -58,17 +58,18 @@ export default function renderNav(element) {
       </ul>
     </div>
 
-    <div class="me-3">
-      <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row">
+    <div style="margin" class=" ms-sm-5">
+      <ul class=" navbar-nav mb-2 mb-lg-0 d-flex flex-row">
           ${
             !user
-              ? `<a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>`
-              : `<button class="nav-link">Sign out</button> <button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
+            
+              ? `<li class="pe-3"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>`
+              : `<li class="pe-3"><button class="nav-link">Sign out</button> <button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
           }
         </li>
         ${
           !user || user.accountType === "customer"
-            ? `<li class="nav-item px-2">
+            ? `<li class="nav-item pe-3 ">
           <a class="nav-link" href="cart_page.html"><i class="fa-solid fa-cart-plus"></i></a>
           </li>`
             : ""
