@@ -26,8 +26,8 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
   location.assign("/src/html/NewMain.html");
 }
 //spinner.remove();
-const file = uploadImg.files[0];
 uploadImg.addEventListener("change", (e) => {
+  const file = uploadImg.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -242,6 +242,8 @@ function AddNewProduct(e) {
     imageElement.src = img;
     let imageDataURL = imageElement.src;
     let obj = getFormValues();
+    console.log(imageDataURL);
+    console.log(imageDataURL.length);
     inputValidation(obj,imageDataURL);
     let createdProduct = {
       id: Date.now(),
@@ -306,7 +308,7 @@ function editProduct(e) {
       let obj = getFormValues();
       console.log(imageDataURL);
       try {
-        inputValidation(obj);
+        inputValidation(obj,imageDataURL);
         let updatedProduct = {
           id: product.id,
           title: obj.NewProductName,
@@ -330,7 +332,7 @@ function editProduct(e) {
         sellerData.products.push(productId);
         //state.currentUser.products.push(productId)
         saveStateInLocalStorage();
-        localStorage.removeItem("tempSavedImage");
+        localStorage.removeItem("savedImage");
         currentMode = "";
         formProduct.reset();
         modal.style.display = "none";
@@ -470,8 +472,6 @@ function deleteProduct(e) {
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
 function inputValidation(obj,img) {
-  console.log('-----------------');
-  console.log(img);
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
@@ -496,7 +496,7 @@ function inputValidation(obj,img) {
     );
   }
   if (img.length <= 35) {
-    console.log('ajj');
+    console.log('GG');
     throw new Error("Invalid Product Image.Product Image required.");
   }
 
