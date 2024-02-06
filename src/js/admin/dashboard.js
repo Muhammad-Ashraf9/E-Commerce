@@ -167,16 +167,14 @@ function renderDashboard(container) {
       )
   );
   document.querySelector("table").addEventListener("click", (e) => {
-    console.log("Proucts table dashboard event");
     const id = e.target.dataset?.id;
     if (!id) return;
     modal.innerHTML = getModalHTML(id);
     document.querySelector(".modal-footer").addEventListener("click", (e) => {
-      console.log("modal-footer Proucts dashboard event");
       if (!e.target.dataset.id) return;
       const id = +e.target.dataset.id;
       deleteProductById(id);
-      renderDashboard(container, modal);
+      renderDashboard(container);
     });
   });
 }
@@ -186,7 +184,6 @@ const currentUser = getCurrentUser();
 if (!currentUser || currentUser.accountType !== "admin") {
   location.assign("../html/NewMain.html");
 }
-
 
 //hide dashboard with spinner
 
@@ -198,59 +195,46 @@ sidebar.addEventListener("click", (e) => {
     main.innerHTML = "";
     switch (e.target.dataset.link) {
       case "dashboard":
-        pageNumber = 1;
         renderDashboard(main);
         break;
       case "products":
-        pageNumber = 1;
         renderProductsPage(
           main,
           state.products,
-          pageNumber,
+          1,
           itemsPerPage,
           sortBy,
           searchBy
         );
         break;
       case "orders":
-        pageNumber = 1;
-        renderOrdersPage(
-          main,
-          state.orders,
-          pageNumber,
-          itemsPerPage,
-          sortBy,
-          searchBy
-        );
+        renderOrdersPage(main, state.orders, 1, itemsPerPage, sortBy, searchBy);
         break;
       case "customers":
-        pageNumber = 1;
         renderCustomersPage(
           main,
           getCustomers(),
-          pageNumber,
+          1,
           itemsPerPage,
           sortBy,
           searchBy
         );
         break;
       case "sellers":
-        pageNumber = 1;
         renderSellersPage(
           main,
           getSellers(),
-          pageNumber,
+          1,
           itemsPerPage,
           sortBy,
           searchBy
         );
         break;
       case "customer-services":
-        pageNumber = 1;
         renderCustomerServicePage(
           main,
           state.messages,
-          pageNumber,
+          1,
           itemsPerPage
           // sortBy,
           // searchBy

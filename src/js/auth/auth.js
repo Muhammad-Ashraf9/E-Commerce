@@ -55,6 +55,7 @@ export function signUp(email, password, name, accountType) {
     }
   }
   addUser(customer);
+  //to sign in the user after sign up if no user is logged in(like in the case of admin adding a customer)
   if (currentUser === null) {
     signIn(email, password);
   }
