@@ -252,15 +252,12 @@ function AddNewProduct(e) {
       description: obj.NewProductDescription,
       imgURL0: imageDataURL,
       imgURL1: imageDataURL,
-      category: obj.NewProductcatagory,
-      stock: obj.NewProductQuantity,
       price: obj.NewProductprice,
       prevPrice: obj.NewProductprice,
+      category: obj.NewProductcatagory,
       sellerId: sellerId.id,
-      rating: -1,
+      stock: obj.NewProductQuantity,
       numberofsales: 0,
-      countSold: 0,
-      reviews: [],
     };
     let sellerData = getUserById(sellerId.id);
     let productId = { productId: createdProduct.id };
@@ -313,15 +310,12 @@ function editProduct(e) {
           description: obj.NewProductDescription,
           imgURL0: imageDataURL,
           imgURL1: imageDataURL,
-          category: obj.NewProductcatagory,
-          stock: obj.NewProductQuantity,
           price: obj.NewProductprice,
           prevPrice: product.prevPrice,
+          category: obj.NewProductcatagory,
           sellerId: product.sellerId,
-          rating: product.rating,
+          stock: obj.NewProductQuantity,
           numberofsales: product.numberofsales,
-          countSold: product.countSold,
-          reviews: product.reviews,
         };
         deleteProductById(updatedProduct.id);
         state.products.push(updatedProduct);

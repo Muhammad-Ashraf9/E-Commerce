@@ -39,7 +39,7 @@ const allObjects = data.reduce((acc, innerArray) => {
    if (data.length==0) {
     let alert = document.createElement('h1');
     alert.setAttribute('class','alert alert-danger')
-    alert.innerText = 'There is no Product to display.'
+    alert.innerText = 'There is no Orders to display.'
     table.appendChild(alert)
     return
   }
