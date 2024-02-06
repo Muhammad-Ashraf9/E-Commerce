@@ -332,7 +332,7 @@ function editProduct(e) {
         sellerData.products.push(productId);
         //state.currentUser.products.push(productId)
         saveStateInLocalStorage();
-        localStorage.removeItem("tempSavedImage");
+        localStorage.removeItem("savedImage");
         currentMode = "";
         formProduct.reset();
         modal.style.display = "none";
