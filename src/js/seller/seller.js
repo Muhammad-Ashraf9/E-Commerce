@@ -393,55 +393,105 @@ function fillFormFields(data) {
 //########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
 //######################################################################################################
 let removeItem = document.querySelectorAll(".fa-trash");
+let tbody = document.querySelector('tbody')
 // console.log(removeItem);
-removeItem.forEach(
-  addEventListener("click", function (e) {
-    if (e.target.classList.contains("fa-trash")) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
-      });
-      swalWithBootstrapButtons
-        .fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            swalWithBootstrapButtons
-              .fire({
-                title: "Deleted!",
-                text: "Your Product has been deleted.",
-                icon: "success",
-              })
-              .then(() => {
-                // Remove the product's row from the table
-                e.target.parentNode.parentNode.remove();
-                // Delete the product
-                deleteProduct(e);
-                // Update the table
-                // location.reload();
-              });
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire({
-              title: "Cancelled",
-              text: "Your Product is safe :)",
-              icon: "error",
+section.addEventListener("click", (e)=>{
+  if (e.target.classList.contains("fa-trash")) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons
+            .fire({
+              title: "Deleted!",
+              text: "Your Product has been deleted.",
+              icon: "success",
+            })
+            .then(() => {
+              // Remove the product's row from the table
+              e.target.parentNode.parentNode.remove();
+              // Delete the product
+              deleteProduct(e);
+              // Update the table
+              // location.reload();
             });
-          }
-        });
-      display();
-    }
-  })
-);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your Product is safe :)",
+            icon: "error",
+          });
+        }
+      });
+    display();
+  }
+})
+// removeItem.forEach((i)=>{
+// console.log(i);
+//   i.addEventListener("click", function (e) {
+//     console.log(e.target);
+//     if (e.target.classList.contains("fa-trash")) {
+//       const swalWithBootstrapButtons = Swal.mixin({
+//         customClass: {
+//           confirmButton: "btn btn-success",
+//           cancelButton: "btn btn-danger",
+//         },
+//         buttonsStyling: false,
+//       });
+//       swalWithBootstrapButtons
+//         .fire({
+//           title: "Are you sure?",
+//           text: "You won't be able to revert this!",
+//           icon: "warning",
+//           showCancelButton: true,
+//           confirmButtonText: "Yes, delete it!",
+//           cancelButtonText: "No, cancel!",
+//           reverseButtons: true,
+//         })
+//         .then((result) => {
+//           if (result.isConfirmed) {
+//             swalWithBootstrapButtons
+//               .fire({
+//                 title: "Deleted!",
+//                 text: "Your Product has been deleted.",
+//                 icon: "success",
+//               })
+//               .then(() => {
+//                 // Remove the product's row from the table
+//                 e.target.parentNode.parentNode.remove();
+//                 // Delete the product
+//                 deleteProduct(e);
+//                 // Update the table
+//                 // location.reload();
+//               });
+//           } else if (result.dismiss === Swal.DismissReason.cancel) {
+//             swalWithBootstrapButtons.fire({
+//               title: "Cancelled",
+//               text: "Your Product is safe :)",
+//               icon: "error",
+//             });
+//           }
+//         });
+//       display();
+//     }
+//   })
+// }
+// );
 
 function deleteProduct(e) {
   if (sellerId.accountType === "seller") {
