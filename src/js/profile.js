@@ -13,7 +13,3 @@ window.addEventListener("load",function(){
 
 
 })
-    // location.assign("../html/main.html");
-    // return;
- 
-

@@ -23,7 +23,8 @@ if (!user || user.accountType == "admin" || user.accountType == "seller") {
 }
 
 let ucart = user.cart; //checking if state
-let cart = ucart.map((item) => ({//fetchin user cart's data
+let cart = ucart.map((item) => ({
+  //fetchin user cart's data
   product: getProductById(item.id),
   num: item.quantity,
 }));
@@ -95,7 +96,8 @@ function newOrder() {
   formData.forEach(function (value, key) {
     formDataObject[key] = value;
   });
-  const newOrder = {//creating a new order object
+  const newOrder = {
+    //creating a new order object
     id: orderID,
     items: Items,
     customerId: customerID,
@@ -104,8 +106,8 @@ function newOrder() {
     customerDetails: formDataObject,
   };
   state.orders.push(newOrder); //pushing the order in the list of orders
-  
-  const uindex=customerIndexInUsersList(getCurrentUser.id);
+
+  const uindex = customerIndexInUsersList(getCurrentUser.id);
   state.users[uindex].orders.push(orderID); //pushing the order id in the customer's orders' list
 
   state.users[uindex].cart = []; //emptying the cart
@@ -114,10 +116,11 @@ function newOrder() {
 
   let sellers = []; //array to contain the ids of the sellers in this order
 
-  Items.forEach((item) => {//a loop to update the stock of each product
+  Items.forEach((item) => {
+    //a loop to update the stock of each product
 
-    const index =productIndexInProductsList(item.id)  // getting the index of the product in product list
-    const sellerIndex = sellerIndexInUsersList(item.sellerId) // getting the index of the seller in users list
+    const index = productIndexInProductsList(item.id); // getting the index of the product in product list
+    const sellerIndex = sellerIndexInUsersList(item.sellerId); // getting the index of the seller in users list
 
     state.products[index].stock -= cart[flagx].num; ///updating the stock in product list
     state.products[index].numberofsales += cart[flagx].num; ///updating number od sales
@@ -131,16 +134,15 @@ function newOrder() {
   saveStateInLocalStorage();
 }
 
-
-function productIndexInProductsList(id){
+function productIndexInProductsList(id) {
   return state.products.findIndex((product) => product.id === id);
 }
 
-function sellerIndexInUsersList(id){
+function sellerIndexInUsersList(id) {
   return state.users.findIndex((seller) => seller.id === id);
 }
 
-function customerIndexInUsersList(id){
+function customerIndexInUsersList(id) {
   return state.users.findIndex(
     (user) => user.id === state.currentUser.id //getting the customers index in the list of users
   );
@@ -202,9 +204,9 @@ window.addEventListener("load", function () {
                 }"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn fs-4">-</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
+                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn">+</button>
                 </div>
               </div>
               <!-- End of controls -->
