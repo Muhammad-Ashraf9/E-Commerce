@@ -40,10 +40,10 @@ function renderOrders(tableDiv, myID) {
             case "description":
               tableinnerHTML += `<th>Details</th>`;
               break;
-            case "img0":
+            case "imgURL0":
               tableinnerHTML += `<th>Image 1</th>`;
               break;
-            case "img1":
+            case "imgURL1":
               tableinnerHTML += `<th>Image 2</th>`;
               break;
             case "sellerId":
@@ -86,7 +86,7 @@ function renderOrders(tableDiv, myID) {
       tableinnerHTML += `<tfoot class="text-center align-middle" style="vertical-align:bottom">
                         <tr>
                           <td colspan="4"><b>Total Items:</b> ${myorderitemscounter}</td>
-                          <td colspan="5">
+                          <td colspan="7">
                             status: ${
                               orders[i]["status"] === "deleverd"
                                 ? `<span class="text-success">${orders[i]["status"]}</span>`
