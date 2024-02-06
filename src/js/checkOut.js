@@ -129,8 +129,9 @@ function newOrder() {
       (seller) => seller.id === item.sellerId
     ); // getting the index of the seller in users list
 
-    state.products[index].stock -= cart[flagx].num; ///updating the stock in product list
-    state.products[index].numberofsales += cart[flagx].num;
+
+    state.products[index].stock -= cart[flagx].num;///updating the stock in product list
+    state.products[index].numberofsales += cart[flagx].num; 
 
     if (!sellers.includes(item.sellerId)) {
       //checking if the seller is already notified with the order id

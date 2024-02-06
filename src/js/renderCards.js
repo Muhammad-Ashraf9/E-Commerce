@@ -6,7 +6,12 @@ import { addtoCart } from "./addToCart.js";
 import { getQuantityFromCart } from "./getQuantityFromCart.js";
 import { state } from "./model.js";
 // Drawing the cards
-export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchValue(), category = getCheckedValue()) {
+export function renderCards(
+  page,
+  numberOfCardsPerPage,
+  searchValue = getSearchValue(),
+  category = getCheckedValue()
+) {
   // let searchValue = ;
   // let category = ;
   let Products = ProductsFiltered(searchValue, category);
@@ -46,7 +51,9 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
               </div>
               <div class="card-footer">
                 <div class="wcf-left">
-                  <span>${Products[i - 1].price} $ <del style="color: red">${Products[i - 1].prevPrice} $</del></span>
+                  <span>${Products[i - 1].price} $ <del style="color: red">${
+      Products[i - 1].prevPrice
+    } $</del></span>
                 </div>
                     <div class="wcf-right">
                       <input type="text" class="quantity" value="${prodQ}" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
@@ -93,4 +100,3 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   }
   renderPaginationSection(page, pagesCount);
 }
-
