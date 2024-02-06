@@ -38,8 +38,9 @@ uploadImg.addEventListener("change", (e) => {
     }
 });
 saveStateInLocalStorage();
-let currentUser = localStorage.getItem("currentUser");
-const currentUserData = JSON.parse(currentUser);
+// let currentUser = localStorage.getItem("currentUser");
+// const currentUserData = JSON.parse(currentUser);
+const currentUserData = getCurrentUser();
 console.log(currentUserData);
 
 const bodys = document.querySelector("body");
@@ -227,15 +228,16 @@ closeBtn.addEventListener("click", function () {
 //########################### Add New Product To Seller Page ###########################################
 //######################################################################################################
 
-let sellerId = JSON.parse(currentUser);
+let sellerId = currentUserData
 
 saveBtn.addEventListener("click", (e) => {
   if (sellerId.accountType === "seller" && currentMode == "Add") {
     AddNewProduct(e);
   }
+  display(getAllProductsByProductIds( state.currentUser.products))
 });
 function AddNewProduct(e) {
-  e.preventDefault();
+  // e.preventDefault();
   try {
     let img = localStorage.getItem("savedImage");
     const imageElement = new Image();
@@ -276,7 +278,7 @@ function AddNewProduct(e) {
     errorMessage.innerText = error.message;
     errorMessage.style.opacity = 1;
   }
-  display();
+  // display();
 }
 
 
