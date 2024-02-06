@@ -2,24 +2,22 @@ import { setAuthStateFromCookie } from "./auth/auth.js";
 import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
 import { renderCards } from "./renderCards.js";
+import { ProductsFiltered } from "./ProductsFiltered.js";
 
 const body = document.querySelector("body");
 console.log("body :>> ", body);
 setAuthStateFromCookie();
 
-
-let div = document.getElementById("ProductShow");
-console.log(div);
-
 renderNav(body);
 renderFooter(body);
 
 let page = 1;
-document.addEventListener("DOMContentLoaded", function () {
+  let numberOfCardsPerPage = 4; // Number of cards per page
+  let productsCount = ProductsFiltered("", "").length; // Number of products
+  let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
   let firstRow = document.getElementById("ProductShow");
   console.log(firstRow);
-  renderCards(page, 4, "", "");
-});
+  renderCards(page, numberOfCardsPerPage, "", "");
 
 // Render after click on the pagination buttons
 const pagSec = document.getElementById("paginationSection");
@@ -42,5 +40,5 @@ pagSec.addEventListener("click", function (event) {
       page = parseInt(event.target.textContent);
     }
   }
-  renderCards(page, 4, "", "");
+  renderCards(page, numberOfCardsPerPage, "", "");
 });
