@@ -19,8 +19,7 @@ let errorMessage = document.querySelector(".error-message");
 let currentMode = "";
 //const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
-let sort = 'sort-up'
-
+let sort = "sort-up";
 
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
   location.assign("/src/html/NewMain.html");
@@ -28,14 +27,14 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
 //spinner.remove();
 uploadImg.addEventListener("change", (e) => {
   const file = uploadImg.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const dataURL = e.target.result;
-        localStorage.setItem("savedImage", dataURL);
-      };
-      reader.readAsDataURL(file);
-    }
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const dataURL = e.target.result;
+      localStorage.setItem("savedImage", dataURL);
+    };
+    reader.readAsDataURL(file);
+  }
 });
 saveStateInLocalStorage();
 // let currentUser = localStorage.getItem("currentUser");
@@ -50,17 +49,19 @@ renderFooter(bodys);
 
 display(getAllProductsByProductIds(currentUserData.products));
 
-function display(allProducts = getAllProductsByProductIds(currentUserData.products)) {
-    section.innerHTML = "";
-    let table = document.querySelector('table');
-    if (!allProducts||allProducts.length==0) {
-     let alert = document.createElement('h1');
-     alert.setAttribute('class','alert alert-danger')
-     alert.innerText = 'There is no Product to display.'
-     table.appendChild(alert)
-     return
-   }
-   let thead = `
+function display(
+  allProducts = getAllProductsByProductIds(currentUserData.products)
+) {
+  section.innerHTML = "";
+  let table = document.querySelector("table");
+  if (!allProducts || allProducts.length == 0) {
+    let alert = document.createElement("h1");
+    alert.setAttribute("class", "alert alert-danger");
+    alert.innerText = "There is no Product to display.";
+    table.appendChild(alert);
+    return;
+  }
+  let thead = `
    <thead>
      <tr>
      <th scope="col" sort="desc" name="id">Product Id <i class="fa-solid fa-${sort}"></i> </th>
@@ -71,13 +72,13 @@ function display(allProducts = getAllProductsByProductIds(currentUserData.produc
        <th scope="col" sort = "desc" name = "price" >Price  <i class="fa-solid fa-${sort}"></i> </i> </th>
      </tr>
    </thead>
- `  
-  table.insertAdjacentHTML('afterbegin',thead)
+ `;
+  table.insertAdjacentHTML("afterbegin", thead);
   //  console.log(allProducts);
- let tbody = allProducts
- .map(
-     (item) =>
-       `
+  let tbody = allProducts
+    .map(
+      (item) =>
+        `
        <tbody>
        <tr>
          <td  data-label = "Product Id" id = ${item.id}>${item.id}</td>
@@ -92,36 +93,34 @@ function display(allProducts = getAllProductsByProductIds(currentUserData.produc
        </tr>
      </tbody>
      `
-     )
-   .join("");
-   table.insertAdjacentHTML('beforeend',tbody)
+    )
+    .join("");
+  table.insertAdjacentHTML("beforeend", tbody);
 
-
-let sortUp = document.querySelector('.fa-sort-up')
-let sortDown = document.querySelector('.fa-sort-down')
-let theadForSort = document.querySelector("thead");
-theadForSort.addEventListener("click", function (e) {
-  // console.log(e);
-    let colName = e.target.parentNode.getAttribute("name")
-    if(e.target.classList.contains('fa-sort-up')){
+  let sortUp = document.querySelector(".fa-sort-up");
+  let sortDown = document.querySelector(".fa-sort-down");
+  let theadForSort = document.querySelector("thead");
+  theadForSort.addEventListener("click", function (e) {
+    // console.log(e);
+    let colName = e.target.parentNode.getAttribute("name");
+    if (e.target.classList.contains("fa-sort-up")) {
       allProducts.sort(function (x, y) {
         if (x[colName] > y[colName]) return -100;
         else if (x[colName] < y[colName]) return 100;
         else return 0;
       });
-      sort = 'sort-down'
+      sort = "sort-down";
       display(allProducts);
-    }else{
+    } else {
       allProducts.sort(function (x, y) {
         if (x[colName] > y[colName]) return 100;
         else if (x[colName] < y[colName]) return -100;
-        else return 0
+        else return 0;
       });
-        sort = 'sort-up'
-        display(allProducts);
-      }
-  })
-
+      sort = "sort-up";
+      display(allProducts);
+    }
+  });
 }
 
 // function display() {
@@ -228,13 +227,13 @@ closeBtn.addEventListener("click", function () {
 //########################### Add New Product To Seller Page ###########################################
 //######################################################################################################
 
-let sellerId = currentUserData
+let sellerId = currentUserData;
 
 saveBtn.addEventListener("click", (e) => {
   if (sellerId.accountType === "seller" && currentMode == "Add") {
     AddNewProduct(e);
   }
-  display(getAllProductsByProductIds( state.currentUser.products))
+  display(getAllProductsByProductIds(state.currentUser.products));
 });
 function AddNewProduct(e) {
   // e.preventDefault();
@@ -246,7 +245,7 @@ function AddNewProduct(e) {
     let obj = getFormValues();
     // console.log(imageDataURL);
     // console.log(imageDataURL.length);
-    inputValidation(obj,imageDataURL);
+    inputValidation(obj, imageDataURL);
     let createdProduct = {
       id: Date.now(),
       title: obj.NewProductName,
@@ -256,7 +255,7 @@ function AddNewProduct(e) {
       category: obj.NewProductcatagory,
       stock: obj.NewProductQuantity,
       price: obj.NewProductprice,
-      prevPrice: -1,
+      prevPrice: obj.NewProductprice,
       sellerId: sellerId.id,
       rating: -1,
       numberofsales: 0,
@@ -280,8 +279,6 @@ function AddNewProduct(e) {
   }
   // display();
 }
-
-
 
 //######################################################################################################
 //######################################### UPDATE PRODUCT #############################################
@@ -309,7 +306,7 @@ function editProduct(e) {
       let imageDataURL = imageElement.src;
       let obj = getFormValues();
       try {
-        inputValidation(obj,imageDataURL);
+        inputValidation(obj, imageDataURL);
         let updatedProduct = {
           id: product.id,
           title: obj.NewProductName,
@@ -358,7 +355,9 @@ function getFormValues() {
   let NewProductprice = document.getElementById("NewProductprice").value;
   let NewProductcatagory = document.getElementById("NewProductcatagory").value;
   let NewProductQuantity = document.getElementById("NewProductQuantity").value;
-  let NewProductDescription = document.getElementById("NewProductDescription").value;
+  let NewProductDescription = document.getElementById(
+    "NewProductDescription"
+  ).value;
   let NewProduct = {
     NewProductName: NewProductName,
     NewProductprice: NewProductprice,
@@ -379,7 +378,6 @@ function fillFormFields(data) {
   // Add logic to handle image if needed
 }
 
-
 //######################################################################################################
 //################################## BEGINING OF SORT OPERATION ########################################
 //######################################################################################################
@@ -391,72 +389,72 @@ function fillFormFields(data) {
 //       else if (x[colName].toLowerCase() < y[colName].toLowerCase()) return -100;
 //       else return 0;
 //     });
-//     display() 
+//     display()
 // });
 //######################################################################################################
 //################################## END OF SORT OPERATION #############################################
 //######################################################################################################
-
 
 //######################################################################################################
 //########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
 //######################################################################################################
 let removeItem = document.querySelectorAll(".fa-trash");
 // console.log(removeItem);
-removeItem.forEach(addEventListener("click", function (e) {
-      if (e.target.classList.contains("fa-trash")) {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger",
-          },
-          buttonsStyling: false,
-        });
-        swalWithBootstrapButtons
-          .fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
-            reverseButtons: true,
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              swalWithBootstrapButtons
-                .fire({
-                  title: "Deleted!",
-                  text: "Your Product has been deleted.",
-                  icon: "success",
-                })
-                .then(() => {
-                  // Remove the product's row from the table
-                  e.target.parentNode.parentNode.remove();
-                  // Delete the product
-                  deleteProduct(e);
-                  // Update the table
-                  // location.reload();
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              swalWithBootstrapButtons.fire({
-                title: "Cancelled",
-                text: "Your Product is safe :)",
-                icon: "error",
+removeItem.forEach(
+  addEventListener("click", function (e) {
+    if (e.target.classList.contains("fa-trash")) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons
+              .fire({
+                title: "Deleted!",
+                text: "Your Product has been deleted.",
+                icon: "success",
+              })
+              .then(() => {
+                // Remove the product's row from the table
+                e.target.parentNode.parentNode.remove();
+                // Delete the product
+                deleteProduct(e);
+                // Update the table
+                // location.reload();
               });
-            }
-          });
-        display();
-      }
-    })
-  );
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+              title: "Cancelled",
+              text: "Your Product is safe :)",
+              icon: "error",
+            });
+          }
+        });
+      display();
+    }
+  })
+);
 
 function deleteProduct(e) {
   if (sellerId.accountType === "seller") {
     // Delete Product From Products Array
     // console.log(e.target.parentNode.parentNode.firstChild.id);
     // let productId = e.target.parentNode.parentNode.firstChild.id;
-    let productId = e.target.parentNode.parentNode.firstElementChild.id
+    let productId = e.target.parentNode.parentNode.firstElementChild.id;
 
     deleteProductById(productId);
     saveStateInLocalStorage();
@@ -464,13 +462,10 @@ function deleteProduct(e) {
   display();
 }
 
-
-
-
 //######################################################################################################
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
-function inputValidation(obj,img) {
+function inputValidation(obj, img) {
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
@@ -501,5 +496,4 @@ function inputValidation(obj,img) {
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductDescription)) {
     throw new Error("Invalid Description.");
   }
-
 }
