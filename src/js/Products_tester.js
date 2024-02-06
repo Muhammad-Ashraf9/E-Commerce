@@ -7,6 +7,9 @@ import { getSearchValue } from "../js/getSearchValue.js";
 import { addtoCart } from "./addToCart.js";
 let prodID = -1;
 
+const body = document.querySelector("body");
+renderFooter(body);
+renderNav(body);
 // Onload page rendering of the cards
 var numberOfCardsPerPage = 8;
  let page = 1; // Current page
