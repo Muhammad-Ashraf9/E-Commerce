@@ -5,7 +5,7 @@ import { renderCards } from "./renderCards.js";
 import { ProductsFiltered } from "./ProductsFiltered.js";
 
 const body = document.querySelector("body");
-console.log("body :>> ", body);
+// console.log("body :>> ", body);
 setAuthStateFromCookie();
 
 renderNav(body);
@@ -16,7 +16,6 @@ let page = 1;
   let productsCount = ProductsFiltered("", "").length; // Number of products
   let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
   let firstRow = document.getElementById("ProductShow");
-  console.log(firstRow);
   renderCards(page, numberOfCardsPerPage, "", "");
 
 // Render after click on the pagination buttons

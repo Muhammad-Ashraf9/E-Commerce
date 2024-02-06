@@ -41,7 +41,7 @@ saveStateInLocalStorage();
 // let currentUser = localStorage.getItem("currentUser");
 // const currentUserData = JSON.parse(currentUser);
 const currentUserData = getCurrentUser();
-console.log(currentUserData);
+// console.log(currentUserData);
 
 const bodys = document.querySelector("body");
 renderNav(bodys);
@@ -73,7 +73,7 @@ function display(allProducts = getAllProductsByProductIds(currentUserData.produc
    </thead>
  `  
   table.insertAdjacentHTML('afterbegin',thead)
-   console.log(allProducts);
+  //  console.log(allProducts);
  let tbody = allProducts
  .map(
      (item) =>
@@ -101,7 +101,7 @@ let sortUp = document.querySelector('.fa-sort-up')
 let sortDown = document.querySelector('.fa-sort-down')
 let theadForSort = document.querySelector("thead");
 theadForSort.addEventListener("click", function (e) {
-  console.log(e);
+  // console.log(e);
     let colName = e.target.parentNode.getAttribute("name")
     if(e.target.classList.contains('fa-sort-up')){
       allProducts.sort(function (x, y) {
@@ -202,7 +202,7 @@ body.addEventListener("click", function (e) {
     currentMode = "Edit";
     errorMessage.innerText = "";
     editProduct(e);
-    console.log(currentMode);
+    // console.log(currentMode);
   } else if (e.target.classList.contains("fa-eye")) {
     // let productId = e.target.parentNode.parentNode.firstChild.id;
     let productId = e.target.parentNode.parentNode.firstElementChild.id;
@@ -244,8 +244,8 @@ function AddNewProduct(e) {
     imageElement.src = img;
     let imageDataURL = imageElement.src;
     let obj = getFormValues();
-    console.log(imageDataURL);
-    console.log(imageDataURL.length);
+    // console.log(imageDataURL);
+    // console.log(imageDataURL.length);
     inputValidation(obj,imageDataURL);
     let createdProduct = {
       id: Date.now(),
@@ -308,7 +308,6 @@ function editProduct(e) {
       imageElement.src = img;
       let imageDataURL = imageElement.src;
       let obj = getFormValues();
-      console.log(imageDataURL);
       try {
         inputValidation(obj,imageDataURL);
         let updatedProduct = {
@@ -457,10 +456,8 @@ function deleteProduct(e) {
     // Delete Product From Products Array
     // console.log(e.target.parentNode.parentNode.firstChild.id);
     // let productId = e.target.parentNode.parentNode.firstChild.id;
-    console.log(e.target.parentNode.parentNode.firstElementChild.id);
     let productId = e.target.parentNode.parentNode.firstElementChild.id
 
-    console.log(productId);
     deleteProductById(productId);
     saveStateInLocalStorage();
   }
@@ -478,7 +475,6 @@ function inputValidation(obj,img) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
   if (!/^\d+$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
-    console.log(NewProductprice);
     throw new Error("Invalid Product Price. Please enter a valid number.");
   }
 
@@ -498,7 +494,6 @@ function inputValidation(obj,img) {
     );
   }
   if (img.length <= 35) {
-    console.log('GG');
     throw new Error("Invalid Product Image.Product Image required.");
   }
 

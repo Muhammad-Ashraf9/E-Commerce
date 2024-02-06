@@ -724,7 +724,6 @@ export function getAllOrdersByOrderIds(orderIds) {
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
     const foundOrder = state.orders.find((order) => order.id === orderId);
-    console.log(foundOrder);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
       allOrders.push(foundOrder);
@@ -734,10 +733,8 @@ export function getAllOrdersByOrderIds(orderIds) {
   for (let i = 0; i < allOrders.length; i++) {
     // Create a new array for each iteration of the outer loop
     const matchedItems = [];
-    console.log(state.currentUser);
     for (let j = 0; j < allOrders[i].items.length; j++) {
       if (allOrders[i].items[j].sellerId === state.currentUser.id) {
-        console.log(allOrders[i].status);
         allOrders[i].items[j].orderId = allOrders[i].id;
         allOrders[i].items[j].orderDate = allOrders[i].date;
         allOrders[i].items[j].orderStatus = allOrders[i].status;
@@ -746,7 +743,6 @@ export function getAllOrdersByOrderIds(orderIds) {
     }
     result.push(matchedItems);
   }
-  console.log(result);
   return result;
 }
 

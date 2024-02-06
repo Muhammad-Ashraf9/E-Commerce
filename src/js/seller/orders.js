@@ -8,9 +8,9 @@ let section = document.getElementById('interface')
 
 // Log or use the allOrders array as needed
 const currentUserForAuth = getCurrentUser();
-console.log('from outer auth ');
+// console.log('from outer auth ');
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
-    console.log('from inner auth ');
+    // console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
 const bodys=document.querySelector("body");
@@ -24,7 +24,7 @@ function display(){
   const currentUserData = JSON.parse(userDataFromLocalStorage);
   // Example usage:
   const data = getAllOrdersByOrderIds(currentUserData.orders);
-  console.log(data);
+  // console.log(data);
 
 
   const extractObjects = (arr) => arr.filter(item => typeof item === 'object');

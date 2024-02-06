@@ -34,7 +34,6 @@ prodCategoryDiv.innerText += ` ${Product.category}`;
 let category = `${Product.category}`;
 
 let parentDiv = document.querySelector(".numOfItems");
-console.log(parentDiv);
 Array.from(parentDiv.children).forEach((child) => {
   child.id = `${prodID}`;
 });
@@ -124,9 +123,7 @@ if (me) {
 // change the counter in the cart icon
 
 let cards = document.getElementById("items");
-console.log(cards);
 cards.addEventListener("click", function (e) {
-  console.log(e.target);
   if (e.target.innerText == "+") {
     let flag = false;
     let targetI = -1;
@@ -174,7 +171,7 @@ cards.addEventListener("click", function (e) {
       document.querySelector(".numOfItems span").innerText--;
     }
   } else {
-    console.log("not + or -");
+    // console.log("not + or -");
   }
 
   if (state.currentUser) {
@@ -191,29 +188,3 @@ cards.addEventListener("click", function (e) {
   saveStateInLocalStorage();
 });
 
-//     if (e.target.innerText == "+") {
-//       let cardID = +e.target.id;
-//       if (cart[cardID].quantity == cart[cardID].id.stock) {
-//         Swal.fire({
-//           icon: "error",
-//           title: "Oops...",
-//           text: "Sorry, there is no more of this item in the seller's stock",
-//         });
-//         return;
-//       }
-//       changeCartItemCount(cart[cardID].id.id, cart[cardID].quantity + 1);
-//       cart[cardID].quantity += +1;
-//       // change the counter in the cart icon
-//       document.querySelector(".numOfItems span").innerText++;
-//     }
-//     if (e.target.innerText == "-") {
-//       let cardID = e.target.id;
-//       console.log(cardID);
-//       if (cart[cardID].quantity - 1 == 0) return;
-//       changeCartItemCount(cart[cardID].product.id, cart[cardID].quantity - 1);
-//       cart[cardID].quantity += -1;
-//       // change the counter in the cart icon
-//       document.querySelector(".numOfItems span").innerText--;
-//     }
-//   }
-// });
