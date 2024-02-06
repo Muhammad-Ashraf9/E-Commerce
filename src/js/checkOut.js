@@ -17,6 +17,11 @@ const body = document.querySelector("body");
 renderFooter(body);
 renderNav(body);
 const user = getCurrentUser(); //getting the user
+
+if (!user || user.accountType == "admin" || user.accountType == "seller") {
+  location.assign("../html/newmain.html");
+}
+
 let ucart = user.cart; //checking if state
 let cart = ucart.map((item) => ({//fetchin user cart's data
   product: getProductById(item.id),
