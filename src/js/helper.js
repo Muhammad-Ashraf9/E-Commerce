@@ -6,7 +6,8 @@ export function setCookie(cname, cvalue, exdays) {
 }
 export function deleteCookie(cName) {
   const sessionEnd = new Date("1999-07-22");
-  document.cookie = `${cName}=;expires:${sessionEnd}`;
+  //fix delete cookie instead of setting it empty string
+  document.cookie = `${cName}=;expires=${sessionEnd}`;
 }
 
 export function getCoookie(key) {

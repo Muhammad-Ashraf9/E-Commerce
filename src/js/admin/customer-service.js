@@ -31,7 +31,6 @@ export function renderCustomerServicePage(
     renderCustomerServicePage(
       container,
       searchByField(state.messages, newSearchBy.field, newSearchBy.value),
-      // pageNumber,
       1, //reset page number to 1 on search
       itemsPerPage,
       sortBy,
@@ -109,7 +108,6 @@ export function renderCustomerServicePage(
   handleChangingItemsPerPage(
     container,
     array,
-    // pageNumber,
     1, //reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,

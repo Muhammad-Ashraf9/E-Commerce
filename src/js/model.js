@@ -935,19 +935,20 @@ export function searchByField(array, field, value) {
   );
 }
 export function deleteMessageById(id) {
-  console.log("id :>> ", id);
   state.messages = state.messages.filter((message) => message.mId !== +id);
   saveStateInLocalStorage();
-}
-export function testLog() {
-  console.log("test");
 }
 
 export function moveGuestCartToUserCart(id) {
   const index = state.users.findIndex((user) => user.id === +id);
-  console.log("index :>> ", index);
-  console.log("state.users[index] :>> ", state.users[index]);
-  state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
+
+  // Add only the items that are not already in the user's cart
+  state.guestCart.forEach((item) => {
+    if (!state.users[index].cart.some((i) => i.id === item.id)) {
+      state.users[index].cart.push(item);
+    }
+  });
+
   state.guestCart = [];
   saveStateInLocalStorage();
 }
