@@ -3,6 +3,7 @@ import {
   state as stateinmycomputer,
 } from "./model.js";
 
+
 import { state } from "../js/model.js";
 
 // let state = JSON.parse(localStorage.getItem("state"));
@@ -129,7 +130,8 @@ function changeState(e) {
     icon: "warning",
     buttons: true,
     dangerMode: false,
-  }).then((willDelete) => {
+  }).then(
+    (willDelete) => {
     if (willDelete) {
       Swal.fire("Thanks for order from us ❤;", {
         icon: "success",
@@ -162,10 +164,8 @@ function addEventListenerByquerySelectorAll(query, event, fun) {
   }
 }
 
-addEventListenerByquerySelectorAll('input[type="checkbox"]',"change",changeState);
-// var delButtons = document.querySelectorAll('input[type="checkbox"]');
-// if (delButtons) {
-//   delButtonsy.forEach((element) => {
-//     element.addEventListener("change", changeState);
-//   });
-// };
+addEventListenerByquerySelectorAll(
+  'input[type="checkbox"]',
+  "change",
+  changeState
+);

@@ -8,7 +8,7 @@ let section = document.getElementById('interface')
 
 // Log or use the allOrders array as needed
 const currentUserForAuth = getCurrentUser();
-// console.log('from outer auth ');
+console.log('from outer auth ');
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
     // console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
@@ -39,7 +39,7 @@ const allObjects = data.reduce((acc, innerArray) => {
    if (data.length==0) {
     let alert = document.createElement('h1');
     alert.setAttribute('class','alert alert-danger')
-    alert.innerText = 'There is no Orders to display.'
+    alert.innerText = 'There is no Product to display.'
     table.appendChild(alert)
     return
   }
