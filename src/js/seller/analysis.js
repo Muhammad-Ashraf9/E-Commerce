@@ -1,4 +1,4 @@
-import {getAllOrdersByOrderIds,getCurrentUser, state} from '../model.js'
+import {getAllOrdersByOrderIds,getCurrentUser, getUserById, state} from '../model.js'
 
 import renderFooter from '../views/Footer.js'
 import renderNav from '../views/Nav.js'
@@ -13,9 +13,9 @@ const bodys=document.querySelector("body");
 renderNav(bodys);
 
 renderFooter(bodys);
-const currentUserForAuth = getCurrentUser();
+const currentUser = getCurrentUser();
 console.log('from outer auth ');
-if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
+if (!currentUser || currentUser.accountType !== "seller") {
     console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
@@ -33,7 +33,8 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
         totalOrders.innerText = 'There is no oreders available yet'
 
 function allProducts(){
-  let tot = state.currentUser.products.length
+  let user = getUserById(currentUser.id)
+  let tot = user.products.length
   if(tot)
         totalProducts.innerText = tot
     else

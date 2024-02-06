@@ -64,14 +64,14 @@ const allObjects = data.reduce((acc, innerArray) => {
         `
         <tbody>
         <tr>
-          <td>${item.orderId}</td>
-          <td>${item.orderDate}</td> 
-          <td>${item.id}</td> 
-          <td>${item.title}</td> 
-          <td>${item.category}</td> 
-          <td>${item.quantity}</td> 
-          <td>${(item.quantity * item.price)}</td> 
-          <td>${item.orderStatus}</td> 
+          <td data-label = "Order Id">${item.orderId}</td>
+          <td data-label = "Order Date">${item.orderDate}</td> 
+          <td data-label = "Product Id">${item.id}</td> 
+          <td data-label = "Title">${item.title}</td> 
+          <td data-label = "Category">${item.category}</td> 
+          <td data-label = "Quantity">${item.quantity}</td> 
+          <td data-label = "Total Price">${(item.quantity * item.price)}</td> 
+          <td data-label = "Order Status">${item.orderStatus}</td> 
         </tr>
       </tbody>
       `

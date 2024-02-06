@@ -32,7 +32,8 @@
     /* Existing styles remain unchanged */
 
     #table {
-        width: 100%;
+        z-index: -1;
+        width: fit-content;
         max-width: 100%;
         height: 80vh !important;
         overflow-y: auto;
@@ -45,26 +46,6 @@
         border-radius: 25px;
         gap: 16.85px;
     }
-
-    @media (max-width: 1200px) {
-        table {
-            font-size: 14px; 
-        }
-    }
-
-    @media (max-width: 992px) {
-        table {
-            font-size: 12px; 
-        }
-    }
-    
-    @media (max-width: 600px) {
-        table {
-            font-size: 14px; 
-        }
-    }
-
-
     td{
         padding: 10px ;
         border-top: 3px solid rgb(155, 155, 155);
@@ -94,7 +75,7 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     /* Add your modal styles here */
-    .modal {
+.modal {
     display: none;
     position: fixed;
     overflow: auto;
@@ -102,11 +83,11 @@
 }
 
 .modal-content {
+    width:50% !important ;/* Adjust the width as needed */
     background-color: #fefefe;
     margin: 10px auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Adjust the width as needed */
 }
 
 .close {
@@ -127,28 +108,60 @@
     width: 10%;
 }
 
-    </style>
+@media(max-width:750px){
+        table td:last-child {
+          border-bottom: 3px solid rgb(155, 155, 155);
+        }
+        #table thead{
+          display: none;
+        }
+        #table, #table tbody, #table tr, #table td{
+          display: block;
+          width: 100%;
+        }
+        #table tr{
+          margin-bottom: 15px;
+        }
+        #table td{
+          text-align: right;
+          padding-left: 50%;
+          position: relative;
+        }
+        #table td::before{
+          content: attr(data-label);
+          position: absolute;
+          padding-left: 15px;
+          text-align: left;
+          left: 0;
+          width: 50%;
+          font-size:15px ;
+          font-weight: bold;
+        }
+
+      }
+
+
+
+</style>
 </head>
 <body class="d-grid">
 
-    <div class="spinner-border" role="status" style="width: 50vw;height: 50vh;">
+    <!-- <div class="spinner-border" role="status" style="width: 50vw;height: 50vh;">
         <span class="visually-hidden">Loading...</span>
-    </div>
-        <div class="container-fluid row">
-            <section id="menu" >
-            </section>
-    <section id="interface">
+    </div> -->
+    <div class="container-fluid row">
+        <section id="menu" >
+        </section>
+        <section id="interface">
             <div class="topSection d-flex justify-content-around ">
                 <h3 class="i-name" >Dashboard</h3>
                 <input type="button" id="addProduct" value=" + Add Product" class="btn btn-outline-primary " >
             </div>
-
-            <div id="table" class="table-responsive">
-
+            <table id="table" class="table-responsive"></table>
+            <!-- <div id="table" class="table-responsive"> -->
             </div>
-    
         </section>
-        </div>      
+    </div>      
 
     <section class="modalSection">
         <div id="myModal" class="modal">

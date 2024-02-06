@@ -77,3 +77,6 @@ body{
     opacity: 0;
     transition: all 0.3s;
 }
+#menu{
+    width: 15vw;
+}

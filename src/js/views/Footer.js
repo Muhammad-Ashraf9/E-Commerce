@@ -1,4 +1,5 @@
 import { getCurrentUser } from "../model.js";
+let user = getCurrentUser();
 export default function renderFooter(element) {
   const footer = `
 </li>
@@ -69,14 +70,24 @@ export default function renderFooter(element) {
                     <h3 class="pb-3">Links</h3>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <p><a class="scroll-link" href="NewMain.html">Home</a></p>
-                    <p><a href="Products_tester.html">Products</a></p>
-                    <p><a href="cart_page.html">Your Cart</a></p>
-                  </div>
+                  ${(!user || user.accountType === 'customer')?
+                    `<div class="row">
+                    <div class="col-md-6">
+                      <p><a class="scroll-link" href="NewMain.html">Home</a></p>
+                      <p><a href="Products_tester.html">Products</a></p>
+                      <p><a href="cart_page.html">Your Cart</a></p>
+                    </div>
+                  </div>`
+                  :
+                    `<div class="row">
+                      <div class="col-md-6">
+                        <p><a class="scroll-link" href="seller.html">Dashborad</a></p>
+                        <p><a href="NewMain.html#about">about</a></p>
+                        <p><a href="NewMain.html#contact">contact us</a></p>
+                      </div>
+                    </div>`
+                  }
                 </div>
-              </div>
         </div>
     </div>
     <hr>
@@ -96,3 +107,4 @@ export default function renderFooter(element) {
 </footer>`;
   element.insertAdjacentHTML("beforeend", footer);
 }
+
