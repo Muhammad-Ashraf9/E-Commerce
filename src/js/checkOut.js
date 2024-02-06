@@ -202,9 +202,9 @@ window.addEventListener("load", function () {
                 }"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
-                  <span class="fs-2 mx-3">${item.num}</span>
                   <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
+                  <span class="fs-2 mx-3">${item.num}</span>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
                 </div>
               </div>
               <!-- End of controls -->

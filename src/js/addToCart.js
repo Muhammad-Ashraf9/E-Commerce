@@ -34,11 +34,21 @@ export function addtoCart(e) {
           title: "Oops...",
           text: "Sorry, there is no more of this item in the seller's stock",
         });
+
         return;
       }
 
       if (!flag) {
-        cart.push({ id: parseInt(prodID), quantity: 1 });
+        if (product.stock>0) {
+          cart.push({ id: parseInt(prodID), quantity: 1 });
+        } else {
+          element.value--;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Sorry, there is no more of this item in the seller's stock",
+          });
+        }
       }
       element.value++;
       state.currentUser.cart = cart;
@@ -71,7 +81,17 @@ export function addtoCart(e) {
         return;
       }
       if (!flag) {
-        cartGuest.push({ id: parseInt(prodID), quantity: 1 });
+        if (product.stock>0) {
+          cartGuest.push({ id: parseInt(prodID), quantity: 1 });
+          // cart.push({ id: parseInt(prodID), quantity: 1 });
+        } else {
+          element.value--;
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Sorry, there is no more of this item in the seller's stock",
+          });
+        }
       }
       element.value++;
       state.guestCart = cartGuest;
