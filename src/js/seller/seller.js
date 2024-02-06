@@ -17,28 +17,25 @@ let uploadImg = document.getElementById("fileInput");
 let formProduct = document.getElementById("form-product");
 let errorMessage = document.querySelector(".error-message");
 let currentMode = "";
-const spinner = document.querySelector(".spinner-border");
+//const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
 let sort = 'sort-up'
 
 
-console.log("from outer auth ");
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
-  console.log("from inner auth ");
-
   location.assign("/src/html/NewMain.html");
 }
-spinner.remove();
+//spinner.remove();
 const file = uploadImg.files[0];
 uploadImg.addEventListener("change", (e) => {
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const dataURL = e.target.result;
-      localStorage.setItem("savedImage", dataURL);
-    };
-    reader.readAsDataURL(file);
-  }
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const dataURL = e.target.result;
+        localStorage.setItem("savedImage", dataURL);
+      };
+      reader.readAsDataURL(file);
+    }
 });
 saveStateInLocalStorage();
 let currentUser = localStorage.getItem("currentUser");
@@ -55,7 +52,7 @@ display(getAllProductsByProductIds(currentUserData.products));
 function display(allProducts = getAllProductsByProductIds(currentUserData.products)) {
     section.innerHTML = "";
     let table = document.querySelector('table');
-    if (allProducts.length==0) {
+    if (!allProducts||allProducts.length==0) {
      let alert = document.createElement('h1');
      alert.setAttribute('class','alert alert-danger')
      alert.innerText = 'There is no Product to display.'
@@ -239,13 +236,13 @@ saveBtn.addEventListener("click", (e) => {
 });
 function AddNewProduct(e) {
   e.preventDefault();
-  let img = localStorage.getItem("savedImage");
-  const imageElement = new Image();
-  imageElement.src = img;
-  let imageDataURL = imageElement.src;
-  let obj = getFormValues();
   try {
-    inputValidation(obj);
+    let img = localStorage.getItem("savedImage");
+    const imageElement = new Image();
+    imageElement.src = img;
+    let imageDataURL = imageElement.src;
+    let obj = getFormValues();
+    inputValidation(obj,imageDataURL);
     let createdProduct = {
       id: Date.now(),
       title: obj.NewProductName,
@@ -273,11 +270,11 @@ function AddNewProduct(e) {
     formProduct.reset();
     modal.style.display = "none";
     // location.reload();
-    display();
   } catch (error) {
     errorMessage.innerText = error.message;
     errorMessage.style.opacity = 1;
   }
+  display();
 }
 
 
@@ -472,8 +469,10 @@ function deleteProduct(e) {
 //######################################################################################################
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
-function inputValidation(obj) {
-  if (!/^[A-Za-z0-9][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
+function inputValidation(obj,img) {
+  console.log('-----------------');
+  console.log(img);
+  if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
   if (!/^\d+$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
@@ -482,7 +481,7 @@ function inputValidation(obj) {
   }
 
   // Validate category (letters and spaces only)
-  if (!/^[A-Za-z0-9][A-Za-z0-9\s\S]*$/.test(obj.NewProductcatagory)) {
+  if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductcatagory)) {
     // Check if NewProductcatagory contains invalid characters
     throw new Error(
       "Invalid Product Category. Only letters and spaces are allowed, and it should be more than 3 characters."
@@ -496,9 +495,14 @@ function inputValidation(obj) {
       "Invalid Product Quantity. Please enter a valid positive number."
     );
   }
+  if (img.length <= 35) {
+    console.log('ajj');
+    throw new Error("Invalid Product Image.Product Image required.");
+  }
 
   // Validate description (letters and spaces only)
-  if (!/^[A-Za-z0-9][A-Za-z0-9\s\S]*$/.test(obj.NewProductDescription)) {
+  if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductDescription)) {
     throw new Error("Invalid Description.");
   }
+
 }
