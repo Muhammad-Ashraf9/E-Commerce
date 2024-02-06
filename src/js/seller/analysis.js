@@ -14,9 +14,9 @@ renderNav(bodys);
 
 renderFooter(bodys);
 const currentUser = getCurrentUser();
-console.log('from outer auth ');
+// console.log('from outer auth ');
 if (!currentUser || currentUser.accountType !== "seller") {
-    console.log('from inner auth ');
+    // console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
 
@@ -25,7 +25,7 @@ if (!currentUser || currentUser.accountType !== "seller") {
   const currentUserData = JSON.parse(userDataFromLocalStorage);
     // Example usage:
   const orders = getAllOrdersByOrderIds(currentUserData.orders);
-  console.log(orders);
+  // console.log(orders);
   let tot = orders.length;
   if(orders)
         totalOrders.innerText = tot
@@ -85,7 +85,7 @@ function profitPerMonth(orders, sellerId) {
           profit += (orderDetails.quantity * orderDetails.price);
         }
     });
-    console.log(profit);
+    // console.log(profit);
     if(profit)
         totaProfit.innerText = profit
     else
@@ -100,9 +100,9 @@ const titles = seller3Products.map(product => product.title);
 const numberOfSales = seller3Products.map(product => product.numberofsales);
 const stock = seller3Products.map(product => product.stock);
 
-console.log(titles);
-console.log(numberOfSales);
-console.log(stock);
+// console.log(titles);
+// console.log(numberOfSales);
+// console.log(stock);
 
 
 

@@ -162,8 +162,10 @@ function addEventListenerByquerySelectorAll(query, event, fun) {
   }
 }
 
-addEventListenerByquerySelectorAll(
-  'input[type="checkbox"]',
-  "change",
-  changeState
-);
+addEventListenerByquerySelectorAll('input[type="checkbox"]',"change",changeState);
+// var delButtons = document.querySelectorAll('input[type="checkbox"]');
+// if (delButtons) {
+//   delButtonsy.forEach((element) => {
+//     element.addEventListener("change", changeState);
+//   });
+// };

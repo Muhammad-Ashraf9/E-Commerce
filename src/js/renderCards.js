@@ -31,10 +31,9 @@ export function renderCards(
   }
   for (let i = startCard; i <= endCard; i++) {
     const iID = Products[i - 1].id;
-          var prodQ = getQuantityFromCart(iID);
+    var prodQ = getQuantityFromCart(iID);
 
-    productOuterDiv = 
-      `
+    productOuterDiv = `
         <div class="col-md-3">
           <div class="wsk-cp-product">
             <img id="two" class="wsk-cp-img" alt="${
@@ -60,6 +59,11 @@ export function renderCards(
                       <button id="${iID}" style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
                         <i id="${iID}" class="fa-solid fa-cart-plus"></i>
                       </button>
+                      ${
+                        Products[i - 1].stock == 0
+                          ? `<div style="color: red;" class="out-of-stock">Out of stock</div>`
+                          : ""
+                      }
                     </div>
 
                   </div>
@@ -67,14 +71,9 @@ export function renderCards(
               </div>
             </div>
           `;
-      
-      firstRow.innerHTML += productOuterDiv;
-      }
-    
 
-  
-
-
+    firstRow.innerHTML += productOuterDiv;
+  }
 
   // add an event listener to all the created buttons
   let addbuttons = document.getElementsByClassName("buy-btn");
@@ -87,7 +86,7 @@ export function renderCards(
     pagebuttons[i].addEventListener("click", function (e) {
       var prodID = e.target.id;
       localStorage.setItem("id", prodID);
-      window.open("../html/ProductDetails.html", );
+      window.open("../html/ProductDetails.html");
     });
   }
 

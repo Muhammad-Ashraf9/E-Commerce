@@ -102,7 +102,7 @@ export function renderProductsPage(
     if (!id) return;
     modal.innerHTML = getModalHTML(id);
     document.querySelector(".modal-footer").addEventListener("click", (e) => {
-      console.log("modal-footer Proucts footer");
+      // console.log("modal-footer Proucts footer");
       if (!e.target.dataset.id) return;
       const id = +e.target.dataset.id;
       deleteProductById(id);

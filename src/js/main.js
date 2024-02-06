@@ -3,21 +3,30 @@ import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
 import { renderCards } from "./renderCards.js";
 import { ProductsFiltered } from "./ProductsFiltered.js";
+import { state } from "./model.js";
 
 const body = document.querySelector("body");
-console.log("body :>> ", body);
+// console.log("body :>> ", body);
 setAuthStateFromCookie();
 
 renderNav(body);
 renderFooter(body);
 
 let page = 1;
-  let numberOfCardsPerPage = 4; // Number of cards per page
-  let productsCount = ProductsFiltered("", "").length; // Number of products
-  let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
-  let firstRow = document.getElementById("ProductShow");
-  console.log(firstRow);
+let numberOfCardsPerPage = 4; // Number of cards per page
+let productsCount = ProductsFiltered("", "").length; // Number of products
+let pagesCount = Math.ceil(productsCount / numberOfCardsPerPage); // Number of pages
+let firstRow = document.getElementById("ProductShow");
+
+let me = state.currentUser;
+if (!me) {
   renderCards(page, numberOfCardsPerPage, "", "");
+} else {
+  if (me.accountType === "seller" || me.accountType === "admin") {
+  } else {
+    renderCards(page, numberOfCardsPerPage, "", "");
+  }
+}
 
 // Render after click on the pagination buttons
 const pagSec = document.getElementById("paginationSection");

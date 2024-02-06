@@ -19,8 +19,7 @@ let errorMessage = document.querySelector(".error-message");
 let currentMode = "";
 //const spinner = document.querySelector(".spinner-border");
 const currentUserForAuth = getCurrentUser();
-let sort = 'sort-up'
-
+let sort = "sort-up";
 
 if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
   location.assign("/src/html/NewMain.html");
@@ -28,19 +27,20 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
 //spinner.remove();
 uploadImg.addEventListener("change", (e) => {
   const file = uploadImg.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const dataURL = e.target.result;
-        localStorage.setItem("savedImage", dataURL);
-      };
-      reader.readAsDataURL(file);
-    }
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const dataURL = e.target.result;
+      localStorage.setItem("savedImage", dataURL);
+    };
+    reader.readAsDataURL(file);
+  }
 });
 saveStateInLocalStorage();
-let currentUser = localStorage.getItem("currentUser");
-const currentUserData = JSON.parse(currentUser);
-console.log(currentUserData);
+// let currentUser = localStorage.getItem("currentUser");
+// const currentUserData = JSON.parse(currentUser);
+const currentUserData = getCurrentUser();
+// console.log(currentUserData);
 
 const bodys = document.querySelector("body");
 renderNav(bodys);
@@ -49,17 +49,19 @@ renderFooter(bodys);
 
 display(getAllProductsByProductIds(currentUserData.products));
 
-function display(allProducts = getAllProductsByProductIds(currentUserData.products)) {
-    section.innerHTML = "";
-    let table = document.querySelector('table');
-    if (!allProducts||allProducts.length==0) {
-     let alert = document.createElement('h1');
-     alert.setAttribute('class','alert alert-danger')
-     alert.innerText = 'There is no Product to display.'
-     table.appendChild(alert)
-     return
-   }
-   let thead = `
+function display(
+  allProducts = getAllProductsByProductIds(currentUserData.products)
+) {
+  section.innerHTML = "";
+  let table = document.querySelector("table");
+  if (!allProducts || allProducts.length == 0) {
+    let alert = document.createElement("h1");
+    alert.setAttribute("class", "alert alert-danger");
+    alert.innerText = "There is no Product to display.";
+    table.appendChild(alert);
+    return;
+  }
+  let thead = `
    <thead>
      <tr>
      <th scope="col" sort="desc" name="id">Product Id <i class="fa-solid fa-${sort}"></i> </th>
@@ -70,13 +72,13 @@ function display(allProducts = getAllProductsByProductIds(currentUserData.produc
        <th scope="col" sort = "desc" name = "price" >Price  <i class="fa-solid fa-${sort}"></i> </i> </th>
      </tr>
    </thead>
- `  
-  table.insertAdjacentHTML('afterbegin',thead)
-   console.log(allProducts);
- let tbody = allProducts
- .map(
-     (item) =>
-       `
+ `;
+  table.insertAdjacentHTML("afterbegin", thead);
+  //  console.log(allProducts);
+  let tbody = allProducts
+    .map(
+      (item) =>
+        `
        <tbody>
        <tr>
          <td  data-label = "Product Id" id = ${item.id}>${item.id}</td>
@@ -91,36 +93,34 @@ function display(allProducts = getAllProductsByProductIds(currentUserData.produc
        </tr>
      </tbody>
      `
-     )
-   .join("");
-   table.insertAdjacentHTML('beforeend',tbody)
+    )
+    .join("");
+  table.insertAdjacentHTML("beforeend", tbody);
 
-
-let sortUp = document.querySelector('.fa-sort-up')
-let sortDown = document.querySelector('.fa-sort-down')
-let theadForSort = document.querySelector("thead");
-theadForSort.addEventListener("click", function (e) {
-  console.log(e);
-    let colName = e.target.parentNode.getAttribute("name")
-    if(e.target.classList.contains('fa-sort-up')){
+  let sortUp = document.querySelector(".fa-sort-up");
+  let sortDown = document.querySelector(".fa-sort-down");
+  let theadForSort = document.querySelector("thead");
+  theadForSort.addEventListener("click", function (e) {
+    // console.log(e);
+    let colName = e.target.parentNode.getAttribute("name");
+    if (e.target.classList.contains("fa-sort-up")) {
       allProducts.sort(function (x, y) {
         if (x[colName] > y[colName]) return -100;
         else if (x[colName] < y[colName]) return 100;
         else return 0;
       });
-      sort = 'sort-down'
+      sort = "sort-down";
       display(allProducts);
-    }else{
+    } else {
       allProducts.sort(function (x, y) {
         if (x[colName] > y[colName]) return 100;
         else if (x[colName] < y[colName]) return -100;
-        else return 0
+        else return 0;
       });
-        sort = 'sort-up'
-        display(allProducts);
-      }
-  })
-
+      sort = "sort-up";
+      display(allProducts);
+    }
+  });
 }
 
 // function display() {
@@ -201,7 +201,7 @@ body.addEventListener("click", function (e) {
     currentMode = "Edit";
     errorMessage.innerText = "";
     editProduct(e);
-    console.log(currentMode);
+    // console.log(currentMode);
   } else if (e.target.classList.contains("fa-eye")) {
     // let productId = e.target.parentNode.parentNode.firstChild.id;
     let productId = e.target.parentNode.parentNode.firstElementChild.id;
@@ -227,39 +227,37 @@ closeBtn.addEventListener("click", function () {
 //########################### Add New Product To Seller Page ###########################################
 //######################################################################################################
 
-let sellerId = JSON.parse(currentUser);
+let sellerId = currentUserData;
 
 saveBtn.addEventListener("click", (e) => {
   if (sellerId.accountType === "seller" && currentMode == "Add") {
     AddNewProduct(e);
   }
+  display(getAllProductsByProductIds(state.currentUser.products));
 });
 function AddNewProduct(e) {
-  e.preventDefault();
+  // e.preventDefault();
   try {
     let img = localStorage.getItem("savedImage");
     const imageElement = new Image();
     imageElement.src = img;
     let imageDataURL = imageElement.src;
     let obj = getFormValues();
-    console.log(imageDataURL);
-    console.log(imageDataURL.length);
-    inputValidation(obj,imageDataURL);
+    // console.log(imageDataURL);
+    // console.log(imageDataURL.length);
+    inputValidation(obj, imageDataURL);
     let createdProduct = {
       id: Date.now(),
       title: obj.NewProductName,
       description: obj.NewProductDescription,
       imgURL0: imageDataURL,
       imgURL1: imageDataURL,
-      category: obj.NewProductcatagory,
-      stock: obj.NewProductQuantity,
       price: obj.NewProductprice,
-      prevPrice: -1,
+      prevPrice: obj.NewProductprice,
+      category: obj.NewProductcatagory,
       sellerId: sellerId.id,
-      rating: -1,
+      stock: obj.NewProductQuantity,
       numberofsales: 0,
-      countSold: 0,
-      reviews: [],
     };
     let sellerData = getUserById(sellerId.id);
     let productId = { productId: createdProduct.id };
@@ -276,10 +274,8 @@ function AddNewProduct(e) {
     errorMessage.innerText = error.message;
     errorMessage.style.opacity = 1;
   }
-  display();
+  // display();
 }
-
-
 
 //######################################################################################################
 //######################################### UPDATE PRODUCT #############################################
@@ -306,24 +302,20 @@ function editProduct(e) {
       imageElement.src = img;
       let imageDataURL = imageElement.src;
       let obj = getFormValues();
-      console.log(imageDataURL);
       try {
-        inputValidation(obj,imageDataURL);
+        inputValidation(obj, imageDataURL);
         let updatedProduct = {
           id: product.id,
           title: obj.NewProductName,
           description: obj.NewProductDescription,
           imgURL0: imageDataURL,
           imgURL1: imageDataURL,
-          category: obj.NewProductcatagory,
-          stock: obj.NewProductQuantity,
           price: obj.NewProductprice,
           prevPrice: product.prevPrice,
+          category: obj.NewProductcatagory,
           sellerId: product.sellerId,
-          rating: product.rating,
+          stock: obj.NewProductQuantity,
           numberofsales: product.numberofsales,
-          countSold: product.countSold,
-          reviews: product.reviews,
         };
         deleteProductById(updatedProduct.id);
         state.products.push(updatedProduct);
@@ -357,7 +349,9 @@ function getFormValues() {
   let NewProductprice = document.getElementById("NewProductprice").value;
   let NewProductcatagory = document.getElementById("NewProductcatagory").value;
   let NewProductQuantity = document.getElementById("NewProductQuantity").value;
-  let NewProductDescription = document.getElementById("NewProductDescription").value;
+  let NewProductDescription = document.getElementById(
+    "NewProductDescription"
+  ).value;
   let NewProduct = {
     NewProductName: NewProductName,
     NewProductprice: NewProductprice,
@@ -378,7 +372,6 @@ function fillFormFields(data) {
   // Add logic to handle image if needed
 }
 
-
 //######################################################################################################
 //################################## BEGINING OF SORT OPERATION ########################################
 //######################################################################################################
@@ -390,93 +383,137 @@ function fillFormFields(data) {
 //       else if (x[colName].toLowerCase() < y[colName].toLowerCase()) return -100;
 //       else return 0;
 //     });
-//     display() 
+//     display()
 // });
 //######################################################################################################
 //################################## END OF SORT OPERATION #############################################
 //######################################################################################################
 
-
 //######################################################################################################
 //########################### DELETE PRODUCT FROM SELLER PAGE ##########################################
 //######################################################################################################
 let removeItem = document.querySelectorAll(".fa-trash");
+let tbody = document.querySelector('tbody')
 // console.log(removeItem);
-removeItem.forEach(addEventListener("click", function (e) {
-      if (e.target.classList.contains("fa-trash")) {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger",
-          },
-          buttonsStyling: false,
-        });
-        swalWithBootstrapButtons
-          .fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
-            reverseButtons: true,
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              swalWithBootstrapButtons
-                .fire({
-                  title: "Deleted!",
-                  text: "Your Product has been deleted.",
-                  icon: "success",
-                })
-                .then(() => {
-                  // Remove the product's row from the table
-                  e.target.parentNode.parentNode.remove();
-                  // Delete the product
-                  deleteProduct(e);
-                  // Update the table
-                  // location.reload();
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              swalWithBootstrapButtons.fire({
-                title: "Cancelled",
-                text: "Your Product is safe :)",
-                icon: "error",
-              });
-            }
+section.addEventListener("click", (e)=>{
+  if (e.target.classList.contains("fa-trash")) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons
+            .fire({
+              title: "Deleted!",
+              text: "Your Product has been deleted.",
+              icon: "success",
+            })
+            .then(() => {
+              // Remove the product's row from the table
+              e.target.parentNode.parentNode.remove();
+              // Delete the product
+              deleteProduct(e);
+              // Update the table
+              // location.reload();
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your Product is safe :)",
+            icon: "error",
           });
-        display();
-      }
-    })
-  );
+        }
+      });
+    display();
+  }
+})
+// removeItem.forEach((i)=>{
+// console.log(i);
+//   i.addEventListener("click", function (e) {
+//     console.log(e.target);
+//     if (e.target.classList.contains("fa-trash")) {
+//       const swalWithBootstrapButtons = Swal.mixin({
+//         customClass: {
+//           confirmButton: "btn btn-success",
+//           cancelButton: "btn btn-danger",
+//         },
+//         buttonsStyling: false,
+//       });
+//       swalWithBootstrapButtons
+//         .fire({
+//           title: "Are you sure?",
+//           text: "You won't be able to revert this!",
+//           icon: "warning",
+//           showCancelButton: true,
+//           confirmButtonText: "Yes, delete it!",
+//           cancelButtonText: "No, cancel!",
+//           reverseButtons: true,
+//         })
+//         .then((result) => {
+//           if (result.isConfirmed) {
+//             swalWithBootstrapButtons
+//               .fire({
+//                 title: "Deleted!",
+//                 text: "Your Product has been deleted.",
+//                 icon: "success",
+//               })
+//               .then(() => {
+//                 // Remove the product's row from the table
+//                 e.target.parentNode.parentNode.remove();
+//                 // Delete the product
+//                 deleteProduct(e);
+//                 // Update the table
+//                 // location.reload();
+//               });
+//           } else if (result.dismiss === Swal.DismissReason.cancel) {
+//             swalWithBootstrapButtons.fire({
+//               title: "Cancelled",
+//               text: "Your Product is safe :)",
+//               icon: "error",
+//             });
+//           }
+//         });
+//       display();
+//     }
+//   })
+// }
+// );
 
 function deleteProduct(e) {
   if (sellerId.accountType === "seller") {
     // Delete Product From Products Array
     // console.log(e.target.parentNode.parentNode.firstChild.id);
     // let productId = e.target.parentNode.parentNode.firstChild.id;
-    console.log(e.target.parentNode.parentNode.firstElementChild.id);
-    let productId = e.target.parentNode.parentNode.firstElementChild.id
+    let productId = e.target.parentNode.parentNode.firstElementChild.id;
 
-    console.log(productId);
     deleteProductById(productId);
     saveStateInLocalStorage();
   }
   display();
 }
 
-
-
-
 //######################################################################################################
 //################################## END OF CRUD OPERATION #############################################
 //######################################################################################################
-function inputValidation(obj,img) {
+function inputValidation(obj, img) {
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
-  if (!/^\d+$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
-    console.log(NewProductprice);
+  if (!/^[1-9]\d*$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
     throw new Error("Invalid Product Price. Please enter a valid number.");
   }
 
@@ -489,14 +526,13 @@ function inputValidation(obj,img) {
   }
 
   // Validate quantity (numbers only)
-  if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
+  if (!/^[1-9]\d*$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
     // Check if NewProductQuantity is not a positive integer
     throw new Error(
       "Invalid Product Quantity. Please enter a valid positive number."
     );
   }
   if (img.length <= 35) {
-    console.log('GG');
     throw new Error("Invalid Product Image.Product Image required.");
   }
 
@@ -504,5 +540,4 @@ function inputValidation(obj,img) {
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductDescription)) {
     throw new Error("Invalid Description.");
   }
-
 }
