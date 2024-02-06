@@ -15,7 +15,7 @@ renderFooter(body);
 renderNav(body);
 
 const user = getCurrentUser();
-if (user.accountType == "admin" || user.accountType == "seller") {
+if (user && user.accountType !== "customer") {
   location.assign("../html/newmain.html");
 }
 
