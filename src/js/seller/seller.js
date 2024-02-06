@@ -463,7 +463,7 @@ function inputValidation(obj, img) {
   if (!/^[A-Za-z][A-Za-z0-9\s\S]*$/.test(obj.NewProductName.trim())) {
     throw new Error("Invalid Product Name.");
   } // Validate price (numbers only)
-  if (!/^\d+$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
+  if (!/^[1-9]\d*$/.test(obj.NewProductprice) || obj.NewProductprice <= 0) {
     throw new Error("Invalid Product Price. Please enter a valid number.");
   }
 
@@ -476,7 +476,7 @@ function inputValidation(obj, img) {
   }
 
   // Validate quantity (numbers only)
-  if (!/^\d+$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
+  if (!/^[1-9]\d*$/.test(obj.NewProductQuantity) || obj.NewProductQuantity <= 0) {
     // Check if NewProductQuantity is not a positive integer
     throw new Error(
       "Invalid Product Quantity. Please enter a valid positive number."
