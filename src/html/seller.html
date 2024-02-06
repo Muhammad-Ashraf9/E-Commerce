@@ -182,9 +182,18 @@
                             <label for="NewProductprice">Price</label>
                         </div>
                         <div class="form-floating mb-3">
+                            <select class="form-select" id="NewProductcatagory" aria-label="Product Category" required>
+                                <option value="" selected disabled>Select Product Category</option>
+                                <option value="Sofas">Sofas</option>
+                                <option value="Tables">Tables</option>
+                                <option value="chairs">chairs</option>
+                            </select>
+                            <label for="NewProductcatagory">Product Category</label>
+                        </div> 
+                        <!-- <div class="form-floating mb-3">
                             <input type="text"  class="form-control" id="NewProductcatagory" placeholder="Product Category" required>
                             <label for="NewProductcatagory">Product Category</label>
-                        </div>
+                        </div> -->
                         <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="NewProductQuantity" placeholder="Quantity" required>
                             <label for="NewProductQuantity">Stock</label>

@@ -287,42 +287,36 @@ function editProduct(e) {
     currentMode === "Edit"
   ) {
     errorMessage.innerText = "";
-    // let productId = e.target.parentNode.parentNode.firstChild.id;
     let productId = e.target.parentNode.parentNode.firstElementChild.id;
+    console.log(productId);
     let product = getProductById(productId);
+    console.log(product);
     localStorage.setItem("savedImage", product.imgURL0);
     fillFormFields(product);
     modal.style.display = "block";
-    // after display model will be wating until user hit save button
-    //############################################################
-    //############################################################
-    saveBtn.addEventListener("click", (e) => {
+
+    // Add event listener with once: true option
+    saveBtn.addEventListener("click", function onSaveClick(event) {
+      saveBtn.removeEventListener("click", onSaveClick); // Remove the event listener after it's executed
       let img = localStorage.getItem("savedImage");
       const imageElement = new Image();
       imageElement.src = img;
       let imageDataURL = imageElement.src;
       let obj = getFormValues();
+      console.log(obj);
       try {
         inputValidation(obj, imageDataURL);
-        let updatedProduct = {
-          id: product.id,
-          title: obj.NewProductName,
-          description: obj.NewProductDescription,
-          imgURL0: imageDataURL,
-          imgURL1: imageDataURL,
-          price: obj.NewProductprice,
-          prevPrice: product.prevPrice,
-          category: obj.NewProductcatagory,
-          sellerId: product.sellerId,
-          stock: obj.NewProductQuantity,
-          numberofsales: product.numberofsales,
-        };
-        deleteProductById(updatedProduct.id);
-        state.products.push(updatedProduct);
-        let sellerData = getUserById(updatedProduct.sellerId);
-        let productId = { productId: updatedProduct.id };
-        sellerData.products.push(productId);
-        //state.currentUser.products.push(productId)
+        product.title = obj.NewProductName;
+        product.description = obj.NewProductDescription;
+        product.imgURL0 = imageDataURL;
+        product.imgURL1 = imageDataURL;
+        product.price = obj.NewProductprice;
+        product.prevPrice = product.prevPrice;
+        product.category = obj.NewProductcatagory;
+        product.sellerId = product.sellerId;
+        product.stock = obj.NewProductQuantity;
+        product.numberofsales = product.numberofsales;
+
         saveStateInLocalStorage();
         localStorage.removeItem("savedImage");
         currentMode = "";
@@ -330,10 +324,9 @@ function editProduct(e) {
         modal.style.display = "none";
         Swal.fire({
           title: "Good job!",
-          text: "Your updates has been saved",
+          text: "Your updates have been saved",
           icon: "success",
         });
-        // location.reload();
       } catch (error) {
         errorMessage.innerText = error.message;
         errorMessage.style.opacity = 1;
@@ -342,6 +335,90 @@ function editProduct(e) {
     });
   }
 }
+
+// Remove this line if you don't want to remove the event listener
+// saveBtn.removeEventListener('click', editProduct);
+
+// function editProduct(e) {
+//   currentMode = "Edit";
+//   if (
+//     e.target.classList.contains("fa-pen-to-square") &&
+//     currentMode === "Edit"
+//   ) {
+//     errorMessage.innerText = "";
+//     // let productId = e.target.parentNode.parentNode.firstChild.id;
+//     let productId = e.target.parentNode.parentNode.firstElementChild.id;
+//     console.log(productId);
+//     let product = getProductById(productId);
+//     console.log(product);
+//     localStorage.setItem("savedImage", product.imgURL0);
+//     fillFormFields(product);
+//     modal.style.display = "block";
+//     // after display model will be wating until user hit save button
+//     //############################################################
+//     //############################################################
+//     saveBtn.addEventListener("click", (e) => {
+//       let img = localStorage.getItem("savedImage");
+//       const imageElement = new Image();
+//       imageElement.src = img;
+//       let imageDataURL = imageElement.src;
+//       let obj = getFormValues();
+//       console.log(obj);
+//       try {
+//         inputValidation(obj, imageDataURL);
+//         product.id = product.id
+//         product.title= obj.NewProductName
+//         product.description= obj.NewProductDescription
+//         product.imgURL0= imageDataURL
+//         product.imgURL1= imageDataURL
+//         product.price= obj.NewProductprice
+//         product.prevPrice= product.prevPrice
+//         product.category= obj.NewProductcatagory
+//         product.sellerId= product.sellerId
+//         product.stock= obj.NewProductQuantity
+//         product.numberofsales= product.numberofsales
+
+//         // let updatedProduct = {
+//         //   id: product.id,
+//         //   title: obj.NewProductName,
+//         //   description: obj.NewProductDescription,
+//         //   imgURL0: imageDataURL,
+//         //   imgURL1: imageDataURL,
+//         //   price: obj.NewProductprice,
+//         //   prevPrice: product.prevPrice,
+//         //   category: obj.NewProductcatagory,
+//         //   sellerId: product.sellerId,
+//         //   stock: obj.NewProductQuantity,
+//         //   numberofsales: product.numberofsales,
+//         // };
+//         // console.log(updatedProduct);
+//         // deleteProductById(updatedProduct.id);
+//         // state.products.push(updatedProduct);
+
+//         // let sellerData = getUserById(updatedProduct.sellerId);
+//         // let productId = { productId: updatedProduct.id };
+//         // sellerData.products.push(productId);
+//         //state.currentUser.products.push(productId)
+//         saveStateInLocalStorage();
+//         localStorage.removeItem("savedImage");
+//         currentMode = "";
+//         formProduct.reset();
+//         modal.style.display = "none";
+//         Swal.fire({
+//           title: "Good job!",
+//           text: "Your updates has been saved",
+//           icon: "success",
+//         });
+//         // location.reload();
+//       } catch (error) {
+//         errorMessage.innerText = error.message;
+//         errorMessage.style.opacity = 1;
+//       }
+//       display();
+//     });
+//     saveBtn.removeEventListener('click',editProduct)
+//   }
+// }
 
 // Get the form fields
 function getFormValues() {
