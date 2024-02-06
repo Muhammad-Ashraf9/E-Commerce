@@ -127,24 +127,19 @@ let cards = document.getElementById("items");
 console.log(cards);
 cards.addEventListener("click", function (e) {
   console.log(e.target);
-  if (state.currentUser) {
-    var cart = state.currentUser.cart;
-  } else {
-    var cart = state.guestCart;
-  }
   if (e.target.innerText == "+") {
     let flag = false;
     let targetI = -1;
-    for (let ii = 0; ii < cart.length; ii++) {
-      if (cart[ii].id == prodID) {
-        cart[ii].quantity++;
+    for (let ii = 0; ii < mycart.length; ii++) {
+      if (mycart[ii].id == prodID) {
+        mycart[ii].quantity++;
         flag = true;
         targetI = ii;
         break;
       }
     }
-    if (flag == true && cart[targetI].quantity > Product.stock) {
-      cart[targetI].quantity--;
+    if (flag == true && mycart[targetI].quantity > Product.stock) {
+      mycart[targetI].quantity--;
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -153,23 +148,22 @@ cards.addEventListener("click", function (e) {
       return;
     }
     if (!flag) {
-      cart.push({ id: parseInt(prodID), quantity: 1 });
+      mycart.push({ id: parseInt(prodID), quantity: 1 });
     }
     document.querySelector(".numOfItems span").innerText++;
   } else if (e.target.innerText == "-") {
-    var cart = state.currentUser.cart;
     let flag = false;
     let targetI = -1;
-    for (let ii = 0; ii < cart.length; ii++) {
-      if (cart[ii].id == prodID) {
-        cart[ii].quantity--;
+    for (let ii = 0; ii < mycart.length; ii++) {
+      if (mycart[ii].id == prodID) {
+        mycart[ii].quantity--;
         flag = true;
         targetI = ii;
         break;
       }
     }
-    if (/*flag == true &&*/ cart[targetI] && cart[targetI].quantity == 0) {
-      cart.splice(targetI, 1);
+    if (/*flag == true &&*/ mycart[targetI] && mycart[targetI].quantity == 0) {
+      mycart.splice(targetI, 1);
       flag = false;
     }
     // if (!flag) {
@@ -179,28 +173,19 @@ cards.addEventListener("click", function (e) {
     if (notminus > 0) {
       document.querySelector(".numOfItems span").innerText--;
     }
-
-    state.currentUser.cart = cart;
-    state.users.forEach((user) => {
-      if (user.id == state.currentUser.id) {
-        user.cart = cart;
-      }
-    });
-    // localStorage.setItem("state", JSON.stringify(state));
-    saveStateInLocalStorage();
   } else {
     console.log("not + or -");
   }
 
   if (state.currentUser) {
-    state.currentUser.cart = cart;
+    state.currentUser.cart = mycart;
     state.users.forEach((user) => {
       if (user.id == state.currentUser.id) {
-        user.cart = cart;
+        user.cart = mycart;
       }
     });
   } else {
-    state.guestCart = cart;
+    state.guestCart = mycart;
   }
   // localStorage.setItem("state", JSON.stringify(state));
   saveStateInLocalStorage();
