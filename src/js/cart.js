@@ -48,20 +48,21 @@ window.addEventListener("load", function () {
       `;
       document.getElementById("CheckOut").style.display = "none";
     }
+    let outOfStockFlag=false;
     let total = 0;
     cart.forEach((item) => {
-      // Qamary Add this to check if the item is out of stock
-      // if(item.num > item.product.stock){
-      //   item.num = item.product.stock;
-      //   if (item.product.stock === 0) {
-      //     DeleteFromCart(item.product.id);
-      //   } else {
-      //   changeCartItemCount(item.product.id, item.product.stock);
-      //   }
-      //   alert(`Sorry, may be one of the items in your cart is out of stock, we have updated the quantity of the item in your cart`);
-        
-      // } 
-      total += item.product.price * item.num;
+
+      if(item.product.stock===0){
+          DeleteFromCart(item.product.id);
+          outOfStockFlag=true;
+      }else{
+         if (item.num > item.product.stock) {
+           item.num = item.product.stock;
+           changeCartItemCount(item.product.id, item.product.stock);
+           outOfStockFlag = true;
+         }
+
+        total += item.product.price * item.num;
       cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
           <div  class="col-lg-2">
@@ -101,7 +102,16 @@ window.addEventListener("load", function () {
         </div>
       </div>`;
       flag++;
+      }
+      
     });
+    if(outOfStockFlag){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Sorry,some changes has happened to the seller's stock so we updated you cart to go on with the change",
+      });
+    }
     document.getElementById("SubTotal").innerText = total;
   }
   cards.addEventListener("click", function (e) {
