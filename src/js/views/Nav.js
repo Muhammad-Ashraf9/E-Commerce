@@ -62,9 +62,13 @@ export default function renderNav(element) {
       <ul class=" navbar-nav mb-2 mb-lg-0 d-flex flex-row">
           ${
             !user
-            
               ? `<li class="pe-3"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#signIn" href="#">Sign in</a>`
-              : `<li class="pe-3"><button class="nav-link">Sign out</button> <button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
+              : `<li class="pe-3"><button class="nav-link">Sign out</button> `
+          }
+          ${
+            user && user.accountType !== "admin"
+              ? `<button id="customerSupport" data-bs-toggle="modal" data-bs-target="#support"><i class="fa-solid fa-headset"></i></button>`
+              : ""
           }
         </li>
         ${
