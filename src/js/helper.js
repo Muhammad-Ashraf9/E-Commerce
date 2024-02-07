@@ -28,9 +28,7 @@ export function isValidPassword(password) {
 }
 
 export function isValidName(string) {
-  return /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/.test(
-    string
-  );
+  return /^[A-Za-z]{3,16}(?: [A-Za-z]{3,16})*$/.test(string);
 }
 export function isValidEmail(emailString) {
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
