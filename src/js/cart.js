@@ -11,14 +11,14 @@ import renderNav from "./views/Nav.js";
 import renderFooter from "./views/Footer.js";
 
 const body = document.querySelector("body");
-
 renderFooter(body);
 renderNav(body);
 
 const user = getCurrentUser();
-// if (!getCurrentUser() || getCurrentUser().accountType == "admin") {
-//   location.assign("../html/main.html");
-// }
+if (user && user.accountType !== "customer") {
+  location.assign("../html/newmain.html");
+}
+
 let ucart = getCurrentCart();
 let cart = ucart.map((item) => ({
   product: getProductById(item.id),
@@ -48,9 +48,21 @@ window.addEventListener("load", function () {
       `;
       document.getElementById("CheckOut").style.display = "none";
     }
+    let outOfStockFlag=false;
     let total = 0;
     cart.forEach((item) => {
-      total += item.product.price * item.num;
+
+      if(item.product.stock===0){
+          DeleteFromCart(item.product.id);
+          outOfStockFlag=true;
+      }else{
+         if (item.num > item.product.stock) {
+           item.num = item.product.stock;
+           changeCartItemCount(item.product.id, item.product.stock);
+           outOfStockFlag = true;
+         }
+
+        total += item.product.price * item.num;
       cards.innerHTML += `<div id="${flag}" class="card m-auto">
         <div class="row g-0">
           <div  class="col-lg-2">
@@ -78,9 +90,9 @@ window.addEventListener("load", function () {
                 }"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn fs-4">-</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn">+</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -90,7 +102,16 @@ window.addEventListener("load", function () {
         </div>
       </div>`;
       flag++;
+      }
+      
     });
+    if(outOfStockFlag){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Sorry,some changes has happened to the seller's stock so we updated you cart to go on with the change",
+      });
+    }
     document.getElementById("SubTotal").innerText = total;
   }
   cards.addEventListener("click", function (e) {

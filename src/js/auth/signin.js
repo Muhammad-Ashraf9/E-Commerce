@@ -8,7 +8,7 @@ import {
 } from "../helper.js";
 
 export default function handleSignIn() {
-  console.log("sign in")
+  // console.log("sign in")
   const form = document.querySelector("#loginForm");
   const email = document.querySelector("#email");
   const emailInvalidFeedback = document.querySelector(

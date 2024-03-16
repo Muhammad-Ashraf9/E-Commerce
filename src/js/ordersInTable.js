@@ -1,6 +1,9 @@
-import { saveStateInLocalStorage, state as stateinmycomputer } from "./model.js";
-// localStorage.setItem("state", JSON.stringify(stateinmycomputer));
-// localStorage.setItem("orders", JSON.stringify(state.orders));
+import {
+  saveStateInLocalStorage,
+  state as stateinmycomputer,
+} from "./model.js";
+
+
 import { state } from "../js/model.js";
 
 // let state = JSON.parse(localStorage.getItem("state"));
@@ -15,10 +18,8 @@ function renderOrders(tableDiv, myID) {
   let myorderCost = 0;
   let mytotalCost = 0;
   for (let i = 0; i < orders.length; i++) {
-    console.log("itrate");
     //   if (myID === orders[i][customerId]) {
     if (orders[i]["customerId"] === myID) {
-      console.log(orders[i]["customerId"]);
       myorderscounter++;
       tableinnerHTML += `<div class="table-responsive ">`; // table - responsive;
       tableinnerHTML += `<table class="table table-sm table-striped border-dark table-bordered shadow-lg table-hover caption-top text-center align-middle px-2 mx-2">`;
@@ -37,10 +38,10 @@ function renderOrders(tableDiv, myID) {
             case "description":
               tableinnerHTML += `<th>Details</th>`;
               break;
-            case "img0":
+            case "imgURL0":
               tableinnerHTML += `<th>Image 1</th>`;
               break;
-            case "img1":
+            case "imgURL1":
               tableinnerHTML += `<th>Image 2</th>`;
               break;
             case "sellerId":
@@ -63,7 +64,7 @@ function renderOrders(tableDiv, myID) {
         myorderitemscounter++;
         tableinnerHTML += `<tr><th >${myorderitemscounter}</th>`;
         for (const key in item) {
-          if (key === "img0" || key === "img1") {
+          if (key === "imgURL0" || key === "imgURL1") {
             tableinnerHTML += `<td class="" style="" >
                                   <img title="Click To Show" src="${item[key]}" class="imageResize img-fluid img-thumbnail" style="max-width: 10vw ">
                                   </img>
@@ -83,7 +84,7 @@ function renderOrders(tableDiv, myID) {
       tableinnerHTML += `<tfoot class="text-center align-middle" style="vertical-align:bottom">
                         <tr>
                           <td colspan="4"><b>Total Items:</b> ${myorderitemscounter}</td>
-                          <td colspan="5">
+                          <td colspan="7">
                             status: ${
                               orders[i]["status"] === "deleverd"
                                 ? `<span class="text-success">${orders[i]["status"]}</span>`
@@ -100,7 +101,6 @@ function renderOrders(tableDiv, myID) {
       mytotalCost = 0;
     }
   }
-  console.log(myorderscounter);
   if (flag === false) {
     // if (myorderscounter === 0) {
     //   // if there is no orders (empty checkout)
@@ -110,7 +110,6 @@ function renderOrders(tableDiv, myID) {
     tableinnerHTML = `<div class="text-center h1 alert alert-danger my-3">No Orders</div>`;
   }
 
-  console.log(tableinnerHTML);
   tableDiv.innerHTML = tableinnerHTML;
 }
 //status: <span class="text-success">Delivered</span>
@@ -125,14 +124,14 @@ function renderOrders(tableDiv, myID) {
 let tableDiv = document.getElementById("table");
 renderOrders(tableDiv, myID);
 function changeState(e) {
-  console.log("changeState");
   Swal.fire({
     title: "Delivery Confirmation!",
     text: "Are you sure you want to confirm the delivery?",
     icon: "warning",
     buttons: true,
     dangerMode: false,
-  }).then((willDelete) => {
+  }).then(
+    (willDelete) => {
     if (willDelete) {
       Swal.fire("Thanks for order from us ❤;", {
         icon: "success",

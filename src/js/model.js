@@ -149,10 +149,12 @@ export const state = {
       items: [
         {
           id: 1,
-          title: "Coush",
+          title: "Coush1",
           description: "Desk, 89 1/50 8/8",
-          img0: "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
-          img1: "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1158868_pe888215_s5.jpg?f=xxs",
+          imgURL0:
+            "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
+          imgURL1:
+            "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1158868_pe888215_s5.jpg?f=xxs",
           sellerId: 3,
           category: "Sofas",
           stock: 10,
@@ -161,10 +163,10 @@ export const state = {
         },
         {
           id: 2,
-          title: "Coush",
+          title: "Coush2",
           description: "Desk,68 1/8 22 7/8",
-          img0: "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194843_pe902111_s5.jpg?f=xxs",
-          img1: "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194842_pe902092_s5.jpg?f=xxs",
+          imgURL0: "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194843_pe902111_s5.jpg?f=xxs",
+          imgURL1: "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194842_pe902092_s5.jpg?f=xxs",
           sellerId: 3,
           category: "Sofas",
           stock: 7,
@@ -173,10 +175,10 @@ export const state = {
         },
         {
           id: 11,
-          title: "Dining Table",
+          title: "Dining Table1",
           description: "Table,  86 5/8 39 3/8  29 1/8 ",
-          img0: "https://www.ikea.com/us/en/images/products/moerbylanga-groensta-table-and-6-chairs__1243748_pe920771_s5.jpg?f=xxs",
-          img1: "https://www.ikea.com/us/en/images/products/moerbylanga-groensta-table-and-6-chairs__1243747_pe920772_s5.jpg?f=xxs",
+          imgURL0: "https://www.ikea.com/us/en/images/products/moerbylanga-groensta-table-and-6-chairs__1243748_pe920771_s5.jpg?f=xxs",
+          imgURL1: "https://www.ikea.com/us/en/images/products/moerbylanga-groensta-table-and-6-chairs__1243747_pe920772_s5.jpg?f=xxs",
           sellerId: 4,
           category: "Tables",
           stock: 3,
@@ -205,8 +207,8 @@ export const state = {
           id: 23,
           title: "chair",
           description: "chair,  33 1/4 35 3/4  34 3/4 ",
-          img0: "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1109687_pe870153_s5.jpg?f=xxs",
-          img1: "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1179060_pe895831_s5.jpg?f=xxs",
+          imgURL0: "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1109687_pe870153_s5.jpg?f=xxs",
+          imgURL1: "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1179060_pe895831_s5.jpg?f=xxs",
           sellerId: 5,
           category: "chairs",
           stock: 6,
@@ -232,7 +234,7 @@ export const state = {
   products: [
     {
       id: 1,
-      title: "Coush",
+      title: "Coush1",
       description: "Desk, 89 1/50 8/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/lagkapten-alex-desk-white__1022432_pe832720_s5.jpg?f=xxs",
@@ -247,7 +249,7 @@ export const state = {
     },
     {
       id: 2,
-      title: "Coush",
+      title: "Coush2",
       description: "Desk,68 1/8 22 7/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/uppland-sofa-kilanda-dark-blue__1194843_pe902111_s5.jpg?f=xxs",
@@ -262,7 +264,7 @@ export const state = {
     },
     {
       id: 3,
-      title: "Coush",
+      title: "Coush3",
       description: "Desk,  5 7/8 31 3/4",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/linanaes-sofa-vissle-dark-gray__1013898_pe829450_s5.jpg?f=xxs",
@@ -277,7 +279,7 @@ export const state = {
     },
     {
       id: 4,
-      title: "Coush",
+      title: "Coush4",
       description: "Desk,  6 4/8 50 3/4",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/friheten-sleeper-sectional-3-seat-w-storage-skiftebo-dark-gray__0175610_pe328883_s5.jpg?f=xxs",
@@ -292,7 +294,7 @@ export const state = {
     },
     {
       id: 5,
-      title: "Coush",
+      title: "Coush5",
       description: "Desk,  10 7/8 30 2/5",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/morabo-sofa-gunnared-dark-gray-wood__0602117_pe680186_s5.jpg?f=xxs",
@@ -307,7 +309,7 @@ export const state = {
     },
     {
       id: 6,
-      title: "Coush",
+      title: "Cous6h",
       description: "Desk,  7 3/8 35 4/9",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/linanaes-sofa-with-chaise-vissle-dark-gray__1013908_pe829460_s5.jpg?f=xxs",
@@ -322,7 +324,7 @@ export const state = {
     },
     {
       id: 7,
-      title: "Coush",
+      title: "Coush7",
       description: "Desk,  9 3/8 32 7/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/glostad-loveseat-knisa-dark-gray__0950864_pe800736_s5.jpg?f=xxs",
@@ -337,7 +339,7 @@ export const state = {
     },
     {
       id: 8,
-      title: "Coush",
+      title: "Coush8",
       description: "Desk,  4 3/8 30 7/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/kivik-sofa-gunnared-beige__0781491_pe760799_s5.jpg?f=xxs",
@@ -352,7 +354,7 @@ export const state = {
     },
     {
       id: 9,
-      title: "Coush",
+      title: "Coush9",
       description: "Desk,  7 4/7 26 7/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/finnala-sofa-gunnared-beige__0514366_pe639439_s5.jpg?f=xxs",
@@ -367,7 +369,7 @@ export const state = {
     },
     {
       id: 10,
-      title: "Coush",
+      title: "Coush10",
       description: "Desk,  9 5/7 30 7/8",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/morabo-sofa-grann-bomstad-golden-brown-wood__0602112_pe680181_s5.jpg?f=xxs",
@@ -382,7 +384,7 @@ export const state = {
     },
     {
       id: 11,
-      title: "Dining Table",
+      title: "Dining Table1",
       description: "Table,  86 5/8 39 3/8  29 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/moerbylanga-groensta-table-and-6-chairs__1243748_pe920771_s5.jpg?f=xxs",
@@ -397,7 +399,7 @@ export const state = {
     },
     {
       id: 12,
-      title: "Dining Table",
+      title: "Dining Table2",
       description: "Table,  80 5/8 30 3/8  23 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/moerbylanga-marenaes-table-and-4-armchairs__1198495_pe904102_s5.jpg?f=xxs",
@@ -412,7 +414,7 @@ export const state = {
     },
     {
       id: 13,
-      title: "Dining Table",
+      title: "Dining Table3",
       description: "Table,  83 5/8 35 3/8  28 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/skogsta-sakarias-table-and-4-chairs-acacia-black-sporda-dark-gray__0680670_pe719884_s5.jpg?f=xxs",
@@ -427,7 +429,7 @@ export const state = {
     },
     {
       id: 14,
-      title: "Dining Table",
+      title: "Dining Table4",
       description: "Table,  89 5/8 40 3/8  30 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/ekedalen-klinten-table-and-4-chairs-white-kilanda-light-beige__1209067_pe909007_s5.jpg?f=xxs",
@@ -442,7 +444,7 @@ export const state = {
     },
     {
       id: 15,
-      title: "Dining Table",
+      title: "Dining Table5",
       description: "Table,  90 5/8 33 3/8  32 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/strandtorp-marenaes-table-and-6-armchairs-brown-black-gunnared-dark-grey__1198509_pe904116_s5.jpg?f=xxs",
@@ -457,7 +459,7 @@ export const state = {
     },
     {
       id: 16,
-      title: "Dining Table",
+      title: "Dining Table6",
       description: "Table,  83 5/8 34 3/8  35 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/ekedalen-krylbo-table-and-4-chairs-oak-tonerud-dark-beige__1232016_pe916333_s5.jpg?f=xxs",
@@ -472,7 +474,7 @@ export const state = {
     },
     {
       id: 17,
-      title: "Dining Table",
+      title: "Dining Table7",
       description: "Table,  85 5/8 36 3/8  34 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/strandtorp-tossberg-table-and-4-chairs-brown-metal-black-gray__1060388_pe850007_s5.jpg?f=xxs",
@@ -487,7 +489,7 @@ export const state = {
     },
     {
       id: 18,
-      title: "Dining Table",
+      title: "Dining Table8",
       description: "Table,  81 5/8 33 3/8  41 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/ekedalen-krylbo-table-and-4-chairs-oak-tonerud-blue__1232008_pe916329_s5.jpg?f=xxs",
@@ -502,7 +504,7 @@ export const state = {
     },
     {
       id: 19,
-      title: "Dining Table",
+      title: "Dining Table9",
       description: "Table,  83 5/8 43 3/8  50 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/taernoe-table-and-4-chairs-outdoor-black-light-brown-stained-kloesan-blue__1035867_pe838199_s5.jpg?f=xxs",
@@ -517,7 +519,7 @@ export const state = {
     },
     {
       id: 20,
-      title: "Dining Table",
+      title: "Dining Table10",
       description: "Table,  93 5/8 55 3/8  34 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/skogsta-skogsta-table-and-6-chairs-acacia-acacia__1240709_pe919454_s5.jpg?f=xxs",
@@ -532,7 +534,7 @@ export const state = {
     },
     {
       id: 21,
-      title: "Dining Table",
+      title: "Dining Table11",
       description: "Table,  86 5/8 35 3/8  32 1/8 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/sjaelland-table-2-chairs-and-bench-outdoor-light-brown-froesoen-duvholmen-beige__0735906_pe740262_s5.jpg?f=xxs",
@@ -547,7 +549,7 @@ export const state = {
     },
     {
       id: 22,
-      title: "chair",
+      title: "chair1",
       description: "chair,  32 1/4 37 3/4  39 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/strandmon-wing-chair-nordvalla-dark-gray__0325432_pe517964_s5.jpg?f=xxs",
@@ -562,7 +564,7 @@ export const state = {
     },
     {
       id: 23,
-      title: "chair",
+      title: "chair2",
       description: "chair,  33 1/4 35 3/4  34 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/ekenaeset-armchair-kilanda-light-beige__1109687_pe870153_s5.jpg?f=xxs",
@@ -577,7 +579,7 @@ export const state = {
     },
     {
       id: 24,
-      title: "chair",
+      title: "chair3",
       description: "chair,  35 1/4 37 3/4  30 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/vedbo-armchair-gunnared-dark-gray__0512767_pe638683_s5.jpg?f=xxs",
@@ -592,7 +594,7 @@ export const state = {
     },
     {
       id: 25,
-      title: "chair",
+      title: "chair4",
       description: "chair,  33 1/4 32 3/4  39 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/bingsta-armchair-vissle-dark-yellow-kabusa-dark-yellow__0761760_pe751428_s5.jpg?f=xxs",
@@ -607,7 +609,7 @@ export const state = {
     },
     {
       id: 26,
-      title: "chair",
+      title: "chair5",
       description: "chair,  44 1/4 39 3/4  49 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/dyvlinge-swivel-chair-kelinge-green__1205904_pe907276_s5.jpg?f=xxs",
@@ -622,7 +624,7 @@ export const state = {
     },
     {
       id: 27,
-      title: "chair",
+      title: "chair6",
       description: "chair,  30 1/4 33 3/4  45 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/remsta-armchair-djuparp-dark-green-blue__0908607_pe783330_s5.jpg?f=xxs",
@@ -637,7 +639,7 @@ export const state = {
     },
     {
       id: 28,
-      title: "chair",
+      title: "chair7",
       description: "chair,  46 1/4 32 3/4  34 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/fulloesa-armchair-gatehult-gray__1203775_pe906443_s5.jpg?f=xxs",
@@ -652,7 +654,7 @@ export const state = {
     },
     {
       id: 29,
-      title: "chair",
+      title: "chair8",
       description: "chair,  43 1/4 39 3/4  40 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/muren-recliner-remmarn-dark-gray__0908536_pe783303_s5.jpg?f=xxs",
@@ -667,7 +669,7 @@ export const state = {
     },
     {
       id: 30,
-      title: "chair",
+      title: "chair9",
       description: "chair,  39 1/4 32 3/4  35 3/4 ",
       imgURL0:
         "https://www.ikea.com/us/en/images/products/buskbo-armchair-rattan-djupvik-white__0700959_pe723853_s5.jpg?f=xxs",
@@ -722,7 +724,6 @@ export function getAllOrdersByOrderIds(orderIds) {
   for (const orderId of orderIds) {
     // Find the order in the state.orders array
     const foundOrder = state.orders.find((order) => order.id === orderId);
-    console.log(foundOrder);
     // If the order is found, add it to the allOrders array
     if (foundOrder) {
       allOrders.push(foundOrder);
@@ -732,10 +733,8 @@ export function getAllOrdersByOrderIds(orderIds) {
   for (let i = 0; i < allOrders.length; i++) {
     // Create a new array for each iteration of the outer loop
     const matchedItems = [];
-    console.log(state.currentUser);
     for (let j = 0; j < allOrders[i].items.length; j++) {
       if (allOrders[i].items[j].sellerId === state.currentUser.id) {
-        console.log(allOrders[i].status);
         allOrders[i].items[j].orderId = allOrders[i].id;
         allOrders[i].items[j].orderDate = allOrders[i].date;
         allOrders[i].items[j].orderStatus = allOrders[i].status;
@@ -744,7 +743,6 @@ export function getAllOrdersByOrderIds(orderIds) {
     }
     result.push(matchedItems);
   }
-  console.log(result);
   return result;
 }
 
@@ -935,19 +933,20 @@ export function searchByField(array, field, value) {
   );
 }
 export function deleteMessageById(id) {
-  console.log("id :>> ", id);
   state.messages = state.messages.filter((message) => message.mId !== +id);
   saveStateInLocalStorage();
-}
-export function testLog() {
-  console.log("test");
 }
 
 export function moveGuestCartToUserCart(id) {
   const index = state.users.findIndex((user) => user.id === +id);
-  console.log("index :>> ", index);
-  console.log("state.users[index] :>> ", state.users[index]);
-  state.users[index].cart = [...state.users[index].cart, ...state.guestCart];
+
+  // Add only the items that are not already in the user's cart
+  state.guestCart.forEach((item) => {
+    if (!state.users[index].cart.some((i) => i.id === item.id)) {
+      state.users[index].cart.push(item);
+    }
+  });
+
   state.guestCart = [];
   saveStateInLocalStorage();
 }

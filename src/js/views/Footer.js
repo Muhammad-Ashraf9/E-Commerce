@@ -1,5 +1,6 @@
 import { getCurrentUser } from "../model.js";
 export default function renderFooter(element) {
+  const currentUser = getCurrentUser();
   const footer = `
 </li>
   <div class="p-2 ps-5 mt-2 bg-light">
@@ -72,11 +73,16 @@ export default function renderFooter(element) {
                 <div class="row">
                   <div class="col-md-6">
                     <p><a class="scroll-link" href="NewMain.html">Home</a></p>
-                    <p><a href="Products_tester.html">Products</a></p>
-                    <p><a href="cart_page.html">Your Cart</a></p>
+                    ${
+                      !currentUser || currentUser.accountType === "customer"
+                        ? `  <p><a href="Products_tester.html">Products</a></p>
+                    <p><a href="cart_page.html">Your Cart</a></p>`
+                        : `<p><a class="scroll-link" href="${currentUser.accountType}.html">Dashborad</a></p>
+`
+                    }
+                  
                   </div>
                 </div>
-              </div>
         </div>
     </div>
     <hr>

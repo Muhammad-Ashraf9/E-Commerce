@@ -1,4 +1,4 @@
-import {getAllOrdersByOrderIds,getCurrentUser, state} from '../model.js'
+import {getAllOrdersByOrderIds,getCurrentUser, getUserById, state} from '../model.js'
 
 import renderFooter from '../views/Footer.js'
 import renderNav from '../views/Nav.js'
@@ -13,10 +13,10 @@ const bodys=document.querySelector("body");
 renderNav(bodys);
 
 renderFooter(bodys);
-const currentUserForAuth = getCurrentUser();
-console.log('from outer auth ');
-if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
-    console.log('from inner auth ');
+const currentUser = getCurrentUser();
+// console.log('from outer auth ');
+if (!currentUser || currentUser.accountType !== "seller") {
+    // console.log('from inner auth ');
     location.assign("/src/html/NewMain.html");
 }
 
@@ -25,7 +25,7 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
   const currentUserData = JSON.parse(userDataFromLocalStorage);
     // Example usage:
   const orders = getAllOrdersByOrderIds(currentUserData.orders);
-  console.log(orders);
+  // console.log(orders);
   let tot = orders.length;
   if(orders)
         totalOrders.innerText = tot
@@ -33,7 +33,8 @@ if (!currentUserForAuth || currentUserForAuth.accountType !== "seller") {
         totalOrders.innerText = 'There is no oreders available yet'
 
 function allProducts(){
-  let tot = state.currentUser.products.length
+  let user = getUserById(currentUser.id)
+  let tot = user.products.length
   if(tot)
         totalProducts.innerText = tot
     else
@@ -84,7 +85,7 @@ function profitPerMonth(orders, sellerId) {
           profit += (orderDetails.quantity * orderDetails.price);
         }
     });
-    console.log(profit);
+    // console.log(profit);
     if(profit)
         totaProfit.innerText = profit
     else
@@ -99,9 +100,9 @@ const titles = seller3Products.map(product => product.title);
 const numberOfSales = seller3Products.map(product => product.numberofsales);
 const stock = seller3Products.map(product => product.stock);
 
-console.log(titles);
-console.log(numberOfSales);
-console.log(stock);
+// console.log(titles);
+// console.log(numberOfSales);
+// console.log(stock);
 
 
 

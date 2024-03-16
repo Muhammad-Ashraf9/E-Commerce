@@ -24,7 +24,7 @@
 
 
 <style>
-        .modal {
+.modal {
     display: none;
     position: fixed;
     overflow: auto;
@@ -32,11 +32,11 @@
 }
 
 .modal-content {
+    width:50% !important ;/* Adjust the width as needed */
     background-color: #fefefe;
     margin: 10px auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Adjust the width as needed */
 }
 
 .close {
@@ -53,8 +53,8 @@
     cursor: pointer;
 }
 
-button{
-    margin: 10px;
+.bb{
+    margin-top: 20px;
 }
 </style>
 </head>
@@ -105,10 +105,10 @@ button{
                 </div>
             </div>
         </div>
-        <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="d-grid gap-2 col-6 mx-auto bb">
             <button class="btn btn-outline-success" type="button" id="stock">View Stock</button>
         </div>
-        <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="d-grid gap-2 col-6 mx-auto bb">
             <button class="btn btn-outline-success" type="button" id="sales">View Sales</button>
         </div>
         <div id="myModal" class="modal">

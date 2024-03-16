@@ -35,7 +35,7 @@
       #table {
         width: 100%;
         max-width: 100%;
-        height: 70vh;
+        height: fit-content !important;
         overflow-y: auto;
         padding: 5px;
         margin: 10px auto;
@@ -59,12 +59,45 @@
       table td:last-child {
         border-right: none;
       }
+      @media(max-width:750px){
+        table td:last-child {
+          border-bottom: 3px solid rgb(155, 155, 155);
+        }
+        #table thead{
+          display: none;
+        }
+        #table, #table tbody, #table tr, #table td{
+          display: block;
+          width: 100%;
+        }
+        #table tr{
+          margin-bottom: 15px;
+        }
+        #table td{
+          text-align: right;
+          padding-left: 50%;
+          position: relative;
+        }
+        #table td::before{
+          content: attr(data-label);
+          position: absolute;
+          padding-left: 15px;
+          text-align: left;
+          left: 0;
+          width: 50%;
+          font-size:15px ;
+          font-weight: bold;
+        }
+
+      }
     </style>
   </head>
   <body class="d-grid">
     <div class="container-fluid row">
       <section id="menu"></section>
       <section id="interface">
+        <input type="checkbox" id="pendingOrders" name="pendingOrders" value="" style="margin: 10px;">
+        <label for="pendingOrders"> Show Pending Orders</label>
         <table id="table" class="table-responsive"></table>
       </section>
       <script type="module" src="../js/seller/orders.js"></script>

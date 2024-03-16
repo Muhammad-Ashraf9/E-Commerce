@@ -27,7 +27,6 @@ export function renderCustomerModal(element) {
   element.insertAdjacentHTML("beforeend", modal);
   document.getElementById("send").addEventListener("click", function () {
     const msg = document.getElementById("message-text").value.trim();
-    console.log(msg);
     const user = getCurrentUser();
     const MId = generateRandomId();
     const UID = user.id;
@@ -42,7 +41,6 @@ export function renderCustomerModal(element) {
       date: Date.now(),
     };
     state.messages.push(newMsg);
-    console.log(state);
     saveStateInLocalStorage();
     Swal.fire({
       title: "Thank you!",
@@ -52,6 +50,5 @@ export function renderCustomerModal(element) {
       location.assign("../html/NewMain.html");
     });
 
-    console.log(state);
   });
 }

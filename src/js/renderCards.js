@@ -6,7 +6,12 @@ import { addtoCart } from "./addToCart.js";
 import { getQuantityFromCart } from "./getQuantityFromCart.js";
 import { state } from "./model.js";
 // Drawing the cards
-export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchValue(), category = getCheckedValue()) {
+export function renderCards(
+  page,
+  numberOfCardsPerPage,
+  searchValue = getSearchValue(),
+  category = getCheckedValue()
+) {
   // let searchValue = ;
   // let category = ;
   let Products = ProductsFiltered(searchValue, category);
@@ -26,10 +31,9 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   }
   for (let i = startCard; i <= endCard; i++) {
     const iID = Products[i - 1].id;
-          var prodQ = getQuantityFromCart(iID);
+    var prodQ = getQuantityFromCart(iID);
 
-    productOuterDiv = 
-      `
+    productOuterDiv = `
         <div class="col-md-3">
           <div class="wsk-cp-product">
             <img id="two" class="wsk-cp-img" alt="${
@@ -41,18 +45,25 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
             <div class="wsk-cp-text">
               <div class="title-product">
                 <h3 class="viewProductPage" id="${Products[i - 1].id}">
-                  ${Products[i - 1].title}${i}
+                  ${Products[i - 1].title}
                 </h3>
               </div>
               <div class="card-footer">
                 <div class="wcf-left">
-                  <span>${Products[i - 1].price} $ <del style="color: red">${Products[i - 1].prevPrice} $</del></span>
+                  <span>${Products[i - 1].price} $ <del style="color: red">${
+      Products[i - 1].prevPrice
+    } $</del></span>
                 </div>
                     <div class="wcf-right">
                       <input type="text" class="quantity" value="${prodQ}" readonly style="width: 30px; background-color: transparent; border: none; user-select: none;">
                       <button id="${iID}" style="width: 30px; background-color: transparent; border: none;" class="buy-btn" title="Add to cart">
                         <i id="${iID}" class="fa-solid fa-cart-plus"></i>
                       </button>
+                      ${
+                        Products[i - 1].stock == 0
+                          ? `<div style="color: red;" class="out-of-stock">Out of stock</div>`
+                          : ""
+                      }
                     </div>
 
                   </div>
@@ -60,14 +71,9 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
               </div>
             </div>
           `;
-      
-      firstRow.innerHTML += productOuterDiv;
-      }
-    
 
-  
-
-
+    firstRow.innerHTML += productOuterDiv;
+  }
 
   // add an event listener to all the created buttons
   let addbuttons = document.getElementsByClassName("buy-btn");
@@ -75,15 +81,24 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
     addbuttons[i].addEventListener("click", addtoCart);
   }
 
-  // Open the product details page
-  body.addEventListener("click", function (e) {
-    if (e.target.classList.contains("viewProductPage")) {
+  let pagebuttons = document.getElementsByClassName("viewProductPage");
+  for (let i = 0; i < pagebuttons.length; i++) {
+    pagebuttons[i].addEventListener("click", function (e) {
       var prodID = e.target.id;
       localStorage.setItem("id", prodID);
-      // location.assign("../html/ProductDetails.html");
-      window.open("../html/ProductDetails.html", );
-    }
-  });
+      window.open("../html/ProductDetails.html");
+    });
+  }
+
+  // Open the product details page
+  // body.addEventListener("click", function (e) {
+  //   if (e.target.classList.contains("viewProductPage")) {
+  //     var prodID = e.target.id;
+  //     localStorage.setItem("id", prodID);
+  //     // location.assign("../html/ProductDetails.html");
+  //     window.open("../html/ProductDetails.html", );
+  //   }
+  // });
 
   let pagesCount = 0;
   if (Products.length == 0) {
@@ -93,4 +108,3 @@ export function renderCards(page, numberOfCardsPerPage, searchValue = getSearchV
   }
   renderPaginationSection(page, pagesCount);
 }
-

@@ -17,8 +17,12 @@ const body = document.querySelector("body");
 renderFooter(body);
 renderNav(body);
 const user = getCurrentUser(); //getting the user
+
+if (!user || user.accountType == "admin" || user.accountType == "seller") {
+  location.assign("../html/newmain.html");
+}
+
 let ucart = user.cart; //checking if state
-let flag = false; // intializing a flag to know when to create a knew order
 let cart = ucart.map((item) => ({
   //fetchin user cart's data
   product: getProductById(item.id),
@@ -28,9 +32,7 @@ let cart = ucart.map((item) => ({
 
 const forms = document.querySelectorAll(".needs-validation");
 const form = document.querySelector("#checkoutForm");
-console.log("form", form);
 form.addEventListener("submit", (e) => e.preventDefault());
-console.log("forms", forms);
 Array.from(forms).forEach((form) => {
   (function () {
     document.getElementById("placing").addEventListener("click", (event) => {
@@ -79,13 +81,7 @@ Array.from(forms).forEach((form) => {
     });
   })();
 });
-console.log(cart);
-
 function newOrder() {
-  if (flag) {
-    return;
-  }
-  flag = true;
   let orderID = generateRandomId();
   let customerID = getCurrentUser().id;
   let Items = []; // making an array of products to be put in the order details
@@ -93,16 +89,14 @@ function newOrder() {
     item.product["quantity"] = item.num;
     Items.push(item.product);
   });
-  var formData = new FormData(document.getElementById("checkoutForm"));
+  const formData = new FormData(document.getElementById("checkoutForm"));
   // Create an object to store form data
-  var formDataObject = {};
-
+  let formDataObject = {};
   // Populate the object with form data
   formData.forEach(function (value, key) {
     formDataObject[key] = value;
   });
-  console.log(formData.entries(), "eeee");
-  let newOrder = {
+  const newOrder = {
     //creating a new order object
     id: orderID,
     items: Items,
@@ -112,39 +106,46 @@ function newOrder() {
     customerDetails: formDataObject,
   };
   state.orders.push(newOrder); //pushing the order in the list of orders
-  const uindex = state.users.findIndex(
-    (user) => user.id === state.currentUser.id
-  ); //getting the customers index in the list of users
 
+  const uindex = customerIndexInUsersList(getCurrentUser.id);
   state.users[uindex].orders.push(orderID); //pushing the order id in the customer's orders' list
 
-  state.users[uindex].cart = [];
-  let flagx = 0; //a flag to use for later
+  state.users[uindex].cart = []; //emptying the cart
+
+  let flagx = 0; //a flag to know which item in the cart i am using
+
   let sellers = []; //array to contain the ids of the sellers in this order
+
   Items.forEach((item) => {
     //a loop to update the stock of each product
-    let index = state.products.findIndex((product) => product.id === item.id); // getting the index of the product in product list
-    console.log(item);
-    let sellerIndex = state.users.findIndex(
-      (seller) => seller.id === item.sellerId
-    ); // getting the index of the seller in users list
+
+    const index = productIndexInProductsList(item.id); // getting the index of the product in product list
+    const sellerIndex = sellerIndexInUsersList(item.sellerId); // getting the index of the seller in users list
 
     state.products[index].stock -= cart[flagx].num; ///updating the stock in product list
-    state.products[index].numberofsales += cart[flagx].num;
-
+    state.products[index].numberofsales += cart[flagx].num; ///updating number od sales
     if (!sellers.includes(item.sellerId)) {
       //checking if the seller is already notified with the order id
-      console.log(state.users[sellerIndex]);
       sellers.push(item.sellerId);
       state.users[sellerIndex].orders.push(orderID); //notifing the seller with the order id
     }
-
     flagx++;
   });
-  console.log("before save local");
   saveStateInLocalStorage();
+}
 
-  console.log("state saved");
+function productIndexInProductsList(id) {
+  return state.products.findIndex((product) => product.id === id);
+}
+
+function sellerIndexInUsersList(id) {
+  return state.users.findIndex((seller) => seller.id === id);
+}
+
+function customerIndexInUsersList(id) {
+  return state.users.findIndex(
+    (user) => user.id === state.currentUser.id //getting the customers index in the list of users
+  );
 }
 
 window.addEventListener("load", function () {
@@ -203,9 +204,9 @@ window.addEventListener("load", function () {
                 }"> </button>
                 <h3 class="price mt-2 mb-3">${item.product.price}</h3>
                 <div class="btn-group numOfItems">
-                  <button style="background: #eec28c; color:white" id="${flag}" class="btn">+</button>
+                  <button style="background: #eec28c; color:white" id="${flag}" class="btn fs-4">-</button>
                   <span class="fs-2 mx-3">${item.num}</span>
-                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn fs-4">-</button>
+                  <button style="background: #B88E2F; color:white" id="${flag}" class="btn">+</button>
                 </div>
               </div>
               <!-- End of controls -->
@@ -239,8 +240,7 @@ window.addEventListener("load", function () {
         return;
       }
       changeCartItemCount(cart[cardID].product.id, cart[cardID].num + 1);
-      cart[cardID].num += +1;
-      flag = false;
+      cart[cardID].num += 1;
       generateCards();
     }
     if (e.target.innerText == "-") {
@@ -248,13 +248,11 @@ window.addEventListener("load", function () {
       if (cart[cardID].num - 1 == 0) return;
       changeCartItemCount(cart[cardID].product.id, cart[cardID].num - 1);
       cart[cardID].num += -1;
-      flag = false;
       generateCards();
     }
     if (e.target.dataset.id) {
       const itemId = +e.target.dataset.id;
       removeFromCart(itemId);
-      flag = false;
       generateCards();
     }
   });

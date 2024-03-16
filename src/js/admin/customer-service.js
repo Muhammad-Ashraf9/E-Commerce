@@ -31,7 +31,6 @@ export function renderCustomerServicePage(
     renderCustomerServicePage(
       container,
       searchByField(state.messages, newSearchBy.field, newSearchBy.value),
-      // pageNumber,
       1, //reset page number to 1 on search
       itemsPerPage,
       sortBy,
@@ -92,7 +91,7 @@ export function renderCustomerServicePage(
     if (!id) return;
     modal.innerHTML = getModalHTML(id);
     document.querySelector(".modal-footer").addEventListener("click", (e) => {
-      console.log("modal-footer Proucts footer");
+      // console.log("modal-footer Proucts footer");
       if (!e.target.dataset.id) return;
       const id = +e.target.dataset.id;
       deleteMessageById(id);
@@ -109,7 +108,6 @@ export function renderCustomerServicePage(
   handleChangingItemsPerPage(
     container,
     array,
-    // pageNumber,
     1, //reset page number to 1 on changing items per page
     itemsPerPage,
     sortBy,
